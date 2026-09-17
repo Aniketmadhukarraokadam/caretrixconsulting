@@ -11,6 +11,15 @@ import {
   Compass,
   DollarSign,
   ChevronRight,
+  Laptop,
+  Headphones,
+  PhoneCall,
+  Clock,
+  ShieldCheck,
+  CheckCircle2,
+  Activity,
+  Server,
+  HeartPulse,
 } from 'lucide-react';
 import Interactive3DCanvas from '../components/Interactive3DCanvas';
 import TiltCard from '../components/TiltCard';
@@ -22,17 +31,19 @@ import { AnimasterMagneticButton } from '../components/extensions/AnimasterLib';
 export default function Home({ onOpenModal }) {
   // ROI / Savings Estimator state
   const [estimatorTeamSize, setEstimatorTeamSize] = useState('15');
-  const [estimatorDomain, setEstimatorDomain] = useState('sap');
+  const [estimatorDomain, setEstimatorDomain] = useState('appsupport');
 
   const getEstimatedSavings = () => {
     const size = parseInt(estimatorTeamSize, 10) || 15;
     const rates = {
+      appsupport: { usRate: 150, ctRate: 45, name: '24/7 Application Support & AMS Pod' },
+      intlvoice: { usRate: 55, ctRate: 18, name: 'International Voice Process Pod (US/UK/AUS)' },
+      domesticvoice: { usRate: 35, ctRate: 12, name: 'Pan-India Domestic Voice Support Pod' },
       sap: { usRate: 180, ctRate: 55, name: 'SAP S/4HANA & Enterprise Cloud Pod' },
       martech: { usRate: 130, ctRate: 40, name: 'Digital Marketing & 8D Motion Growth Pod' },
       healthcare: { usRate: 75, ctRate: 22, name: 'Healthcare Operations & RCM Billing Pod' },
-      software: { usRate: 140, ctRate: 45, name: 'Full-Stack Software & AI Engineering Pod' },
     };
-    const domainData = rates[estimatorDomain] || rates.sap;
+    const domainData = rates[estimatorDomain] || rates.appsupport;
     const annualHoursPerDev = 1920;
     const standardCost = size * domainData.usRate * annualHoursPerDev;
     const caretrixCost = size * domainData.ctRate * annualHoursPerDev;
@@ -109,35 +120,35 @@ export default function Home({ onOpenModal }) {
               >
                 <Sparkles size={16} color="#1d4ed8" />
                 <span style={{ color: '#1d4ed8', fontSize: '0.84rem', fontWeight: 700, letterSpacing: '0.8px', textTransform: 'uppercase' }}>
-                  Enterprise Digital Transformation &amp; Global Consulting
+                  Tier-1 Enterprise Consulting, Application Support &amp; BPO
                 </span>
               </div>
 
               <h1
                 style={{
-                  fontSize: 'clamp(2.6rem, 4.8vw, 4.4rem)',
+                  fontSize: 'clamp(2.5rem, 4.6vw, 4.2rem)',
                   fontWeight: 900,
-                  lineHeight: '1.1',
+                  lineHeight: '1.12',
                   marginBottom: '1.5rem',
                   letterSpacing: '-0.03em',
                   color: '#0f172a',
                 }}
               >
-                Engineering the <span className="gradient-text-cyber">Digital Future</span> with 3D Motion &amp; Global Consulting.
+                Accelerating Enterprises with <span className="gradient-text-cyber">24/7 Application Support</span>, Global Voice &amp; SAP Cloud.
               </h1>
 
               <p
                 style={{
-                  fontSize: '1.18rem',
+                  fontSize: '1.16rem',
                   color: '#475569',
                   lineHeight: '1.75',
                   marginBottom: '2.5rem',
                   maxWidth: '680px',
                 }}
               >
-                Caretrix delivers Fortune-500 scale digital innovation: <strong>SAP S/4HANA Cloud Transformations</strong>, 
-                high-velocity <strong>Digital Marketing &amp; 8D Motion Video</strong>, autonomous <strong>HRMS Software</strong>, 
-                and round-the-clock <strong>24/7 Global Delivery Pods</strong> from Pune and Navi Mumbai.
+                Caretrix delivers Fortune-500 grade operational excellence: <strong>24/7/365 Application Support Services (AMS)</strong> with a 15-minute P1 incident SLA, 
+                <strong>International &amp; Domestic Voice Process Call Centers</strong>, <strong>SAP S/4HANA Transformations</strong>, and 
+                <strong>Performance Marketing (5.2x ROAS)</strong> from Pune and Navi Mumbai delivery hubs.
               </p>
 
               {/* CTAs */}
@@ -175,23 +186,23 @@ export default function Home({ onOpenModal }) {
               >
                 <div>
                   <div style={{ fontSize: '1.8rem', fontWeight: 800, color: '#1d4ed8' }}>
-                    <StatCounter end={180} duration={1500} prefix="$" suffix="M+" />
+                    <StatCounter end={15} duration={1200} prefix="<" suffix=" Min" />
                   </div>
-                  <div style={{ fontSize: '0.82rem', color: '#64748b' }}>Client Pipeline Influenced</div>
+                  <div style={{ fontSize: '0.82rem', color: '#64748b' }}>P1 Critical Incident SLA</div>
                 </div>
 
                 <div>
                   <div style={{ fontSize: '1.8rem', fontWeight: 800, color: '#059669' }}>
-                    <StatCounter end={99.8} duration={1500} decimals={1} suffix="%" />
+                    <StatCounter end={96.4} duration={1500} decimals={1} suffix="%" />
                   </div>
-                  <div style={{ fontSize: '0.82rem', color: '#64748b' }}>Verified SLA Adherence</div>
+                  <div style={{ fontSize: '0.82rem', color: '#64748b' }}>Verified Voice CSAT Score</div>
                 </div>
 
                 <div>
                   <div style={{ fontSize: '1.8rem', fontWeight: 800, color: '#d97706' }}>
-                    <StatCounter end={13} duration={1200} suffix=" Pods" />
+                    <StatCounter end={180} duration={1500} prefix="$" suffix="M+" />
                   </div>
-                  <div style={{ fontSize: '0.82rem', color: '#64748b' }}>Specialized Delivery Centers</div>
+                  <div style={{ fontSize: '0.82rem', color: '#64748b' }}>Client Pipeline Influenced</div>
                 </div>
               </div>
             </div>
@@ -284,14 +295,15 @@ export default function Home({ onOpenModal }) {
       <div className="marquee-container" style={{ background: '#ffffff', borderTop: '1px solid #e2e8f0', borderBottom: '1px solid #e2e8f0', padding: '16px 0' }}>
         <div className="marquee-content">
           {[
+            'APPLICATION SUPPORT SERVICES (AMS L1/L2/L3)',
+            'INTERNATIONAL VOICE PROCESS (US/UK/AUS)',
+            'DOMESTIC VOICE PROCESS (12+ INDIAN LANGUAGES)',
             'SAP S/4HANA CLOUD MIGRATIONS',
-            '3D COMMERCIAL MOTION & 8D VIDEO',
-            'AI SEARCH OPTIMIZATION (GEO & AEO)',
+            'PERFORMANCE MARKETING (5.2x ROAS)',
+            'ANSWER ENGINE OPTIMIZATION (AEO & GEO)',
             'ENTERPRISE HRMS & PAYROLL CLOUD',
             'HIPAA REVENUE CYCLE MANAGEMENT',
-            'MULTI-TOUCH ROAS ATTRIBUTION',
-            '24/7 GLOBAL DELIVERY PODS',
-            'INSTITUTIONAL BGV SCREENING',
+            '24/7/365 FOLLOW-THE-SUN DELIVERY',
           ].map((item, idx) => (
             <span
               key={idx}
@@ -313,7 +325,251 @@ export default function Home({ onOpenModal }) {
         </div>
       </div>
 
-      {/* 3. Featured Enterprise Transformation Pillars */}
+      {/* 3. NEW DEDICATED SECTION: Enterprise Application Support Services (AMS) */}
+      <section className="section-py" style={{ background: '#ffffff', borderBottom: '1px solid #e2e8f0' }}>
+        <div className="container-fluid">
+          <div className="grid-2" style={{ alignItems: 'center', gap: '4rem' }}>
+            <div>
+              <span className="eyebrow eyebrow-cyber">
+                <Laptop size={14} /> Mission-Critical IT Operations
+              </span>
+              <h2 className="section-title">
+                24/7/365 Enterprise <span className="gradient-text-cyber">Application Support (AMS)</span>
+              </h2>
+              <p className="section-subtitle" style={{ marginBottom: '2rem' }}>
+                Ensure zero unplanned downtime for your mission-critical software, custom microservices, and enterprise databases. 
+                Our dedicated Application Management Services (AMS) pods provide continuous L1, L2, and L3 tier triaging with bank-grade SLAs.
+              </p>
+
+              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '1.25rem', marginBottom: '2.5rem' }}>
+                <div style={{ background: '#f8fafc', border: '1px solid #e2e8f0', borderRadius: '14px', padding: '1.25rem' }}>
+                  <div style={{ color: '#1d4ed8', fontWeight: 800, fontSize: '1.4rem', marginBottom: '4px' }}>&lt;15 Min SLA</div>
+                  <strong style={{ color: '#0f172a', fontSize: '0.9rem', display: 'block' }}>P1 Critical Response</strong>
+                  <p style={{ color: '#64748b', fontSize: '0.8rem', marginTop: '4px' }}>Immediate escalation &amp; resolution for blocking production issues.</p>
+                </div>
+
+                <div style={{ background: '#f8fafc', border: '1px solid #e2e8f0', borderRadius: '14px', padding: '1.25rem' }}>
+                  <div style={{ color: '#059669', fontWeight: 800, fontSize: '1.4rem', marginBottom: '4px' }}>99.98%</div>
+                  <strong style={{ color: '#0f172a', fontSize: '0.9rem', display: 'block' }}>System Availability</strong>
+                  <p style={{ color: '#64748b', fontSize: '0.8rem', marginTop: '4px' }}>Continuous cloud monitoring &amp; proactive health health-checks.</p>
+                </div>
+
+                <div style={{ background: '#f8fafc', border: '1px solid #e2e8f0', borderRadius: '14px', padding: '1.25rem' }}>
+                  <div style={{ color: '#0284c7', fontWeight: 800, fontSize: '1.4rem', marginBottom: '4px' }}>Full-Stack</div>
+                  <strong style={{ color: '#0f172a', fontSize: '0.9rem', display: 'block' }}>Observability Suite</strong>
+                  <p style={{ color: '#64748b', fontSize: '0.8rem', marginTop: '4px' }}>Datadog, Dynatrace, New Relic, Prometheus &amp; Grafana.</p>
+                </div>
+
+                <div style={{ background: '#f8fafc', border: '1px solid #e2e8f0', borderRadius: '14px', padding: '1.25rem' }}>
+                  <div style={{ color: '#d97706', fontWeight: 800, fontSize: '1.4rem', marginBottom: '4px' }}>Zero-Downtime</div>
+                  <strong style={{ color: '#0f172a', fontSize: '0.9rem', display: 'block' }}>CI/CD Deployment</strong>
+                  <p style={{ color: '#64748b', fontSize: '0.8rem', marginTop: '4px' }}>Automated rollbacks, database migrations &amp; patch verification.</p>
+                </div>
+              </div>
+
+              <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap' }}>
+                <button onClick={onOpenModal} className="btn btn-primary" style={{ padding: '0.85rem 1.8rem' }}>
+                  <span>Deploy an Application Support Pod</span>
+                  <ArrowRight size={16} />
+                </button>
+                <Link to="/services" className="btn btn-secondary" style={{ padding: '0.85rem 1.6rem' }}>
+                  View Support Framework
+                </Link>
+              </div>
+            </div>
+
+            <div>
+              <div style={{ background: '#ffffff', border: '1px solid #e2e8f0', borderRadius: '24px', padding: '2.5rem', boxShadow: '0 15px 40px -5px rgba(15, 23, 42, 0.08)' }}>
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.5rem', borderBottom: '1px solid #f1f5f9', paddingBottom: '1rem' }}>
+                  <div>
+                    <span style={{ fontSize: '0.78rem', color: '#1d4ed8', fontWeight: 800, textTransform: 'uppercase' }}>ITIL v4 Certified Tiering</span>
+                    <h3 style={{ fontSize: '1.3rem', color: '#0f172a', marginTop: '2px' }}>Multi-Tier Incident Architecture</h3>
+                  </div>
+                  <span style={{ background: '#ecfdf5', color: '#059669', fontSize: '0.75rem', fontWeight: 700, padding: '4px 10px', borderRadius: '20px' }}>
+                    Live 24/7 Monitoring
+                  </span>
+                </div>
+
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
+                  <div style={{ display: 'flex', gap: '1rem', alignItems: 'flex-start' }}>
+                    <div style={{ width: '36px', height: '36px', borderRadius: '8px', background: '#eff6ff', color: '#1d4ed8', display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 800, flexShrink: 0 }}>
+                      L1
+                    </div>
+                    <div>
+                      <strong style={{ color: '#0f172a', fontSize: '0.95rem' }}>24/7 Helpdesk &amp; First-Line Triage</strong>
+                      <p style={{ color: '#64748b', fontSize: '0.82rem', marginTop: '2px' }}>User access management, basic troubleshooting, automated alert triage, and ticket dispatch within 5 minutes.</p>
+                    </div>
+                  </div>
+
+                  <div style={{ display: 'flex', gap: '1rem', alignItems: 'flex-start' }}>
+                    <div style={{ width: '36px', height: '36px', borderRadius: '8px', background: '#f0fdf4', color: '#059669', display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 800, flexShrink: 0 }}>
+                      L2
+                    </div>
+                    <div>
+                      <strong style={{ color: '#0f172a', fontSize: '0.95rem' }}>Deep Application &amp; Database Engineering</strong>
+                      <p style={{ color: '#64748b', fontSize: '0.82rem', marginTop: '2px' }}>Configuration remediation, database query optimization, log deep-dives, microservice restarts, and API syncs.</p>
+                    </div>
+                  </div>
+
+                  <div style={{ display: 'flex', gap: '1rem', alignItems: 'flex-start' }}>
+                    <div style={{ width: '36px', height: '36px', borderRadius: '8px', background: '#fffbeb', color: '#d97706', display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 800, flexShrink: 0 }}>
+                      L3
+                    </div>
+                    <div>
+                      <strong style={{ color: '#0f172a', fontSize: '0.95rem' }}>Core Code Fixes &amp; Architectural Engineering</strong>
+                      <p style={{ color: '#64748b', fontSize: '0.82rem', marginTop: '2px' }}>Direct bug patching, hotfix deployment, architectural redesign, root-cause analysis (RCA), and vendor escalations.</p>
+                    </div>
+                  </div>
+                </div>
+
+                <div style={{ borderTop: '1px solid #f1f5f9', marginTop: '1.5rem', paddingTop: '1.25rem', display: 'flex', justifyContent: 'space-between', alignItems: 'center', fontSize: '0.84rem' }}>
+                  <span style={{ color: '#64748b' }}>Standard Incident Ticketing:</span>
+                  <span style={{ color: '#0f172a', fontWeight: 700 }}>ServiceNow • Jira • Zendesk • Freshservice</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* 4. NEW DEDICATED SECTION: International & Domestic Voice Process Hub */}
+      <section className="section-py" style={{ background: '#f8fafc', borderBottom: '1px solid #e2e8f0' }}>
+        <div className="container-fluid">
+          <div className="text-center mx-auto" style={{ maxWidth: '850px', marginBottom: '3.5rem' }}>
+            <span className="eyebrow eyebrow-cyber">
+              <Headphones size={14} /> Omnichannel Voice &amp; Customer Care
+            </span>
+            <h2 className="section-title">
+              Dual-Track Voice Operations: <span className="gradient-text-cyber">International &amp; Domestic</span>
+            </h2>
+            <p className="section-subtitle mx-auto">
+              Empowering global enterprises with C2 English neutral-accent voice desks while delivering Pan-India native fluency across 12+ Indian languages.
+            </p>
+          </div>
+
+          <div className="grid-2" style={{ gap: '2.5rem' }}>
+            {/* International Voice Card */}
+            <div
+              style={{
+                background: '#ffffff',
+                border: '1px solid #e2e8f0',
+                borderRadius: '22px',
+                padding: '2.5rem',
+                boxShadow: '0 10px 30px -5px rgba(15, 23, 42, 0.08)',
+                display: 'flex',
+                flexDirection: 'column',
+                justifyContent: 'space-between',
+              }}
+            >
+              <div>
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.25rem' }}>
+                  <span style={{ background: '#f0fdf4', color: '#059669', border: '1px solid #bbf7d0', padding: '4px 12px', borderRadius: '20px', fontSize: '0.74rem', fontWeight: 800 }}>
+                    US / UK / AUSTRALIA / EUROPE
+                  </span>
+                  <span style={{ fontSize: '0.82rem', color: '#059669', fontWeight: 700 }}>
+                    ✓ 96.4% CSAT Rating
+                  </span>
+                </div>
+
+                <h3 style={{ fontSize: '1.6rem', color: '#0f172a', marginBottom: '0.75rem', display: 'flex', alignItems: 'center', gap: '10px' }}>
+                  <Globe2 size={24} color="#059669" /> International Voice Process
+                </h3>
+
+                <p style={{ color: '#475569', fontSize: '0.92rem', lineHeight: '1.65', marginBottom: '1.5rem' }}>
+                  High-touch inbound and outbound customer experience pods delivering empathy, neutral accent fluency, and rapid resolution for international markets across North American, European, and Australian business hours.
+                </p>
+
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem', marginBottom: '1.5rem' }}>
+                  {[
+                    '24/7 Inbound Customer Service, Billing & Escalation Desks',
+                    'C2 English Certified Specialists with Neutral Accent Training',
+                    'HIPAA-Compliant US Healthcare Intake & Insurance Verification',
+                    'Technical Support Tier-1/2 with Remote Desktop Diagnostics',
+                    'FinTech KYC Screening, Fraud Alert Outreach & Telesales',
+                    'Cloud Telephony: Genesys, Five9, Avaya & Twilio with AI Sentiment Tracking',
+                  ].map((feat, idx) => (
+                    <div key={idx} style={{ display: 'flex', gap: '8px', alignItems: 'center', fontSize: '0.86rem', color: '#334155' }}>
+                      <CheckCircle2 size={16} color="#059669" style={{ flexShrink: 0 }} />
+                      <span>{feat}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              <div style={{ borderTop: '1px solid #f1f5f9', paddingTop: '1.5rem', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                <div>
+                  <div style={{ fontSize: '0.74rem', color: '#64748b' }}>Response SLA:</div>
+                  <div style={{ fontSize: '0.95rem', fontWeight: 800, color: '#059669' }}>&lt;20s Average Answer Speed</div>
+                </div>
+                <button onClick={onOpenModal} className="btn btn-primary" style={{ padding: '8px 18px', fontSize: '0.86rem' }}>
+                  Deploy International Pod
+                </button>
+              </div>
+            </div>
+
+            {/* Domestic Voice Card */}
+            <div
+              style={{
+                background: '#ffffff',
+                border: '1px solid #e2e8f0',
+                borderRadius: '22px',
+                padding: '2.5rem',
+                boxShadow: '0 10px 30px -5px rgba(15, 23, 42, 0.08)',
+                display: 'flex',
+                flexDirection: 'column',
+                justifyContent: 'space-between',
+              }}
+            >
+              <div>
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.25rem' }}>
+                  <span style={{ background: '#fffbeb', color: '#d97706', border: '1px solid #fde68a', padding: '4px 12px', borderRadius: '20px', fontSize: '0.74rem', fontWeight: 800 }}>
+                    PAN-INDIA MULTILINGUAL GRID
+                  </span>
+                  <span style={{ fontSize: '0.82rem', color: '#d97706', fontWeight: 700 }}>
+                    ✓ 12+ Regional Languages
+                  </span>
+                </div>
+
+                <h3 style={{ fontSize: '1.6rem', color: '#0f172a', marginBottom: '0.75rem', display: 'flex', alignItems: 'center', gap: '10px' }}>
+                  <PhoneCall size={24} color="#d97706" /> Domestic Voice Process
+                </h3>
+
+                <p style={{ color: '#475569', fontSize: '0.92rem', lineHeight: '1.65', marginBottom: '1.5rem' }}>
+                  High-velocity regional Indian voice operations addressing language fragmentation for leading Indian banks, NBFCs, e-commerce marketplaces, telecom providers, and D2C brands.
+                </p>
+
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem', marginBottom: '1.5rem' }}>
+                  {[
+                    'Native Regional Fluency: Hindi, Marathi, Tamil, Telugu, Kannada, Bengali & more',
+                    'BFSI Collections, Loan Document Verification & e-KYC Auditing',
+                    'E-Commerce Hyperlocal Delivery Tracking & Customer Dispute Resolution',
+                    'Healthcare Tele-Consultation Bookings & Diagnostic Scheduling',
+                    '100% Call Recording, Quality Scoring & Speech Pattern Analytics',
+                    'Automated IVR Telephony with Sub-Second Specialist Routing',
+                  ].map((feat, idx) => (
+                    <div key={idx} style={{ display: 'flex', gap: '8px', alignItems: 'center', fontSize: '0.86rem', color: '#334155' }}>
+                      <CheckCircle2 size={16} color="#d97706" style={{ flexShrink: 0 }} />
+                      <span>{feat}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              <div style={{ borderTop: '1px solid #f1f5f9', paddingTop: '1.5rem', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                <div>
+                  <div style={{ fontSize: '0.74rem', color: '#64748b' }}>Speed SLA:</div>
+                  <div style={{ fontSize: '0.95rem', fontWeight: 800, color: '#d97706' }}>&lt;15s Average Answer Speed</div>
+                </div>
+                <button onClick={onOpenModal} className="btn btn-primary" style={{ padding: '8px 18px', fontSize: '0.86rem' }}>
+                  Deploy Domestic Pod
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* 5. Featured Enterprise Transformation Pillars */}
       <section className="section-py" style={{ background: '#ffffff' }}>
         <div className="container-fluid">
           <div className="text-center mx-auto" style={{ maxWidth: '850px', marginBottom: '4rem' }}>
@@ -321,7 +577,7 @@ export default function Home({ onOpenModal }) {
               <Compass size={14} /> Strategic Growth Engines
             </span>
             <h2 className="section-title">
-              Full-Frame Enterprise <span className="gradient-text-cyber">Transformation Pillars</span>
+              Enterprise Digital <span className="gradient-text-cyber">Transformation Pillars</span>
             </h2>
             <p className="section-subtitle mx-auto">
               Bridging cutting-edge MarTech, enterprise ERP cloud modernizations, and global operational resilience.
@@ -360,15 +616,15 @@ export default function Home({ onOpenModal }) {
                     fontWeight: 700,
                   }}
                 >
-                  DIGITAL MARKETING &amp; MARTECH
+                  DIGITAL MARKETING &amp; 5.2x ROAS
                 </span>
               </div>
               <div style={{ padding: '1.75rem' }}>
                 <h3 style={{ fontSize: '1.3rem', marginBottom: '0.6rem', color: '#0f172a' }}>
-                  AI Growth Marketing &amp; ROAS Scale
+                  AI Growth Marketing &amp; AEO / GEO
                 </h3>
                 <p style={{ color: '#475569', fontSize: '0.9rem', lineHeight: '1.65', marginBottom: '1.25rem' }}>
-                  Programmatic ad spend optimization, multi-channel funnels, Generative Engine Optimization (AEO/GEO), and hyper-converting sales copy.
+                  Programmatic ad spend optimization, multi-channel funnels, Generative Engine Optimization (AEO/GEO for ChatGPT/Perplexity), and hyper-converting sales copy.
                 </p>
                 <Link to="/services" style={{ color: '#1d4ed8', fontSize: '0.88rem', fontWeight: 600, display: 'inline-flex', alignItems: 'center', gap: '6px' }}>
                   Explore MarTech Services <ChevronRight size={16} />
@@ -473,10 +729,10 @@ export default function Home({ onOpenModal }) {
         </div>
       </section>
 
-      {/* 4. Real-Human 3D 8D Motion Video Studio & Services Showcase */}
+      {/* 6. Real-Human 3D 8D Motion Video Studio Demonstration */}
       <HumanMotion8DStudio onOpenModal={onOpenModal} />
 
-      {/* 5. Real-Time Global Delivery & Delivery Centers */}
+      {/* 7. Real-Time Global Delivery & Delivery Centers */}
       <section className="section-py" style={{ background: '#f8fafc', borderTop: '1px solid #e2e8f0', borderBottom: '1px solid #e2e8f0' }}>
         <div className="container-fluid">
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', flexWrap: 'wrap', gap: '2rem', marginBottom: '3.5rem' }}>
@@ -518,10 +774,10 @@ export default function Home({ onOpenModal }) {
               </div>
               <h3 style={{ fontSize: '1.4rem', color: '#0f172a', marginBottom: '0.5rem' }}>Pune Technology Center</h3>
               <p style={{ color: '#475569', fontSize: '0.88rem', marginBottom: '1.25rem', lineHeight: '1.6' }}>
-                4th Floor, Dangat Patil Empire, Kudale Baug, Vadgaon Budruk, Pune 411041. Hosting SAP Centers of Excellence, Cloud Architecture, and MarTech labs.
+                4th Floor, Dangat Patil Empire, Kudale Baug, Vadgaon Budruk, Pune 411041. Hosting Application Support Labs, SAP Centers of Excellence, and MarTech operations.
               </p>
               <div style={{ borderTop: '1px solid #f1f5f9', paddingTop: '1rem', fontSize: '0.82rem', color: '#64748b' }}>
-                <strong style={{ color: '#0f172a' }}>Specializations:</strong> SAP S/4HANA, Custom Microservices, 8D Motion, KPO STEM
+                <strong style={{ color: '#0f172a' }}>Specializations:</strong> 24/7 AMS, SAP S/4HANA, Custom Microservices, 8D Motion
               </div>
             </div>
 
@@ -538,7 +794,7 @@ export default function Home({ onOpenModal }) {
             >
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.25rem' }}>
                 <span style={{ fontSize: '0.78rem', fontWeight: 800, color: '#0284c7', background: '#f0f9ff', border: '1px solid #bae6fd', padding: '4px 10px', borderRadius: '6px' }}>
-                  OPERATIONS &amp; RCM HUB
+                  OPERATIONS &amp; VOICE HUB
                 </span>
                 <span style={{ fontSize: '0.78rem', color: '#059669', display: 'flex', alignItems: 'center', gap: '6px', fontWeight: 600 }}>
                   <span style={{ width: '8px', height: '8px', borderRadius: '50%', background: '#059669', display: 'inline-block' }} /> Live 24/7
@@ -546,10 +802,10 @@ export default function Home({ onOpenModal }) {
               </div>
               <h3 style={{ fontSize: '1.4rem', color: '#0f172a', marginBottom: '0.5rem' }}>Navi Mumbai Delivery Hub</h3>
               <p style={{ color: '#475569', fontSize: '0.88rem', marginBottom: '1.25rem', lineHeight: '1.6' }}>
-                C-207, 2nd Floor, Tower 2, Above Vashi Railway Station, 400703. Direct rail-transit connectivity, high-density biometric security floors.
+                C-207, 2nd Floor, Tower 2, Above Vashi Railway Station, 400703. Direct rail-transit connectivity, high-density biometric voice floors.
               </p>
               <div style={{ borderTop: '1px solid #f1f5f9', paddingTop: '1rem', fontSize: '0.82rem', color: '#64748b' }}>
-                <strong style={{ color: '#0f172a' }}>Specializations:</strong> Healthcare RCM, BGV Screening, Omnichannel Voice BPO
+                <strong style={{ color: '#0f172a' }}>Specializations:</strong> International Voice Process, Domestic Multilingual BPO, Healthcare RCM
               </div>
             </div>
 
@@ -595,7 +851,7 @@ export default function Home({ onOpenModal }) {
         </div>
       </section>
 
-      {/* 6. Interactive Cost Savings & ROI Calculator Widget */}
+      {/* 8. Interactive Cost Savings & ROI Calculator Widget */}
       <section className="section-py" style={{ background: '#ffffff' }}>
         <div className="container">
           <div
@@ -616,7 +872,7 @@ export default function Home({ onOpenModal }) {
                   Calculate Your Pod Cost Advantage
                 </h2>
                 <p style={{ color: '#475569', fontSize: '1rem', lineHeight: '1.7', marginBottom: '2rem' }}>
-                  See how replacing onshore overhead with Caretrix’s dedicated high-performance pods compresses your budget while accelerating sprint throughput.
+                  See how replacing onshore overhead with Caretrix’s dedicated high-performance pods compresses your budget while accelerating operational velocity.
                 </p>
 
                 {/* Team Size Slider */}
@@ -643,10 +899,12 @@ export default function Home({ onOpenModal }) {
                   </label>
                   <div style={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap' }}>
                     {[
+                      { id: 'appsupport', label: 'Application Support (AMS)' },
+                      { id: 'intlvoice', label: 'International Voice (US/UK)' },
+                      { id: 'domesticvoice', label: 'Domestic Voice (Pan-India)' },
                       { id: 'sap', label: 'SAP S/4HANA ERP' },
-                      { id: 'martech', label: 'MarTech & 8D Motion' },
+                      { id: 'martech', label: 'Performance Marketing' },
                       { id: 'healthcare', label: 'Healthcare RCM' },
-                      { id: 'software', label: 'AI & Custom Dev' },
                     ].map((d) => (
                       <button
                         key={d.id}
@@ -706,10 +964,10 @@ export default function Home({ onOpenModal }) {
         </div>
       </section>
 
-      {/* Pan-India Business Presence & Advanced AEO/GEO Knowledge Engine */}
+      {/* 9. Pan-India Business Presence & Advanced AEO/GEO Knowledge Engine */}
       <PanIndiaAndAEOSection onOpenModal={onOpenModal} />
 
-      {/* 7. Full-Frame Executive Enterprise Call to Action */}
+      {/* 10. Full-Frame Executive Enterprise Call to Action */}
       <section
         className="section-py-lg"
         style={{
@@ -744,7 +1002,7 @@ export default function Home({ onOpenModal }) {
               lineHeight: '1.75',
             }}
           >
-            Whether you require an end-to-end SAP S/4HANA migration pod, an AI-powered digital marketing machine, or a 24/7 global operations desk, our leadership team is ready to deploy.
+            Whether you require 24/7 Application Support Services (AMS), an International/Domestic Voice Process call center, or an end-to-end SAP S/4HANA migration pod, our leadership team is ready to deploy.
           </p>
 
           <div style={{ display: 'flex', justifyContent: 'center', gap: '1.25rem', flexWrap: 'wrap' }}>

@@ -18,23 +18,34 @@ import {
   FileCheck2,
   Headphones,
   CheckCircle2,
+  Layers,
+  PhoneCall,
+  Laptop,
+  Users,
 } from 'lucide-react';
 
 export default function Navbar({ onOpenModal }) {
   const [isOpen, setIsOpen] = useState(false);
   const [servicesDropdownOpen, setServicesDropdownOpen] = useState(false);
+  const [voiceDropdownOpen, setVoiceDropdownOpen] = useState(false);
   const [hubsDropdownOpen, setHubsDropdownOpen] = useState(false);
+  
+  // Mobile accordions
   const [mobileServicesOpen, setMobileServicesOpen] = useState(false);
+  const [mobileVoiceOpen, setMobileVoiceOpen] = useState(false);
   const [mobileHubsOpen, setMobileHubsOpen] = useState(false);
 
   const servicesRef = useRef(null);
+  const voiceRef = useRef(null);
   const hubsRef = useRef(null);
 
   const closeAll = () => {
     setIsOpen(false);
     setServicesDropdownOpen(false);
+    setVoiceDropdownOpen(false);
     setHubsDropdownOpen(false);
     setMobileServicesOpen(false);
+    setMobileVoiceOpen(false);
     setMobileHubsOpen(false);
   };
 
@@ -43,6 +54,9 @@ export default function Navbar({ onOpenModal }) {
     const handleClickOutside = (e) => {
       if (servicesRef.current && !servicesRef.current.contains(e.target)) {
         setServicesDropdownOpen(false);
+      }
+      if (voiceRef.current && !voiceRef.current.contains(e.target)) {
+        setVoiceDropdownOpen(false);
       }
       if (hubsRef.current && !hubsRef.current.contains(e.target)) {
         setHubsDropdownOpen(false);
@@ -116,7 +130,7 @@ export default function Navbar({ onOpenModal }) {
               <Globe2 size={12} /> Pan-India Grid
             </span>
             <span style={{ color: '#cbd5e1' }}>
-              <strong>28 States &amp; 8 UTs Covered</strong> • Major Tech Centers: Pune • Mumbai • Bengaluru • Hyderabad • Delhi NCR • Chennai
+              <strong>28 States &amp; 8 UTs Covered</strong> • Major Delivery Hubs: Pune • Mumbai • Bengaluru • Hyderabad • Delhi NCR • Chennai
             </span>
           </div>
 
@@ -136,7 +150,7 @@ export default function Navbar({ onOpenModal }) {
             </a>
             <span style={{ color: '#34d399', display: 'flex', alignItems: 'center', gap: '5px', fontWeight: 600 }}>
               <span style={{ width: '6px', height: '6px', borderRadius: '50%', background: '#10b981', display: 'inline-block', boxShadow: '0 0 6px #10b981' }} />
-              24/7 Operations Online
+              24/7/365 Global Operations Live
             </span>
           </div>
         </div>
@@ -149,7 +163,7 @@ export default function Navbar({ onOpenModal }) {
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'space-between',
-          height: '74px',
+          height: '76px',
         }}
       >
         {/* Brand Logo */}
@@ -158,7 +172,7 @@ export default function Navbar({ onOpenModal }) {
             src="/logo.png"
             alt="Caretrix Consulting"
             style={{
-              height: '42px',
+              height: '44px',
               width: 'auto',
               objectFit: 'contain',
             }}
@@ -197,7 +211,7 @@ export default function Navbar({ onOpenModal }) {
           style={{
             display: 'flex',
             alignItems: 'center',
-            gap: '1.4rem',
+            gap: '1.35rem',
           }}
           className="desktop-nav"
         >
@@ -206,8 +220,8 @@ export default function Navbar({ onOpenModal }) {
             end
             onClick={closeAll}
             style={({ isActive }) => ({
-              color: isActive ? '#0052cc' : '#334155',
-              fontWeight: isActive ? 700 : 500,
+              color: isActive ? '#0052cc' : '#1e293b',
+              fontWeight: isActive ? 700 : 600,
               fontSize: '0.92rem',
               padding: '6px 2px',
             })}
@@ -215,7 +229,7 @@ export default function Navbar({ onOpenModal }) {
             Home
           </NavLink>
 
-          {/* Services Mega Dropdown Trigger */}
+          {/* Mega Dropdown: Services & Solutions */}
           <div
             ref={servicesRef}
             style={{ position: 'relative' }}
@@ -225,7 +239,7 @@ export default function Navbar({ onOpenModal }) {
             <NavLink
               to="/services"
               style={{
-                color: servicesDropdownOpen ? '#0052cc' : '#334155',
+                color: servicesDropdownOpen ? '#0052cc' : '#1e293b',
                 fontWeight: 600,
                 fontSize: '0.92rem',
                 display: 'inline-flex',
@@ -234,18 +248,19 @@ export default function Navbar({ onOpenModal }) {
                 padding: '6px 2px',
               }}
             >
-              <span>Services (65+)</span>
+              <span>Services &amp; Solutions</span>
               <span
                 style={{
-                  background: 'linear-gradient(135deg, #0052cc 0%, #2563eb 100%)',
-                  color: '#ffffff',
+                  background: '#eff6ff',
+                  border: '1px solid #bfdbfe',
+                  color: '#1d4ed8',
                   fontSize: '0.62rem',
                   fontWeight: 800,
                   padding: '1px 6px',
                   borderRadius: '4px',
                 }}
               >
-                SAP &amp; AI
+                65+
               </span>
               <ChevronDown size={14} style={{ transform: servicesDropdownOpen ? 'rotate(180deg)' : 'none', transition: 'transform 0.2s' }} />
             </NavLink>
@@ -256,8 +271,8 @@ export default function Navbar({ onOpenModal }) {
                 style={{
                   position: 'absolute',
                   top: '100%',
-                  left: '-150px',
-                  width: '680px',
+                  left: '-180px',
+                  width: '740px',
                   background: '#ffffff',
                   border: '1px solid #e2e8f0',
                   borderRadius: '16px',
@@ -266,9 +281,91 @@ export default function Navbar({ onOpenModal }) {
                   zIndex: 2000,
                   display: 'grid',
                   gridTemplateColumns: 'repeat(2, 1fr)',
-                  gap: '1.25rem',
+                  gap: '1.1rem',
                 }}
               >
+                {/* 1. Application Support Services */}
+                <Link
+                  to="/services"
+                  onClick={closeAll}
+                  style={{
+                    display: 'flex',
+                    alignItems: 'flex-start',
+                    gap: '12px',
+                    padding: '12px',
+                    borderRadius: '12px',
+                    background: '#eff6ff',
+                    border: '1px solid #dbeafe',
+                    transition: 'all 0.2s',
+                  }}
+                >
+                  <Laptop size={22} color="#1d4ed8" style={{ flexShrink: 0, marginTop: '3px' }} />
+                  <div>
+                    <strong style={{ color: '#0f172a', fontSize: '0.92rem', display: 'flex', alignItems: 'center', gap: '6px' }}>
+                      Application Support Services
+                      <span style={{ fontSize: '0.65rem', background: '#2563eb', color: '#fff', padding: '1px 6px', borderRadius: '4px' }}>AMS</span>
+                    </strong>
+                    <p style={{ color: '#475569', fontSize: '0.78rem', lineHeight: '1.5', marginTop: '2px' }}>
+                      24/7/365 L1/L2/L3 support, 15-min P1 incident SLA, cloud observability &amp; legacy modernization.
+                    </p>
+                  </div>
+                </Link>
+
+                {/* 2. International Voice Process */}
+                <Link
+                  to="/services"
+                  onClick={closeAll}
+                  style={{
+                    display: 'flex',
+                    alignItems: 'flex-start',
+                    gap: '12px',
+                    padding: '12px',
+                    borderRadius: '12px',
+                    background: '#f0fdf4',
+                    border: '1px solid #dcfce7',
+                    transition: 'all 0.2s',
+                  }}
+                >
+                  <Headphones size={22} color="#059669" style={{ flexShrink: 0, marginTop: '3px' }} />
+                  <div>
+                    <strong style={{ color: '#0f172a', fontSize: '0.92rem', display: 'flex', alignItems: 'center', gap: '6px' }}>
+                      International Voice Process
+                      <span style={{ fontSize: '0.65rem', background: '#059669', color: '#fff', padding: '1px 6px', borderRadius: '4px' }}>US / UK / AUS</span>
+                    </strong>
+                    <p style={{ color: '#475569', fontSize: '0.78rem', lineHeight: '1.5', marginTop: '2px' }}>
+                      C2 English &amp; neutral accent pods, 24/7 inbound/outbound customer support &amp; 96%+ CSAT.
+                    </p>
+                  </div>
+                </Link>
+
+                {/* 3. Domestic Voice Process */}
+                <Link
+                  to="/services"
+                  onClick={closeAll}
+                  style={{
+                    display: 'flex',
+                    alignItems: 'flex-start',
+                    gap: '12px',
+                    padding: '12px',
+                    borderRadius: '12px',
+                    background: '#fffbeb',
+                    border: '1px solid #fef3c7',
+                    transition: 'all 0.2s',
+                  }}
+                >
+                  <PhoneCall size={22} color="#d97706" style={{ flexShrink: 0, marginTop: '3px' }} />
+                  <div>
+                    <strong style={{ color: '#0f172a', fontSize: '0.92rem', display: 'flex', alignItems: 'center', gap: '6px' }}>
+                      Domestic Voice Process
+                      <span style={{ fontSize: '0.65rem', background: '#d97706', color: '#fff', padding: '1px 6px', borderRadius: '4px' }}>12+ Languages</span>
+                    </strong>
+                    <p style={{ color: '#475569', fontSize: '0.78rem', lineHeight: '1.5', marginTop: '2px' }}>
+                      Pan-India multilingual voice support for BFSI, E-commerce, tele-sales &amp; &lt;15s answer speed.
+                    </p>
+                  </div>
+                </Link>
+
+                {/* 4. SAP S/4HANA & ERP Cloud */}
                 <Link
                   to="/services"
                   onClick={closeAll}
@@ -288,12 +385,13 @@ export default function Navbar({ onOpenModal }) {
                     <strong style={{ color: '#0f172a', fontSize: '0.92rem', display: 'block' }}>
                       SAP S/4HANA &amp; ERP Cloud
                     </strong>
-                    <p style={{ color: '#64748b', fontSize: '0.78rem', lineHeight: '1.5' }}>
-                      Greenfield/Brownfield migration, Central Finance, BTP &amp; 24/7 BASIS AMS.
+                    <p style={{ color: '#64748b', fontSize: '0.78rem', lineHeight: '1.5', marginTop: '2px' }}>
+                      Greenfield/Brownfield migration, Central Finance (cFin), BTP, Fiori &amp; BASIS AMS.
                     </p>
                   </div>
                 </Link>
 
+                {/* 5. Digital Marketing & 8D Motion */}
                 <Link
                   to="/services"
                   onClick={closeAll}
@@ -311,14 +409,15 @@ export default function Navbar({ onOpenModal }) {
                   <BarChart3 size={22} color="#0284c7" style={{ flexShrink: 0, marginTop: '3px' }} />
                   <div>
                     <strong style={{ color: '#0f172a', fontSize: '0.92rem', display: 'block' }}>
-                      Digital Marketing &amp; 8D Motion
+                      Performance Marketing &amp; 8D Motion
                     </strong>
-                    <p style={{ color: '#64748b', fontSize: '0.78rem', lineHeight: '1.5' }}>
-                      Performance ROAS engines, GEO/AEO AI SEO, and 3D commercial video.
+                    <p style={{ color: '#64748b', fontSize: '0.78rem', lineHeight: '1.5', marginTop: '2px' }}>
+                      Multi-touch ROAS engines, Generative AEO/GEO optimization, and 3D commercial video.
                     </p>
                   </div>
                 </Link>
 
+                {/* 6. Healthcare Operations & RCM */}
                 <Link
                   to="/services"
                   onClick={closeAll}
@@ -336,35 +435,10 @@ export default function Navbar({ onOpenModal }) {
                   <HeartPulse size={22} color="#059669" style={{ flexShrink: 0, marginTop: '3px' }} />
                   <div>
                     <strong style={{ color: '#0f172a', fontSize: '0.92rem', display: 'block' }}>
-                      Healthcare Operations &amp; RCM
+                      Healthcare RCM &amp; Clinical BPO
                     </strong>
-                    <p style={{ color: '#64748b', fontSize: '0.78rem', lineHeight: '1.5' }}>
-                      HIPAA-certified medical billing, ICD-10 coding, and denial recovery.
-                    </p>
-                  </div>
-                </Link>
-
-                <Link
-                  to="/services"
-                  onClick={closeAll}
-                  style={{
-                    display: 'flex',
-                    alignItems: 'flex-start',
-                    gap: '12px',
-                    padding: '12px',
-                    borderRadius: '12px',
-                    background: '#f8fafc',
-                    border: '1px solid #e2e8f0',
-                    transition: 'all 0.2s',
-                  }}
-                >
-                  <FileCheck2 size={22} color="#d97706" style={{ flexShrink: 0, marginTop: '3px' }} />
-                  <div>
-                    <strong style={{ color: '#0f172a', fontSize: '0.92rem', display: 'block' }}>
-                      Pan-India Verification (BGV)
-                    </strong>
-                    <p style={{ color: '#64748b', fontSize: '0.78rem', lineHeight: '1.5' }}>
-                      Court record queries, university checks, and physical geo-tracking across 28 states.
+                    <p style={{ color: '#64748b', fontSize: '0.78rem', lineHeight: '1.5', marginTop: '2px' }}>
+                      HIPAA-certified medical billing, ICD-10 coding, charge capture &amp; denial recovery.
                     </p>
                   </div>
                 </Link>
@@ -373,33 +447,160 @@ export default function Navbar({ onOpenModal }) {
                   style={{
                     gridColumn: 'span 2',
                     borderTop: '1px solid #e2e8f0',
-                    paddingTop: '0.75rem',
+                    paddingTop: '0.85rem',
                     display: 'flex',
                     justifyContent: 'space-between',
                     alignItems: 'center',
                     fontSize: '0.82rem',
                   }}
                 >
-                  <span style={{ color: '#64748b' }}>Explore full catalog including HRMS, Real Estate, and STM Publishing:</span>
+                  <span style={{ color: '#64748b' }}>Explore HRMS, Real Estate Title, STM Publishing &amp; BGV:</span>
                   <Link to="/services" onClick={closeAll} style={{ color: '#0052cc', fontWeight: 700, display: 'inline-flex', alignItems: 'center', gap: '4px' }}>
-                    View All 65+ Services <ArrowRight size={14} />
+                    View All 65+ Services Directory <ArrowRight size={14} />
                   </Link>
                 </div>
               </div>
             )}
           </div>
 
-          {/* Hubs Dropdown */}
+          {/* Voice & BPO Hub Menu */}
+          <div
+            ref={voiceRef}
+            style={{ position: 'relative' }}
+            onMouseEnter={() => setVoiceDropdownOpen(true)}
+            onMouseLeave={() => setVoiceDropdownOpen(false)}
+          >
+            <button
+              onClick={() => setVoiceDropdownOpen(!voiceDropdownOpen)}
+              style={{
+                background: 'transparent',
+                border: 'none',
+                color: voiceDropdownOpen ? '#0052cc' : '#1e293b',
+                fontWeight: 600,
+                fontSize: '0.92rem',
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: '5px',
+                cursor: 'pointer',
+                padding: '6px 2px',
+              }}
+            >
+              <Headphones size={15} color="#059669" />
+              <span>Voice &amp; Support Pods</span>
+              <ChevronDown size={14} style={{ transform: voiceDropdownOpen ? 'rotate(180deg)' : 'none', transition: 'transform 0.2s' }} />
+            </button>
+
+            {voiceDropdownOpen && (
+              <div
+                style={{
+                  position: 'absolute',
+                  top: '100%',
+                  left: '-80px',
+                  width: '380px',
+                  background: '#ffffff',
+                  border: '1px solid #e2e8f0',
+                  borderRadius: '16px',
+                  padding: '1.25rem',
+                  boxShadow: '0 20px 45px -10px rgba(15, 23, 42, 0.15)',
+                  zIndex: 2000,
+                  display: 'flex',
+                  flexDirection: 'column',
+                  gap: '0.75rem',
+                }}
+              >
+                <div style={{ fontSize: '0.78rem', color: '#059669', fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.5px' }}>
+                  24/7 Voice &amp; Customer Support Centers
+                </div>
+
+                <Link
+                  to="/services"
+                  onClick={closeAll}
+                  style={{
+                    padding: '10px 12px',
+                    borderRadius: '10px',
+                    background: '#f0fdf4',
+                    border: '1px solid #dcfce7',
+                    display: 'block',
+                  }}
+                >
+                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                    <strong style={{ color: '#0f172a', fontSize: '0.88rem' }}>International Voice Process</strong>
+                    <span style={{ fontSize: '0.7rem', color: '#059669', fontWeight: 700 }}>US / UK / AUS</span>
+                  </div>
+                  <p style={{ color: '#475569', fontSize: '0.76rem', margin: '4px 0 0' }}>
+                    C2 English specialists, tech support, customer care, and HIPAA intake.
+                  </p>
+                </Link>
+
+                <Link
+                  to="/services"
+                  onClick={closeAll}
+                  style={{
+                    padding: '10px 12px',
+                    borderRadius: '10px',
+                    background: '#fffbeb',
+                    border: '1px solid #fef3c7',
+                    display: 'block',
+                  }}
+                >
+                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                    <strong style={{ color: '#0f172a', fontSize: '0.88rem' }}>Domestic Voice Process</strong>
+                    <span style={{ fontSize: '0.7rem', color: '#d97706', fontWeight: 700 }}>12+ Languages</span>
+                  </div>
+                  <p style={{ color: '#475569', fontSize: '0.76rem', margin: '4px 0 0' }}>
+                    Hindi, Marathi, Tamil, Telugu, Kannada, Bengali &amp; regional pan-India support.
+                  </p>
+                </Link>
+
+                <Link
+                  to="/services"
+                  onClick={closeAll}
+                  style={{
+                    padding: '10px 12px',
+                    borderRadius: '10px',
+                    background: '#eff6ff',
+                    border: '1px solid #dbeafe',
+                    display: 'block',
+                  }}
+                >
+                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                    <strong style={{ color: '#0f172a', fontSize: '0.88rem' }}>Application Support (AMS)</strong>
+                    <span style={{ fontSize: '0.7rem', color: '#1d4ed8', fontWeight: 700 }}>15-Min SLA</span>
+                  </div>
+                  <p style={{ color: '#475569', fontSize: '0.76rem', margin: '4px 0 0' }}>
+                    L1, L2, L3 tier engineering support, bug triaging &amp; cloud observability.
+                  </p>
+                </Link>
+              </div>
+            )}
+          </div>
+
+          <NavLink
+            to="/industries"
+            onClick={closeAll}
+            style={({ isActive }) => ({
+              color: isActive ? '#0052cc' : '#1e293b',
+              fontWeight: isActive ? 700 : 600,
+              fontSize: '0.92rem',
+              padding: '6px 2px',
+            })}
+          >
+            Industries
+          </NavLink>
+
+          {/* Pan-India Delivery Hubs Dropdown */}
           <div
             ref={hubsRef}
             style={{ position: 'relative' }}
+            onMouseEnter={() => setHubsDropdownOpen(true)}
+            onMouseLeave={() => setHubsDropdownOpen(false)}
           >
             <button
               onClick={() => setHubsDropdownOpen(!hubsDropdownOpen)}
               style={{
                 background: 'transparent',
                 border: 'none',
-                color: hubsDropdownOpen ? '#0052cc' : '#334155',
+                color: hubsDropdownOpen ? '#0052cc' : '#1e293b',
                 fontWeight: 600,
                 fontSize: '0.92rem',
                 display: 'inline-flex',
@@ -446,7 +647,7 @@ export default function Navbar({ onOpenModal }) {
                   ))}
                 </div>
                 <div style={{ marginTop: '0.75rem', paddingTop: '0.75rem', borderTop: '1px solid #e2e8f0', textAlign: 'center' }}>
-                  <Link to="/global" onClick={closeAll} style={{ color: '#0052cc', fontSize: '0.82rem', fontWeight: 600 }}>
+                  <Link to="/global" onClick={closeAll} style={{ color: '#0052cc', fontSize: '0.82rem', fontWeight: 700 }}>
                     Explore Global Follow-The-Sun Facilities →
                   </Link>
                 </div>
@@ -455,37 +656,11 @@ export default function Navbar({ onOpenModal }) {
           </div>
 
           <NavLink
-            to="/industries"
-            onClick={closeAll}
-            style={({ isActive }) => ({
-              color: isActive ? '#0052cc' : '#334155',
-              fontWeight: isActive ? 700 : 500,
-              fontSize: '0.92rem',
-              padding: '6px 2px',
-            })}
-          >
-            Industries
-          </NavLink>
-
-          <NavLink
-            to="/projects"
-            onClick={closeAll}
-            style={({ isActive }) => ({
-              color: isActive ? '#0052cc' : '#334155',
-              fontWeight: isActive ? 700 : 500,
-              fontSize: '0.92rem',
-              padding: '6px 2px',
-            })}
-          >
-            Projects
-          </NavLink>
-
-          <NavLink
             to="/case-studies"
             onClick={closeAll}
             style={({ isActive }) => ({
-              color: isActive ? '#0052cc' : '#334155',
-              fontWeight: isActive ? 700 : 500,
+              color: isActive ? '#0052cc' : '#1e293b',
+              fontWeight: isActive ? 700 : 600,
               fontSize: '0.92rem',
               padding: '6px 2px',
             })}
@@ -494,53 +669,50 @@ export default function Navbar({ onOpenModal }) {
           </NavLink>
 
           <NavLink
-            to="/careers"
+            to="/about"
             onClick={closeAll}
             style={({ isActive }) => ({
-              color: isActive ? '#0052cc' : '#334155',
-              fontWeight: isActive ? 700 : 500,
+              color: isActive ? '#0052cc' : '#1e293b',
+              fontWeight: isActive ? 700 : 600,
               fontSize: '0.92rem',
               padding: '6px 2px',
             })}
           >
-            Careers
+            About
           </NavLink>
 
           <NavLink
             to="/contact"
             onClick={closeAll}
             style={({ isActive }) => ({
-              color: isActive ? '#0052cc' : '#334155',
-              fontWeight: isActive ? 700 : 500,
+              color: isActive ? '#0052cc' : '#1e293b',
+              fontWeight: isActive ? 700 : 600,
               fontSize: '0.92rem',
               padding: '6px 2px',
             })}
           >
             Contact
           </NavLink>
-
-          <NavLink
-            to="/admin"
-            onClick={closeAll}
-            style={({ isActive }) => ({
-              display: 'inline-flex',
-              alignItems: 'center',
-              gap: '6px',
-              padding: '5px 12px',
-              borderRadius: '8px',
-              background: isActive ? '#e0f2fe' : '#f1f5f9',
-              border: '1px solid #cbd5e1',
-              color: '#0f172a',
-              fontWeight: 600,
-              fontSize: '0.82rem',
-            })}
-          >
-            <ShieldCheck size={14} color="#0052cc" /> Admin
-          </NavLink>
         </nav>
 
-        {/* Action Button & Mobile Toggle */}
+        {/* Right CTA Area */}
         <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
+          <a
+            href="tel:+917758088438"
+            className="btn btn-secondary"
+            style={{
+              padding: '8px 16px',
+              fontSize: '0.85rem',
+              display: 'flex',
+              alignItems: 'center',
+              gap: '6px',
+              border: '1px solid #cbd5e1',
+            }}
+          >
+            <Phone size={14} color="#0052cc" />
+            <span style={{ fontWeight: 700 }}>Call Directorate</span>
+          </a>
+
           <button
             onClick={() => {
               closeAll();
@@ -548,83 +720,140 @@ export default function Navbar({ onOpenModal }) {
             }}
             className="btn btn-primary"
             style={{
-              padding: '0.65rem 1.4rem',
-              fontSize: '0.9rem',
+              padding: '9px 20px',
+              fontSize: '0.88rem',
+              fontWeight: 700,
             }}
           >
             <Sparkles size={16} />
-            <span>Launch RFP</span>
+            <span>Initiate RFP</span>
+            <ArrowRight size={16} />
           </button>
 
+          {/* Mobile Hamburger Button */}
           <button
-            className="mobile-toggle"
             onClick={() => setIsOpen(!isOpen)}
-            aria-label="Toggle navigation"
             style={{
-              background: 'none',
+              background: 'transparent',
               border: 'none',
               cursor: 'pointer',
-              color: '#0f172a',
               display: 'none',
-              padding: '6px',
+              color: '#0f172a',
             }}
+            className="mobile-menu-btn"
+            aria-label="Toggle Navigation Menu"
           >
-            {isOpen ? <X size={26} /> : <Menu size={26} />}
+            {isOpen ? <X size={28} /> : <Menu size={28} />}
           </button>
         </div>
       </div>
 
-      {/* Mobile Drawer */}
+      {/* 3. Mobile Navigation Drawer */}
       {isOpen && (
         <div
           style={{
             background: '#ffffff',
             borderTop: '1px solid #e2e8f0',
             padding: '1.5rem',
-            boxShadow: '0 20px 40px rgba(15, 23, 42, 0.1)',
+            boxShadow: '0 10px 30px rgba(0,0,0,0.1)',
+            display: 'flex',
+            flexDirection: 'column',
+            gap: '1rem',
+            maxHeight: '80vh',
+            overflowY: 'auto',
           }}
         >
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
-            <Link to="/" onClick={closeAll} style={{ color: '#0f172a', fontSize: '1rem', fontWeight: 600 }}>Home</Link>
-            <Link to="/about" onClick={closeAll} style={{ color: '#0f172a', fontSize: '1rem', fontWeight: 600 }}>About Directorate</Link>
-            <Link to="/services" onClick={closeAll} style={{ color: '#0052cc', fontSize: '1rem', fontWeight: 700 }}>65+ Services Directory</Link>
-            <Link to="/industries" onClick={closeAll} style={{ color: '#0f172a', fontSize: '1rem', fontWeight: 600 }}>Industries</Link>
-            <Link to="/projects" onClick={closeAll} style={{ color: '#0f172a', fontSize: '1rem', fontWeight: 600 }}>Projects</Link>
-            <Link to="/global" onClick={closeAll} style={{ color: '#0f172a', fontSize: '1rem', fontWeight: 600 }}>Global Delivery</Link>
-            <Link to="/case-studies" onClick={closeAll} style={{ color: '#0f172a', fontSize: '1rem', fontWeight: 600 }}>Case Studies</Link>
-            <Link to="/careers" onClick={closeAll} style={{ color: '#0f172a', fontSize: '1rem', fontWeight: 600 }}>Careers</Link>
-            <Link to="/contact" onClick={closeAll} style={{ color: '#0f172a', fontSize: '1rem', fontWeight: 600 }}>Contact Desk</Link>
-            <Link to="/admin" onClick={closeAll} style={{ color: '#0f172a', fontSize: '1rem', fontWeight: 600 }}>Admin Portal</Link>
+          <NavLink to="/" onClick={closeAll} style={{ color: '#0f172a', fontWeight: 700, fontSize: '1.05rem' }}>
+            Home
+          </NavLink>
 
-            <div style={{ borderTop: '1px solid #e2e8f0', paddingTop: '1rem', display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
-              <a href="tel:+917758088438" style={{ color: '#0052cc', fontWeight: 600, fontSize: '0.9rem' }}>
-                📞 Call: +91 77580 88438
-              </a>
-              <button
-                onClick={() => {
-                  closeAll();
-                  onOpenModal();
-                }}
-                className="btn btn-primary"
-                style={{ width: '100%', marginTop: '0.5rem' }}
-              >
-                <Sparkles size={16} /> Request Custom Proposal
-              </button>
+          {/* Mobile Services Accordion */}
+          <div>
+            <div
+              onClick={() => setMobileServicesOpen(!mobileServicesOpen)}
+              style={{
+                display: 'flex',
+                justifyContent: 'space-between',
+                alignItems: 'center',
+                color: '#0f172a',
+                fontWeight: 700,
+                fontSize: '1.05rem',
+                cursor: 'pointer',
+              }}
+            >
+              <span>Services (65+)</span>
+              <ChevronDown size={18} style={{ transform: mobileServicesOpen ? 'rotate(180deg)' : 'none' }} />
             </div>
+
+            {mobileServicesOpen && (
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '0.6rem', marginTop: '0.75rem', paddingLeft: '0.75rem', borderLeft: '2px solid #0052cc' }}>
+                <Link to="/services" onClick={closeAll} style={{ color: '#1d4ed8', fontWeight: 600, fontSize: '0.9rem' }}>
+                  ● Application Support Services (AMS)
+                </Link>
+                <Link to="/services" onClick={closeAll} style={{ color: '#059669', fontWeight: 600, fontSize: '0.9rem' }}>
+                  ● International Voice Process (US/UK/AUS)
+                </Link>
+                <Link to="/services" onClick={closeAll} style={{ color: '#d97706', fontWeight: 600, fontSize: '0.9rem' }}>
+                  ● Domestic Voice Process (12+ Languages)
+                </Link>
+                <Link to="/services" onClick={closeAll} style={{ color: '#334155', fontSize: '0.9rem' }}>
+                  SAP S/4HANA &amp; ERP Cloud
+                </Link>
+                <Link to="/services" onClick={closeAll} style={{ color: '#334155', fontSize: '0.9rem' }}>
+                  Digital Marketing &amp; 8D Motion
+                </Link>
+                <Link to="/services" onClick={closeAll} style={{ color: '#334155', fontSize: '0.9rem' }}>
+                  Healthcare Operations &amp; RCM
+                </Link>
+                <Link to="/services" onClick={closeAll} style={{ color: '#0052cc', fontWeight: 700, fontSize: '0.88rem' }}>
+                  View All 65+ Services →
+                </Link>
+              </div>
+            )}
+          </div>
+
+          <NavLink to="/industries" onClick={closeAll} style={{ color: '#0f172a', fontWeight: 700, fontSize: '1.05rem' }}>
+            Industries
+          </NavLink>
+
+          <NavLink to="/case-studies" onClick={closeAll} style={{ color: '#0f172a', fontWeight: 700, fontSize: '1.05rem' }}>
+            Case Studies
+          </NavLink>
+
+          <NavLink to="/global" onClick={closeAll} style={{ color: '#0f172a', fontWeight: 700, fontSize: '1.05rem' }}>
+            Global &amp; Pan-India Hubs
+          </NavLink>
+
+          <NavLink to="/about" onClick={closeAll} style={{ color: '#0f172a', fontWeight: 700, fontSize: '1.05rem' }}>
+            About
+          </NavLink>
+
+          <NavLink to="/contact" onClick={closeAll} style={{ color: '#0f172a', fontWeight: 700, fontSize: '1.05rem' }}>
+            Contact
+          </NavLink>
+
+          <div style={{ paddingTop: '1rem', borderTop: '1px solid #e2e8f0', display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
+            <a
+              href="tel:+917758088438"
+              className="btn btn-secondary"
+              style={{ width: '100%', justifyContent: 'center' }}
+            >
+              <Phone size={16} /> +91 77580 88438
+            </a>
+
+            <button
+              onClick={() => {
+                closeAll();
+                onOpenModal();
+              }}
+              className="btn btn-primary"
+              style={{ width: '100%', justifyContent: 'center' }}
+            >
+              <Sparkles size={16} /> Initiate Enterprise RFP
+            </button>
           </div>
         </div>
       )}
-
-      <style>{`
-        @media (max-width: 1024px) {
-          .desktop-nav {
-            display: none !important;
-          }
-          .mobile-toggle {
-            display: block !important;
-          }
-        }
-      `}</style>
     </header>
   );
 }

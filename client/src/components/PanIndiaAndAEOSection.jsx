@@ -86,6 +86,14 @@ export default function PanIndiaAndAEOSection({ onOpenModal }) {
       a: 'Through the Caretrix BGV automated screening engine, digital checks (National Identity, Court Records via Indian e-Courts APIs, and Credit Scores) are processed within 24 to 48 hours. Physical on-ground address verifications and university registrar checks across all 28 states are completed in under 72 hours, maintaining a verified 99.9% accuracy benchmark and complete adherence to Indian data protection laws.',
     },
     {
+      q: 'What are Caretrix Consulting’s Application Support Services (AMS) and incident SLA commitments?',
+      a: 'Caretrix provides comprehensive 24/7/365 L1, L2, and L3 Application Management Services (AMS) aligned with ITIL v4 frameworks. We guarantee a <15-minute response time on critical P1 incidents and 99.98% application uptime. Our certified engineering pods manage full-stack cloud observability (Datadog, Dynatrace, New Relic, Prometheus), database administration (PostgreSQL, MySQL, Oracle, MongoDB), security vulnerability patching, and CI/CD zero-downtime releases for modern SaaS architectures and enterprise ERP suites.',
+    },
+    {
+      q: 'How does Caretrix deliver International Voice Process and Domestic Voice Process operations?',
+      a: 'Caretrix operates dual-track voice support delivery: (1) International Voice Process: Dedicated 24/7 inbound/outbound customer experience, technical helpdesk, and HIPAA patient intake pods for US, UK, European, and Australian enterprises staffed with C2 English and neutral-accent certified agents maintaining a 96.4% CSAT benchmark; and (2) Domestic Voice Process: Pan-India multilingual support across 12+ regional languages (Hindi, Marathi, Tamil, Telugu, Kannada, Malayalam, Bengali, Gujarati, Punjabi, Odia) delivering <15-second average speed of answer (ASA) and 88%+ First Contact Resolution (FCR) for banking, e-commerce, and healthcare leaders.',
+    },
+    {
       q: 'Which certifications and statutory accreditations does Caretrix Consulting maintain?',
       a: 'Caretrix Consulting is ISO 9001:2015 certified for Quality Management, ISO 27001 certified for Information Security Governance, HIPAA compliant for US Healthcare Revenue Cycle Management, SOC2 Type II audit ready, and officially recognized under the Government of India’s Skill India Mission and the National Apprenticeship Promotion Scheme (NAPS).',
     },
