@@ -1,0 +1,11 @@
+{
+  "name": "caretrix-consulting",
+  "version": "2.0.0",
+  "description": "Caretrix Consulting Full-Stack React + SQL Application",
+  "scripts": {
+    "server": "node server/server.js",
+    "client": "npm.cmd --prefix client run dev",
+    "build": "npm.cmd --prefix client run build",
+    "start": "node server/server.js"
+  }
+}

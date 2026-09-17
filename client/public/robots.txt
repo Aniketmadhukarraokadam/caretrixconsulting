@@ -1,0 +1,21 @@
+# Robots.txt for Caretrix Consulting (Pan-India & Global)
+User-agent: *
+Allow: /
+
+# Explicit AI Generative Engine Optimization (GEO) Permissions
+User-agent: GPTBot
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: Applebot-Extended
+Allow: /
+
+Sitemap: https://www.caretrixconsulting.com/sitemap.xml
