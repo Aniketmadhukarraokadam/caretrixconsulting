@@ -132,6 +132,17 @@ button, input, select, textarea {
   flex: 1;
 }
 
+#particle-canvas {
+  position: fixed !important;
+  top: 0 !important;
+  left: 0 !important;
+  width: 100vw !important;
+  height: 100vh !important;
+  pointer-events: none !important;
+  z-index: 0 !important;
+  display: block !important;
+}
+
 /* Containers */
 .container-fluid {
   width: 100%;
@@ -361,6 +372,23 @@ button, input, select, textarea {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 1.5rem;
+}
+
+@media (max-width: 1024px) {
+  .desktop-nav {
+    display: none !important;
+  }
+  .mobile-toggle {
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+  }
+}
+
+@media (min-width: 1025px) {
+  .mobile-toggle {
+    display: none !important;
+  }
 }
 
 @media (max-width: 991px) {

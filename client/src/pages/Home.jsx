@@ -20,6 +20,9 @@ import {
   Activity,
   Server,
   HeartPulse,
+  Briefcase,
+  Building2,
+  Cpu,
 } from 'lucide-react';
 import Interactive3DCanvas from '../components/Interactive3DCanvas';
 import TiltCard from '../components/TiltCard';
@@ -29,6 +32,9 @@ import HumanMotion8DStudio from '../components/HumanMotion8DStudio';
 import { AnimasterMagneticButton } from '../components/extensions/AnimasterLib';
 
 export default function Home({ onOpenModal }) {
+  // Mega Hub Hero Active Pillar State: 'consulting' | 'services'
+  const [heroPillar, setHeroPillar] = useState('consulting');
+
   // ROI / Savings Estimator state
   const [estimatorTeamSize, setEstimatorTeamSize] = useState('15');
   const [estimatorDomain, setEstimatorDomain] = useState('appsupport');
@@ -59,16 +65,102 @@ export default function Home({ onOpenModal }) {
 
   return (
     <div className="full-frame-homepage" style={{ background: '#f8fafc', color: '#0f172a' }}>
+      {/* 0. Mega Hub Top Announcement Strip (Visible immediately below Navbar) */}
+      <div
+        style={{
+          background: '#ffffff',
+          borderBottom: '1px solid #e2e8f0',
+          padding: '9px 0',
+          boxShadow: '0 1px 3px rgba(15, 23, 42, 0.04)',
+        }}
+      >
+        <div
+          className="container-fluid"
+          style={{
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'space-between',
+            flexWrap: 'wrap',
+            gap: '10px',
+          }}
+        >
+          <div style={{ display: 'flex', alignItems: 'center', gap: '10px', flexWrap: 'wrap' }}>
+            <span
+              style={{
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: '5px',
+                fontSize: '0.74rem',
+                fontWeight: 800,
+                color: '#0052cc',
+                background: '#eff6ff',
+                border: '1px solid #bfdbfe',
+                padding: '3px 10px',
+                borderRadius: '16px',
+                textTransform: 'uppercase',
+                letterSpacing: '0.5px',
+              }}
+            >
+              <Building2 size={13} /> Enterprise Mega Hub
+            </span>
+            <span style={{ fontSize: '0.82rem', color: '#334155', fontWeight: 600 }}>
+              Dual-Powerhouse Model: <strong>Strategic Enterprise Consulting</strong> &amp; <strong>24/7 Global Managed Services</strong> across 28 Indian States
+            </span>
+          </div>
+
+          <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+            <button
+              onClick={() => setHeroPillar('consulting')}
+              style={{
+                fontSize: '0.78rem',
+                fontWeight: 700,
+                color: heroPillar === 'consulting' ? '#ffffff' : '#0052cc',
+                background: heroPillar === 'consulting' ? '#0052cc' : '#eff6ff',
+                border: '1px solid #bfdbfe',
+                padding: '4px 12px',
+                borderRadius: '6px',
+                cursor: 'pointer',
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: '5px',
+                transition: 'all 0.2s',
+              }}
+            >
+              <Briefcase size={12} /> Strategic Consulting
+            </button>
+            <button
+              onClick={() => setHeroPillar('services')}
+              style={{
+                fontSize: '0.78rem',
+                fontWeight: 700,
+                color: heroPillar === 'services' ? '#ffffff' : '#059669',
+                background: heroPillar === 'services' ? '#059669' : '#ecfdf5',
+                border: '1px solid #a7f3d0',
+                padding: '4px 12px',
+                borderRadius: '6px',
+                cursor: 'pointer',
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: '5px',
+                transition: 'all 0.2s',
+              }}
+            >
+              <Headphones size={12} /> Managed Services &amp; Voice
+            </button>
+          </div>
+        </div>
+      </div>
+
       {/* 1. Full-Frame Modern Executive Hero Section */}
       <section
         style={{
           position: 'relative',
-          minHeight: '92vh',
+          minHeight: '85vh',
           display: 'flex',
           alignItems: 'center',
           background: 'radial-gradient(ellipse 90% 70% at 50% -10%, #e0f2fe 0%, #f8fafc 65%, #f8fafc 100%)',
           overflow: 'hidden',
-          padding: '6rem 0 4.5rem',
+          padding: '3.75rem 0 3.5rem',
           borderBottom: '1px solid #e2e8f0',
         }}
       >
@@ -115,48 +207,85 @@ export default function Home({ onOpenModal }) {
                   background: '#eff6ff',
                   border: '1px solid #bfdbfe',
                   boxShadow: '0 2px 8px rgba(37, 99, 235, 0.08)',
-                  marginBottom: '1.5rem',
+                  marginBottom: '1.25rem',
                 }}
               >
                 <Sparkles size={16} color="#1d4ed8" />
                 <span style={{ color: '#1d4ed8', fontSize: '0.84rem', fontWeight: 700, letterSpacing: '0.8px', textTransform: 'uppercase' }}>
-                  Tier-1 Enterprise Consulting, Application Support &amp; BPO
+                  Enterprise Mega Hub • Consulting &amp; Global Operations
                 </span>
               </div>
 
               <h1
                 style={{
-                  fontSize: 'clamp(2.5rem, 4.6vw, 4.2rem)',
+                  fontSize: 'clamp(2.4rem, 4.4vw, 4rem)',
                   fontWeight: 900,
-                  lineHeight: '1.12',
-                  marginBottom: '1.5rem',
+                  lineHeight: '1.14',
+                  marginBottom: '1.25rem',
                   letterSpacing: '-0.03em',
                   color: '#0f172a',
                 }}
               >
-                Accelerating Enterprises with <span className="gradient-text-cyber">24/7 Application Support</span>, Global Voice &amp; SAP Cloud.
+                Accelerating Enterprises with <span className="gradient-text-cyber">Strategic Consulting</span> &amp; <span style={{ color: '#0052cc' }}>24/7 Managed Services</span>.
               </h1>
 
               <p
                 style={{
-                  fontSize: '1.16rem',
+                  fontSize: '1.12rem',
                   color: '#475569',
-                  lineHeight: '1.75',
-                  marginBottom: '2.5rem',
+                  lineHeight: '1.7',
+                  marginBottom: '2rem',
                   maxWidth: '680px',
                 }}
               >
-                Caretrix delivers Fortune-500 grade operational excellence: <strong>24/7/365 Application Support Services (AMS)</strong> with a 15-minute P1 incident SLA, 
-                <strong>International &amp; Domestic Voice Process Call Centers</strong>, <strong>SAP S/4HANA Transformations</strong>, and 
-                <strong>Performance Marketing (5.2x ROAS)</strong> from Pune and Navi Mumbai delivery hubs.
+                Caretrix operates as a premier enterprise Mega Hub: uniting Fortune-500 scale <strong>Strategic Consulting</strong> (SAP S/4HANA migrations, cloud architecture, corporate advisory) with bank-grade <strong>24/7 Managed Services</strong> (15-min SLA Application Support AMS, US/UK/AUS &amp; Pan-India Voice Processes, and HIPAA Healthcare BPO).
               </p>
 
+              {/* Dual-Pillar Quick Feature Badges */}
+              <div style={{ display: 'flex', gap: '10px', flexWrap: 'wrap', marginBottom: '2rem' }}>
+                <div
+                  style={{
+                    padding: '8px 14px',
+                    borderRadius: '8px',
+                    background: '#ffffff',
+                    border: '1px solid #dbeafe',
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: '8px',
+                    boxShadow: '0 2px 4px rgba(0,0,0,0.02)',
+                  }}
+                >
+                  <Briefcase size={16} color="#0052cc" />
+                  <span style={{ fontSize: '0.84rem', color: '#1e293b', fontWeight: 600 }}>
+                    <strong>Consulting:</strong> SAP S/4HANA • Strategy • Cloud Architecture
+                  </span>
+                </div>
+
+                <div
+                  style={{
+                    padding: '8px 14px',
+                    borderRadius: '8px',
+                    background: '#ffffff',
+                    border: '1px solid #dcfce7',
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: '8px',
+                    boxShadow: '0 2px 4px rgba(0,0,0,0.02)',
+                  }}
+                >
+                  <Headphones size={16} color="#059669" />
+                  <span style={{ fontSize: '0.84rem', color: '#1e293b', fontWeight: 600 }}>
+                    <strong>Services:</strong> 15-Min SLA AMS • US/UK Voice • 12+ Languages
+                  </span>
+                </div>
+              </div>
+
               {/* CTAs */}
-              <div style={{ display: 'flex', flexWrap: 'wrap', gap: '1.25rem', marginBottom: '3rem', alignItems: 'center' }}>
+              <div style={{ display: 'flex', flexWrap: 'wrap', gap: '1rem', marginBottom: '2.5rem', alignItems: 'center' }}>
                 <AnimasterMagneticButton
                   onClick={onOpenModal}
                   variant="primary"
-                  style={{ padding: '0.95rem 2.2rem', fontSize: '1.05rem' }}
+                  style={{ padding: '0.9rem 2rem', fontSize: '1rem' }}
                 >
                   <Sparkles size={18} />
                   <span>Initiate Enterprise RFP</span>
@@ -166,10 +295,19 @@ export default function Home({ onOpenModal }) {
                 <Link
                   to="/services"
                   className="btn btn-secondary"
-                  style={{ padding: '1rem 2rem', fontSize: '1.05rem' }}
+                  style={{ padding: '0.9rem 1.8rem', fontSize: '1rem' }}
                 >
-                  <Layers size={18} color="#123d6b" />
-                  <span>Explore 65+ Services</span>
+                  <Briefcase size={16} color="#0052cc" />
+                  <span>Consulting Hub</span>
+                </Link>
+
+                <Link
+                  to="/services"
+                  className="btn btn-secondary"
+                  style={{ padding: '0.9rem 1.8rem', fontSize: '1rem' }}
+                >
+                  <Headphones size={16} color="#059669" />
+                  <span>Services Hub</span>
                 </Link>
               </div>
 
@@ -181,109 +319,202 @@ export default function Home({ onOpenModal }) {
                   gap: '2.5rem',
                   flexWrap: 'wrap',
                   borderTop: '1px solid #e2e8f0',
-                  paddingTop: '1.75rem',
+                  paddingTop: '1.5rem',
                 }}
               >
                 <div>
-                  <div style={{ fontSize: '1.8rem', fontWeight: 800, color: '#1d4ed8' }}>
+                  <div style={{ fontSize: '1.75rem', fontWeight: 800, color: '#1d4ed8' }}>
                     <StatCounter end={15} duration={1200} prefix="<" suffix=" Min" />
                   </div>
-                  <div style={{ fontSize: '0.82rem', color: '#64748b' }}>P1 Critical Incident SLA</div>
+                  <div style={{ fontSize: '0.8rem', color: '#64748b' }}>P1 Critical Incident SLA</div>
                 </div>
 
                 <div>
-                  <div style={{ fontSize: '1.8rem', fontWeight: 800, color: '#059669' }}>
+                  <div style={{ fontSize: '1.75rem', fontWeight: 800, color: '#059669' }}>
                     <StatCounter end={96.4} duration={1500} decimals={1} suffix="%" />
                   </div>
-                  <div style={{ fontSize: '0.82rem', color: '#64748b' }}>Verified Voice CSAT Score</div>
+                  <div style={{ fontSize: '0.8rem', color: '#64748b' }}>Verified Voice CSAT Score</div>
                 </div>
 
                 <div>
-                  <div style={{ fontSize: '1.8rem', fontWeight: 800, color: '#d97706' }}>
-                    <StatCounter end={180} duration={1500} prefix="$" suffix="M+" />
+                  <div style={{ fontSize: '1.75rem', fontWeight: 800, color: '#d97706' }}>
+                    <StatCounter end={28} duration={1200} suffix=" States" />
                   </div>
-                  <div style={{ fontSize: '0.82rem', color: '#64748b' }}>Client Pipeline Influenced</div>
+                  <div style={{ fontSize: '0.8rem', color: '#64748b' }}>Pan-India Delivery Grid</div>
                 </div>
               </div>
             </div>
 
-            {/* Hero Right Column: 3D Visual Card */}
+            {/* Hero Right Column: Interactive Dual-Engine Showcase Terminal */}
             <div>
               <TiltCard
                 style={{
                   background: '#ffffff',
-                  border: '1px solid #e2e8f0',
+                  border: '1px solid #cbd5e1',
                   borderRadius: '24px',
                   boxShadow: '0 20px 45px -10px rgba(15, 23, 42, 0.12)',
                   overflow: 'hidden',
                 }}
               >
-                <div style={{ position: 'relative', height: '360px', overflow: 'hidden' }}>
+                {/* Terminal Tab Header */}
+                <div
+                  style={{
+                    background: '#0f172a',
+                    padding: '12px 18px',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'space-between',
+                  }}
+                >
+                  <div style={{ display: 'flex', gap: '6px' }}>
+                    <div style={{ width: '10px', height: '10px', borderRadius: '50%', background: '#ef4444' }} />
+                    <div style={{ width: '10px', height: '10px', borderRadius: '50%', background: '#f59e0b' }} />
+                    <div style={{ width: '10px', height: '10px', borderRadius: '50%', background: '#10b981' }} />
+                  </div>
+                  <div style={{ display: 'flex', gap: '6px' }}>
+                    <button
+                      onClick={() => setHeroPillar('consulting')}
+                      style={{
+                        padding: '4px 12px',
+                        borderRadius: '6px',
+                        border: 'none',
+                        fontSize: '0.74rem',
+                        fontWeight: 700,
+                        cursor: 'pointer',
+                        background: heroPillar === 'consulting' ? '#0052cc' : 'rgba(255, 255, 255, 0.1)',
+                        color: '#ffffff',
+                        transition: 'all 0.2s',
+                      }}
+                    >
+                      Engine A: Consulting
+                    </button>
+                    <button
+                      onClick={() => setHeroPillar('services')}
+                      style={{
+                        padding: '4px 12px',
+                        borderRadius: '6px',
+                        border: 'none',
+                        fontSize: '0.74rem',
+                        fontWeight: 700,
+                        cursor: 'pointer',
+                        background: heroPillar === 'services' ? '#059669' : 'rgba(255, 255, 255, 0.1)',
+                        color: '#ffffff',
+                        transition: 'all 0.2s',
+                      }}
+                    >
+                      Engine B: Managed Services
+                    </button>
+                  </div>
+                </div>
+
+                {/* Hero Graphic / Visual Representation */}
+                <div style={{ position: 'relative', height: '280px', overflow: 'hidden' }}>
                   <img
-                    src="/images/hero_3d_mesh.jpg"
-                    alt="3D Holographic Global Mesh Network"
+                    src={heroPillar === 'consulting' ? '/images/sap_cloud_mesh.jpg' : '/images/hero_3d_mesh.jpg'}
+                    alt="Caretrix Mega Hub Architecture"
                     style={{
                       width: '100%',
                       height: '100%',
                       objectFit: 'cover',
                       display: 'block',
+                      transition: 'all 0.4s ease',
                     }}
                   />
                   <div
                     style={{
                       position: 'absolute',
                       inset: 0,
-                      background: 'linear-gradient(to top, rgba(15, 23, 42, 0.8) 0%, transparent 60%)',
+                      background: 'linear-gradient(to top, rgba(15, 23, 42, 0.85) 0%, rgba(15, 23, 42, 0.2) 60%, transparent 100%)',
                     }}
                   />
                   <div
                     style={{
                       position: 'absolute',
-                      top: '18px',
-                      left: '18px',
+                      top: '16px',
+                      left: '16px',
                       background: 'rgba(255, 255, 255, 0.95)',
                       backdropFilter: 'blur(10px)',
                       border: '1px solid #cbd5e1',
-                      padding: '6px 14px',
+                      padding: '5px 12px',
                       borderRadius: '30px',
-                      fontSize: '0.78rem',
+                      fontSize: '0.74rem',
                       fontWeight: 700,
-                      color: '#1d4ed8',
+                      color: heroPillar === 'consulting' ? '#0052cc' : '#059669',
                       display: 'flex',
                       alignItems: 'center',
                       gap: '6px',
                       boxShadow: '0 2px 10px rgba(0,0,0,0.1)',
                     }}
                   >
-                    <Globe2 size={14} /> LIVE GLOBAL DATA FABRIC
+                    {heroPillar === 'consulting' ? <Briefcase size={12} /> : <Headphones size={12} />}
+                    {heroPillar === 'consulting' ? 'STRATEGIC CONSULTING HUB' : '24/7 MANAGED SERVICES HUB'}
+                  </div>
+
+                  <div
+                    style={{
+                      position: 'absolute',
+                      bottom: '16px',
+                      left: '16px',
+                      right: '16px',
+                      color: '#ffffff',
+                    }}
+                  >
+                    <div style={{ fontSize: '1.15rem', fontWeight: 800, marginBottom: '2px' }}>
+                      {heroPillar === 'consulting'
+                        ? 'SAP S/4HANA, Cloud & Advisory CoE'
+                        : 'Application Support AMS & Dual Voice Pods'}
+                    </div>
+                    <div style={{ fontSize: '0.78rem', color: '#cbd5e1' }}>
+                      {heroPillar === 'consulting'
+                        ? 'Greenfield/Brownfield ERP, AWS/Azure Governance, and 5.2x ROAS MarTech.'
+                        : '15-Minute P1 SLA, US/UK/AUS C2 English & 12+ Pan-India Language Centers.'}
+                    </div>
                   </div>
                 </div>
 
-                <div style={{ padding: '1.75rem' }}>
-                  <h3 style={{ fontSize: '1.35rem', marginBottom: '0.5rem', color: '#0f172a' }}>
-                    Connected Global Intelligence
-                  </h3>
-                  <p style={{ color: '#475569', fontSize: '0.92rem', lineHeight: '1.6', marginBottom: '1.25rem' }}>
-                    Unified cross-border delivery spanning Pune Global HQ, Navi Mumbai Center, and international enterprise nodes. Real-time observability and sub-second transaction routing.
-                  </p>
-                  <div style={{ display: 'flex', gap: '0.75rem', flexWrap: 'wrap' }}>
-                    {['ISO 9001:2015', 'ISO 27001 Security', 'SOC2 Compliant', 'HIPAA Certified'].map((cert, idx) => (
-                      <span
-                        key={idx}
-                        style={{
-                          background: '#f1f5f9',
-                          border: '1px solid #e2e8f0',
-                          borderRadius: '6px',
-                          padding: '4px 10px',
-                          fontSize: '0.76rem',
-                          color: '#334155',
-                          fontWeight: 600,
-                        }}
-                      >
-                        ✓ {cert}
-                      </span>
-                    ))}
-                  </div>
+                {/* Card Content & Features */}
+                <div style={{ padding: '1.4rem' }}>
+                  {heroPillar === 'consulting' ? (
+                    <div>
+                      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '10px', marginBottom: '1rem' }}>
+                        <div style={{ background: '#f8fafc', border: '1px solid #e2e8f0', borderRadius: '10px', padding: '10px' }}>
+                          <strong style={{ color: '#0f172a', fontSize: '0.84rem', display: 'block' }}>SAP S/4HANA CoE</strong>
+                          <span style={{ color: '#64748b', fontSize: '0.74rem' }}>cFin, BTP, Fiori UI5 &amp; BASIS</span>
+                        </div>
+                        <div style={{ background: '#f8fafc', border: '1px solid #e2e8f0', borderRadius: '10px', padding: '10px' }}>
+                          <strong style={{ color: '#0f172a', fontSize: '0.84rem', display: 'block' }}>5.2x Verified ROAS</strong>
+                          <span style={{ color: '#64748b', fontSize: '0.74rem' }}>Programmatic MarTech &amp; 8D Motion</span>
+                        </div>
+                      </div>
+                      <div style={{ display: 'flex', gap: '6px', flexWrap: 'wrap' }}>
+                        {['ISO 9001:2015', 'ISO 27001 Certified', 'SOC-2 Type II', 'CMMI Level 3'].map((badge, idx) => (
+                          <span key={idx} style={{ background: '#eff6ff', color: '#1d4ed8', border: '1px solid #bfdbfe', borderRadius: '6px', padding: '3px 8px', fontSize: '0.72rem', fontWeight: 700 }}>
+                            ✓ {badge}
+                          </span>
+                        ))}
+                      </div>
+                    </div>
+                  ) : (
+                    <div>
+                      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '10px', marginBottom: '1rem' }}>
+                        <div style={{ background: '#f8fafc', border: '1px solid #e2e8f0', borderRadius: '10px', padding: '10px' }}>
+                          <strong style={{ color: '#0f172a', fontSize: '0.84rem', display: 'block' }}>&lt;15 Min P1 SLA</strong>
+                          <span style={{ color: '#64748b', fontSize: '0.74rem' }}>ITIL v4 L1/L2/L3 24/7/365</span>
+                        </div>
+                        <div style={{ background: '#f8fafc', border: '1px solid #e2e8f0', borderRadius: '10px', padding: '10px' }}>
+                          <strong style={{ color: '#0f172a', fontSize: '0.84rem', display: 'block' }}>Dual Voice Process</strong>
+                          <span style={{ color: '#64748b', fontSize: '0.74rem' }}>US/UK/AUS &amp; 12+ Indian Langs</span>
+                        </div>
+                      </div>
+                      <div style={{ display: 'flex', gap: '6px', flexWrap: 'wrap' }}>
+                        {['HIPAA Certified', 'PCI-DSS Level 1', 'Skill India Partner', '28 States BGV'].map((badge, idx) => (
+                          <span key={idx} style={{ background: '#ecfdf5', color: '#047857', border: '1px solid #a7f3d0', borderRadius: '6px', padding: '3px 8px', fontSize: '0.72rem', fontWeight: 700 }}>
+                            ✓ {badge}
+                          </span>
+                        ))}
+                      </div>
+                    </div>
+                  )}
                 </div>
               </TiltCard>
             </div>

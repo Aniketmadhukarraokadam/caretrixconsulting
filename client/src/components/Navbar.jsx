@@ -22,61 +22,77 @@ import {
   PhoneCall,
   Laptop,
   Users,
+  Briefcase,
+  Building2,
+  Clock,
+  Compass,
 } from 'lucide-react';
 
 export default function Navbar({ onOpenModal }) {
-  const [isOpen, setIsOpen] = useState(false);
-  const [servicesDropdownOpen, setServicesDropdownOpen] = useState(false);
-  const [voiceDropdownOpen, setVoiceDropdownOpen] = useState(false);
-  const [hubsDropdownOpen, setHubsDropdownOpen] = useState(false);
+  const [isMobileOpen, setIsMobileOpen] = useState(false);
+  const [activeDropdown, setActiveDropdown] = useState(null); // 'consulting' | 'services' | 'hubs' | 'company' | null
   
-  // Mobile accordions
+  // Mobile accordion states
+  const [mobileConsultingOpen, setMobileConsultingOpen] = useState(false);
   const [mobileServicesOpen, setMobileServicesOpen] = useState(false);
-  const [mobileVoiceOpen, setMobileVoiceOpen] = useState(false);
   const [mobileHubsOpen, setMobileHubsOpen] = useState(false);
+  const [mobileCompanyOpen, setMobileCompanyOpen] = useState(false);
 
-  const servicesRef = useRef(null);
-  const voiceRef = useRef(null);
-  const hubsRef = useRef(null);
+  const timeoutRef = useRef(null);
+  const navContainerRef = useRef(null);
 
-  const closeAll = () => {
-    setIsOpen(false);
-    setServicesDropdownOpen(false);
-    setVoiceDropdownOpen(false);
-    setHubsDropdownOpen(false);
-    setMobileServicesOpen(false);
-    setMobileVoiceOpen(false);
-    setMobileHubsOpen(false);
+  const handleMouseEnter = (dropdownName) => {
+    if (timeoutRef.current) clearTimeout(timeoutRef.current);
+    setActiveDropdown(dropdownName);
   };
 
-  // Click outside to close dropdowns
+  const handleMouseLeave = () => {
+    timeoutRef.current = setTimeout(() => {
+      setActiveDropdown(null);
+    }, 180);
+  };
+
+  const closeAll = () => {
+    if (timeoutRef.current) clearTimeout(timeoutRef.current);
+    setActiveDropdown(null);
+    setIsMobileOpen(false);
+    setMobileConsultingOpen(false);
+    setMobileServicesOpen(false);
+    setMobileHubsOpen(false);
+    setMobileCompanyOpen(false);
+  };
+
+  // Close dropdown on ESC or outside click
   useEffect(() => {
+    const handleKeyDown = (e) => {
+      if (e.key === 'Escape') closeAll();
+    };
     const handleClickOutside = (e) => {
-      if (servicesRef.current && !servicesRef.current.contains(e.target)) {
-        setServicesDropdownOpen(false);
-      }
-      if (voiceRef.current && !voiceRef.current.contains(e.target)) {
-        setVoiceDropdownOpen(false);
-      }
-      if (hubsRef.current && !hubsRef.current.contains(e.target)) {
-        setHubsDropdownOpen(false);
+      if (navContainerRef.current && !navContainerRef.current.contains(e.target)) {
+        setActiveDropdown(null);
       }
     };
+    document.addEventListener('keydown', handleKeyDown);
     document.addEventListener('mousedown', handleClickOutside);
-    return () => document.removeEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('keydown', handleKeyDown);
+      document.removeEventListener('mousedown', handleClickOutside);
+      if (timeoutRef.current) clearTimeout(timeoutRef.current);
+    };
   }, []);
 
   const panIndiaHubs = [
-    { city: 'Pune (Global HQ)', desc: 'Dangat Patil Empire, Vadgaon Budruk. SAP CoE & Cloud Lab.', state: 'Maharashtra' },
-    { city: 'Navi Mumbai Hub', desc: 'Vashi Station Tower 2. Healthcare RCM & 24/7 BPO Ops.', state: 'Maharashtra' },
-    { city: 'Bengaluru Tech Hub', desc: 'Outer Ring Road tech corridor. ABAP on HANA & Cloud BTP.', state: 'Karnataka' },
-    { city: 'Hyderabad AI Lab', desc: 'Hitec City. Agentic AI, Computer Vision & Data Annotation.', state: 'Telangana' },
-    { city: 'Delhi NCR Advisory', desc: 'Gurugram Cyber City. Corporate Strategy & Pan-India BGV.', state: 'NCR' },
-    { city: 'Chennai Delivery', desc: 'OMR corridor. STM Publishing & Prepress XML automation.', state: 'Tamil Nadu' },
+    { city: 'Pune (Global HQ)', desc: 'Dangat Patil Empire, Vadgaon Budruk. SAP CoE & Cloud Lab.', state: 'Maharashtra', tag: 'Global HQ' },
+    { city: 'Navi Mumbai Hub', desc: 'Vashi Station Tower 2. Healthcare RCM & 24/7 BPO Ops.', state: 'Maharashtra', tag: 'BPO Ops' },
+    { city: 'Bengaluru Tech Hub', desc: 'Outer Ring Road tech corridor. ABAP on HANA & Cloud BTP.', state: 'Karnataka', tag: 'Cloud CoE' },
+    { city: 'Hyderabad AI Lab', desc: 'Hitec City. Agentic AI, Computer Vision & Data Annotation.', state: 'Telangana', tag: 'AI Hub' },
+    { city: 'Delhi NCR Advisory', desc: 'Gurugram Cyber City. Corporate Strategy & Pan-India BGV.', state: 'NCR', tag: 'Advisory' },
+    { city: 'Chennai Delivery', desc: 'OMR corridor. STM Publishing & Prepress XML automation.', state: 'Tamil Nadu', tag: 'Delivery' },
   ];
 
   return (
     <header
+      ref={navContainerRef}
       style={{
         position: 'sticky',
         top: 0,
@@ -89,7 +105,7 @@ export default function Navbar({ onOpenModal }) {
         width: '100%',
       }}
     >
-      {/* 1. Executive Top Bar: Pan-India Network & Direct Helplines */}
+      {/* 1. Executive Top Operational Bar */}
       <div
         style={{
           background: '#0a192f',
@@ -109,16 +125,16 @@ export default function Navbar({ onOpenModal }) {
             gap: '0.75rem',
           }}
         >
-          {/* Pan-India Presence Indicator */}
-          <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+          {/* Mega Hub Badge & Pan-India Network */}
+          <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
             <span
               style={{
                 display: 'inline-flex',
                 alignItems: 'center',
                 gap: '5px',
-                padding: '2px 8px',
+                padding: '2px 9px',
                 borderRadius: '12px',
-                background: 'rgba(2, 132, 199, 0.25)',
+                background: 'linear-gradient(135deg, rgba(2, 132, 199, 0.3) 0%, rgba(37, 99, 235, 0.3) 100%)',
                 border: '1px solid rgba(56, 189, 248, 0.4)',
                 color: '#38bdf8',
                 fontWeight: 700,
@@ -127,46 +143,46 @@ export default function Navbar({ onOpenModal }) {
                 letterSpacing: '0.5px',
               }}
             >
-              <Globe2 size={12} /> Pan-India Grid
+              <Sparkles size={11} /> Enterprise Mega Hub
             </span>
-            <span style={{ color: '#cbd5e1' }}>
-              <strong>28 States &amp; 8 UTs Covered</strong> • Major Delivery Hubs: Pune • Mumbai • Bengaluru • Hyderabad • Delhi NCR • Chennai
+            <span style={{ color: '#e2e8f0', fontSize: '0.78rem' }}>
+              <strong>Strategic Consulting</strong> &amp; <strong>24/7 Global Managed Services</strong> across 28 Indian States &amp; 8 UTs
             </span>
           </div>
 
-          {/* Quick Helplines & Regional Indicator */}
-          <div style={{ display: 'flex', alignItems: 'center', gap: '1.5rem', flexWrap: 'wrap' }}>
+          {/* Quick Contact & Live Status */}
+          <div style={{ display: 'flex', alignItems: 'center', gap: '1.4rem', flexWrap: 'wrap' }}>
             <a
               href="tel:+917758088438"
               style={{ display: 'flex', alignItems: 'center', gap: '5px', color: '#38bdf8', fontWeight: 600 }}
             >
-              <Phone size={13} /> +91 77580 88438
+              <Phone size={12} /> +91 77580 88438
             </a>
             <a
               href="mailto:Contact@caretrixconsulting.com"
               style={{ display: 'flex', alignItems: 'center', gap: '5px', color: '#cbd5e1' }}
             >
-              <Mail size={13} /> Contact@caretrixconsulting.com
+              <Mail size={12} /> Contact@caretrixconsulting.com
             </a>
             <span style={{ color: '#34d399', display: 'flex', alignItems: 'center', gap: '5px', fontWeight: 600 }}>
               <span style={{ width: '6px', height: '6px', borderRadius: '50%', background: '#10b981', display: 'inline-block', boxShadow: '0 0 6px #10b981' }} />
-              24/7/365 Global Operations Live
+              24/7 Operations Live
             </span>
           </div>
         </div>
       </div>
 
-      {/* 2. Main Executive Navigation Bar */}
+      {/* 2. Main Mega Hub Navigation Bar */}
       <div
         className="container-fluid"
         style={{
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'space-between',
-          height: '76px',
+          height: '74px',
         }}
       >
-        {/* Brand Logo */}
+        {/* Brand Logo & Mega Hub Identity */}
         <Link to="/" onClick={closeAll} style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
           <img
             src="/logo.png"
@@ -178,43 +194,60 @@ export default function Navbar({ onOpenModal }) {
             }}
           />
           <div>
-            <span
-              style={{
-                fontFamily: 'var(--font-display)',
-                fontWeight: 800,
-                fontSize: '1.35rem',
-                letterSpacing: '-0.02em',
-                color: '#123d6b',
-                display: 'block',
-                lineHeight: 1.1,
-              }}
-            >
-              CARETRIX
-            </span>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+              <span
+                style={{
+                  fontFamily: 'var(--font-display)',
+                  fontWeight: 800,
+                  fontSize: '1.3rem',
+                  letterSpacing: '-0.02em',
+                  color: '#123d6b',
+                  lineHeight: 1.1,
+                }}
+              >
+                CARETRIX
+              </span>
+              <span
+                style={{
+                  fontSize: '0.62rem',
+                  fontWeight: 800,
+                  background: '#0052cc',
+                  color: '#ffffff',
+                  padding: '1px 6px',
+                  borderRadius: '4px',
+                  textTransform: 'uppercase',
+                  letterSpacing: '0.5px',
+                }}
+              >
+                Mega Hub
+              </span>
+            </div>
             <span
               style={{
                 fontSize: '0.66rem',
                 fontWeight: 700,
-                letterSpacing: '1.8px',
+                letterSpacing: '1.5px',
                 color: '#64748b',
                 textTransform: 'uppercase',
                 display: 'block',
+                marginTop: '1px',
               }}
             >
-              CONSULTING PVT. LTD.
+              Consulting &amp; Managed Services
             </span>
           </div>
         </Link>
 
-        {/* Desktop Navigation Links */}
+        {/* Desktop Primary Navigation */}
         <nav
           style={{
             display: 'flex',
             alignItems: 'center',
-            gap: '1.35rem',
+            gap: '1.5rem',
           }}
           className="desktop-nav"
         >
+          {/* Home */}
           <NavLink
             to="/"
             end
@@ -223,464 +256,683 @@ export default function Navbar({ onOpenModal }) {
               color: isActive ? '#0052cc' : '#1e293b',
               fontWeight: isActive ? 700 : 600,
               fontSize: '0.92rem',
-              padding: '6px 2px',
+              padding: '8px 2px',
             })}
           >
             Home
           </NavLink>
 
-          {/* Mega Dropdown: Services & Solutions */}
+          {/* 1. CONSULTING HUB DROPDOWN */}
           <div
-            ref={servicesRef}
             style={{ position: 'relative' }}
-            onMouseEnter={() => setServicesDropdownOpen(true)}
-            onMouseLeave={() => setServicesDropdownOpen(false)}
+            onMouseEnter={() => handleMouseEnter('consulting')}
+            onMouseLeave={handleMouseLeave}
           >
-            <NavLink
-              to="/services"
+            <button
+              onClick={() => setActiveDropdown(activeDropdown === 'consulting' ? null : 'consulting')}
               style={{
-                color: servicesDropdownOpen ? '#0052cc' : '#1e293b',
+                background: 'transparent',
+                border: 'none',
+                color: activeDropdown === 'consulting' ? '#0052cc' : '#1e293b',
                 fontWeight: 600,
                 fontSize: '0.92rem',
                 display: 'inline-flex',
                 alignItems: 'center',
                 gap: '5px',
-                padding: '6px 2px',
+                cursor: 'pointer',
+                padding: '8px 4px',
               }}
             >
-              <span>Services &amp; Solutions</span>
-              <span
+              <Briefcase size={16} color="#0052cc" />
+              <span>Consulting Hub</span>
+              <ChevronDown
+                size={14}
                 style={{
-                  background: '#eff6ff',
-                  border: '1px solid #bfdbfe',
-                  color: '#1d4ed8',
-                  fontSize: '0.62rem',
-                  fontWeight: 800,
-                  padding: '1px 6px',
-                  borderRadius: '4px',
+                  transform: activeDropdown === 'consulting' ? 'rotate(180deg)' : 'none',
+                  transition: 'transform 0.2s',
                 }}
-              >
-                65+
-              </span>
-              <ChevronDown size={14} style={{ transform: servicesDropdownOpen ? 'rotate(180deg)' : 'none', transition: 'transform 0.2s' }} />
-            </NavLink>
+              />
+            </button>
 
-            {/* Mega Menu Flyout */}
-            {servicesDropdownOpen && (
+            {/* Dropdown Card */}
+            {activeDropdown === 'consulting' && (
               <div
                 style={{
                   position: 'absolute',
                   top: '100%',
-                  left: '-180px',
-                  width: '740px',
+                  left: '-120px',
+                  width: '680px',
                   background: '#ffffff',
                   border: '1px solid #e2e8f0',
                   borderRadius: '16px',
-                  padding: '1.75rem',
+                  padding: '1.5rem',
                   boxShadow: '0 20px 45px -10px rgba(15, 23, 42, 0.15)',
                   zIndex: 2000,
-                  display: 'grid',
-                  gridTemplateColumns: 'repeat(2, 1fr)',
-                  gap: '1.1rem',
                 }}
               >
-                {/* 1. Application Support Services */}
-                <Link
-                  to="/services"
-                  onClick={closeAll}
-                  style={{
-                    display: 'flex',
-                    alignItems: 'flex-start',
-                    gap: '12px',
-                    padding: '12px',
-                    borderRadius: '12px',
-                    background: '#eff6ff',
-                    border: '1px solid #dbeafe',
-                    transition: 'all 0.2s',
-                  }}
-                >
-                  <Laptop size={22} color="#1d4ed8" style={{ flexShrink: 0, marginTop: '3px' }} />
+                {/* Header inside dropdown */}
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1rem', paddingBottom: '0.75rem', borderBottom: '1px solid #f1f5f9' }}>
                   <div>
-                    <strong style={{ color: '#0f172a', fontSize: '0.92rem', display: 'flex', alignItems: 'center', gap: '6px' }}>
-                      Application Support Services
-                      <span style={{ fontSize: '0.65rem', background: '#2563eb', color: '#fff', padding: '1px 6px', borderRadius: '4px' }}>AMS</span>
-                    </strong>
-                    <p style={{ color: '#475569', fontSize: '0.78rem', lineHeight: '1.5', marginTop: '2px' }}>
-                      24/7/365 L1/L2/L3 support, 15-min P1 incident SLA, cloud observability &amp; legacy modernization.
-                    </p>
+                    <span style={{ fontSize: '0.72rem', fontWeight: 800, textTransform: 'uppercase', color: '#0052cc', letterSpacing: '0.6px' }}>
+                      Pillar 1 • Strategic Advisory &amp; Enterprise Architecture
+                    </span>
+                    <h4 style={{ fontSize: '1rem', fontWeight: 800, color: '#0f172a', margin: '2px 0 0' }}>
+                      Enterprise Consulting Division
+                    </h4>
                   </div>
-                </Link>
+                  <span style={{ fontSize: '0.75rem', background: '#eff6ff', color: '#1d4ed8', padding: '3px 10px', borderRadius: '20px', fontWeight: 700 }}>
+                    Strategy &amp; Cloud CoE
+                  </span>
+                </div>
 
-                {/* 2. International Voice Process */}
-                <Link
-                  to="/services"
-                  onClick={closeAll}
-                  style={{
-                    display: 'flex',
-                    alignItems: 'flex-start',
-                    gap: '12px',
-                    padding: '12px',
-                    borderRadius: '12px',
-                    background: '#f0fdf4',
-                    border: '1px solid #dcfce7',
-                    transition: 'all 0.2s',
-                  }}
-                >
-                  <Headphones size={22} color="#059669" style={{ flexShrink: 0, marginTop: '3px' }} />
-                  <div>
-                    <strong style={{ color: '#0f172a', fontSize: '0.92rem', display: 'flex', alignItems: 'center', gap: '6px' }}>
-                      International Voice Process
-                      <span style={{ fontSize: '0.65rem', background: '#059669', color: '#fff', padding: '1px 6px', borderRadius: '4px' }}>US / UK / AUS</span>
-                    </strong>
-                    <p style={{ color: '#475569', fontSize: '0.78rem', lineHeight: '1.5', marginTop: '2px' }}>
-                      C2 English &amp; neutral accent pods, 24/7 inbound/outbound customer support &amp; 96%+ CSAT.
-                    </p>
-                  </div>
-                </Link>
+                {/* Grid of Consulting Services */}
+                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '1rem' }}>
+                  {/* SAP S/4HANA */}
+                  <Link
+                    to="/services"
+                    onClick={closeAll}
+                    style={{
+                      display: 'flex',
+                      alignItems: 'flex-start',
+                      gap: '12px',
+                      padding: '12px',
+                      borderRadius: '12px',
+                      background: '#f8fafc',
+                      border: '1px solid #e2e8f0',
+                      transition: 'all 0.2s',
+                    }}
+                  >
+                    <Server size={20} color="#0052cc" style={{ flexShrink: 0, marginTop: '2px' }} />
+                    <div>
+                      <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+                        <strong style={{ color: '#0f172a', fontSize: '0.88rem' }}>SAP S/4HANA &amp; ERP Cloud</strong>
+                        <span style={{ fontSize: '0.65rem', background: '#0052cc', color: '#fff', padding: '1px 5px', borderRadius: '4px' }}>CoE</span>
+                      </div>
+                      <p style={{ color: '#64748b', fontSize: '0.76rem', lineHeight: '1.4', margin: '3px 0 0' }}>
+                        Greenfield/Brownfield migration, Central Finance (cFin), BTP, Fiori UI5 &amp; ABAP on HANA.
+                      </p>
+                    </div>
+                  </Link>
 
-                {/* 3. Domestic Voice Process */}
-                <Link
-                  to="/services"
-                  onClick={closeAll}
-                  style={{
-                    display: 'flex',
-                    alignItems: 'flex-start',
-                    gap: '12px',
-                    padding: '12px',
-                    borderRadius: '12px',
-                    background: '#fffbeb',
-                    border: '1px solid #fef3c7',
-                    transition: 'all 0.2s',
-                  }}
-                >
-                  <PhoneCall size={22} color="#d97706" style={{ flexShrink: 0, marginTop: '3px' }} />
-                  <div>
-                    <strong style={{ color: '#0f172a', fontSize: '0.92rem', display: 'flex', alignItems: 'center', gap: '6px' }}>
-                      Domestic Voice Process
-                      <span style={{ fontSize: '0.65rem', background: '#d97706', color: '#fff', padding: '1px 6px', borderRadius: '4px' }}>12+ Languages</span>
-                    </strong>
-                    <p style={{ color: '#475569', fontSize: '0.78rem', lineHeight: '1.5', marginTop: '2px' }}>
-                      Pan-India multilingual voice support for BFSI, E-commerce, tele-sales &amp; &lt;15s answer speed.
-                    </p>
-                  </div>
-                </Link>
+                  {/* Corporate Advisory */}
+                  <Link
+                    to="/services"
+                    onClick={closeAll}
+                    style={{
+                      display: 'flex',
+                      alignItems: 'flex-start',
+                      gap: '12px',
+                      padding: '12px',
+                      borderRadius: '12px',
+                      background: '#f8fafc',
+                      border: '1px solid #e2e8f0',
+                      transition: 'all 0.2s',
+                    }}
+                  >
+                    <Compass size={20} color="#2563eb" style={{ flexShrink: 0, marginTop: '2px' }} />
+                    <div>
+                      <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+                        <strong style={{ color: '#0f172a', fontSize: '0.88rem' }}>Management &amp; Advisory</strong>
+                        <span style={{ fontSize: '0.65rem', background: '#2563eb', color: '#fff', padding: '1px 5px', borderRadius: '4px' }}>Strategy</span>
+                      </div>
+                      <p style={{ color: '#64748b', fontSize: '0.76rem', lineHeight: '1.4', margin: '3px 0 0' }}>
+                        Business process re-engineering, digital governance, organizational scaling &amp; M&amp;A integration.
+                      </p>
+                    </div>
+                  </Link>
 
-                {/* 4. SAP S/4HANA & ERP Cloud */}
-                <Link
-                  to="/services"
-                  onClick={closeAll}
-                  style={{
-                    display: 'flex',
-                    alignItems: 'flex-start',
-                    gap: '12px',
-                    padding: '12px',
-                    borderRadius: '12px',
-                    background: '#f8fafc',
-                    border: '1px solid #e2e8f0',
-                    transition: 'all 0.2s',
-                  }}
-                >
-                  <Server size={22} color="#0052cc" style={{ flexShrink: 0, marginTop: '3px' }} />
-                  <div>
-                    <strong style={{ color: '#0f172a', fontSize: '0.92rem', display: 'block' }}>
-                      SAP S/4HANA &amp; ERP Cloud
-                    </strong>
-                    <p style={{ color: '#64748b', fontSize: '0.78rem', lineHeight: '1.5', marginTop: '2px' }}>
-                      Greenfield/Brownfield migration, Central Finance (cFin), BTP, Fiori &amp; BASIS AMS.
-                    </p>
-                  </div>
-                </Link>
+                  {/* Cloud Architecture */}
+                  <Link
+                    to="/services"
+                    onClick={closeAll}
+                    style={{
+                      display: 'flex',
+                      alignItems: 'flex-start',
+                      gap: '12px',
+                      padding: '12px',
+                      borderRadius: '12px',
+                      background: '#f8fafc',
+                      border: '1px solid #e2e8f0',
+                      transition: 'all 0.2s',
+                    }}
+                  >
+                    <Cpu size={20} color="#0284c7" style={{ flexShrink: 0, marginTop: '2px' }} />
+                    <div>
+                      <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+                        <strong style={{ color: '#0f172a', fontSize: '0.88rem' }}>Cloud Architecture &amp; DevOps</strong>
+                        <span style={{ fontSize: '0.65rem', background: '#0284c7', color: '#fff', padding: '1px 5px', borderRadius: '4px' }}>Cloud</span>
+                      </div>
+                      <p style={{ color: '#64748b', fontSize: '0.76rem', lineHeight: '1.4', margin: '3px 0 0' }}>
+                        AWS, Azure &amp; Hybrid Cloud governance, microservices architecture, SOC-2 &amp; zero-trust security.
+                      </p>
+                    </div>
+                  </Link>
 
-                {/* 5. Digital Marketing & 8D Motion */}
-                <Link
-                  to="/services"
-                  onClick={closeAll}
-                  style={{
-                    display: 'flex',
-                    alignItems: 'flex-start',
-                    gap: '12px',
-                    padding: '12px',
-                    borderRadius: '12px',
-                    background: '#f8fafc',
-                    border: '1px solid #e2e8f0',
-                    transition: 'all 0.2s',
-                  }}
-                >
-                  <BarChart3 size={22} color="#0284c7" style={{ flexShrink: 0, marginTop: '3px' }} />
-                  <div>
-                    <strong style={{ color: '#0f172a', fontSize: '0.92rem', display: 'block' }}>
-                      Performance Marketing &amp; 8D Motion
-                    </strong>
-                    <p style={{ color: '#64748b', fontSize: '0.78rem', lineHeight: '1.5', marginTop: '2px' }}>
-                      Multi-touch ROAS engines, Generative AEO/GEO optimization, and 3D commercial video.
-                    </p>
-                  </div>
-                </Link>
+                  {/* Performance Marketing & 8D Motion */}
+                  <Link
+                    to="/services"
+                    onClick={closeAll}
+                    style={{
+                      display: 'flex',
+                      alignItems: 'flex-start',
+                      gap: '12px',
+                      padding: '12px',
+                      borderRadius: '12px',
+                      background: '#f8fafc',
+                      border: '1px solid #e2e8f0',
+                      transition: 'all 0.2s',
+                    }}
+                  >
+                    <BarChart3 size={20} color="#ea580c" style={{ flexShrink: 0, marginTop: '2px' }} />
+                    <div>
+                      <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+                        <strong style={{ color: '#0f172a', fontSize: '0.88rem' }}>MarTech &amp; 8D Motion Studio</strong>
+                        <span style={{ fontSize: '0.65rem', background: '#ea580c', color: '#fff', padding: '1px 5px', borderRadius: '4px' }}>5.2x ROAS</span>
+                      </div>
+                      <p style={{ color: '#64748b', fontSize: '0.76rem', lineHeight: '1.4', margin: '3px 0 0' }}>
+                        Multi-touch programmatic ad engines, AI search AEO/GEO indexing &amp; cinema-grade 8D commercial motion.
+                      </p>
+                    </div>
+                  </Link>
+                </div>
 
-                {/* 6. Healthcare Operations & RCM */}
-                <Link
-                  to="/services"
-                  onClick={closeAll}
-                  style={{
-                    display: 'flex',
-                    alignItems: 'flex-start',
-                    gap: '12px',
-                    padding: '12px',
-                    borderRadius: '12px',
-                    background: '#f8fafc',
-                    border: '1px solid #e2e8f0',
-                    transition: 'all 0.2s',
-                  }}
-                >
-                  <HeartPulse size={22} color="#059669" style={{ flexShrink: 0, marginTop: '3px' }} />
-                  <div>
-                    <strong style={{ color: '#0f172a', fontSize: '0.92rem', display: 'block' }}>
-                      Healthcare RCM &amp; Clinical BPO
-                    </strong>
-                    <p style={{ color: '#64748b', fontSize: '0.78rem', lineHeight: '1.5', marginTop: '2px' }}>
-                      HIPAA-certified medical billing, ICD-10 coding, charge capture &amp; denial recovery.
-                    </p>
-                  </div>
-                </Link>
-
+                {/* Footer strip linking to Managed Services */}
                 <div
                   style={{
-                    gridColumn: 'span 2',
+                    marginTop: '1.1rem',
+                    paddingTop: '0.9rem',
                     borderTop: '1px solid #e2e8f0',
-                    paddingTop: '0.85rem',
                     display: 'flex',
                     justifyContent: 'space-between',
                     alignItems: 'center',
                     fontSize: '0.82rem',
                   }}
                 >
-                  <span style={{ color: '#64748b' }}>Explore HRMS, Real Estate Title, STM Publishing &amp; BGV:</span>
-                  <Link to="/services" onClick={closeAll} style={{ color: '#0052cc', fontWeight: 700, display: 'inline-flex', alignItems: 'center', gap: '4px' }}>
-                    View All 65+ Services Directory <ArrowRight size={14} />
-                  </Link>
+                  <span style={{ color: '#64748b' }}>Looking for 24/7 operational execution and voice centers?</span>
+                  <button
+                    onClick={() => setActiveDropdown('services')}
+                    style={{
+                      background: 'none',
+                      border: 'none',
+                      color: '#0052cc',
+                      fontWeight: 700,
+                      cursor: 'pointer',
+                      display: 'inline-flex',
+                      alignItems: 'center',
+                      gap: '4px',
+                    }}
+                  >
+                    Switch to Managed Services Hub <ArrowRight size={13} />
+                  </button>
                 </div>
               </div>
             )}
           </div>
 
-          {/* Voice & BPO Hub Menu */}
+          {/* 2. SERVICES HUB DROPDOWN */}
           <div
-            ref={voiceRef}
             style={{ position: 'relative' }}
-            onMouseEnter={() => setVoiceDropdownOpen(true)}
-            onMouseLeave={() => setVoiceDropdownOpen(false)}
+            onMouseEnter={() => handleMouseEnter('services')}
+            onMouseLeave={handleMouseLeave}
           >
             <button
-              onClick={() => setVoiceDropdownOpen(!voiceDropdownOpen)}
+              onClick={() => setActiveDropdown(activeDropdown === 'services' ? null : 'services')}
               style={{
                 background: 'transparent',
                 border: 'none',
-                color: voiceDropdownOpen ? '#0052cc' : '#1e293b',
+                color: activeDropdown === 'services' ? '#0052cc' : '#1e293b',
                 fontWeight: 600,
                 fontSize: '0.92rem',
                 display: 'inline-flex',
                 alignItems: 'center',
                 gap: '5px',
                 cursor: 'pointer',
-                padding: '6px 2px',
+                padding: '8px 4px',
               }}
             >
-              <Headphones size={15} color="#059669" />
-              <span>Voice &amp; Support Pods</span>
-              <ChevronDown size={14} style={{ transform: voiceDropdownOpen ? 'rotate(180deg)' : 'none', transition: 'transform 0.2s' }} />
+              <Headphones size={16} color="#059669" />
+              <span>Services Hub</span>
+              <span
+                style={{
+                  background: '#dcfce7',
+                  border: '1px solid #86efac',
+                  color: '#15803d',
+                  fontSize: '0.62rem',
+                  fontWeight: 800,
+                  padding: '1px 5px',
+                  borderRadius: '4px',
+                }}
+              >
+                24/7
+              </span>
+              <ChevronDown
+                size={14}
+                style={{
+                  transform: activeDropdown === 'services' ? 'rotate(180deg)' : 'none',
+                  transition: 'transform 0.2s',
+                }}
+              />
             </button>
 
-            {voiceDropdownOpen && (
+            {/* Dropdown Card */}
+            {activeDropdown === 'services' && (
               <div
                 style={{
                   position: 'absolute',
                   top: '100%',
-                  left: '-80px',
-                  width: '380px',
+                  left: '-240px',
+                  width: '760px',
                   background: '#ffffff',
                   border: '1px solid #e2e8f0',
                   borderRadius: '16px',
-                  padding: '1.25rem',
+                  padding: '1.5rem',
+                  boxShadow: '0 20px 45px -10px rgba(15, 23, 42, 0.15)',
+                  zIndex: 2000,
+                }}
+              >
+                {/* Header inside dropdown */}
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1rem', paddingBottom: '0.75rem', borderBottom: '1px solid #f1f5f9' }}>
+                  <div>
+                    <span style={{ fontSize: '0.72rem', fontWeight: 800, textTransform: 'uppercase', color: '#059669', letterSpacing: '0.6px' }}>
+                      Pillar 2 • 24/7 Global BPO &amp; Managed Support Operations
+                    </span>
+                    <h4 style={{ fontSize: '1rem', fontWeight: 800, color: '#0f172a', margin: '2px 0 0' }}>
+                      Global Managed Services Division
+                    </h4>
+                  </div>
+                  <span style={{ fontSize: '0.75rem', background: '#ecfdf5', color: '#047857', padding: '3px 10px', borderRadius: '20px', fontWeight: 700 }}>
+                    SLA-Backed Delivery
+                  </span>
+                </div>
+
+                {/* Grid of 6 Core Services */}
+                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '0.9rem' }}>
+                  {/* 1. Application Support Services */}
+                  <Link
+                    to="/services"
+                    onClick={closeAll}
+                    style={{
+                      display: 'flex',
+                      alignItems: 'flex-start',
+                      gap: '12px',
+                      padding: '11px',
+                      borderRadius: '12px',
+                      background: '#eff6ff',
+                      border: '1px solid #dbeafe',
+                      transition: 'all 0.2s',
+                    }}
+                  >
+                    <Laptop size={20} color="#1d4ed8" style={{ flexShrink: 0, marginTop: '2px' }} />
+                    <div>
+                      <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+                        <strong style={{ color: '#0f172a', fontSize: '0.88rem' }}>Application Support (AMS)</strong>
+                        <span style={{ fontSize: '0.65rem', background: '#1d4ed8', color: '#fff', padding: '1px 5px', borderRadius: '4px' }}>15-Min SLA</span>
+                      </div>
+                      <p style={{ color: '#475569', fontSize: '0.76rem', lineHeight: '1.4', margin: '2px 0 0' }}>
+                        ITIL v4 L1/L2/L3 triage, full-stack APM observability (Datadog/Dynatrace), database tuning &amp; BASIS.
+                      </p>
+                    </div>
+                  </Link>
+
+                  {/* 2. International Voice Process */}
+                  <Link
+                    to="/services"
+                    onClick={closeAll}
+                    style={{
+                      display: 'flex',
+                      alignItems: 'flex-start',
+                      gap: '12px',
+                      padding: '11px',
+                      borderRadius: '12px',
+                      background: '#f0fdf4',
+                      border: '1px solid #dcfce7',
+                      transition: 'all 0.2s',
+                    }}
+                  >
+                    <Headphones size={20} color="#059669" style={{ flexShrink: 0, marginTop: '2px' }} />
+                    <div>
+                      <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+                        <strong style={{ color: '#0f172a', fontSize: '0.88rem' }}>International Voice Process</strong>
+                        <span style={{ fontSize: '0.65rem', background: '#059669', color: '#fff', padding: '1px 5px', borderRadius: '4px' }}>US / UK / AUS</span>
+                      </div>
+                      <p style={{ color: '#475569', fontSize: '0.76rem', lineHeight: '1.4', margin: '2px 0 0' }}>
+                        C2 neutral English specialists, 24/7 inbound/outbound support, 96.4% CSAT &amp; HIPAA-compliant pods.
+                      </p>
+                    </div>
+                  </Link>
+
+                  {/* 3. Domestic Voice Process */}
+                  <Link
+                    to="/services"
+                    onClick={closeAll}
+                    style={{
+                      display: 'flex',
+                      alignItems: 'flex-start',
+                      gap: '12px',
+                      padding: '11px',
+                      borderRadius: '12px',
+                      background: '#fffbeb',
+                      border: '1px solid #fef3c7',
+                      transition: 'all 0.2s',
+                    }}
+                  >
+                    <PhoneCall size={20} color="#d97706" style={{ flexShrink: 0, marginTop: '2px' }} />
+                    <div>
+                      <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+                        <strong style={{ color: '#0f172a', fontSize: '0.88rem' }}>Domestic Voice Process</strong>
+                        <span style={{ fontSize: '0.65rem', background: '#d97706', color: '#fff', padding: '1px 5px', borderRadius: '4px' }}>12+ Languages</span>
+                      </div>
+                      <p style={{ color: '#475569', fontSize: '0.76rem', lineHeight: '1.4', margin: '2px 0 0' }}>
+                        Pan-India support in Hindi, Marathi, Tamil, Telugu, Kannada, Bengali &amp; regional dialects (&lt;15s ASA).
+                      </p>
+                    </div>
+                  </Link>
+
+                  {/* 4. Healthcare Operations & RCM */}
+                  <Link
+                    to="/services"
+                    onClick={closeAll}
+                    style={{
+                      display: 'flex',
+                      alignItems: 'flex-start',
+                      gap: '12px',
+                      padding: '11px',
+                      borderRadius: '12px',
+                      background: '#f8fafc',
+                      border: '1px solid #e2e8f0',
+                      transition: 'all 0.2s',
+                    }}
+                  >
+                    <HeartPulse size={20} color="#0d9488" style={{ flexShrink: 0, marginTop: '2px' }} />
+                    <div>
+                      <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+                        <strong style={{ color: '#0f172a', fontSize: '0.88rem' }}>Healthcare RCM &amp; Clinical BPO</strong>
+                        <span style={{ fontSize: '0.65rem', background: '#0d9488', color: '#fff', padding: '1px 5px', borderRadius: '4px' }}>HIPAA</span>
+                      </div>
+                      <p style={{ color: '#64748b', fontSize: '0.76rem', lineHeight: '1.4', margin: '2px 0 0' }}>
+                        Medical coding (ICD-10), billing, prior authorization, charge capture &amp; denial recovery pods.
+                      </p>
+                    </div>
+                  </Link>
+
+                  {/* 5. Pan-India Background Verification */}
+                  <Link
+                    to="/services"
+                    onClick={closeAll}
+                    style={{
+                      display: 'flex',
+                      alignItems: 'flex-start',
+                      gap: '12px',
+                      padding: '11px',
+                      borderRadius: '12px',
+                      background: '#f8fafc',
+                      border: '1px solid #e2e8f0',
+                      transition: 'all 0.2s',
+                    }}
+                  >
+                    <ShieldCheck size={20} color="#6366f1" style={{ flexShrink: 0, marginTop: '2px' }} />
+                    <div>
+                      <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+                        <strong style={{ color: '#0f172a', fontSize: '0.88rem' }}>Pan-India Verification (BGV)</strong>
+                        <span style={{ fontSize: '0.65rem', background: '#6366f1', color: '#fff', padding: '1px 5px', borderRadius: '4px' }}>28 States</span>
+                      </div>
+                      <p style={{ color: '#64748b', fontSize: '0.76rem', lineHeight: '1.4', margin: '2px 0 0' }}>
+                        Physical address verification, court records, criminal checks &amp; institutional credentials across India.
+                      </p>
+                    </div>
+                  </Link>
+
+                  {/* 6. Enterprise HRMS & Staffing */}
+                  <Link
+                    to="/services"
+                    onClick={closeAll}
+                    style={{
+                      display: 'flex',
+                      alignItems: 'flex-start',
+                      gap: '12px',
+                      padding: '11px',
+                      borderRadius: '12px',
+                      background: '#f8fafc',
+                      border: '1px solid #e2e8f0',
+                      transition: 'all 0.2s',
+                    }}
+                  >
+                    <Users size={20} color="#475569" style={{ flexShrink: 0, marginTop: '2px' }} />
+                    <div>
+                      <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+                        <strong style={{ color: '#0f172a', fontSize: '0.88rem' }}>Enterprise HRMS &amp; Staffing</strong>
+                        <span style={{ fontSize: '0.65rem', background: '#475569', color: '#fff', padding: '1px 5px', borderRadius: '4px' }}>NAPS</span>
+                      </div>
+                      <p style={{ color: '#64748b', fontSize: '0.76rem', lineHeight: '1.4', margin: '2px 0 0' }}>
+                        Skill India and NAPS certified staffing, automated payroll engines, compliance &amp; talent pipelines.
+                      </p>
+                    </div>
+                  </Link>
+                </div>
+
+                {/* Footer strip */}
+                <div
+                  style={{
+                    marginTop: '1.1rem',
+                    paddingTop: '0.9rem',
+                    borderTop: '1px solid #e2e8f0',
+                    display: 'flex',
+                    justifyContent: 'space-between',
+                    alignItems: 'center',
+                    fontSize: '0.82rem',
+                  }}
+                >
+                  <span style={{ color: '#64748b' }}>Real Estate Title, STM Publishing XML, and custom workflows:</span>
+                  <Link to="/services" onClick={closeAll} style={{ color: '#0052cc', fontWeight: 700, display: 'inline-flex', alignItems: 'center', gap: '4px' }}>
+                    View Complete 65+ Services Directory <ArrowRight size={13} />
+                  </Link>
+                </div>
+              </div>
+            )}
+          </div>
+
+          {/* 3. MEGA DELIVERY HUBS */}
+          <div
+            style={{ position: 'relative' }}
+            onMouseEnter={() => handleMouseEnter('hubs')}
+            onMouseLeave={handleMouseLeave}
+          >
+            <button
+              onClick={() => setActiveDropdown(activeDropdown === 'hubs' ? null : 'hubs')}
+              style={{
+                background: 'transparent',
+                border: 'none',
+                color: activeDropdown === 'hubs' ? '#0052cc' : '#1e293b',
+                fontWeight: 600,
+                fontSize: '0.92rem',
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: '5px',
+                cursor: 'pointer',
+                padding: '8px 4px',
+              }}
+            >
+              <MapPin size={15} color="#0052cc" />
+              <span>Mega Hubs</span>
+              <ChevronDown
+                size={14}
+                style={{
+                  transform: activeDropdown === 'hubs' ? 'rotate(180deg)' : 'none',
+                  transition: 'transform 0.2s',
+                }}
+              />
+            </button>
+
+            {/* Dropdown Card */}
+            {activeDropdown === 'hubs' && (
+              <div
+                style={{
+                  position: 'absolute',
+                  top: '100%',
+                  left: '-140px',
+                  width: '460px',
+                  background: '#ffffff',
+                  border: '1px solid #e2e8f0',
+                  borderRadius: '16px',
+                  padding: '1.4rem',
+                  boxShadow: '0 20px 45px -10px rgba(15, 23, 42, 0.15)',
+                  zIndex: 2000,
+                }}
+              >
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.8rem', paddingBottom: '0.6rem', borderBottom: '1px solid #f1f5f9' }}>
+                  <span style={{ fontSize: '0.72rem', fontWeight: 800, textTransform: 'uppercase', color: '#0052cc', letterSpacing: '0.5px' }}>
+                    Pan-India Delivery Infrastructure
+                  </span>
+                  <span style={{ fontSize: '0.72rem', color: '#0284c7', background: '#e0f2fe', padding: '2px 8px', borderRadius: '4px', fontWeight: 700 }}>
+                    28 States Covered
+                  </span>
+                </div>
+
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '0.7rem' }}>
+                  {panIndiaHubs.map((hub, idx) => (
+                    <div key={idx} style={{ borderBottom: idx !== panIndiaHubs.length - 1 ? '1px solid #f8fafc' : 'none', paddingBottom: '5px' }}>
+                      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                        <strong style={{ color: '#0f172a', fontSize: '0.86rem' }}>{hub.city}</strong>
+                        <span style={{ fontSize: '0.7rem', color: '#0052cc', background: '#eff6ff', padding: '1px 6px', borderRadius: '4px', fontWeight: 700 }}>
+                          {hub.tag}
+                        </span>
+                      </div>
+                      <p style={{ color: '#64748b', fontSize: '0.76rem', margin: '2px 0 0' }}>{hub.desc}</p>
+                    </div>
+                  ))}
+                </div>
+
+                <div style={{ marginTop: '0.9rem', paddingTop: '0.8rem', borderTop: '1px solid #e2e8f0', textAlign: 'center' }}>
+                  <Link to="/global" onClick={closeAll} style={{ color: '#0052cc', fontSize: '0.82rem', fontWeight: 700, display: 'inline-flex', alignItems: 'center', gap: '4px' }}>
+                    Explore Global Delivery Network &amp; On-Ground Reach <ArrowRight size={13} />
+                  </Link>
+                </div>
+              </div>
+            )}
+          </div>
+
+          {/* 4. COMPANY DROPDOWN */}
+          <div
+            style={{ position: 'relative' }}
+            onMouseEnter={() => handleMouseEnter('company')}
+            onMouseLeave={handleMouseLeave}
+          >
+            <button
+              onClick={() => setActiveDropdown(activeDropdown === 'company' ? null : 'company')}
+              style={{
+                background: 'transparent',
+                border: 'none',
+                color: activeDropdown === 'company' ? '#0052cc' : '#1e293b',
+                fontWeight: 600,
+                fontSize: '0.92rem',
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: '5px',
+                cursor: 'pointer',
+                padding: '8px 4px',
+              }}
+            >
+              <span>Company</span>
+              <ChevronDown
+                size={14}
+                style={{
+                  transform: activeDropdown === 'company' ? 'rotate(180deg)' : 'none',
+                  transition: 'transform 0.2s',
+                }}
+              />
+            </button>
+
+            {activeDropdown === 'company' && (
+              <div
+                style={{
+                  position: 'absolute',
+                  top: '100%',
+                  left: '-40px',
+                  width: '260px',
+                  background: '#ffffff',
+                  border: '1px solid #e2e8f0',
+                  borderRadius: '14px',
+                  padding: '1rem',
                   boxShadow: '0 20px 45px -10px rgba(15, 23, 42, 0.15)',
                   zIndex: 2000,
                   display: 'flex',
                   flexDirection: 'column',
-                  gap: '0.75rem',
+                  gap: '0.5rem',
                 }}
               >
-                <div style={{ fontSize: '0.78rem', color: '#059669', fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.5px' }}>
-                  24/7 Voice &amp; Customer Support Centers
-                </div>
-
                 <Link
-                  to="/services"
+                  to="/about"
                   onClick={closeAll}
                   style={{
-                    padding: '10px 12px',
-                    borderRadius: '10px',
-                    background: '#f0fdf4',
-                    border: '1px solid #dcfce7',
-                    display: 'block',
+                    padding: '8px 12px',
+                    borderRadius: '8px',
+                    color: '#0f172a',
+                    fontWeight: 600,
+                    fontSize: '0.88rem',
+                    transition: 'background 0.2s',
                   }}
+                  onMouseEnter={(e) => (e.currentTarget.style.background = '#f8fafc')}
+                  onMouseLeave={(e) => (e.currentTarget.style.background = 'transparent')}
                 >
-                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                    <strong style={{ color: '#0f172a', fontSize: '0.88rem' }}>International Voice Process</strong>
-                    <span style={{ fontSize: '0.7rem', color: '#059669', fontWeight: 700 }}>US / UK / AUS</span>
-                  </div>
-                  <p style={{ color: '#475569', fontSize: '0.76rem', margin: '4px 0 0' }}>
-                    C2 English specialists, tech support, customer care, and HIPAA intake.
-                  </p>
+                  About Caretrix
                 </Link>
-
                 <Link
-                  to="/services"
+                  to="/projects"
                   onClick={closeAll}
                   style={{
-                    padding: '10px 12px',
-                    borderRadius: '10px',
-                    background: '#fffbeb',
-                    border: '1px solid #fef3c7',
-                    display: 'block',
+                    padding: '8px 12px',
+                    borderRadius: '8px',
+                    color: '#0f172a',
+                    fontWeight: 600,
+                    fontSize: '0.88rem',
+                    transition: 'background 0.2s',
                   }}
+                  onMouseEnter={(e) => (e.currentTarget.style.background = '#f8fafc')}
+                  onMouseLeave={(e) => (e.currentTarget.style.background = 'transparent')}
                 >
-                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                    <strong style={{ color: '#0f172a', fontSize: '0.88rem' }}>Domestic Voice Process</strong>
-                    <span style={{ fontSize: '0.7rem', color: '#d97706', fontWeight: 700 }}>12+ Languages</span>
-                  </div>
-                  <p style={{ color: '#475569', fontSize: '0.76rem', margin: '4px 0 0' }}>
-                    Hindi, Marathi, Tamil, Telugu, Kannada, Bengali &amp; regional pan-India support.
-                  </p>
+                  Projects &amp; Case Studies
                 </Link>
-
                 <Link
-                  to="/services"
+                  to="/industries"
                   onClick={closeAll}
                   style={{
-                    padding: '10px 12px',
-                    borderRadius: '10px',
-                    background: '#eff6ff',
-                    border: '1px solid #dbeafe',
-                    display: 'block',
+                    padding: '8px 12px',
+                    borderRadius: '8px',
+                    color: '#0f172a',
+                    fontWeight: 600,
+                    fontSize: '0.88rem',
+                    transition: 'background 0.2s',
                   }}
+                  onMouseEnter={(e) => (e.currentTarget.style.background = '#f8fafc')}
+                  onMouseLeave={(e) => (e.currentTarget.style.background = 'transparent')}
                 >
-                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                    <strong style={{ color: '#0f172a', fontSize: '0.88rem' }}>Application Support (AMS)</strong>
-                    <span style={{ fontSize: '0.7rem', color: '#1d4ed8', fontWeight: 700 }}>15-Min SLA</span>
-                  </div>
-                  <p style={{ color: '#475569', fontSize: '0.76rem', margin: '4px 0 0' }}>
-                    L1, L2, L3 tier engineering support, bug triaging &amp; cloud observability.
-                  </p>
+                  Industries Served
+                </Link>
+                <Link
+                  to="/careers"
+                  onClick={closeAll}
+                  style={{
+                    padding: '8px 12px',
+                    borderRadius: '8px',
+                    color: '#0f172a',
+                    fontWeight: 600,
+                    fontSize: '0.88rem',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'space-between',
+                    transition: 'background 0.2s',
+                  }}
+                  onMouseEnter={(e) => (e.currentTarget.style.background = '#f8fafc')}
+                  onMouseLeave={(e) => (e.currentTarget.style.background = 'transparent')}
+                >
+                  <span>Careers</span>
+                  <span style={{ fontSize: '0.65rem', background: '#dcfce7', color: '#15803d', padding: '1px 6px', borderRadius: '4px', fontWeight: 700 }}>Hiring</span>
                 </Link>
               </div>
             )}
           </div>
 
-          <NavLink
-            to="/industries"
-            onClick={closeAll}
-            style={({ isActive }) => ({
-              color: isActive ? '#0052cc' : '#1e293b',
-              fontWeight: isActive ? 700 : 600,
-              fontSize: '0.92rem',
-              padding: '6px 2px',
-            })}
-          >
-            Industries
-          </NavLink>
-
-          {/* Pan-India Delivery Hubs Dropdown */}
-          <div
-            ref={hubsRef}
-            style={{ position: 'relative' }}
-            onMouseEnter={() => setHubsDropdownOpen(true)}
-            onMouseLeave={() => setHubsDropdownOpen(false)}
-          >
-            <button
-              onClick={() => setHubsDropdownOpen(!hubsDropdownOpen)}
-              style={{
-                background: 'transparent',
-                border: 'none',
-                color: hubsDropdownOpen ? '#0052cc' : '#1e293b',
-                fontWeight: 600,
-                fontSize: '0.92rem',
-                display: 'inline-flex',
-                alignItems: 'center',
-                gap: '5px',
-                cursor: 'pointer',
-                padding: '6px 2px',
-              }}
-            >
-              <MapPin size={14} color="#0052cc" />
-              <span>Pan-India Hubs</span>
-              <ChevronDown size={14} style={{ transform: hubsDropdownOpen ? 'rotate(180deg)' : 'none', transition: 'transform 0.2s' }} />
-            </button>
-
-            {hubsDropdownOpen && (
-              <div
-                style={{
-                  position: 'absolute',
-                  top: '100%',
-                  left: '-100px',
-                  width: '420px',
-                  background: '#ffffff',
-                  border: '1px solid #e2e8f0',
-                  borderRadius: '16px',
-                  padding: '1.25rem',
-                  boxShadow: '0 20px 45px -10px rgba(15, 23, 42, 0.15)',
-                  zIndex: 2000,
-                }}
-              >
-                <div style={{ fontSize: '0.78rem', color: '#0052cc', fontWeight: 800, textTransform: 'uppercase', marginBottom: '0.75rem', letterSpacing: '0.5px' }}>
-                  Pan-India Delivery Centers &amp; CoEs
-                </div>
-                <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
-                  {panIndiaHubs.map((hub, idx) => (
-                    <div key={idx} style={{ borderBottom: idx !== panIndiaHubs.length - 1 ? '1px solid #f1f5f9' : 'none', paddingBottom: '6px' }}>
-                      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                        <strong style={{ color: '#0f172a', fontSize: '0.86rem' }}>{hub.city}</strong>
-                        <span style={{ fontSize: '0.72rem', color: '#0284c7', background: '#e0f2fe', padding: '2px 8px', borderRadius: '4px', fontWeight: 600 }}>
-                          {hub.state}
-                        </span>
-                      </div>
-                      <p style={{ color: '#64748b', fontSize: '0.76rem', marginTop: '2px' }}>{hub.desc}</p>
-                    </div>
-                  ))}
-                </div>
-                <div style={{ marginTop: '0.75rem', paddingTop: '0.75rem', borderTop: '1px solid #e2e8f0', textAlign: 'center' }}>
-                  <Link to="/global" onClick={closeAll} style={{ color: '#0052cc', fontSize: '0.82rem', fontWeight: 700 }}>
-                    Explore Global Follow-The-Sun Facilities →
-                  </Link>
-                </div>
-              </div>
-            )}
-          </div>
-
-          <NavLink
-            to="/case-studies"
-            onClick={closeAll}
-            style={({ isActive }) => ({
-              color: isActive ? '#0052cc' : '#1e293b',
-              fontWeight: isActive ? 700 : 600,
-              fontSize: '0.92rem',
-              padding: '6px 2px',
-            })}
-          >
-            Case Studies
-          </NavLink>
-
-          <NavLink
-            to="/about"
-            onClick={closeAll}
-            style={({ isActive }) => ({
-              color: isActive ? '#0052cc' : '#1e293b',
-              fontWeight: isActive ? 700 : 600,
-              fontSize: '0.92rem',
-              padding: '6px 2px',
-            })}
-          >
-            About
-          </NavLink>
-
+          {/* Contact */}
           <NavLink
             to="/contact"
             onClick={closeAll}
@@ -688,169 +940,303 @@ export default function Navbar({ onOpenModal }) {
               color: isActive ? '#0052cc' : '#1e293b',
               fontWeight: isActive ? 700 : 600,
               fontSize: '0.92rem',
-              padding: '6px 2px',
+              padding: '8px 2px',
             })}
           >
             Contact
           </NavLink>
         </nav>
 
-        {/* Right CTA Area */}
+        {/* Right CTA Actions */}
         <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
-          <a
-            href="tel:+917758088438"
-            className="btn btn-secondary"
-            style={{
-              padding: '8px 16px',
-              fontSize: '0.85rem',
-              display: 'flex',
-              alignItems: 'center',
-              gap: '6px',
-              border: '1px solid #cbd5e1',
-            }}
-          >
-            <Phone size={14} color="#0052cc" />
-            <span style={{ fontWeight: 700 }}>Call Directorate</span>
-          </a>
-
           <button
             onClick={() => {
               closeAll();
-              onOpenModal();
+              if (onOpenModal) onOpenModal();
             }}
             className="btn btn-primary"
             style={{
-              padding: '9px 20px',
+              padding: '0.65rem 1.4rem',
               fontSize: '0.88rem',
               fontWeight: 700,
+              borderRadius: '8px',
+              display: 'inline-flex',
+              alignItems: 'center',
+              gap: '6px',
+              boxShadow: '0 4px 12px rgba(0, 82, 204, 0.2)',
             }}
           >
-            <Sparkles size={16} />
+            <Sparkles size={14} />
             <span>Initiate RFP</span>
-            <ArrowRight size={16} />
           </button>
 
-          {/* Mobile Hamburger Button */}
+          {/* Mobile Menu Hamburger Toggle */}
           <button
-            onClick={() => setIsOpen(!isOpen)}
+            onClick={() => setIsMobileOpen(!isMobileOpen)}
             style={{
-              background: 'transparent',
-              border: 'none',
+              background: '#f1f5f9',
+              border: '1px solid #cbd5e1',
+              borderRadius: '8px',
+              padding: '8px',
+              color: '#0f172a',
               cursor: 'pointer',
               display: 'none',
-              color: '#0f172a',
             }}
-            className="mobile-menu-btn"
-            aria-label="Toggle Navigation Menu"
+            className="mobile-toggle"
+            aria-label="Toggle navigation menu"
           >
-            {isOpen ? <X size={28} /> : <Menu size={28} />}
+            {isMobileOpen ? <X size={22} /> : <Menu size={22} />}
           </button>
         </div>
       </div>
 
       {/* 3. Mobile Navigation Drawer */}
-      {isOpen && (
+      {isMobileOpen && (
         <div
           style={{
+            position: 'fixed',
+            top: '74px',
+            left: 0,
+            right: 0,
+            bottom: 0,
             background: '#ffffff',
-            borderTop: '1px solid #e2e8f0',
-            padding: '1.5rem',
-            boxShadow: '0 10px 30px rgba(0,0,0,0.1)',
-            display: 'flex',
-            flexDirection: 'column',
-            gap: '1rem',
-            maxHeight: '80vh',
+            zIndex: 3000,
             overflowY: 'auto',
+            padding: '1.5rem',
+            borderTop: '1px solid #e2e8f0',
           }}
         >
-          <NavLink to="/" onClick={closeAll} style={{ color: '#0f172a', fontWeight: 700, fontSize: '1.05rem' }}>
-            Home
-          </NavLink>
-
-          {/* Mobile Services Accordion */}
-          <div>
-            <div
-              onClick={() => setMobileServicesOpen(!mobileServicesOpen)}
-              style={{
-                display: 'flex',
-                justifyContent: 'space-between',
-                alignItems: 'center',
-                color: '#0f172a',
-                fontWeight: 700,
-                fontSize: '1.05rem',
-                cursor: 'pointer',
-              }}
-            >
-              <span>Services (65+)</span>
-              <ChevronDown size={18} style={{ transform: mobileServicesOpen ? 'rotate(180deg)' : 'none' }} />
-            </div>
-
-            {mobileServicesOpen && (
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '0.6rem', marginTop: '0.75rem', paddingLeft: '0.75rem', borderLeft: '2px solid #0052cc' }}>
-                <Link to="/services" onClick={closeAll} style={{ color: '#1d4ed8', fontWeight: 600, fontSize: '0.9rem' }}>
-                  ● Application Support Services (AMS)
-                </Link>
-                <Link to="/services" onClick={closeAll} style={{ color: '#059669', fontWeight: 600, fontSize: '0.9rem' }}>
-                  ● International Voice Process (US/UK/AUS)
-                </Link>
-                <Link to="/services" onClick={closeAll} style={{ color: '#d97706', fontWeight: 600, fontSize: '0.9rem' }}>
-                  ● Domestic Voice Process (12+ Languages)
-                </Link>
-                <Link to="/services" onClick={closeAll} style={{ color: '#334155', fontSize: '0.9rem' }}>
-                  SAP S/4HANA &amp; ERP Cloud
-                </Link>
-                <Link to="/services" onClick={closeAll} style={{ color: '#334155', fontSize: '0.9rem' }}>
-                  Digital Marketing &amp; 8D Motion
-                </Link>
-                <Link to="/services" onClick={closeAll} style={{ color: '#334155', fontSize: '0.9rem' }}>
-                  Healthcare Operations &amp; RCM
-                </Link>
-                <Link to="/services" onClick={closeAll} style={{ color: '#0052cc', fontWeight: 700, fontSize: '0.88rem' }}>
-                  View All 65+ Services →
-                </Link>
-              </div>
-            )}
+          {/* Quick Hub Indicator */}
+          <div
+            style={{
+              background: '#eff6ff',
+              border: '1px solid #bfdbfe',
+              borderRadius: '10px',
+              padding: '10px 14px',
+              marginBottom: '1.25rem',
+              display: 'flex',
+              alignItems: 'center',
+              gap: '8px',
+              color: '#1d4ed8',
+              fontSize: '0.84rem',
+              fontWeight: 700,
+            }}
+          >
+            <Building2 size={16} /> Caretrix Mega Hub: Consulting &amp; Managed Services
           </div>
 
-          <NavLink to="/industries" onClick={closeAll} style={{ color: '#0f172a', fontWeight: 700, fontSize: '1.05rem' }}>
-            Industries
-          </NavLink>
-
-          <NavLink to="/case-studies" onClick={closeAll} style={{ color: '#0f172a', fontWeight: 700, fontSize: '1.05rem' }}>
-            Case Studies
-          </NavLink>
-
-          <NavLink to="/global" onClick={closeAll} style={{ color: '#0f172a', fontWeight: 700, fontSize: '1.05rem' }}>
-            Global &amp; Pan-India Hubs
-          </NavLink>
-
-          <NavLink to="/about" onClick={closeAll} style={{ color: '#0f172a', fontWeight: 700, fontSize: '1.05rem' }}>
-            About
-          </NavLink>
-
-          <NavLink to="/contact" onClick={closeAll} style={{ color: '#0f172a', fontWeight: 700, fontSize: '1.05rem' }}>
-            Contact
-          </NavLink>
-
-          <div style={{ paddingTop: '1rem', borderTop: '1px solid #e2e8f0', display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
-            <a
-              href="tel:+917758088438"
-              className="btn btn-secondary"
-              style={{ width: '100%', justifyContent: 'center' }}
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
+            <Link
+              to="/"
+              onClick={closeAll}
+              style={{ padding: '10px 0', fontSize: '1.05rem', fontWeight: 700, color: '#0f172a', borderBottom: '1px solid #f1f5f9' }}
             >
-              <Phone size={16} /> +91 77580 88438
-            </a>
+              Home
+            </Link>
 
+            {/* Accordion: Consulting Hub */}
+            <div style={{ borderBottom: '1px solid #f1f5f9', paddingBottom: '0.5rem' }}>
+              <button
+                onClick={() => setMobileConsultingOpen(!mobileConsultingOpen)}
+                style={{
+                  width: '100%',
+                  display: 'flex',
+                  justifyContent: 'space-between',
+                  alignItems: 'center',
+                  background: 'none',
+                  border: 'none',
+                  padding: '10px 0',
+                  fontSize: '1.05rem',
+                  fontWeight: 700,
+                  color: '#0052cc',
+                  cursor: 'pointer',
+                }}
+              >
+                <span style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                  <Briefcase size={18} /> Consulting Hub
+                </span>
+                <ChevronDown size={16} style={{ transform: mobileConsultingOpen ? 'rotate(180deg)' : 'none', transition: 'transform 0.2s' }} />
+              </button>
+
+              {mobileConsultingOpen && (
+                <div style={{ paddingLeft: '1rem', display: 'flex', flexDirection: 'column', gap: '0.5rem', marginTop: '0.25rem' }}>
+                  <Link to="/services" onClick={closeAll} style={{ padding: '6px 0', color: '#334155', fontSize: '0.92rem' }}>
+                    • SAP S/4HANA &amp; ERP Cloud Migration
+                  </Link>
+                  <Link to="/services" onClick={closeAll} style={{ padding: '6px 0', color: '#334155', fontSize: '0.92rem' }}>
+                    • Corporate Strategy &amp; Advisory Consulting
+                  </Link>
+                  <Link to="/services" onClick={closeAll} style={{ padding: '6px 0', color: '#334155', fontSize: '0.92rem' }}>
+                    • Cloud Architecture &amp; DevOps Infrastructure
+                  </Link>
+                  <Link to="/services" onClick={closeAll} style={{ padding: '6px 0', color: '#334155', fontSize: '0.92rem' }}>
+                    • MarTech &amp; 8D Motion Studio (5.2x ROAS)
+                  </Link>
+                </div>
+              )}
+            </div>
+
+            {/* Accordion: Services Hub */}
+            <div style={{ borderBottom: '1px solid #f1f5f9', paddingBottom: '0.5rem' }}>
+              <button
+                onClick={() => setMobileServicesOpen(!mobileServicesOpen)}
+                style={{
+                  width: '100%',
+                  display: 'flex',
+                  justifyContent: 'space-between',
+                  alignItems: 'center',
+                  background: 'none',
+                  border: 'none',
+                  padding: '10px 0',
+                  fontSize: '1.05rem',
+                  fontWeight: 700,
+                  color: '#059669',
+                  cursor: 'pointer',
+                }}
+              >
+                <span style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                  <Headphones size={18} /> Managed Services Hub
+                </span>
+                <ChevronDown size={16} style={{ transform: mobileServicesOpen ? 'rotate(180deg)' : 'none', transition: 'transform 0.2s' }} />
+              </button>
+
+              {mobileServicesOpen && (
+                <div style={{ paddingLeft: '1rem', display: 'flex', flexDirection: 'column', gap: '0.5rem', marginTop: '0.25rem' }}>
+                  <Link to="/services" onClick={closeAll} style={{ padding: '6px 0', color: '#334155', fontSize: '0.92rem' }}>
+                    • 24/7 Application Support (15-Min SLA AMS)
+                  </Link>
+                  <Link to="/services" onClick={closeAll} style={{ padding: '6px 0', color: '#334155', fontSize: '0.92rem' }}>
+                    • International Voice Process (US/UK/AUS Pods)
+                  </Link>
+                  <Link to="/services" onClick={closeAll} style={{ padding: '6px 0', color: '#334155', fontSize: '0.92rem' }}>
+                    • Domestic Voice Process (12+ Pan-India Languages)
+                  </Link>
+                  <Link to="/services" onClick={closeAll} style={{ padding: '6px 0', color: '#334155', fontSize: '0.92rem' }}>
+                    • Healthcare RCM &amp; Clinical BPO (HIPAA)
+                  </Link>
+                  <Link to="/services" onClick={closeAll} style={{ padding: '6px 0', color: '#334155', fontSize: '0.92rem' }}>
+                    • Pan-India Background Verification (28 States)
+                  </Link>
+                  <Link to="/services" onClick={closeAll} style={{ padding: '6px 0', color: '#334155', fontSize: '0.92rem' }}>
+                    • Enterprise HRMS &amp; Staffing (NAPS / Skill India)
+                  </Link>
+                </div>
+              )}
+            </div>
+
+            {/* Accordion: Mega Hubs */}
+            <div style={{ borderBottom: '1px solid #f1f5f9', paddingBottom: '0.5rem' }}>
+              <button
+                onClick={() => setMobileHubsOpen(!mobileHubsOpen)}
+                style={{
+                  width: '100%',
+                  display: 'flex',
+                  justifyContent: 'space-between',
+                  alignItems: 'center',
+                  background: 'none',
+                  border: 'none',
+                  padding: '10px 0',
+                  fontSize: '1.05rem',
+                  fontWeight: 700,
+                  color: '#0f172a',
+                  cursor: 'pointer',
+                }}
+              >
+                <span style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                  <MapPin size={18} /> Delivery Hubs &amp; CoEs
+                </span>
+                <ChevronDown size={16} style={{ transform: mobileHubsOpen ? 'rotate(180deg)' : 'none', transition: 'transform 0.2s' }} />
+              </button>
+
+              {mobileHubsOpen && (
+                <div style={{ paddingLeft: '1rem', display: 'flex', flexDirection: 'column', gap: '0.5rem', marginTop: '0.25rem' }}>
+                  <Link to="/global" onClick={closeAll} style={{ padding: '6px 0', color: '#334155', fontSize: '0.92rem' }}>
+                    • Pune Global HQ (SAP &amp; Cloud Lab)
+                  </Link>
+                  <Link to="/global" onClick={closeAll} style={{ padding: '6px 0', color: '#334155', fontSize: '0.92rem' }}>
+                    • Navi Mumbai Hub (Healthcare RCM &amp; BPO)
+                  </Link>
+                  <Link to="/global" onClick={closeAll} style={{ padding: '6px 0', color: '#334155', fontSize: '0.92rem' }}>
+                    • Bengaluru Tech Hub (HANA Cloud BTP)
+                  </Link>
+                  <Link to="/global" onClick={closeAll} style={{ padding: '6px 0', color: '#334155', fontSize: '0.92rem' }}>
+                    • Hyderabad AI Lab (Process Automation)
+                  </Link>
+                  <Link to="/global" onClick={closeAll} style={{ padding: '6px 0', color: '#334155', fontSize: '0.92rem' }}>
+                    • Delhi NCR Advisory &amp; Chennai Delivery
+                  </Link>
+                </div>
+              )}
+            </div>
+
+            {/* Accordion: Company */}
+            <div style={{ borderBottom: '1px solid #f1f5f9', paddingBottom: '0.5rem' }}>
+              <button
+                onClick={() => setMobileCompanyOpen(!mobileCompanyOpen)}
+                style={{
+                  width: '100%',
+                  display: 'flex',
+                  justifyContent: 'space-between',
+                  alignItems: 'center',
+                  background: 'none',
+                  border: 'none',
+                  padding: '10px 0',
+                  fontSize: '1.05rem',
+                  fontWeight: 700,
+                  color: '#0f172a',
+                  cursor: 'pointer',
+                }}
+              >
+                <span>Company &amp; Work</span>
+                <ChevronDown size={16} style={{ transform: mobileCompanyOpen ? 'rotate(180deg)' : 'none', transition: 'transform 0.2s' }} />
+              </button>
+
+              {mobileCompanyOpen && (
+                <div style={{ paddingLeft: '1rem', display: 'flex', flexDirection: 'column', gap: '0.5rem', marginTop: '0.25rem' }}>
+                  <Link to="/about" onClick={closeAll} style={{ padding: '6px 0', color: '#334155', fontSize: '0.92rem' }}>
+                    About Caretrix Consulting
+                  </Link>
+                  <Link to="/projects" onClick={closeAll} style={{ padding: '6px 0', color: '#334155', fontSize: '0.92rem' }}>
+                    Projects &amp; Case Studies
+                  </Link>
+                  <Link to="/industries" onClick={closeAll} style={{ padding: '6px 0', color: '#334155', fontSize: '0.92rem' }}>
+                    Industries Served
+                  </Link>
+                  <Link to="/careers" onClick={closeAll} style={{ padding: '6px 0', color: '#334155', fontSize: '0.92rem' }}>
+                    Careers &amp; Opportunities
+                  </Link>
+                </div>
+              )}
+            </div>
+
+            <Link
+              to="/contact"
+              onClick={closeAll}
+              style={{ padding: '10px 0', fontSize: '1.05rem', fontWeight: 700, color: '#0f172a', borderBottom: '1px solid #f1f5f9' }}
+            >
+              Contact Us
+            </Link>
+          </div>
+
+          {/* Quick Call & RFP */}
+          <div style={{ marginTop: '1.75rem', display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
             <button
               onClick={() => {
                 closeAll();
-                onOpenModal();
+                if (onOpenModal) onOpenModal();
               }}
               className="btn btn-primary"
-              style={{ width: '100%', justifyContent: 'center' }}
+              style={{ width: '100%', padding: '0.85rem', justifyContent: 'center' }}
             >
               <Sparkles size={16} /> Initiate Enterprise RFP
             </button>
+            <a
+              href="tel:+917758088438"
+              className="btn btn-secondary"
+              style={{ width: '100%', padding: '0.85rem', justifyContent: 'center', display: 'flex', alignItems: 'center', gap: '8px' }}
+            >
+              <Phone size={16} color="#0052cc" /> Call +91 77580 88438
+            </a>
           </div>
         </div>
       )}
