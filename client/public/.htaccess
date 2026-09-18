@@ -3,7 +3,7 @@
 # Apache Configuration for Shared Hosting & SPA
 # =============================================
 
-# ---- GZIP Compression ----
+# ---- GZIP / Deflate Compression ----
 <IfModule mod_deflate.c>
   AddOutputFilterByType DEFLATE text/html
   AddOutputFilterByType DEFLATE text/css
@@ -23,10 +23,10 @@
 <IfModule mod_expires.c>
   ExpiresActive On
 
-  # HTML - short cache (content changes)
-  ExpiresByType text/html                       "access plus 1 hour"
+  # HTML - NEVER cache index.html so users always get newest JS bundle
+  ExpiresByType text/html                       "access plus 0 seconds"
 
-  # CSS & JS
+  # CSS & JS (hashed filenames - safe for 1 year immutable)
   ExpiresByType text/css                        "access plus 1 year"
   ExpiresByType application/javascript          "access plus 1 year"
   ExpiresByType text/javascript                 "access plus 1 year"
@@ -46,19 +46,24 @@
   ExpiresByType application/font-woff           "access plus 1 year"
   ExpiresByType application/font-woff2          "access plus 1 year"
 
-  # XML / Sitemap
+  # XML / Sitemap / Text
   ExpiresByType application/xml                 "access plus 1 day"
   ExpiresByType text/xml                        "access plus 1 day"
+  ExpiresByType text/plain                      "access plus 1 day"
 </IfModule>
 
 # ---- Cache-Control Headers ----
 <IfModule mod_headers.c>
+  # Hashed assets cached 1 year
   <FilesMatch "\.(css|js|png|jpg|jpeg|gif|webp|woff|woff2|svg|ico)$">
     Header set Cache-Control "public, max-age=31536000, immutable"
   </FilesMatch>
 
-  <FilesMatch "\.html$">
-    Header set Cache-Control "public, max-age=3600, must-revalidate"
+  # HTML files MUST be revalidated immediately to avoid stale bundle crashes
+  <FilesMatch "\.(html|htm)$">
+    Header set Cache-Control "no-cache, no-store, must-revalidate"
+    Header set Pragma "no-cache"
+    Header set Expires "0"
   </FilesMatch>
 
   # Security Headers
@@ -80,16 +85,20 @@ DirectoryIndex index.html
   RewriteEngine On
   RewriteBase /
 
-  # Force HTTPS
+  # 1. Canonical Redirect: www to non-www (apex domain)
+  RewriteCond %{HTTP_HOST} ^www\.(.+)$ [NC]
+  RewriteRule ^(.*)$ https://%1/$1 [R=301,L]
+
+  # 2. Force HTTPS
   RewriteCond %{HTTPS} off
   RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [R=301,L]
 
-  # Don't rewrite real files or directories
+  # 3. Don't rewrite real files or directories
   RewriteCond %{REQUEST_FILENAME} -f [OR]
   RewriteCond %{REQUEST_FILENAME} -d
   RewriteRule ^ - [L]
 
-  # Route all other URLs to index.html for React Router
+  # 4. Route all other URLs to index.html for React Router
   RewriteRule ^ index.html [L]
 </IfModule>
 

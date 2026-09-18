@@ -1,0 +1,41 @@
+name: Build & Deploy to Hostinger Production
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  build-and-deploy:
+    name: Build & Deploy to Hostinger FTP
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 📥 Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: ⚡ Set up Node.js 20
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: 📦 Install Client Dependencies
+        run: |
+          cd client
+          npm install
+
+      - name: 🚀 Build Production Bundle
+        run: |
+          cd client
+          npm run build
+
+      - name: 📂 Deploy to Hostinger via FTP
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+        with:
+          server: ${{ secrets.FTP_SERVER || '82.180.143.14' }}
+          username: ${{ secrets.FTP_USERNAME || 'u696371114.caretrix' }}
+          password: ${{ secrets.FTP_PASSWORD || 'Caretrix@1800' }}
+          local-dir: ./client/dist/
+          server-dir: /
+          dangerous-clean-slate: false
