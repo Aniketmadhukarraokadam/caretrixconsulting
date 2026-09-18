@@ -9,23 +9,23 @@ export default function ParticleCanvas() {
     const ctx = canvas.getContext('2d');
 
     const COLORS = [
-      [0, 166, 199],   // Caretrix Teal
-      [18, 61, 107],   // Corporate Blue
-      [247, 148, 29],  // Orange accent
+      [0, 82, 204],
+      [37, 99, 235],
+      [2, 132, 199],
     ];
 
+    // Minimal count (14 particles) for zero CPU overhead
     const CFG = {
-      count: 50,
-      minR: 0.6,
+      count: 14,
+      minR: 0.8,
       maxR: 1.8,
-      minOpacity: 0.05,
-      maxOpacity: 0.16,
-      speed: 0.25,
+      speed: 0.18,
     };
 
     let W, H;
     let particles = [];
     let animationId;
+    let isRunning = true;
 
     function resize() {
       W = canvas.width = window.innerWidth;
@@ -42,31 +42,27 @@ export default function ParticleCanvas() {
         this.y = random ? Math.random() * H : Math.random() * H;
         this.r = CFG.minR + Math.random() * (CFG.maxR - CFG.minR);
         const a = Math.random() * Math.PI * 2;
-        const s = CFG.speed * (0.3 + Math.random() * 0.7);
+        const s = CFG.speed * (0.4 + Math.random() * 0.6);
         this.vx = Math.cos(a) * s;
         this.vy = Math.sin(a) * s;
-        this.op = CFG.minOpacity + Math.random() * (CFG.maxOpacity - CFG.minOpacity);
-        const ci = Math.random() < 0.2 ? 2 : Math.floor(Math.random() * 2);
+        this.op = 0.04 + Math.random() * 0.08;
+        const ci = Math.floor(Math.random() * COLORS.length);
         this.color = COLORS[ci];
-        this.pulse = Math.random() * Math.PI * 2;
-        this.pulseSpeed = 0.008 + Math.random() * 0.012;
       }
 
       update() {
         this.x += this.vx;
         this.y += this.vy;
-        this.pulse += this.pulseSpeed;
         if (this.x < -10 || this.x > W + 10 || this.y < -10 || this.y > H + 10) {
           this.init(false);
         }
       }
 
       draw() {
-        const alpha = this.op * (0.75 + 0.25 * Math.sin(this.pulse));
         const [r, g, b] = this.color;
         ctx.beginPath();
         ctx.arc(this.x, this.y, this.r, 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(${r},${g},${b},${alpha.toFixed(3)})`;
+        ctx.fillStyle = `rgba(${r},${g},${b},${this.op})`;
         ctx.fill();
       }
     }
@@ -77,11 +73,23 @@ export default function ParticleCanvas() {
       particles.push(new Dust());
     }
 
+    const handleVisibility = () => {
+      isRunning = !document.hidden;
+      if (isRunning && !animationId) {
+        animate();
+      }
+    };
+    document.addEventListener('visibilitychange', handleVisibility);
+
     function animate() {
+      if (!isRunning) {
+        animationId = null;
+        return;
+      }
       ctx.clearRect(0, 0, W, H);
-      for (const p of particles) {
-        p.update();
-        p.draw();
+      for (let i = 0; i < particles.length; i++) {
+        particles[i].update();
+        particles[i].draw();
       }
       animationId = requestAnimationFrame(animate);
     }
@@ -92,6 +100,7 @@ export default function ParticleCanvas() {
     return () => {
       cancelAnimationFrame(animationId);
       window.removeEventListener('resize', resize);
+      document.removeEventListener('visibilitychange', handleVisibility);
     };
   }, []);
 
