@@ -26,6 +26,8 @@ import {
   Building2,
   Clock,
   Compass,
+  Code2,
+  Bot,
 } from 'lucide-react';
 
 export default function Navbar({ onOpenModal }) {
@@ -82,9 +84,9 @@ export default function Navbar({ onOpenModal }) {
   }, []);
 
   const panIndiaHubs = [
-    { city: 'Pune (Global HQ)', desc: 'Dangat Patil Empire, Vadgaon Budruk. SAP CoE & Cloud Lab.', state: 'Maharashtra', tag: 'Global HQ' },
+    { city: 'Pune (Global HQ)', desc: 'Dangat Patil Empire, Vadgaon Budruk. Cloud & Enterprise Software CoE.', state: 'Maharashtra', tag: 'Global HQ' },
     { city: 'Navi Mumbai Hub', desc: 'Vashi Station Tower 2. Healthcare RCM & 24/7 BPO Ops.', state: 'Maharashtra', tag: 'BPO Ops' },
-    { city: 'Bengaluru Tech Hub', desc: 'Outer Ring Road tech corridor. ABAP on HANA & Cloud BTP.', state: 'Karnataka', tag: 'Cloud CoE' },
+    { city: 'Bengaluru Tech Hub', desc: 'Outer Ring Road tech corridor. Cloud Microservices & DevOps CoE.', state: 'Karnataka', tag: 'Cloud CoE' },
     { city: 'Hyderabad AI Lab', desc: 'Hitec City. Agentic AI, Computer Vision & Data Annotation.', state: 'Telangana', tag: 'AI Hub' },
     { city: 'Delhi NCR Advisory', desc: 'Gurugram Cyber City. Corporate Strategy & Pan-India BGV.', state: 'NCR', tag: 'Advisory' },
     { city: 'Chennai Delivery', desc: 'OMR corridor. STM Publishing & Prepress XML automation.', state: 'Tamil Nadu', tag: 'Delivery' },
@@ -325,9 +327,9 @@ export default function Navbar({ onOpenModal }) {
                   </span>
                 </div>
 
-                {/* Grid of Consulting Services */}
-                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '1rem' }}>
-                  {/* SAP S/4HANA */}
+                {/* Grid of Universal Consulting Services */}
+                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '0.9rem' }}>
+                  {/* 1. Cloud Architecture & DevOps */}
                   <Link
                     to="/services"
                     onClick={closeAll}
@@ -335,26 +337,26 @@ export default function Navbar({ onOpenModal }) {
                       display: 'flex',
                       alignItems: 'flex-start',
                       gap: '12px',
-                      padding: '12px',
+                      padding: '11px',
                       borderRadius: '12px',
                       background: '#f8fafc',
                       border: '1px solid #e2e8f0',
                       transition: 'all 0.2s',
                     }}
                   >
-                    <Server size={20} color="#0052cc" style={{ flexShrink: 0, marginTop: '2px' }} />
+                    <Server size={20} color="#0284c7" style={{ flexShrink: 0, marginTop: '2px' }} />
                     <div>
                       <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
-                        <strong style={{ color: '#0f172a', fontSize: '0.88rem' }}>SAP S/4HANA &amp; ERP Cloud</strong>
-                        <span style={{ fontSize: '0.65rem', background: '#0052cc', color: '#fff', padding: '1px 5px', borderRadius: '4px' }}>CoE</span>
+                        <strong style={{ color: '#0f172a', fontSize: '0.88rem' }}>Cloud Architecture &amp; DevOps</strong>
+                        <span style={{ fontSize: '0.65rem', background: '#0284c7', color: '#fff', padding: '1px 5px', borderRadius: '4px' }}>Cloud</span>
                       </div>
                       <p style={{ color: '#64748b', fontSize: '0.76rem', lineHeight: '1.4', margin: '3px 0 0' }}>
-                        Greenfield/Brownfield migration, Central Finance (cFin), BTP, Fiori UI5 &amp; ABAP on HANA.
+                        AWS, Azure &amp; GCP landing zones, Kubernetes (EKS/AKS), Terraform IaC, and GitOps CI/CD pipelines.
                       </p>
                     </div>
                   </Link>
 
-                  {/* Corporate Advisory */}
+                  {/* 2. Custom Software Engineering */}
                   <Link
                     to="/services"
                     onClick={closeAll}
@@ -362,7 +364,115 @@ export default function Navbar({ onOpenModal }) {
                       display: 'flex',
                       alignItems: 'flex-start',
                       gap: '12px',
-                      padding: '12px',
+                      padding: '11px',
+                      borderRadius: '12px',
+                      background: '#f8fafc',
+                      border: '1px solid #e2e8f0',
+                      transition: 'all 0.2s',
+                    }}
+                  >
+                    <Code2 size={20} color="#8b5cf6" style={{ flexShrink: 0, marginTop: '2px' }} />
+                    <div>
+                      <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+                        <strong style={{ color: '#0f172a', fontSize: '0.88rem' }}>Custom Enterprise Software</strong>
+                        <span style={{ fontSize: '0.65rem', background: '#8b5cf6', color: '#fff', padding: '1px 5px', borderRadius: '4px' }}>Full-Stack</span>
+                      </div>
+                      <p style={{ color: '#64748b', fontSize: '0.76rem', lineHeight: '1.4', margin: '3px 0 0' }}>
+                        React 19, Next.js, Node.js, Python, Java Spring Boot, scalable microservices, and mobile platforms.
+                      </p>
+                    </div>
+                  </Link>
+
+                  {/* 3. Enterprise ERP & CRM Core */}
+                  <Link
+                    to="/services"
+                    onClick={closeAll}
+                    style={{
+                      display: 'flex',
+                      alignItems: 'flex-start',
+                      gap: '12px',
+                      padding: '11px',
+                      borderRadius: '12px',
+                      background: '#f8fafc',
+                      border: '1px solid #e2e8f0',
+                      transition: 'all 0.2s',
+                    }}
+                  >
+                    <Layers size={20} color="#0052cc" style={{ flexShrink: 0, marginTop: '2px' }} />
+                    <div>
+                      <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+                        <strong style={{ color: '#0f172a', fontSize: '0.88rem' }}>Enterprise ERP &amp; CRM</strong>
+                        <span style={{ fontSize: '0.65rem', background: '#0052cc', color: '#fff', padding: '1px 5px', borderRadius: '4px' }}>Enterprise</span>
+                      </div>
+                      <p style={{ color: '#64748b', fontSize: '0.76rem', lineHeight: '1.4', margin: '3px 0 0' }}>
+                        SAP S/4HANA (cFin/BTP), Salesforce CRM, Microsoft Dynamics 365, and Oracle Cloud modernizations.
+                      </p>
+                    </div>
+                  </Link>
+
+                  {/* 4. AI & Hyper-Automation */}
+                  <Link
+                    to="/services"
+                    onClick={closeAll}
+                    style={{
+                      display: 'flex',
+                      alignItems: 'flex-start',
+                      gap: '12px',
+                      padding: '11px',
+                      borderRadius: '12px',
+                      background: '#f8fafc',
+                      border: '1px solid #e2e8f0',
+                      transition: 'all 0.2s',
+                    }}
+                  >
+                    <Bot size={20} color="#ec4899" style={{ flexShrink: 0, marginTop: '2px' }} />
+                    <div>
+                      <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+                        <strong style={{ color: '#0f172a', fontSize: '0.88rem' }}>AI &amp; Hyper-Automation</strong>
+                        <span style={{ fontSize: '0.65rem', background: '#ec4899', color: '#fff', padding: '1px 5px', borderRadius: '4px' }}>AI / LLMs</span>
+                      </div>
+                      <p style={{ color: '#64748b', fontSize: '0.76rem', lineHeight: '1.4', margin: '3px 0 0' }}>
+                        Private enterprise LLMs, RAG knowledge systems, autonomous agentic workflows, and RPA bots.
+                      </p>
+                    </div>
+                  </Link>
+
+                  {/* 5. Cyber Security & IT Governance */}
+                  <Link
+                    to="/services"
+                    onClick={closeAll}
+                    style={{
+                      display: 'flex',
+                      alignItems: 'flex-start',
+                      gap: '12px',
+                      padding: '11px',
+                      borderRadius: '12px',
+                      background: '#f8fafc',
+                      border: '1px solid #e2e8f0',
+                      transition: 'all 0.2s',
+                    }}
+                  >
+                    <ShieldCheck size={20} color="#10b981" style={{ flexShrink: 0, marginTop: '2px' }} />
+                    <div>
+                      <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+                        <strong style={{ color: '#0f172a', fontSize: '0.88rem' }}>Cyber Security &amp; SOC</strong>
+                        <span style={{ fontSize: '0.65rem', background: '#10b981', color: '#fff', padding: '1px 5px', borderRadius: '4px' }}>Security</span>
+                      </div>
+                      <p style={{ color: '#64748b', fontSize: '0.76rem', lineHeight: '1.4', margin: '3px 0 0' }}>
+                        24/7 Managed SOC, SIEM monitoring, penetration testing (VAPT), and ISO 27001 / SOC-2 Type II readiness.
+                      </p>
+                    </div>
+                  </Link>
+
+                  {/* 6. Strategic Advisory & Consulting */}
+                  <Link
+                    to="/services"
+                    onClick={closeAll}
+                    style={{
+                      display: 'flex',
+                      alignItems: 'flex-start',
+                      gap: '12px',
+                      padding: '11px',
                       borderRadius: '12px',
                       background: '#f8fafc',
                       border: '1px solid #e2e8f0',
@@ -376,61 +486,7 @@ export default function Navbar({ onOpenModal }) {
                         <span style={{ fontSize: '0.65rem', background: '#2563eb', color: '#fff', padding: '1px 5px', borderRadius: '4px' }}>Strategy</span>
                       </div>
                       <p style={{ color: '#64748b', fontSize: '0.76rem', lineHeight: '1.4', margin: '3px 0 0' }}>
-                        Business process re-engineering, digital governance, organizational scaling &amp; M&amp;A integration.
-                      </p>
-                    </div>
-                  </Link>
-
-                  {/* Cloud Architecture */}
-                  <Link
-                    to="/services"
-                    onClick={closeAll}
-                    style={{
-                      display: 'flex',
-                      alignItems: 'flex-start',
-                      gap: '12px',
-                      padding: '12px',
-                      borderRadius: '12px',
-                      background: '#f8fafc',
-                      border: '1px solid #e2e8f0',
-                      transition: 'all 0.2s',
-                    }}
-                  >
-                    <Cpu size={20} color="#0284c7" style={{ flexShrink: 0, marginTop: '2px' }} />
-                    <div>
-                      <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
-                        <strong style={{ color: '#0f172a', fontSize: '0.88rem' }}>Cloud Architecture &amp; DevOps</strong>
-                        <span style={{ fontSize: '0.65rem', background: '#0284c7', color: '#fff', padding: '1px 5px', borderRadius: '4px' }}>Cloud</span>
-                      </div>
-                      <p style={{ color: '#64748b', fontSize: '0.76rem', lineHeight: '1.4', margin: '3px 0 0' }}>
-                        AWS, Azure &amp; Hybrid Cloud governance, microservices architecture, SOC-2 &amp; zero-trust security.
-                      </p>
-                    </div>
-                  </Link>
-
-                  {/* Performance Marketing & 8D Motion */}
-                  <Link
-                    to="/services"
-                    onClick={closeAll}
-                    style={{
-                      display: 'flex',
-                      alignItems: 'flex-start',
-                      gap: '12px',
-                      padding: '12px',
-                      borderRadius: '12px',
-                      background: '#f8fafc',
-                      border: '1px solid #e2e8f0',
-                      transition: 'all 0.2s',
-                    }}
-                  >
-                    <BarChart3 size={20} color="#ea580c" style={{ flexShrink: 0, marginTop: '2px' }} />
-                    <div>
-                      <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
-                        <strong style={{ color: '#0f172a', fontSize: '0.88rem' }}>MarTech &amp; 8D Motion Studio</strong>
-                        <span style={{ fontSize: '0.65rem', background: '#ea580c', color: '#fff', padding: '1px 5px', borderRadius: '4px' }}>5.2x ROAS</span>
-                      </div>
-                      <p style={{ color: '#64748b', fontSize: '0.76rem', lineHeight: '1.4', margin: '3px 0 0' }}>
-                        Multi-touch programmatic ad engines, AI search AEO/GEO indexing &amp; cinema-grade 8D commercial motion.
+                        Business process re-engineering, digital governance, organizational scaling &amp; M&amp;A tech integration.
                       </p>
                     </div>
                   </Link>
@@ -569,7 +625,7 @@ export default function Navbar({ onOpenModal }) {
                         <span style={{ fontSize: '0.65rem', background: '#1d4ed8', color: '#fff', padding: '1px 5px', borderRadius: '4px' }}>15-Min SLA</span>
                       </div>
                       <p style={{ color: '#475569', fontSize: '0.76rem', lineHeight: '1.4', margin: '2px 0 0' }}>
-                        ITIL v4 L1/L2/L3 triage, full-stack APM observability (Datadog/Dynatrace), database tuning &amp; BASIS.
+                        ITIL v4 L1/L2/L3 triage, full-stack APM observability (Datadog/Dynatrace), database administration &amp; cloud infrastructure.
                       </p>
                     </div>
                   </Link>
@@ -1061,16 +1117,22 @@ export default function Navbar({ onOpenModal }) {
               {mobileConsultingOpen && (
                 <div style={{ paddingLeft: '1rem', display: 'flex', flexDirection: 'column', gap: '0.5rem', marginTop: '0.25rem' }}>
                   <Link to="/services" onClick={closeAll} style={{ padding: '6px 0', color: '#334155', fontSize: '0.92rem' }}>
-                    • SAP S/4HANA &amp; ERP Cloud Migration
-                  </Link>
-                  <Link to="/services" onClick={closeAll} style={{ padding: '6px 0', color: '#334155', fontSize: '0.92rem' }}>
-                    • Corporate Strategy &amp; Advisory Consulting
-                  </Link>
-                  <Link to="/services" onClick={closeAll} style={{ padding: '6px 0', color: '#334155', fontSize: '0.92rem' }}>
                     • Cloud Architecture &amp; DevOps Infrastructure
                   </Link>
                   <Link to="/services" onClick={closeAll} style={{ padding: '6px 0', color: '#334155', fontSize: '0.92rem' }}>
-                    • MarTech &amp; 8D Motion Studio (5.2x ROAS)
+                    • Custom Enterprise Software Engineering
+                  </Link>
+                  <Link to="/services" onClick={closeAll} style={{ padding: '6px 0', color: '#334155', fontSize: '0.92rem' }}>
+                    • Enterprise ERP &amp; CRM (SAP, Salesforce, Dynamics)
+                  </Link>
+                  <Link to="/services" onClick={closeAll} style={{ padding: '6px 0', color: '#334155', fontSize: '0.92rem' }}>
+                    • AI Engineering &amp; Hyper-Automation
+                  </Link>
+                  <Link to="/services" onClick={closeAll} style={{ padding: '6px 0', color: '#334155', fontSize: '0.92rem' }}>
+                    • Cyber Security &amp; Managed SOC Operations
+                  </Link>
+                  <Link to="/services" onClick={closeAll} style={{ padding: '6px 0', color: '#334155', fontSize: '0.92rem' }}>
+                    • Management Consulting &amp; Strategic Advisory
                   </Link>
                 </div>
               )}

@@ -43,10 +43,12 @@ export default function Home({ onOpenModal }) {
     const size = parseInt(estimatorTeamSize, 10) || 15;
     const rates = {
       appsupport: { usRate: 150, ctRate: 45, name: '24/7 Application Support & AMS Pod' },
+      cloudsoft: { usRate: 175, ctRate: 50, name: 'Cloud & Custom Software Engineering Pod' },
+      ai_automation: { usRate: 190, ctRate: 55, name: 'AI, LLM & Hyper-Automation Pod' },
       intlvoice: { usRate: 55, ctRate: 18, name: 'International Voice Process Pod (US/UK/AUS)' },
       domesticvoice: { usRate: 35, ctRate: 12, name: 'Pan-India Domestic Voice Support Pod' },
-      sap: { usRate: 180, ctRate: 55, name: 'SAP S/4HANA & Enterprise Cloud Pod' },
-      martech: { usRate: 130, ctRate: 40, name: 'Digital Marketing & 8D Motion Growth Pod' },
+      erp_crm: { usRate: 185, ctRate: 55, name: 'Enterprise ERP & CRM Pod (SAP/Salesforce/Dynamics)' },
+      cybersecurity: { usRate: 180, ctRate: 52, name: 'Cyber Security & Managed SOC Pod' },
       healthcare: { usRate: 75, ctRate: 22, name: 'Healthcare Operations & RCM Billing Pod' },
     };
     const domainData = rates[estimatorDomain] || rates.appsupport;
@@ -238,7 +240,7 @@ export default function Home({ onOpenModal }) {
                   maxWidth: '680px',
                 }}
               >
-                Caretrix operates as a premier enterprise Mega Hub: uniting Fortune-500 scale <strong>Strategic Consulting</strong> (SAP S/4HANA migrations, cloud architecture, corporate advisory) with bank-grade <strong>24/7 Managed Services</strong> (15-min SLA Application Support AMS, US/UK/AUS &amp; Pan-India Voice Processes, and HIPAA Healthcare BPO).
+                Caretrix operates as a premier enterprise Mega Hub: uniting Fortune-500 scale <strong>Strategic Consulting</strong> (Multi-Cloud &amp; DevOps, Custom Software Engineering, AI &amp; Automation, Enterprise ERP/CRM, and Cyber Defense) with bank-grade <strong>24/7 Managed Services</strong> (15-min SLA Application Support AMS, US/UK/AUS &amp; Pan-India Voice Processes, and HIPAA Healthcare BPO).
               </p>
 
               {/* Dual-Pillar Quick Feature Badges */}
@@ -257,7 +259,7 @@ export default function Home({ onOpenModal }) {
                 >
                   <Briefcase size={16} color="#0052cc" />
                   <span style={{ fontSize: '0.84rem', color: '#1e293b', fontWeight: 600 }}>
-                    <strong>Consulting:</strong> SAP S/4HANA • Strategy • Cloud Architecture
+                    <strong>Consulting:</strong> Cloud &amp; DevOps • Custom Software • AI • Enterprise ERP
                   </span>
                 </div>
 
@@ -461,12 +463,12 @@ export default function Home({ onOpenModal }) {
                   >
                     <div style={{ fontSize: '1.15rem', fontWeight: 800, marginBottom: '2px' }}>
                       {heroPillar === 'consulting'
-                        ? 'SAP S/4HANA, Cloud & Advisory CoE'
+                        ? 'Cloud, Custom Software & Enterprise CoE'
                         : 'Application Support AMS & Dual Voice Pods'}
                     </div>
                     <div style={{ fontSize: '0.78rem', color: '#cbd5e1' }}>
                       {heroPillar === 'consulting'
-                        ? 'Greenfield/Brownfield ERP, AWS/Azure Governance, and 5.2x ROAS MarTech.'
+                        ? 'Multi-Cloud AWS/Azure, Resilient Microservices, AI Automation & Enterprise ERP/CRM.'
                         : '15-Minute P1 SLA, US/UK/AUS C2 English & 12+ Pan-India Language Centers.'}
                     </div>
                   </div>
@@ -478,12 +480,12 @@ export default function Home({ onOpenModal }) {
                     <div>
                       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '10px', marginBottom: '1rem' }}>
                         <div style={{ background: '#f8fafc', border: '1px solid #e2e8f0', borderRadius: '10px', padding: '10px' }}>
-                          <strong style={{ color: '#0f172a', fontSize: '0.84rem', display: 'block' }}>SAP S/4HANA CoE</strong>
-                          <span style={{ color: '#64748b', fontSize: '0.74rem' }}>cFin, BTP, Fiori UI5 &amp; BASIS</span>
+                          <strong style={{ color: '#0f172a', fontSize: '0.84rem', display: 'block' }}>Cloud &amp; Software CoE</strong>
+                          <span style={{ color: '#64748b', fontSize: '0.74rem' }}>AWS/Azure, React/Node, Microservices</span>
                         </div>
                         <div style={{ background: '#f8fafc', border: '1px solid #e2e8f0', borderRadius: '10px', padding: '10px' }}>
-                          <strong style={{ color: '#0f172a', fontSize: '0.84rem', display: 'block' }}>5.2x Verified ROAS</strong>
-                          <span style={{ color: '#64748b', fontSize: '0.74rem' }}>Programmatic MarTech &amp; 8D Motion</span>
+                          <strong style={{ color: '#0f172a', fontSize: '0.84rem', display: 'block' }}>Enterprise ERP &amp; AI</strong>
+                          <span style={{ color: '#64748b', fontSize: '0.74rem' }}>SAP S/4HANA, Salesforce &amp; Agents</span>
                         </div>
                       </div>
                       <div style={{ display: 'flex', gap: '6px', flexWrap: 'wrap' }}>
@@ -863,7 +865,7 @@ export default function Home({ onOpenModal }) {
               </div>
             </TiltCard>
 
-            {/* Pillar 2: SAP S/4HANA & Enterprise Cloud */}
+            {/* Pillar 2: Cloud Architecture, Custom Software & Enterprise ERP */}
             <TiltCard
               style={{
                 background: '#ffffff',
@@ -875,8 +877,8 @@ export default function Home({ onOpenModal }) {
             >
               <div style={{ height: '220px', overflow: 'hidden', position: 'relative' }}>
                 <img
-                  src="/images/sap_cloud_mesh.jpg"
-                  alt="SAP S/4HANA Cloud Architecture"
+                  src="/it_services.png"
+                  alt="Cloud Architecture & Custom Software"
                   style={{ width: '100%', height: '100%', objectFit: 'cover' }}
                 />
                 <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to top, rgba(15, 23, 42, 0.7), transparent 70%)' }} />
@@ -886,26 +888,26 @@ export default function Home({ onOpenModal }) {
                     top: '14px',
                     left: '14px',
                     background: 'rgba(255, 255, 255, 0.95)',
-                    border: '1px solid #fde68a',
-                    color: '#d97706',
+                    border: '1px solid #bfdbfe',
+                    color: '#1d4ed8',
                     padding: '4px 12px',
                     borderRadius: '20px',
                     fontSize: '0.74rem',
                     fontWeight: 700,
                   }}
                 >
-                  SAP S/4HANA &amp; ENTERPRISE ERP
+                  CLOUD, SOFTWARE &amp; ENTERPRISE CORE
                 </span>
               </div>
               <div style={{ padding: '1.75rem' }}>
                 <h3 style={{ fontSize: '1.3rem', marginBottom: '0.6rem', color: '#0f172a' }}>
-                  S/4HANA Migration &amp; Central Finance
+                  Cloud Architecture, Software &amp; ERP
                 </h3>
                 <p style={{ color: '#475569', fontSize: '0.9rem', lineHeight: '1.65', marginBottom: '1.25rem' }}>
-                  Greenfield/Brownfield S/4HANA migrations, SAP BTP integrations, ABAP on HANA, custom Fiori UI5 portals, and 24/7 SLA-backed BASIS AMS.
+                  Multi-cloud infrastructure (AWS/Azure/GCP), resilient microservices in Node/React/Java, DevOps automation, and modern enterprise ERP/CRM (SAP, Salesforce, Dynamics).
                 </p>
-                <Link to="/services" style={{ color: '#d97706', fontSize: '0.88rem', fontWeight: 600, display: 'inline-flex', alignItems: 'center', gap: '6px' }}>
-                  Explore SAP Consulting <ChevronRight size={16} />
+                <Link to="/services" style={{ color: '#1d4ed8', fontSize: '0.88rem', fontWeight: 600, display: 'inline-flex', alignItems: 'center', gap: '6px' }}>
+                  Explore Cloud &amp; Software Consulting <ChevronRight size={16} />
                 </Link>
               </div>
             </TiltCard>
@@ -1005,10 +1007,10 @@ export default function Home({ onOpenModal }) {
               </div>
               <h3 style={{ fontSize: '1.4rem', color: '#0f172a', marginBottom: '0.5rem' }}>Pune Technology Center</h3>
               <p style={{ color: '#475569', fontSize: '0.88rem', marginBottom: '1.25rem', lineHeight: '1.6' }}>
-                4th Floor, Dangat Patil Empire, Kudale Baug, Vadgaon Budruk, Pune 411041. Hosting Application Support Labs, SAP Centers of Excellence, and MarTech operations.
+                4th Floor, Dangat Patil Empire, Kudale Baug, Vadgaon Budruk, Pune 411041. Hosting Multi-Cloud Architecture Labs, Application Support AMS, Software Engineering, and Enterprise Consulting.
               </p>
               <div style={{ borderTop: '1px solid #f1f5f9', paddingTop: '1rem', fontSize: '0.82rem', color: '#64748b' }}>
-                <strong style={{ color: '#0f172a' }}>Specializations:</strong> 24/7 AMS, SAP S/4HANA, Custom Microservices, 8D Motion
+                <strong style={{ color: '#0f172a' }}>Specializations:</strong> 24/7 AMS, Cloud &amp; DevOps, Custom Software, AI &amp; Enterprise ERP
               </div>
             </div>
 
@@ -1131,10 +1133,12 @@ export default function Home({ onOpenModal }) {
                   <div style={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap' }}>
                     {[
                       { id: 'appsupport', label: 'Application Support (AMS)' },
+                      { id: 'cloudsoft', label: 'Cloud & Custom Software' },
+                      { id: 'ai_automation', label: 'AI & Hyper-Automation' },
                       { id: 'intlvoice', label: 'International Voice (US/UK)' },
                       { id: 'domesticvoice', label: 'Domestic Voice (Pan-India)' },
-                      { id: 'sap', label: 'SAP S/4HANA ERP' },
-                      { id: 'martech', label: 'Performance Marketing' },
+                      { id: 'erp_crm', label: 'Enterprise ERP & CRM' },
+                      { id: 'cybersecurity', label: 'Cyber Security' },
                       { id: 'healthcare', label: 'Healthcare RCM' },
                     ].map((d) => (
                       <button

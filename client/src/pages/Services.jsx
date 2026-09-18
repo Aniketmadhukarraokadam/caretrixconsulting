@@ -25,6 +25,13 @@ import {
   TrendingUp,
   Clock,
   Check,
+  Server,
+  Code2,
+  Bot,
+  Database,
+  Users,
+  Shield,
+  Workflow,
 } from 'lucide-react';
 import HumanMotion8DStudio from '../components/HumanMotion8DStudio';
 
@@ -33,19 +40,23 @@ export default function Services({ onOpenModal }) {
   const [searchQuery, setSearchQuery] = useState('');
 
   const categories = [
-    { id: 'all', label: 'All Services (65+)' },
+    { id: 'all', label: 'All Universal Services (70+)' },
     { id: 'appsupport', label: 'Application Support (AMS)' },
-    { id: 'intlvoice', label: 'International Voice Process' },
-    { id: 'domesticvoice', label: 'Domestic Voice Process' },
-    { id: 'sap', label: 'SAP S/4HANA & ERP' },
-    { id: 'marketing', label: 'Performance Marketing & 8D' },
+    { id: 'clouddevops', label: 'Cloud & DevOps' },
+    { id: 'customsoftware', label: 'Custom Software & Platforms' },
+    { id: 'ai_automation', label: 'AI & Hyper-Automation' },
+    { id: 'intlvoice', label: 'International Voice (US/UK/AUS)' },
+    { id: 'domesticvoice', label: 'Domestic Voice (Pan-India 12+ Langs)' },
+    { id: 'enterprise_erp', label: 'Enterprise ERP & CRM' },
+    { id: 'cybersecurity', label: 'Cyber Security & IT Governance' },
+    { id: 'it_staffing', label: 'IT Talent Pods & Staffing' },
+    { id: 'backoffice_bpo', label: 'Back-Office BPO & Processing' },
     { id: 'healthcare', label: 'Healthcare BPO / RCM' },
     { id: 'hrms', label: 'HRMS & AI Software' },
-    { id: 'verification', label: 'Background Verification' },
+    { id: 'verification', label: 'Background Verification (28 States)' },
     { id: 'realestate', label: 'Real Estate & Title' },
     { id: 'publishing', label: 'STM Publishing' },
-    { id: 'ai', label: 'AI & Data Annotation' },
-    { id: 'software', label: 'Custom Software & Microservices' },
+    { id: 'marketing', label: 'Performance Marketing & 8D Motion' },
     { id: 'accounting', label: 'Accounting & Payroll' },
   ];
 
@@ -57,7 +68,7 @@ export default function Services({ onOpenModal }) {
       icon: <Laptop size={32} color="#1d4ed8" />,
       image: '/it_services.png',
       title: 'Enterprise Application Support Services (AMS), L1/L2/L3 Maintenance & Cloud Observability',
-      desc: 'Mission-critical enterprise application maintenance and 24/7/365 production support. We ensure uninterrupted digital velocity for modern SaaS architectures, legacy ERP monoliths, cloud microservices, and client-facing web portals with industry-leading SLA commitments.',
+      desc: 'Mission-critical enterprise application maintenance and 24/7/365 production support. We ensure uninterrupted digital velocity for modern SaaS architectures, enterprise ERPs, cloud microservices, and client-facing web portals with industry-leading SLA commitments.',
       features: [
         'Tier-1, Tier-2 & Tier-3 (L1/L2/L3) Incident Response & Bug Remediations',
         'Strict SLA Commitment: <15 Minute Acknowledgment for Critical P1 Incidents',
@@ -68,6 +79,63 @@ export default function Services({ onOpenModal }) {
       ],
       deliverables: '99.98% application uptime guarantee, 15-minute P1 critical response time, and detailed monthly root-cause analysis (RCA) reporting.',
       roiTag: '52% TCO Reduction vs Onshore Support',
+    },
+    {
+      id: 'cloud-devops-engineering',
+      cat: 'clouddevops',
+      badge: 'MULTI-CLOUD & DEVOPS INFRASTRUCTURE',
+      icon: <Server size={32} color="#0284c7" />,
+      image: '/images/hero_3d_mesh.jpg',
+      title: 'Cloud Architecture, Multi-Cloud Migration (AWS, Azure, GCP) & DevOps Automation',
+      desc: 'Enterprise-grade cloud transformation and infrastructure modernization: cloud migration roadmaps, Kubernetes container orchestration, Infrastructure-as-Code (Terraform, Ansible), GitOps CI/CD pipelines, FinOps cost optimization, and multi-region disaster recovery architectures.',
+      features: [
+        'Cloud Migration & Enterprise Landing Zones on AWS, Microsoft Azure & Google Cloud Platform (GCP)',
+        'Container Orchestration with Kubernetes (EKS, AKS, GKE), Docker & Helm Charts',
+        'Infrastructure-as-Code (IaC) using Terraform, Terragrunt & AWS CloudFormation',
+        'GitOps & Automated CI/CD Pipelines (GitHub Actions, GitLab CI, ArgoCD, Jenkins)',
+        'Cloud FinOps: Continuous Cost Optimization, Resource Right-Sizing & Reserved Instance Governance',
+        'Hybrid Cloud Networking, Direct Connect, VPN Mesh & Zero-Downtime Multi-Region Failover',
+      ],
+      deliverables: '99.99% infrastructure uptime SLA, zero-downtime deployment pipelines, and 30-45% documented cloud cost reduction.',
+      roiTag: '38% Cloud Spend Compression',
+    },
+    {
+      id: 'custom-software-engineering',
+      cat: 'customsoftware',
+      badge: 'FULL-STACK SOFTWARE & PLATFORM ENGINEERING',
+      icon: <Code2 size={32} color="#8b5cf6" />,
+      image: '/it_services.png',
+      title: 'Custom Enterprise Software Engineering, Microservices & High-Scale Web/Mobile Platforms',
+      desc: 'Full-lifecycle software product engineering for high-throughput enterprise systems. We architect resilient microservices, distributed data streaming pipelines, responsive modern web frontends, and cross-platform mobile solutions tailored to complex business domains.',
+      features: [
+        'Modern Web Applications with React 19, Next.js, TypeScript, Vue.js & Responsive UI Systems',
+        'High-Performance Backend Microservices in Node.js, Python (FastAPI/Django), Java Spring Boot & Go',
+        'Scalable API Architecture: RESTful, GraphQL, gRPC & Event-Driven Apache Kafka/RabbitMQ Messaging',
+        'Enterprise Database Engineering: PostgreSQL, MySQL, Redis Caching, MongoDB & DynamoDB',
+        'Cross-Platform Mobile Applications: React Native, Flutter & Native iOS/Android SDKs',
+        'End-to-End Automated Testing: Unit, Integration, E2E (Playwright/Cypress) & Load Testing (k6)',
+      ],
+      deliverables: 'Clean architecture with 90%+ automated test coverage, sub-200ms API response latency, and modular codebase with full IP ownership.',
+      roiTag: 'Full IP Transfer • Sub-200ms APIs',
+    },
+    {
+      id: 'ai-hyper-automation',
+      cat: 'ai_automation',
+      badge: 'ENTERPRISE AI & AUTOMATION',
+      icon: <Bot size={32} color="#ec4899" />,
+      image: '/images/martech_3d_engine.jpg',
+      title: 'Generative AI, Agentic Workflows, LLM Fine-Tuning & Intelligent Process Automation',
+      desc: 'Productionizing Artificial Intelligence for real-world enterprise velocity. From private enterprise LLMs and Retrieval-Augmented Generation (RAG) knowledge systems to autonomous multi-agent systems and Robotic Process Automation (RPA), we automate complex manual workflows safely.',
+      features: [
+        'Enterprise RAG Architectures with Milvus/Pinecone Vector DBs & Private LLM Embeddings',
+        'Autonomous Agentic AI Workflows for Document Triage, Customer Queries & Data Synthesis',
+        'Fine-Tuning Open-Source LLMs (Llama 3, Mistral, Gemma) on Proprietary Domain Datasets',
+        'Intelligent Document Processing (IDP): OCR, LayoutLM & Neural Extraction for Invoices & KYC',
+        'Robotic Process Automation (RPA) with UiPath, Automation Anywhere & Python Workers',
+        'AI Safety, Guardrails, Data Privacy & SOC-2 Compliant Air-Gapped Deployment',
+      ],
+      deliverables: '70% reduction in manual data processing hours, under 1.5-second LLM inference latency, and enterprise-grade data privacy guarantees.',
+      roiTag: '70% Manual Workload Automated',
     },
     {
       id: 'intl-voice-process',
@@ -108,15 +176,91 @@ export default function Services({ onOpenModal }) {
       roiTag: '12+ Regional Languages • <15s ASA',
     },
     {
+      id: 'enterprise-erp-crm',
+      cat: 'enterprise_erp',
+      badge: 'ENTERPRISE SYSTEMS PRACTICE',
+      icon: <Layers size={32} color="#0052cc" />,
+      image: '/images/sap_cloud_mesh.jpg',
+      title: 'Enterprise ERP & CRM Solutions (SAP S/4HANA, Salesforce, Microsoft Dynamics 365 & Oracle Cloud)',
+      desc: 'Strategic consulting, implementation, and application lifecycle support across the world’s leading enterprise business software platforms. We modernize core enterprise workflows including ERP financial consolidation, supply chain, CRM sales automation, and HR operations.',
+      features: [
+        'SAP S/4HANA Cloud Transformations: Greenfield, Brownfield, Central Finance (cFin) & BTP',
+        'Salesforce CRM Deployments: Sales Cloud, Service Cloud, CPQ & Custom Lightning Components',
+        'Microsoft Dynamics 365: Finance & Operations (F&O), Business Central & Power Platform Flows',
+        'Oracle Cloud ERP & NetSuite: Multi-Subsidiary Financial Consolidation & Global Procure-to-Pay',
+        'Seamless Cross-Platform Middleware Integration (MuleSoft, Boomi, SAP Cloud Connector & REST)',
+        'Enterprise Change Management, User Training, Master Data Governance & 24/7 L1-L3 Support',
+      ],
+      deliverables: 'Unified multi-entity financial consolidation, up to 60% acceleration in period close, and certified enterprise ERP/CRM solution architects.',
+      roiTag: 'SAP • Salesforce • Dynamics 365 • Oracle',
+    },
+    {
+      id: 'cybersecurity-governance',
+      cat: 'cybersecurity',
+      badge: 'CYBER DEFENSE & COMPLIANCE',
+      icon: <ShieldCheck size={32} color="#10b981" />,
+      image: '/global_delivery.png',
+      title: 'Enterprise Cyber Security, Managed SOC Operations, Penetration Testing & IT Governance',
+      desc: 'Bank-grade cybersecurity defense and regulatory compliance management. We protect enterprise digital perimeters with 24/7 Security Operations Center (SOC) monitoring, threat hunting, continuous vulnerability management, and regulatory certification roadmaps.',
+      features: [
+        '24/7 Managed Security Operations Center (SOC) with SIEM/XDR (Splunk, Microsoft Sentinel, Wazuh)',
+        'Vulnerability Assessment & Penetration Testing (VAPT) for Web, Mobile, APIs & Cloud Infrastructure',
+        'Zero-Trust Network Architecture, Identity & Access Management (IAM), MFA & SSO Enforcement',
+        'Compliance & Certification Readiness: ISO 27001, SOC-2 Type II, HIPAA, GDPR & PCI-DSS',
+        'Incident Response, Digital Forensics & Comprehensive Disaster Recovery Tabletop Exercises',
+        'Continuous Employee Security Awareness, Phishing Simulations & Third-Party Vendor Risk Auditing',
+      ],
+      deliverables: '<10 minute threat containment SLA, zero high-severity unpatched CVEs, and guaranteed audit readiness for global compliance standards.',
+      roiTag: 'SOC-2 • ISO 27001 • Zero-Trust',
+    },
+    {
+      id: 'it-talent-augmentation',
+      cat: 'it_staffing',
+      badge: 'GLOBAL WORKFORCE CONSULTING',
+      icon: <Users size={32} color="#059669" />,
+      image: '/workforce_team.png',
+      title: 'IT Talent Augmentation, Dedicated Agile Engineering Pods & Offshore Development Centers (ODC)',
+      desc: 'Rapidly scale your technology organization with elite, pre-vetted senior software engineers, DevOps specialists, data scientists, and QA automation leads. We deploy self-sufficient, high-performance pods integrated directly into your agile rituals.',
+      features: [
+        'Top 3% Pre-Vetted Senior Engineers across Frontend, Backend, Cloud, Data & QA',
+        'Dedicated Offshore Development Center (ODC) Setup in Pune, Bengaluru & Hyderabad with Biometric Security',
+        'Flexible Engagement Models: Staff Augmentation, Dedicated Managed Pods & Fixed-Scope Deliverables',
+        'Zero Overhead: We Handle Global Payroll, Benefits, High-Spec Workstations & Local Compliance',
+        'Timezone Overlap Guarantee: Minimum 4-6 Hours Shared Operational Hours with US, UK, or EU Teams',
+        'Rapid 7 to 14-Day Deployment Runway with 2-Week No-Risk Trial Guarantee',
+      ],
+      deliverables: '50-65% talent cost savings vs domestic hiring, 14-day replacement SLA, and 100% intellectual property ownership.',
+      roiTag: '50-65% Cost Savings • 7-Day Pod Setup',
+    },
+    {
+      id: 'backoffice-bpo-ops',
+      cat: 'backoffice_bpo',
+      badge: 'GLOBAL BACK-OFFICE OPERATIONS',
+      icon: <Workflow size={32} color="#d97706" />,
+      image: '/finance_accounting.png',
+      title: 'Global Back-Office Operations, Digital Transaction Processing & Catalog Management',
+      desc: 'Streamline mission-critical transactional workflows with speed, accuracy, and operational rigor. We manage complex data entry, order-to-cash processing, procurement administration, digital content moderation, and enterprise catalog enrichment.',
+      features: [
+        'Automated & Human-in-the-Loop Invoice Processing, Purchase Order Matching & Three-Way Reconciliations',
+        'High-Volume Data Extraction, Document Cleansing, Deduplication & Data Migration Audits',
+        'E-Commerce Product Catalog Management, Taxonomy Classification & Multi-Channel SKU Enrichment',
+        'Digital Content Moderation: Multilingual Text, Image & Video Compliance Review',
+        'Customer Account Servicing, Order Tracking, Dispute Resolution & Exception Handling',
+        'Continuous Quality Assurance (QA) with Six Sigma Defect Tracking & Root-Cause Audits',
+      ],
+      deliverables: '99.85% data accuracy benchmark, 24-hour SLA turnaround for standard batches, and guaranteed scalability during seasonal volume surges.',
+      roiTag: '99.85% Processing Accuracy',
+    },
+    {
       id: 'digital-marketing-growth',
       cat: 'marketing',
       badge: 'HIGH-VELOCITY GROWTH MARKETING & 8D MOTION',
       icon: <BarChart3 size={32} color="#0284c7" />,
       image: '/images/martech_3d_engine.jpg',
-      title: 'Performance Marketing, Generative Engine Optimization (GEO/AEO) & 8D Motion Commercials',
-      desc: 'Full-funnel client acquisition marketing combining multi-channel programmatic ad buying, high-converting direct-response copywriting, 3D CGI commercial video, 8D spatial binaural audio, and advanced entity schema optimization for AI search engines.',
+      title: 'Performance Marketing, Generative Engine Optimization (GEO/AEO) & 3D/8D Motion Studio',
+      desc: 'Next-generation programmatic acquisition and brand acceleration. We combine high-converting multi-channel ad funnels (Meta, Google, LinkedIn) with cutting-edge 3D real-human cinematic motion, 8D spatial audio, and Generative Engine Optimization (GEO) to dominate AI search surfaces.',
       features: [
-        'Multi-Touch Paid Acquisition (Meta Ads, Google Performance Max, LinkedIn B2B)',
+        'Multi-Channel Performance Ad Campaigns (Meta Ads, Google Search/Performance Max & LinkedIn B2B)',
         'Generative Engine Optimization (GEO) & Answer Engine Optimization (AEO) for ChatGPT, Perplexity & Gemini',
         'Cinema-Grade 3D Product Motion, CGI Commercial Animation & 8D Spatial Audio',
         'Conversion Rate Optimization (CRO), Multi-Variant Landing Page Funnels & Heatmap Audits',
@@ -127,76 +271,23 @@ export default function Services({ onOpenModal }) {
       roiTag: '5.2x Average ROAS • Next-Gen AEO/GEO',
     },
     {
-      id: 'sap-s4hana-migration',
-      cat: 'sap',
-      badge: 'ENTERPRISE SAP PRACTICE',
-      icon: <Layers size={32} color="#0052cc" />,
-      image: '/images/sap_cloud_mesh.jpg',
-      title: 'SAP S/4HANA Transformation, Cloud Migration & Greenfield/Brownfield Deployments',
-      desc: 'End-to-end enterprise SAP digital core transformations: SAP ECC 6.0 migration to SAP S/4HANA Cloud (Public & Private Edition), Central Finance (cFin) consolidation, automated code remediation, and business process re-engineering for global corporations.',
+      id: 'global-accounting-payroll',
+      cat: 'accounting',
+      badge: 'CORPORATE FINANCE & TAX',
+      icon: <Briefcase size={32} color="#0284c7" />,
+      image: '/finance_accounting.png',
+      title: 'Global Accounting, US GAAP/IFRS Bookkeeping, AP/AR Management & Tax Filings',
+      desc: 'Full-service outsourced corporate accounting, accounts payable/receivable cycles, multi-currency ledger management, bank reconciliations, and statutory direct/indirect tax compliance for fast-growing global corporations.',
       features: [
-        'Greenfield, Brownfield & Selective Data Transition (SDT) to SAP S/4HANA',
-        'SAP Central Finance (cFin) Integration & Universal Journal (ACDOCA) Setup',
-        'SAP Readiness Assessment, Custom Code Remediation & Dual-Maintenance',
-        'SAP S/4HANA Embedded Analytics, Real-Time Financial Close & KPI Dashboards',
-        'Cloud Infrastructure Deployment on AWS, Microsoft Azure & Google Cloud (GCP)',
+        'Full-Cycle General Ledger Accounting & Monthly Financial Close Management',
+        'Accounts Payable (AP) Automation: Vendor Onboarding, Invoice Validation & Payment Batch Processing',
+        'Accounts Receivable (AR) Optimization: Invoicing, Collections Tracking & Aging Analysis',
+        'Multi-Currency Bank & Credit Card Reconciliations (QuickBooks, Xero, NetSuite & SAP)',
+        'US GAAP, IFRS & Indian AS Compliance with Audit-Ready Working Paper Preparation',
+        'Payroll Processing, Statutory Tax Deductions (TDS, PF, ESIC) & GST/Sales Tax Return Filings',
       ],
-      deliverables: 'Accelerated 4-6 month cutover roadmap, 65% faster financial close cycles, and 100% data fidelity.',
-      roiTag: '65% Month-End Close Acceleration',
-    },
-    {
-      id: 'sap-functional-modules',
-      cat: 'sap',
-      badge: 'SAP FUNCTIONAL EXCELLENCE',
-      icon: <CheckCircle2 size={32} color="#1d4ed8" />,
-      image: '/it_services.png',
-      title: 'SAP Functional Consulting (FICO, MM, SD, PP, QM & SuccessFactors)',
-      desc: 'Deep-domain SAP functional configuration and optimization: Order-to-Cash (O2C), Procure-to-Pay (P2P), Record-to-Report (R2R), Plan-to-Produce (P2P), and Hire-to-Retire (H2R) workflows aligned with global industry best practices.',
-      features: [
-        'SAP FICO: New General Ledger, Multi-Currency AP/AR, Asset Accounting & CO-PA',
-        'SAP MM & Sourcing: Material Requirements Planning (MRP Live), Inventory & P2P',
-        'SAP SD: Sales Order Processing, Pricing Procedure, Billing & Global Trade Services',
-        'SAP PP & QM: Discrete/Repetitive Manufacturing, Shop Floor Control & Inspections',
-        'SAP HCM & SuccessFactors: Employee Central, Global Payroll & Performance Management',
-      ],
-      deliverables: 'Comprehensive business blueprinting, automated workflow approval routing, and certified module consultants.',
-      roiTag: 'Certified SAP Module Specialists',
-    },
-    {
-      id: 'sap-btp-abap',
-      cat: 'sap',
-      badge: 'SAP TECHNICAL ARCHITECTURE',
-      icon: <Cpu size={32} color="#0284c7" />,
-      image: '/workforce_team.png',
-      title: 'SAP BTP, ABAP on HANA & Fiori UI5 Cloud Engineering',
-      desc: 'Modern cloud-native SAP extensibility on SAP Business Technology Platform (BTP): Core Data Services (CDS) Views, RESTful Application Programming (RAP), OData microservices, and consumer-grade SAP Fiori / SAPUI5 responsive applications.',
-      features: [
-        'SAP Business Technology Platform (BTP) Integration Suite & Cloud Foundry',
-        'ABAP on HANA, Core Data Services (CDS) Views & Virtual Data Models (VDM)',
-        'RESTful Application Programming (RAP) & Cloud Application Programming (CAP)',
-        'Custom SAP Fiori / SAPUI5 Mobile-First Apps & Launchpad Personalization',
-        'SAP Cloud Connector, Third-Party REST/GraphQL Integrations & Event Mesh',
-      ],
-      deliverables: 'Clean-core architecture, decoupled microservices, and 40% reduction in custom maintenance overhead.',
-      roiTag: 'Clean Core BTP Architecture',
-    },
-    {
-      id: 'sap-basis-ams',
-      cat: 'sap',
-      badge: '24/7 MANAGED SAP BASIS',
-      icon: <ShieldCheck size={32} color="#10b981" />,
-      image: '/global_delivery.png',
-      title: 'SAP BASIS Administration, Security, GRC & 24/7 AMS Support',
-      desc: 'Enterprise-grade SAP BASIS support, SAP HANA database tuning, high availability, disaster recovery failover, Support Package Stack (SPS) patching, and ITIL-aligned 24/7 L1-L3 Application Management Services (AMS).',
-      features: [
-        'SAP HANA In-Memory Database Administration, Backup/Recovery & Optimization',
-        'SAP System Copy, OS/DB Cloud Migration & Homogeneous/Heterogeneous Refreshes',
-        'SAP Security, Authorizations, GRC Access Control & Role Engineering Auditing',
-        '24/7 Follow-The-Sun L1/L2/L3 Ticket Resolution & Incident Management',
-        'Automated Testing, EarlyWatch Alert Analysis & Continuous SLA Optimization',
-      ],
-      deliverables: '99.98% SAP system uptime SLA, <15 minute critical P1 incident response, and proactive tuning.',
-      roiTag: '99.98% System Uptime SLA',
+      deliverables: 'Sub-5-day monthly financial close, 100% on-time statutory tax filings, and CPA-reviewed management reporting packages.',
+      roiTag: 'Sub-5-Day Monthly Close',
     },
     {
       id: 'hrms-software',
@@ -328,7 +419,7 @@ export default function Services({ onOpenModal }) {
               marginBottom: '1.25rem',
             }}
           >
-            <Sparkles size={14} /> Full-Spectrum IT &amp; BPO Catalog (65+ Services)
+            <Sparkles size={14} /> Full-Spectrum Enterprise Services Catalog (70+ Services)
           </div>
           <h1
             style={{
@@ -339,7 +430,7 @@ export default function Services({ onOpenModal }) {
               marginBottom: '1.25rem',
             }}
           >
-            Enterprise Services &amp; <span className="gradient-text-cyber">Global Delivery Pods</span>
+            Universal Enterprise Services &amp; <span className="gradient-text-cyber">Global Delivery Pods</span>
           </h1>
           <p
             style={{
@@ -350,8 +441,8 @@ export default function Services({ onOpenModal }) {
               lineHeight: '1.7',
             }}
           >
-            From <strong>24/7 Application Support Services (AMS)</strong>, <strong>International Voice Process (US/UK/AUS)</strong>, 
-            and <strong>Domestic Pan-India Multilingual Voice Care</strong> to <strong>SAP S/4HANA Migrations</strong> and <strong>Performance Marketing</strong> — explore our end-to-end delivery framework.
+            From <strong>24/7 Application Support (AMS)</strong>, <strong>Multi-Cloud &amp; DevOps</strong>, 
+            <strong>Custom Software Engineering</strong>, and <strong>AI Hyper-Automation</strong> to <strong>Global Voice Operations (US/UK/AUS &amp; Pan-India 12+ Languages)</strong> and <strong>Enterprise ERP/CRM Modernization</strong> — explore our end-to-end universal delivery framework.
           </p>
 
           <div style={{ display: 'flex', justifyContent: 'center', gap: '1rem', flexWrap: 'wrap' }}>
@@ -415,7 +506,7 @@ export default function Services({ onOpenModal }) {
               <Search size={18} color="#1d4ed8" style={{ position: 'absolute', left: '14px', top: '50%', transform: 'translateY(-50%)' }} />
               <input
                 type="text"
-                placeholder="Search across all 65+ services (e.g. Application Support, Voice, SAP, RCM, BGV)..."
+                placeholder="Search across all 70+ universal services (e.g. Cloud, Custom Software, AMS, Voice, AI, Cybersecurity, ERP, RCM, BGV)..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 style={{
@@ -665,7 +756,7 @@ export default function Services({ onOpenModal }) {
             Require a Customized Multi-Disciplinary Scope?
           </h2>
           <p style={{ color: 'rgba(255, 255, 255, 0.85)', maxWidth: '700px', margin: '0 auto 2.5rem', fontSize: '1.1rem', lineHeight: '1.7' }}>
-            Our enterprise solutions architects assemble dedicated pods combining Application Support engineers, International/Domestic Voice agents, or SAP consultants tailored to your target SLA.
+            Our enterprise solutions architects assemble dedicated pods combining Application Support engineers, Cloud &amp; DevOps specialists, Full-Stack Developers, AI engineers, or Voice &amp; BPO agents tailored to your target SLA.
           </p>
           <div style={{ display: 'flex', justifyContent: 'center', gap: '1rem', flexWrap: 'wrap' }}>
             <button onClick={onOpenModal} className="btn btn-accent btn-lg" style={{ padding: '1rem 2.5rem', fontSize: '1.05rem' }}>
