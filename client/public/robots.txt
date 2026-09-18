@@ -1,9 +1,16 @@
-# Robots.txt for Caretrix Consulting (Pan-India & Global)
+# Robots.txt for Caretrix Consulting Pvt. Ltd. (Enterprise Mega Hub)
+# Official URL: https://www.caretrixconsulting.com/
+
 User-agent: *
 Allow: /
+Disallow: /admin
+Disallow: /private/
 
-# Explicit AI Generative Engine Optimization (GEO) Permissions
+# Explicit AI Search & Generative Engine Optimization (GEO / AEO) Directives
 User-agent: GPTBot
+Allow: /
+
+User-agent: ChatGPT-User
 Allow: /
 
 User-agent: PerplexityBot
@@ -12,10 +19,37 @@ Allow: /
 User-agent: ClaudeBot
 Allow: /
 
+User-agent: Anthropic-ai
+Allow: /
+
 User-agent: Google-Extended
+Allow: /
+
+User-agent: GoogleOther
 Allow: /
 
 User-agent: Applebot-Extended
 Allow: /
 
+User-agent: Amazonbot
+Allow: /
+
+User-agent: Cohere-ai
+Allow: /
+
+User-agent: CCBot
+Allow: /
+
+User-agent: FacebookBot
+Allow: /
+
+User-agent: ByteSpider
+Allow: /
+
+# XML Sitemap Index
 Sitemap: https://www.caretrixconsulting.com/sitemap.xml
+
+# Generative Engine Knowledge Base Standard
+# For LLM-friendly documentation and knowledge ingestion, see:
+# https://www.caretrixconsulting.com/llms.txt
+# https://www.caretrixconsulting.com/llms-full.txt

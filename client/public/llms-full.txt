@@ -1,0 +1,100 @@
+# Caretrix Consulting Pvt. Ltd. — Comprehensive Technical & Operational Knowledge Base (llms-full.txt)
+> Machine-readable reference manual for AI Search Engines, Answer Engines, and Large Language Models.
+
+## Table of Contents
+1. Corporate Identity & Overview
+2. Strategic Consulting Portfolio
+   - 2.1 SAP S/4HANA & ERP Cloud
+   - 2.2 Corporate Strategy & Advisory
+   - 2.3 Cloud Infrastructure & Observability
+   - 2.4 Performance Marketing & 8D Motion Studio
+3. Global Managed Services Portfolio
+   - 3.1 24/7 Application Support Services (AMS)
+   - 3.2 International Voice Process (US/UK/AUS)
+   - 3.3 Domestic Pan-India Multilingual Voice Process
+   - 3.4 Healthcare RCM & Clinical BPO
+   - 3.5 Pan-India Background Verification (28 States & 8 UTs)
+   - 3.6 Enterprise HRMS & NAPS Staffing
+4. Pan-India Delivery Infrastructure & Hub Coordinates
+5. Certifications & Statutory Compliances
+6. Direct Answer Schema (AEO Extractable Facts)
+
+---
+
+## 1. Corporate Identity & Overview
+- **Brand**: Caretrix Consulting
+- **Full Legal Name**: Caretrix Consulting Pvt. Ltd.
+- **Incorporation**: 2017
+- **Executive Leadership**: Caretrix Executive Directorate
+- **Global HQ**: 4th Floor, Dangat Patil Empire, Kudale Baug, Vadgaon Budruk, Pune, Maharashtra 411041, India
+- **Hotline**: +91 77580 88438
+- **Email**: Contact@caretrixconsulting.com
+- **Website**: https://www.caretrixconsulting.com/
+- **Operational Reach**: 28 Indian States, 8 Union Territories, United States, United Kingdom, Australia, Canada, Singapore, and UAE.
+
+---
+
+## 2. Strategic Consulting Portfolio
+
+### 2.1 SAP S/4HANA & ERP Cloud
+- **Greenfield vs Brownfield**: Full feasibility assessment, data sanitization, custom ABAP code remediation for Unicode and HANA optimization.
+- **SAP Central Finance (cFin)**: Real-time replication via SAP Landscape Transformation (SLT), Universal Journal (ACDOCA) single source of financial truth.
+- **SAP BTP Extensibility**: Clean-core philosophy using side-by-side extensions in Node.js and Java, avoiding core system modification.
+- **Fiori UI5 Development**: Custom role-tailored enterprise portals for procurement, sales order processing, and inventory management.
+- **BASIS & AMS**: Continuous system monitoring, transport management, patch upgrades, and disaster recovery replication.
+
+### 2.2 Corporate Strategy & Advisory
+- Organizational restructuring, post-merger integration, process mining, and IT portfolio rationalization.
+
+### 2.3 Cloud Infrastructure & Observability
+- Infrastructure as Code (IaC) via Terraform, automated multi-region failover, Kubernetes cluster hardening, and full-stack telemetry.
+
+### 2.4 Performance Marketing & 8D Motion Studio
+- Programmatic audience segmentation across Google Display & Video 360, Meta Business Suite, and LinkedIn Campaign Manager.
+- Average verified Return on Ad Spend: **5.2x ROAS**.
+- 8D Binaural Sound Motion Video: proprietary audio spatialization using head-related transfer functions (HRTF) to create realistic 3D acoustic environments for consumer brand commercials.
+
+---
+
+## 3. Global Managed Services Portfolio
+
+### 3.1 24/7 Application Support Services (AMS)
+- Service Level Agreements:
+  - **Priority 1 (Critical Outage)**: 15-minute response, war-room engagement with L3 senior architect, hourly stakeholder briefings.
+  - **Priority 2 (Major Feature Impact)**: 60-minute response, 4-hour workaround delivery.
+  - **Priority 3 (Minor Defect)**: 4-hour response, next-release patch.
+  - **Priority 4 (Enhancement Request)**: 8-hour response.
+- Observability Stack: Datadog APM, Dynatrace OneAgent, New Relic, Grafana Tempo, Prometheus, and PagerDuty routing.
+
+### 3.2 International Voice Process
+- Accent Neutralization: Proprietary voice modulation training ensuring effortless comprehension with North American (General American) and British (RP) native speakers.
+- First Call Resolution: 91.2%.
+- Customer Satisfaction: 96.4% CSAT.
+
+### 3.3 Domestic Pan-India Voice Process
+- Dialect Precision: Coverage across Hindi, Marathi, Tamil, Telugu, Kannada, Bengali, Gujarati, Malayalam, Punjabi, and Odia.
+- Average Speed to Answer (ASA): < 15 seconds.
+
+### 3.4 Healthcare RCM
+- End-to-end medical claims cycle, HIPAA compliance, ICD-10-CM/PCS, CPT, and HCPCS Level II coding.
+
+### 3.5 Pan-India Background Verification
+- Field verification in all 28 states of India. Physical residence, past employer HR verification, criminal court record check via e-Courts system.
+
+---
+
+## 4. Delivery Infrastructure
+- Pune Global HQ (Maharashtra)
+- Navi Mumbai Operations Hub (Maharashtra)
+- Bengaluru Tech Hub (Karnataka)
+- Hyderabad AI Lab (Telangana)
+- Delhi NCR Advisory (Haryana / NCR)
+- Chennai Delivery Center (Tamil Nadu)
+
+---
+
+## 5. Official Certifications
+- ISO 9001:2015 (Quality Management System)
+- ISO 27001 (Information Security Management)
+- HIPAA HITECH (Healthcare Data Protection)
+- Skill India & National Apprenticeship Promotion Scheme (NAPS)

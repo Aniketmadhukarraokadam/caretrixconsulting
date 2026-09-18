@@ -1,60 +1,103 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml"
         xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
         http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
+  <!-- 1. Homepage: Enterprise Mega Hub -->
   <url>
     <loc>https://www.caretrixconsulting.com/</loc>
-    <lastmod>2026-09-16</lastmod>
+    <lastmod>2026-09-17</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.caretrixconsulting.com/" />
+    <xhtml:link rel="alternate" hreflang="en-IN" href="https://www.caretrixconsulting.com/" />
+    <xhtml:link rel="alternate" hreflang="en-US" href="https://www.caretrixconsulting.com/" />
+    <xhtml:link rel="alternate" hreflang="en-GB" href="https://www.caretrixconsulting.com/" />
+    <xhtml:link rel="alternate" hreflang="en-AU" href="https://www.caretrixconsulting.com/" />
+    <image:image>
+      <image:loc>https://www.caretrixconsulting.com/images/hero_3d_mesh.jpg</image:loc>
+      <image:title>Caretrix Consulting Global Data Fabric and Enterprise Mesh</image:title>
+      <image:caption>3D holographic visualization of Pan-India enterprise consulting nodes</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.caretrixconsulting.com/images/sap_cloud_mesh.jpg</image:loc>
+      <image:title>SAP S/4HANA Cloud and Enterprise ERP Architecture</image:title>
+      <image:caption>Holographic architectural mesh of SAP Central Finance and BTP extensions</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.caretrixconsulting.com/images/martech_3d_engine.jpg</image:loc>
+      <image:title>AI MarTech and 8D Motion Video Production Engine</image:title>
+      <image:caption>Cinema-grade 3D commercial graphics and programmatic marketing optimization</image:caption>
+    </image:image>
   </url>
+
+  <!-- 2. Services Directory: 65+ Specialized Offerings -->
   <url>
     <loc>https://www.caretrixconsulting.com/services</loc>
-    <lastmod>2026-09-16</lastmod>
+    <lastmod>2026-09-17</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.95</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.caretrixconsulting.com/services" />
+    <xhtml:link rel="alternate" hreflang="en-IN" href="https://www.caretrixconsulting.com/services" />
+    <xhtml:link rel="alternate" hreflang="en-US" href="https://www.caretrixconsulting.com/services" />
   </url>
-  <url>
-    <loc>https://www.caretrixconsulting.com/about</loc>
-    <lastmod>2026-09-16</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.85</priority>
-  </url>
-  <url>
-    <loc>https://www.caretrixconsulting.com/industries</loc>
-    <lastmod>2026-09-16</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.85</priority>
-  </url>
-  <url>
-    <loc>https://www.caretrixconsulting.com/projects</loc>
-    <lastmod>2026-09-16</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.85</priority>
-  </url>
-  <url>
-    <loc>https://www.caretrixconsulting.com/case-studies</loc>
-    <lastmod>2026-09-16</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.85</priority>
-  </url>
+
+  <!-- 3. Global & Pan-India Delivery Hubs -->
   <url>
     <loc>https://www.caretrixconsulting.com/global</loc>
-    <lastmod>2026-09-16</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.80</priority>
+    <lastmod>2026-09-17</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.90</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.caretrixconsulting.com/global" />
+    <xhtml:link rel="alternate" hreflang="en-IN" href="https://www.caretrixconsulting.com/global" />
   </url>
+
+  <!-- 4. Projects & Enterprise Case Studies -->
+  <url>
+    <loc>https://www.caretrixconsulting.com/projects</loc>
+    <lastmod>2026-09-17</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.88</priority>
+  </url>
+
+  <url>
+    <loc>https://www.caretrixconsulting.com/case-studies</loc>
+    <lastmod>2026-09-17</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.88</priority>
+  </url>
+
+  <!-- 5. Industries Served -->
+  <url>
+    <loc>https://www.caretrixconsulting.com/industries</loc>
+    <lastmod>2026-09-17</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.85</priority>
+  </url>
+
+  <!-- 6. About Us: Corporate Directorate -->
+  <url>
+    <loc>https://www.caretrixconsulting.com/about</loc>
+    <lastmod>2026-09-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
+  </url>
+
+  <!-- 7. Careers & National Apprenticeship (NAPS) -->
   <url>
     <loc>https://www.caretrixconsulting.com/careers</loc>
-    <lastmod>2026-09-16</lastmod>
+    <lastmod>2026-09-17</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.90</priority>
   </url>
+
+  <!-- 8. Contact & Instant RFP Desk -->
   <url>
     <loc>https://www.caretrixconsulting.com/contact</loc>
-    <lastmod>2026-09-16</lastmod>
+    <lastmod>2026-09-17</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.85</priority>
+    <priority>0.90</priority>
   </url>
 </urlset>
