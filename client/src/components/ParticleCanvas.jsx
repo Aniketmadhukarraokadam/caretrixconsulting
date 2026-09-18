@@ -81,20 +81,24 @@ export default function ParticleCanvas() {
     };
     document.addEventListener('visibilitychange', handleVisibility);
 
-    function animate() {
+    let lastTime = 0;
+    function animate(currentTime = 0) {
       if (!isRunning) {
         animationId = null;
         return;
       }
+      animationId = requestAnimationFrame(animate);
+      if (currentTime - lastTime < 33) return;
+      lastTime = currentTime;
+
       ctx.clearRect(0, 0, W, H);
       for (let i = 0; i < particles.length; i++) {
         particles[i].update();
         particles[i].draw();
       }
-      animationId = requestAnimationFrame(animate);
     }
 
-    animate();
+    animate(0);
     window.addEventListener('resize', resize);
 
     return () => {

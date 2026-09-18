@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, lazy, Suspense } from 'react';
 import { Link } from 'react-router-dom';
 import {
   ArrowRight,
@@ -27,9 +27,11 @@ import {
 import Interactive3DCanvas from '../components/Interactive3DCanvas';
 import TiltCard from '../components/TiltCard';
 import StatCounter from '../components/StatCounter';
-import PanIndiaAndAEOSection from '../components/PanIndiaAndAEOSection';
-import HumanMotion8DStudio from '../components/HumanMotion8DStudio';
 import { AnimasterMagneticButton } from '../components/extensions/AnimasterLib';
+
+// Lazy-load below-the-fold heavy modules to achieve sub-second FCP
+const PanIndiaAndAEOSection = lazy(() => import('../components/PanIndiaAndAEOSection'));
+const HumanMotion8DStudio = lazy(() => import('../components/HumanMotion8DStudio'));
 
 export default function Home({ onOpenModal }) {
   // Mega Hub Hero Active Pillar State: 'consulting' | 'services'
@@ -963,7 +965,9 @@ export default function Home({ onOpenModal }) {
       </section>
 
       {/* 6. Real-Human 3D 8D Motion Video Studio Demonstration */}
-      <HumanMotion8DStudio onOpenModal={onOpenModal} />
+      <Suspense fallback={<div style={{ minHeight: '300px', background: '#f8fafc' }} />}>
+        <HumanMotion8DStudio onOpenModal={onOpenModal} />
+      </Suspense>
 
       {/* 7. Real-Time Global Delivery & Delivery Centers */}
       <section className="section-py" style={{ background: '#f8fafc', borderTop: '1px solid #e2e8f0', borderBottom: '1px solid #e2e8f0' }}>
@@ -1200,7 +1204,9 @@ export default function Home({ onOpenModal }) {
       </section>
 
       {/* 9. Pan-India Business Presence & Advanced AEO/GEO Knowledge Engine */}
-      <PanIndiaAndAEOSection onOpenModal={onOpenModal} />
+      <Suspense fallback={<div style={{ minHeight: '300px', background: '#f8fafc' }} />}>
+        <PanIndiaAndAEOSection onOpenModal={onOpenModal} />
+      </Suspense>
 
       {/* 10. Full-Frame Executive Enterprise Call to Action */}
       <section
@@ -1237,7 +1243,7 @@ export default function Home({ onOpenModal }) {
               lineHeight: '1.75',
             }}
           >
-            Whether you require 24/7 Application Support Services (AMS), an International/Domestic Voice Process call center, or an end-to-end SAP S/4HANA migration pod, our leadership team is ready to deploy.
+            Whether you require 24/7 Application Support (AMS), Multi-Cloud &amp; DevOps Engineering, Custom Software Development, or Global Voice Operations, our leadership team is ready to deploy.
           </p>
 
           <div style={{ display: 'flex', justifyContent: 'center', gap: '1.25rem', flexWrap: 'wrap' }}>

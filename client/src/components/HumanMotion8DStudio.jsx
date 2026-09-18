@@ -121,7 +121,8 @@ const SERVICES_VIDEOS = [
 
 export default function HumanMotion8DStudio({ onOpenModal }) {
   const [selectedIdx, setSelectedIdx] = useState(0);
-  const [isPlaying, setIsPlaying] = useState(true);
+  const [isPlaying, setIsPlaying] = useState(false);
+  const [hasLoadedVideo, setHasLoadedVideo] = useState(false);
   const [isMuted, setIsMuted] = useState(true);
   const [isSpatial8DOn, setIsSpatial8DOn] = useState(false);
   const [azimuth, setAzimuth] = useState(0);
@@ -136,13 +137,13 @@ export default function HumanMotion8DStudio({ onOpenModal }) {
 
   // Handle Video play/pause
   useEffect(() => {
-    if (!videoRef.current) return;
+    if (!videoRef.current || !hasLoadedVideo) return;
     if (isPlaying) {
       videoRef.current.play().catch(() => {});
     } else {
       videoRef.current.pause();
     }
-  }, [isPlaying, selectedIdx]);
+  }, [isPlaying, selectedIdx, hasLoadedVideo]);
 
   // Handle 8D Spatial Audio Synth using Web Audio API
   useEffect(() => {
@@ -413,9 +414,9 @@ export default function HumanMotion8DStudio({ onOpenModal }) {
               <div style={{ position: 'relative', aspectRatio: '16/9', width: '100%', overflow: 'hidden' }}>
                 <video
                   ref={videoRef}
-                  src={activeService.videoUrl}
+                  src={hasLoadedVideo ? activeService.videoUrl : undefined}
                   poster={activeService.poster}
-                  autoPlay
+                  preload="none"
                   loop
                   muted={isMuted}
                   playsInline
@@ -426,6 +427,52 @@ export default function HumanMotion8DStudio({ onOpenModal }) {
                     display: 'block',
                   }}
                 />
+
+                {/* On-Demand Video Play Overlay */}
+                {!hasLoadedVideo && (
+                  <div
+                    onClick={() => {
+                      setHasLoadedVideo(true);
+                      setIsPlaying(true);
+                    }}
+                    style={{
+                      position: 'absolute',
+                      inset: 0,
+                      display: 'flex',
+                      flexDirection: 'column',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      background: 'rgba(15, 23, 42, 0.45)',
+                      backdropFilter: 'blur(2px)',
+                      cursor: 'pointer',
+                      zIndex: 15,
+                      transition: 'all 0.3s',
+                    }}
+                  >
+                    <div
+                      style={{
+                        width: '64px',
+                        height: '64px',
+                        borderRadius: '50%',
+                        background: 'linear-gradient(135deg, #0052cc 0%, #2563eb 100%)',
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        color: '#ffffff',
+                        boxShadow: '0 0 25px rgba(37, 99, 235, 0.6)',
+                        marginBottom: '10px',
+                      }}
+                    >
+                      <Play size={26} style={{ marginLeft: '3px' }} />
+                    </div>
+                    <span style={{ color: '#ffffff', fontSize: '0.9rem', fontWeight: 700, textShadow: '0 2px 4px rgba(0,0,0,0.8)' }}>
+                      Click to Stream 8D Demonstration
+                    </span>
+                    <span style={{ color: '#93c5fd', fontSize: '0.74rem', marginTop: '3px' }}>
+                      Fast On-Demand HD Video
+                    </span>
+                  </div>
+                )}
 
                 {/* HUD Top Bar */}
                 <div
@@ -547,7 +594,10 @@ export default function HumanMotion8DStudio({ onOpenModal }) {
                   </div>
 
                   <button
-                    onClick={() => setIsPlaying(!isPlaying)}
+                    onClick={() => {
+                      if (!hasLoadedVideo) setHasLoadedVideo(true);
+                      setIsPlaying(!isPlaying);
+                    }}
                     style={{
                       width: '42px',
                       height: '42px',

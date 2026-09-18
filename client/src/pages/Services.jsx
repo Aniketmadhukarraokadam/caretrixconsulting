@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, lazy, Suspense } from 'react';
 import {
   Cpu,
   HeartPulse,
@@ -33,7 +33,8 @@ import {
   Shield,
   Workflow,
 } from 'lucide-react';
-import HumanMotion8DStudio from '../components/HumanMotion8DStudio';
+
+const HumanMotion8DStudio = lazy(() => import('../components/HumanMotion8DStudio'));
 
 export default function Services({ onOpenModal }) {
   const [activeFilter, setActiveFilter] = useState('all');
@@ -485,7 +486,9 @@ export default function Services({ onOpenModal }) {
       </section>
 
       {/* 3. 3D 8D Real-Human Video Studio Demonstration */}
-      <HumanMotion8DStudio onOpenModal={onOpenModal} />
+      <Suspense fallback={<div style={{ minHeight: '280px', background: '#f8fafc' }} />}>
+        <HumanMotion8DStudio onOpenModal={onOpenModal} />
+      </Suspense>
 
       {/* 4. Search & Filter Bar */}
       <section
