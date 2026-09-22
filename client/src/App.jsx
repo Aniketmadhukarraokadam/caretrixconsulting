@@ -9,7 +9,7 @@ import { ToastProvider } from './components/Toast';
 // Keep Home directly imported for instant First Contentful Paint
 import Home from './pages/Home';
 
-// Lazy load all secondary routes to minimize initial bundle size
+// Lazy load secondary routes to minimize initial bundle size
 const About = lazy(() => import('./pages/About'));
 const Services = lazy(() => import('./pages/Services'));
 const Industries = lazy(() => import('./pages/Industries'));
@@ -19,9 +19,6 @@ const CaseStudies = lazy(() => import('./pages/CaseStudies'));
 const Careers = lazy(() => import('./pages/Careers'));
 const Contact = lazy(() => import('./pages/Contact'));
 const Admin = lazy(() => import('./pages/Admin'));
-const VengeanceCopilotDock = lazy(() =>
-  import('./components/extensions/VengeanceAI').then((m) => ({ default: m.VengeanceCopilotDock }))
-);
 
 function ScrollToTop() {
   const { pathname } = useLocation();
@@ -47,8 +44,8 @@ function PageLoader() {
           width: '36px',
           height: '36px',
           borderRadius: '50%',
-          border: '3px solid #e2e8f0',
-          borderTopColor: '#0052cc',
+          border: '3px solid #dde2f5',
+          borderTopColor: '#1C2280',
           animation: 'spin 0.6s linear infinite',
         }}
       />
@@ -90,9 +87,6 @@ export default function App() {
 
         <Footer onOpenModal={openModal} />
         <ConsultationModal isOpen={isModalOpen} onClose={closeModal} />
-        <Suspense fallback={null}>
-          <VengeanceCopilotDock onOpenModal={openModal} />
-        </Suspense>
       </div>
     </ToastProvider>
   );

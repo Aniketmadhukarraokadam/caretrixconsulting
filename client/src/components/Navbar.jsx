@@ -1,162 +1,832 @@
-import React, { useState } from 'react';
-import { NavLink, Link } from 'react-router-dom';
-import { Menu, X, ChevronDown, Phone, Mail, Sparkles, Briefcase, Headphones, MapPin } from 'lucide-react';
-
-const linkStyle = ({ isActive }) => ({
-  color: isActive ? '#0052cc' : '#1e293b',
-  fontWeight: isActive ? 700 : 600,
-  fontSize: '0.92rem',
-  padding: '8px 2px',
-});
+import React, { useState, useEffect, useRef } from 'react';
+import { NavLink, Link, useNavigate } from 'react-router-dom';
+import {
+  Phone,
+  Mail,
+  MapPin,
+  Send,
+  ChevronDown,
+  Menu,
+  X,
+  Bot,
+  Brain,
+  FileCode2,
+  FileSpreadsheet,
+  BookOpen,
+  FileText,
+  Printer,
+  Tablet,
+  Image as ImageIcon,
+  HeartPulse,
+  Receipt,
+  CreditCard,
+  Ban,
+  RotateCcw,
+  Search,
+  Scale,
+  Scroll,
+  Building,
+  UserCog,
+  BookCheck,
+  CircleDollarSign,
+  Users,
+  BarChart3,
+  Laptop,
+  Megaphone,
+  ShoppingCart,
+  LineChart,
+  Truck,
+  ShieldCheck,
+  FileSearch,
+  Accessibility,
+  Grid,
+  Sparkles,
+  ArrowRight,
+  ExternalLink,
+} from 'lucide-react';
 
 export default function Navbar({ onOpenModal }) {
-  const [isOpen, setIsOpen] = useState(false);
-  const [activeDropdown, setActiveDropdown] = useState(null);
+  const [isScrolled, setIsScrolled] = useState(false);
+  const [servicesOpen, setServicesOpen] = useState(false);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [mobileServicesAccordion, setMobileServicesAccordion] = useState(false);
 
-  const closeMenu = () => {
-    setIsOpen(false);
-    setActiveDropdown(null);
+  const navRef = useRef(null);
+  const timeoutRef = useRef(null);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 30) {
+        setIsScrolled(true);
+      } else {
+        setIsScrolled(false);
+      }
+    };
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  const handleMouseEnter = () => {
+    if (timeoutRef.current) clearTimeout(timeoutRef.current);
+    setServicesOpen(true);
   };
 
-  const toggleDropdown = (name) => {
-    setActiveDropdown((current) => (current === name ? null : name));
+  const handleMouseLeave = () => {
+    timeoutRef.current = setTimeout(() => {
+      setServicesOpen(false);
+    }, 200);
   };
 
-  const dropdown = (name, label, Icon, color, items) => (
-    <div style={{ position: 'relative' }}>
-      <button
-        type="button"
-        onClick={() => toggleDropdown(name)}
-        style={{
-          background: 'transparent',
-          border: 'none',
-          color: activeDropdown === name ? '#0052cc' : '#1e293b',
-          fontWeight: 600,
-          fontSize: '0.92rem',
-          display: 'inline-flex',
-          alignItems: 'center',
-          gap: '5px',
-          cursor: 'pointer',
-          padding: '8px 4px',
-        }}
-      >
-        <Icon size={16} color={color} />
-        <span>{label}</span>
-        <ChevronDown size={14} style={{ transform: activeDropdown === name ? 'rotate(180deg)' : 'none' }} />
-      </button>
-      {activeDropdown === name && (
-        <div
-          style={{
-            position: 'absolute',
-            top: '100%',
-            left: '-20px',
-            minWidth: '230px',
-            background: '#fff',
-            border: '1px solid #e2e8f0',
-            borderRadius: '12px',
-            padding: '0.6rem',
-            boxShadow: '0 20px 45px -10px rgba(15, 23, 42, 0.15)',
-            zIndex: 2000,
-          }}
-        >
-          {items.map((item) => (
-            <Link
-              key={item}
-              to="/services"
-              onClick={closeMenu}
-              style={{ display: 'block', padding: '9px 10px', color: '#334155', fontSize: '0.86rem', borderRadius: '7px' }}
-            >
-              {item}
-            </Link>
-          ))}
-        </div>
-      )}
-    </div>
-  );
+  const closeDropdown = () => {
+    if (timeoutRef.current) clearTimeout(timeoutRef.current);
+    setServicesOpen(false);
+    setMobileMenuOpen(false);
+  };
+
+  const navigateToService = (category) => {
+    closeDropdown();
+    navigate(`/services?cat=${category}`);
+  };
 
   return (
-    <header
-      style={{
-        position: 'sticky',
-        top: 0,
-        zIndex: 1000,
-        background: 'rgba(255, 255, 255, 0.98)',
-        backdropFilter: 'blur(20px)',
-        borderBottom: '1px solid #e2e8f0',
-        boxShadow: '0 4px 20px -2px rgba(15, 23, 42, 0.05)',
-        width: '100%',
-      }}
-    >
-      <div style={{ background: '#0a192f', color: '#cbd5e1', fontSize: '0.78rem', padding: '6px 0' }}>
-        <div className="container-fluid" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '0.75rem' }}>
-          <span style={{ color: '#e2e8f0' }}>
-            <strong>Strategic Consulting</strong> &amp; <strong>24/7 Global Managed Services</strong> across 28 Indian States &amp; 8 UTs
-          </span>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '1.2rem', flexWrap: 'wrap' }}>
-            <a href="tel:+917758088438" style={{ display: 'flex', alignItems: 'center', gap: '5px', color: '#38bdf8', fontWeight: 600 }}>
-              <Phone size={12} /> +91 77580 88438
-            </a>
-            <a href="mailto:Contact@caretrixconsulting.com" style={{ display: 'flex', alignItems: 'center', gap: '5px', color: '#cbd5e1' }}>
-              <Mail size={12} /> Contact@caretrixconsulting.com
-            </a>
-          </div>
-        </div>
-      </div>
-
-      <div className="container-fluid" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', height: '74px' }}>
-        <Link to="/" onClick={closeMenu} style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
-          <img src="/logo.png" alt="Caretrix Consulting" style={{ height: '44px', width: 'auto', objectFit: 'contain' }} />
-          <div>
-            <div style={{ fontFamily: 'var(--font-display)', fontWeight: 800, fontSize: '1.3rem', letterSpacing: '-0.02em', color: '#123d6b', lineHeight: 1.1 }}>
-              CARETRIX
+    <div id="site-header" style={{ position: 'sticky', top: 0, zIndex: 1030, width: '100%' }}>
+      {/* ── TOPBAR ────────────────────────────────────── */}
+      <div
+        className="topbar"
+        style={{
+          background: 'linear-gradient(90deg, #080B1A 0%, #111536 100%)',
+          padding: '9px 0',
+          fontSize: '12.5px',
+          fontWeight: 500,
+          color: 'rgba(255, 255, 255, 0.75)',
+          borderBottom: '1px solid rgba(255, 255, 255, 0.06)',
+        }}
+      >
+        <div className="container">
+          <div
+            style={{
+              display: 'flex',
+              justifyContent: 'space-between',
+              alignItems: 'center',
+              flexWrap: 'wrap',
+              gap: '10px',
+            }}
+          >
+            <div style={{ display: 'flex', alignItems: 'center', gap: '14px', flexWrap: 'wrap' }}>
+              <span
+                style={{
+                  background: '#CC2228',
+                  color: '#ffffff',
+                  fontSize: '10px',
+                  fontWeight: 800,
+                  padding: '3px 12px',
+                  borderRadius: '100px',
+                  letterSpacing: '1px',
+                  textTransform: 'uppercase',
+                }}
+              >
+                Caretrix Consulting Private Limited
+              </span>
+              <span style={{ width: '1px', height: '14px', background: 'rgba(255,255,255,0.15)' }} />
+              <a
+                href="mailto:support@caretrixconsulting.com"
+                style={{ display: 'inline-flex', alignItems: 'center', gap: '6px', color: 'rgba(255,255,255,0.8)' }}
+              >
+                <Mail size={12} color="#CC2228" /> support@caretrixconsulting.com
+              </a>
+              <span style={{ width: '1px', height: '14px', background: 'rgba(255,255,255,0.15)' }} />
+              <a
+                href="tel:+918308906690"
+                style={{ display: 'inline-flex', alignItems: 'center', gap: '6px', color: 'rgba(255,255,255,0.8)' }}
+              >
+                <Phone size={12} color="#CC2228" /> +91-8308906690
+              </a>
+              <span style={{ width: '1px', height: '14px', background: 'rgba(255,255,255,0.15)' }} />
+              <span style={{ display: 'inline-flex', alignItems: 'center', gap: '6px', color: 'rgba(255,255,255,0.7)' }}>
+                <MapPin size={12} color="#CC2228" /> Pune HQ &amp; Bengaluru, India | USA
+              </span>
             </div>
-            <span style={{ fontSize: '0.66rem', fontWeight: 700, letterSpacing: '1.5px', color: '#64748b', textTransform: 'uppercase' }}>
-              Consulting &amp; Managed Services
-            </span>
+
+            <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+              <span style={{ fontSize: '11px', color: '#10b981', fontWeight: 600 }}>
+                ● ISO 27001 Certified &bull; HIPAA Compliant
+              </span>
+            </div>
           </div>
-        </Link>
-
-        <nav className="desktop-nav" style={{ display: 'flex', alignItems: 'center', gap: '1.5rem' }}>
-          <NavLink to="/" end onClick={closeMenu} style={linkStyle}>Home</NavLink>
-          {dropdown('consulting', 'Consulting', Briefcase, '#0052cc', ['Cloud Architecture & DevOps', 'Custom Enterprise Software', 'Enterprise ERP & CRM', 'AI & Automation'])}
-          {dropdown('services', 'Services', Headphones, '#059669', ['Application Support Services', 'International Voice Process', 'Healthcare Operations', 'Background Verification'])}
-          {dropdown('locations', 'Delivery Hubs', MapPin, '#0052cc', ['Pune Global HQ', 'Navi Mumbai Operations', 'Bengaluru Tech Center', 'Hyderabad AI Lab'])}
-          <NavLink to="/about" onClick={closeMenu} style={linkStyle}>Company</NavLink>
-          <NavLink to="/contact" onClick={closeMenu} style={linkStyle}>Contact</NavLink>
-        </nav>
-
-        <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
-          <button
-            type="button"
-            onClick={() => { closeMenu(); if (onOpenModal) onOpenModal(); }}
-            className="btn btn-primary"
-            style={{ padding: '0.65rem 1.4rem', fontSize: '0.88rem', fontWeight: 700, borderRadius: '8px', display: 'inline-flex', alignItems: 'center', gap: '6px' }}
-          >
-            <Sparkles size={14} /> <span>Initiate RFP</span>
-          </button>
-          <button
-            type="button"
-            onClick={() => setIsOpen(!isOpen)}
-            className="mobile-toggle"
-            aria-label="Toggle navigation menu"
-            style={{ background: '#f1f5f9', border: '1px solid #cbd5e1', borderRadius: '8px', padding: '8px', color: '#0f172a', cursor: 'pointer' }}
-          >
-            {isOpen ? <X size={22} /> : <Menu size={22} />}
-          </button>
         </div>
       </div>
 
-      {isOpen && (
-        <div className="mobile-nav" style={{ background: '#fff', borderTop: '1px solid #e2e8f0', padding: '1rem 1.5rem 1.5rem' }}>
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '0.25rem' }}>
-            <Link to="/" onClick={closeMenu} style={{ padding: '10px 0', fontSize: '1.05rem', fontWeight: 700, color: '#0f172a' }}>Home</Link>
-            <Link to="/services" onClick={closeMenu} style={{ padding: '10px 0', fontSize: '1.05rem', fontWeight: 700, color: '#0052cc' }}>Consulting &amp; Services</Link>
-            <Link to="/global" onClick={closeMenu} style={{ padding: '10px 0', fontSize: '1.05rem', fontWeight: 700, color: '#0f172a' }}>Delivery Hubs</Link>
-            <Link to="/about" onClick={closeMenu} style={{ padding: '10px 0', fontSize: '1.05rem', fontWeight: 700, color: '#0f172a' }}>Company</Link>
-            <Link to="/contact" onClick={closeMenu} style={{ padding: '10px 0', fontSize: '1.05rem', fontWeight: 700, color: '#0f172a' }}>Contact Us</Link>
+      {/* ── MAIN FLOATING NAVBAR ────────────────────────────────────── */}
+      <nav
+        ref={navRef}
+        style={{
+          background: isScrolled ? 'rgba(255, 255, 255, 0.98)' : 'rgba(255, 255, 255, 0.94)',
+          backdropFilter: 'blur(20px)',
+          WebkitBackdropFilter: 'blur(20px)',
+          border: '1px solid rgba(28, 34, 128, 0.08)',
+          boxShadow: isScrolled
+            ? '0 15px 45px rgba(28, 34, 128, 0.12)'
+            : '0 10px 35px rgba(28, 34, 128, 0.06)',
+          width: '96%',
+          maxWidth: '1740px',
+          margin: isScrolled ? '6px auto 10px' : '12px auto 14px',
+          borderRadius: '18px',
+          transition: 'all 0.3s ease',
+          position: 'relative',
+        }}
+      >
+        <div
+          className="container-fluid"
+          style={{
+            minHeight: '68px',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'space-between',
+            padding: '0 20px',
+          }}
+        >
+          {/* Brand Logo */}
+          <Link
+            to="/"
+            onClick={closeDropdown}
+            style={{ display: 'flex', alignItems: 'center', gap: '10px' }}
+          >
+            <img
+              src="/logo.png"
+              alt="Caretrix Consulting"
+              style={{
+                height: '48px',
+                width: 'auto',
+                objectFit: 'contain',
+                transition: 'all 0.3s ease',
+              }}
+            />
+          </Link>
+
+          {/* Desktop Nav Items */}
+          <div
+            className="d-desktop"
+            style={{
+              display: 'flex',
+              alignItems: 'center',
+              gap: '6px',
+            }}
+          >
+            <NavLink
+              to="/"
+              className={({ isActive }) =>
+                `nav-link-item ${isActive ? 'active' : ''}`
+              }
+            >
+              Home
+            </NavLink>
+
+            <NavLink
+              to="/about"
+              className={({ isActive }) =>
+                `nav-link-item ${isActive ? 'active' : ''}`
+              }
+            >
+              About
+            </NavLink>
+
+            {/* Services Dropdown Item */}
+            <div
+              style={{ position: 'relative' }}
+              onMouseEnter={handleMouseEnter}
+              onMouseLeave={handleMouseLeave}
+            >
+              <button
+                type="button"
+                onClick={() => setServicesOpen(!servicesOpen)}
+                className={`nav-link-item ${servicesOpen ? 'active' : ''}`}
+                style={{
+                  background: 'none',
+                  border: 'none',
+                  cursor: 'pointer',
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: '4px',
+                }}
+              >
+                Services <ChevronDown size={14} style={{ transform: servicesOpen ? 'rotate(180deg)' : 'none', transition: 'transform 0.2s' }} />
+              </button>
+
+              {/* 4-Column Mega Menu Dropdown */}
+              {servicesOpen && (
+                <div
+                  style={{
+                    position: 'absolute',
+                    top: '100%',
+                    left: '50%',
+                    transform: 'translateX(-50%)',
+                    width: '960px',
+                    maxWidth: '92vw',
+                    background: '#ffffff',
+                    borderRadius: '16px',
+                    boxShadow: '0 25px 60px rgba(13, 16, 53, 0.18), 0 0 0 1px rgba(28, 34, 128, 0.08)',
+                    padding: '24px',
+                    zIndex: 1050,
+                    animation: 'dropFade 0.2s ease',
+                  }}
+                >
+                  <div
+                    style={{
+                      display: 'grid',
+                      gridTemplateColumns: 'repeat(4, 1fr)',
+                      gap: '20px',
+                    }}
+                  >
+                    {/* Column 1: AI & Automations + Publishing */}
+                    <div>
+                      <div className="mega-col-header" style={{ color: '#CC2228' }}>
+                        <Brain size={14} /> AI &amp; Automations
+                      </div>
+                      <div className="mega-links-group">
+                        <Link to="/services?cat=ai_automation" onClick={closeDropdown} className="mega-item">
+                          <Bot size={13} color="#CC2228" /> AI Automation Services
+                        </Link>
+                        <Link to="/services?cat=ai_automation" onClick={closeDropdown} className="mega-item">
+                          <FileCode2 size={13} color="#CC2228" /> Agentic AI Workflows
+                        </Link>
+                        <Link to="/services?cat=ai_automation" onClick={closeDropdown} className="mega-item">
+                          <FileText size={13} color="#CC2228" /> Intelligent Doc Processing
+                        </Link>
+                        <Link to="/services?cat=data_annotation" onClick={closeDropdown} className="mega-item">
+                          <FileSpreadsheet size={13} color="#CC2228" /> AI Data Annotation
+                        </Link>
+                      </div>
+
+                      <div className="mega-col-header mt-3">
+                        <BookOpen size={14} /> Publishing
+                      </div>
+                      <div className="mega-links-group">
+                        <Link to="/services?cat=publishing" onClick={closeDropdown} className="mega-item">
+                          <BookOpen size={13} /> Publishing Services
+                        </Link>
+                        <Link to="/services?cat=publishing" onClick={closeDropdown} className="mega-item">
+                          <FileText size={13} /> Editorial Services
+                        </Link>
+                        <Link to="/services?cat=publishing" onClick={closeDropdown} className="mega-item">
+                          <Printer size={13} /> Digital Prepress
+                        </Link>
+                        <Link to="/services?cat=publishing" onClick={closeDropdown} className="mega-item">
+                          <Tablet size={13} /> eBook &amp; ePUB3 Conversion
+                        </Link>
+                        <Link to="/services?cat=publishing" onClick={closeDropdown} className="mega-item">
+                          <ImageIcon size={13} /> Alt Text &amp; Accessibility
+                        </Link>
+                      </div>
+                    </div>
+
+                    {/* Column 2: Healthcare BPO + Real Estate */}
+                    <div>
+                      <div className="mega-col-header" style={{ color: '#0284C7' }}>
+                        <HeartPulse size={14} /> Health Care
+                      </div>
+                      <div className="mega-links-group">
+                        <Link to="/services?cat=healthcare" onClick={closeDropdown} className="mega-item">
+                          <HeartPulse size={13} color="#0284C7" /> Medical Coding (ICD-10)
+                        </Link>
+                        <Link to="/services?cat=healthcare" onClick={closeDropdown} className="mega-item">
+                          <Receipt size={13} color="#0284C7" /> Medical Billing
+                        </Link>
+                        <Link to="/services?cat=healthcare" onClick={closeDropdown} className="mega-item">
+                          <CreditCard size={13} color="#0284C7" /> Payment Posting
+                        </Link>
+                        <Link to="/services?cat=healthcare" onClick={closeDropdown} className="mega-item">
+                          <Ban size={13} color="#0284C7" /> Denial Management
+                        </Link>
+                        <Link to="/services?cat=healthcare" onClick={closeDropdown} className="mega-item">
+                          <RotateCcw size={13} color="#0284C7" /> AR Recovery
+                        </Link>
+                      </div>
+
+                      <div className="mega-col-header mt-3">
+                        <Building size={14} /> Real Estate
+                      </div>
+                      <div className="mega-links-group">
+                        <Link to="/services?cat=realestate" onClick={closeDropdown} className="mega-item">
+                          <Search size={13} /> CAM Audit Services
+                        </Link>
+                        <Link to="/services?cat=realestate" onClick={closeDropdown} className="mega-item">
+                          <Scale size={13} /> CAM Reconciliation
+                        </Link>
+                        <Link to="/services?cat=realestate" onClick={closeDropdown} className="mega-item">
+                          <Scroll size={13} /> Lease Administration
+                        </Link>
+                        <Link to="/services?cat=realestate" onClick={closeDropdown} className="mega-item">
+                          <FileText size={13} /> Lease Abstraction
+                        </Link>
+                        <Link to="/services?cat=realestate" onClick={closeDropdown} className="mega-item">
+                          <CircleDollarSign size={13} /> Property Accounting
+                        </Link>
+                      </div>
+                    </div>
+
+                    {/* Column 3: Accounting & HR Software + IT & Digital */}
+                    <div>
+                      <div className="mega-col-header" style={{ color: '#E11D48' }}>
+                        <UserCog size={14} /> Accounting &amp; HR Software
+                      </div>
+                      <div className="mega-links-group">
+                        <Link
+                          to="/services?cat=hrms"
+                          onClick={closeDropdown}
+                          className="mega-item fw-bold"
+                          style={{
+                            background: 'rgba(225, 29, 72, 0.08)',
+                            color: '#E11D48',
+                            borderRadius: '8px',
+                            padding: '6px 10px',
+                          }}
+                        >
+                          <UserCog size={13} color="#E11D48" /> CaretrixHRMS
+                          <span
+                            style={{
+                              background: '#E11D48',
+                              color: '#fff',
+                              fontSize: '9px',
+                              padding: '2px 5px',
+                              borderRadius: '4px',
+                              marginLeft: 'auto',
+                            }}
+                          >
+                            AI SOFTWARE
+                          </span>
+                        </Link>
+                        <Link to="/services?cat=accounting" onClick={closeDropdown} className="mega-item">
+                          <BookCheck size={13} /> Bookkeeping
+                        </Link>
+                        <Link to="/services?cat=accounting" onClick={closeDropdown} className="mega-item">
+                          <CircleDollarSign size={13} /> Payroll Processing
+                        </Link>
+                        <Link to="/services?cat=staffing" onClick={closeDropdown} className="mega-item">
+                          <Users size={13} /> Manpower &amp; Staffing
+                        </Link>
+                        <Link to="/services?cat=accounting" onClick={closeDropdown} className="mega-item">
+                          <BarChart3 size={13} /> Financial Reporting
+                        </Link>
+                      </div>
+
+                      <div className="mega-col-header mt-3">
+                        <Laptop size={14} /> IT &amp; Digital
+                      </div>
+                      <div className="mega-links-group">
+                        <Link to="/services?cat=customsoftware" onClick={closeDropdown} className="mega-item">
+                          <Laptop size={13} /> Software Solutions
+                        </Link>
+                        <Link to="/services?cat=digitalmarketing" onClick={closeDropdown} className="mega-item">
+                          <Megaphone size={13} /> Digital Marketing &amp; SEO
+                        </Link>
+                        <Link to="/services?cat=customsoftware" onClick={closeDropdown} className="mega-item">
+                          <ShoppingCart size={13} /> E-Commerce Solutions
+                        </Link>
+                        <Link to="/services?cat=customsoftware" onClick={closeDropdown} className="mega-item">
+                          <LineChart size={13} /> Data Analytics
+                        </Link>
+                      </div>
+                    </div>
+
+                    {/* Column 4: More Services + View All */}
+                    <div>
+                      <div className="mega-col-header">
+                        <Grid size={14} /> More Services
+                      </div>
+                      <div className="mega-links-group">
+                        <Link to="/services?cat=logistics" onClick={closeDropdown} className="mega-item">
+                          <Truck size={13} /> Logistics Services
+                        </Link>
+                        <Link to="/services?cat=realestate" onClick={closeDropdown} className="mega-item">
+                          <Building size={13} /> Title &amp; Settlement
+                        </Link>
+                        <Link to="/services?cat=realestate" onClick={closeDropdown} className="mega-item">
+                          <Receipt size={13} /> Mortgage &amp; Escrow
+                        </Link>
+                        <Link to="/services?cat=verification" onClick={closeDropdown} className="mega-item">
+                          <ShieldCheck size={13} /> Background Verification
+                        </Link>
+                        <Link to="/services?cat=technicalpub" onClick={closeDropdown} className="mega-item">
+                          <FileSearch size={13} /> Technical Writing (S1000D)
+                        </Link>
+                        <Link to="/services?cat=publishing" onClick={closeDropdown} className="mega-item">
+                          <Accessibility size={13} /> Digital Accessibility
+                        </Link>
+                      </div>
+
+                      <div className="mega-col-header mt-3" style={{ color: '#CC2228' }}>
+                        <Grid size={14} /> View All
+                      </div>
+                      <div className="mega-links-group">
+                        <Link
+                          to="/services"
+                          onClick={closeDropdown}
+                          className="mega-item"
+                          style={{
+                            fontWeight: 700,
+                            color: '#CC2228',
+                            background: 'rgba(204, 34, 40, 0.06)',
+                            borderRadius: '8px',
+                            padding: '8px 10px',
+                          }}
+                        >
+                          <Grid size={13} color="#CC2228" /> Explore All 65+ Services <ArrowRight size={12} />
+                        </Link>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Featured Software Strip at Bottom of Mega Menu */}
+                  <div
+                    style={{
+                      borderTop: '1px solid #e2e8f0',
+                      marginTop: '18px',
+                      paddingTop: '14px',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'space-between',
+                      flexWrap: 'wrap',
+                      gap: '10px',
+                      background: 'rgba(225, 29, 72, 0.04)',
+                      padding: '10px 16px',
+                      borderRadius: '10px',
+                    }}
+                  >
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '8px', fontSize: '13px' }}>
+                      <Sparkles size={16} color="#f59e0b" />
+                      <span>
+                        Featured Platform: <strong style={{ color: '#E11D48' }}>CaretrixHRMS</strong> — Enterprise AI HRMS &amp; Autonomous Payroll Software
+                      </span>
+                    </div>
+                    <Link
+                      to="/services?cat=hrms"
+                      onClick={closeDropdown}
+                      style={{
+                        background: '#E11D48',
+                        color: '#ffffff',
+                        fontSize: '11.5px',
+                        fontWeight: 700,
+                        padding: '6px 14px',
+                        borderRadius: '6px',
+                        display: 'inline-flex',
+                        alignItems: 'center',
+                        gap: '6px',
+                      }}
+                    >
+                      Explore CaretrixHRMS <ArrowRight size={12} />
+                    </Link>
+                  </div>
+                </div>
+              )}
+            </div>
+
+            <NavLink
+              to="/industries"
+              className={({ isActive }) =>
+                `nav-link-item ${isActive ? 'active' : ''}`
+              }
+            >
+              Industries
+            </NavLink>
+
+            <NavLink
+              to="/projects"
+              className={({ isActive }) =>
+                `nav-link-item ${isActive ? 'active' : ''}`
+              }
+            >
+              Projects
+            </NavLink>
+
+            <NavLink
+              to="/careers"
+              className={({ isActive }) =>
+                `nav-link-item ${isActive ? 'active' : ''}`
+              }
+            >
+              Careers
+            </NavLink>
+
+            <NavLink
+              to="/contact"
+              className={({ isActive }) =>
+                `nav-link-item ${isActive ? 'active' : ''}`
+              }
+            >
+              Contact
+            </NavLink>
+          </div>
+
+          {/* Right Action Items */}
+          <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
+            {/* Direct Phone Info Box */}
+            <div
+              className="d-desktop"
+              style={{
+                borderLeft: '1.5px solid rgba(28, 34, 128, 0.1)',
+                paddingLeft: '16px',
+                textAlign: 'left',
+              }}
+            >
+              <div
+                style={{
+                  fontFamily: 'var(--font-heading)',
+                  fontSize: '13px',
+                  fontWeight: 700,
+                  color: '#1a1d3a',
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: '6px',
+                }}
+              >
+                <Phone size={12} color="#CC2228" /> +91-8308906690
+              </div>
+              <div style={{ fontSize: '11px', color: 'rgba(28, 34, 128, 0.6)', fontWeight: 500 }}>
+                24/7 Digital Inquiry &bull; Mon–Sat 9AM–6PM IST
+              </div>
+            </div>
+
+            {/* Primary CTA Button */}
+            <button
+              type="button"
+              onClick={onOpenModal}
+              className="btn-accent-custom"
+              style={{
+                padding: '10px 22px',
+                fontSize: '13.5px',
+                whiteSpace: 'nowrap',
+              }}
+            >
+              <Send size={14} /> Get Free Quote
+            </button>
+
+            {/* Mobile Hamburger Toggle */}
+            <button
+              type="button"
+              className="d-mobile"
+              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+              style={{
+                background: 'none',
+                border: 'none',
+                cursor: 'pointer',
+                padding: '6px',
+                color: '#1C2280',
+              }}
+              aria-label="Toggle navigation"
+            >
+              {mobileMenuOpen ? <X size={26} /> : <Menu size={26} />}
+            </button>
           </div>
         </div>
-      )}
-    </header>
+
+        {/* Mobile Accordion Drawer */}
+        {mobileMenuOpen && (
+          <div
+            style={{
+              background: '#ffffff',
+              borderTop: '1px solid #e2e8f0',
+              borderRadius: '0 0 18px 18px',
+              padding: '20px',
+              display: 'flex',
+              flexDirection: 'column',
+              gap: '12px',
+            }}
+          >
+            <Link to="/" onClick={closeDropdown} className="mobile-nav-link">
+              Home
+            </Link>
+            <Link to="/about" onClick={closeDropdown} className="mobile-nav-link">
+              About Us
+            </Link>
+
+            {/* Mobile Services Accordion */}
+            <div>
+              <button
+                type="button"
+                onClick={() => setMobileServicesAccordion(!mobileServicesAccordion)}
+                className="mobile-nav-link"
+                style={{
+                  width: '100%',
+                  display: 'flex',
+                  justifyContent: 'space-between',
+                  alignItems: 'center',
+                  background: 'none',
+                  border: 'none',
+                  textAlign: 'left',
+                }}
+              >
+                Services <ChevronDown size={16} style={{ transform: mobileServicesAccordion ? 'rotate(180deg)' : 'none', transition: 'transform 0.2s' }} />
+              </button>
+
+              {mobileServicesAccordion && (
+                <div
+                  style={{
+                    padding: '10px 16px',
+                    background: '#f8fafc',
+                    borderRadius: '10px',
+                    marginTop: '6px',
+                    display: 'flex',
+                    flexDirection: 'column',
+                    gap: '10px',
+                  }}
+                >
+                  <Link to="/services?cat=ai_automation" onClick={closeDropdown} className="mobile-sub-link">
+                    &bull; AI &amp; Automations
+                  </Link>
+                  <Link to="/services?cat=hrms" onClick={closeDropdown} className="mobile-sub-link fw-bold" style={{ color: '#E11D48' }}>
+                    &bull; CaretrixHRMS (AI HR &amp; Payroll Software)
+                  </Link>
+                  <Link to="/services?cat=healthcare" onClick={closeDropdown} className="mobile-sub-link">
+                    &bull; Healthcare BPO &amp; RCM
+                  </Link>
+                  <Link to="/services?cat=customsoftware" onClick={closeDropdown} className="mobile-sub-link">
+                    &bull; IT &amp; Custom Software Solutions
+                  </Link>
+                  <Link to="/services?cat=publishing" onClick={closeDropdown} className="mobile-sub-link">
+                    &bull; STM Publishing &amp; Prepress
+                  </Link>
+                  <Link to="/services?cat=realestate" onClick={closeDropdown} className="mobile-sub-link">
+                    &bull; Real Estate, CAM &amp; Title
+                  </Link>
+                  <Link to="/services?cat=data_annotation" onClick={closeDropdown} className="mobile-sub-link">
+                    &bull; AI Data Annotation
+                  </Link>
+                  <Link to="/services?cat=accounting" onClick={closeDropdown} className="mobile-sub-link">
+                    &bull; Accounting &amp; Bookkeeping
+                  </Link>
+                  <Link to="/services?cat=digitalmarketing" onClick={closeDropdown} className="mobile-sub-link">
+                    &bull; Digital Marketing &amp; SEO
+                  </Link>
+                  <Link to="/services" onClick={closeDropdown} className="mobile-sub-link fw-bold" style={{ color: '#CC2228' }}>
+                    &bull; View All 65+ Services &rarr;
+                  </Link>
+                </div>
+              )}
+            </div>
+
+            <Link to="/industries" onClick={closeDropdown} className="mobile-nav-link">
+              Industries
+            </Link>
+            <Link to="/projects" onClick={closeDropdown} className="mobile-nav-link">
+              Projects
+            </Link>
+            <Link to="/careers" onClick={closeDropdown} className="mobile-nav-link">
+              Careers
+            </Link>
+            <Link to="/contact" onClick={closeDropdown} className="mobile-nav-link">
+              Contact
+            </Link>
+
+            <div style={{ marginTop: '10px', paddingTop: '10px', borderTop: '1px solid #e2e8f0' }}>
+              <div style={{ fontSize: '13px', fontWeight: 700, color: '#1a1d3a', marginBottom: '8px' }}>
+                <Phone size={13} color="#CC2228" style={{ display: 'inline', marginRight: '6px' }} />
+                +91-8308906690
+              </div>
+              <button
+                type="button"
+                onClick={() => {
+                  closeDropdown();
+                  onOpenModal();
+                }}
+                className="btn-accent-custom"
+                style={{ width: '100%', justifyContent: 'center' }}
+              >
+                <Send size={14} /> Get Free Quote
+              </button>
+            </div>
+          </div>
+        )}
+      </nav>
+
+      {/* Embedded Component Styles */}
+      <style>{`
+        .nav-link-item {
+          font-family: var(--font-heading);
+          font-size: 14.5px;
+          font-weight: 600;
+          color: #1a1d3a;
+          padding: 8px 14px;
+          border-radius: 8px;
+          position: relative;
+          transition: color 0.2s, background 0.2s;
+        }
+        .nav-link-item:hover, .nav-link-item.active {
+          color: #1C2280;
+          background: rgba(28, 34, 128, 0.05);
+        }
+        .nav-link-item::after {
+          content: '';
+          position: absolute;
+          bottom: 2px;
+          left: 14px;
+          right: 14px;
+          height: 2.5px;
+          background: #CC2228;
+          border-radius: 2px;
+          transform: scaleX(0);
+          transform-origin: left;
+          transition: transform 0.25s ease;
+        }
+        .nav-link-item:hover::after, .nav-link-item.active::after {
+          transform: scaleX(1);
+        }
+        .mega-col-header {
+          font-family: var(--font-heading);
+          font-size: 11px;
+          font-weight: 800;
+          text-transform: uppercase;
+          letter-spacing: 1px;
+          color: #1C2280;
+          padding-bottom: 6px;
+          border-bottom: 1.5px solid rgba(28, 34, 128, 0.1);
+          margin-bottom: 8px;
+          display: flex;
+          align-items: center;
+          gap: 6px;
+        }
+        .mega-links-group {
+          display: flex;
+          flex-direction: column;
+          gap: 3px;
+        }
+        .mega-item {
+          font-size: 13px;
+          font-weight: 500;
+          color: #2d3060;
+          padding: 5px 8px;
+          border-radius: 6px;
+          display: flex;
+          align-items: center;
+          gap: 8px;
+          transition: all 0.15s ease;
+        }
+        .mega-item:hover {
+          background: rgba(28, 34, 128, 0.06);
+          color: #1C2280;
+          padding-left: 12px;
+        }
+        .mobile-nav-link {
+          font-family: var(--font-heading);
+          font-size: 15px;
+          font-weight: 600;
+          color: #1a1d3a;
+          padding: 8px 12px;
+          border-radius: 8px;
+        }
+        .mobile-sub-link {
+          font-size: 13.5px;
+          color: #475569;
+          padding: 4px 8px;
+        }
+        @media (max-width: 991px) {
+          .d-desktop { display: none !important; }
+          .d-mobile { display: block !important; }
+        }
+        @media (min-width: 992px) {
+          .d-mobile { display: none !important; }
+        }
+      `}</style>
+    </div>
   );
 }

@@ -1,776 +1,724 @@
-import React, { useState, lazy, Suspense } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useSearchParams } from 'react-router-dom';
 import {
-  Cpu,
-  HeartPulse,
-  FileCheck2,
-  Headphones,
-  BarChart3,
-  Briefcase,
-  Building,
-  BookOpen,
-  Sparkles,
-  Layers,
-  Truck,
-  FileText,
-  Search,
-  CheckCircle2,
-  Send,
-  ShieldCheck,
-  Zap,
-  Laptop,
-  PhoneCall,
-  Activity,
-  Globe2,
-  ArrowRight,
-  TrendingUp,
-  Clock,
-  Check,
-  Server,
-  Code2,
+  Brain,
   Bot,
-  Database,
+  Laptop,
+  HeartPulse,
+  BookOpen,
+  Building,
+  FileSpreadsheet,
+  BarChart3,
+  Truck,
+  Megaphone,
+  FileText,
+  ShieldCheck,
+  Award,
   Users,
-  Shield,
-  Workflow,
+  CheckCircle2,
+  ArrowRight,
+  Search,
+  Sparkles,
+  Clock,
+  CircleDollarSign,
+  UserCog,
+  Send,
+  Printer,
+  Tablet,
+  Receipt,
+  CreditCard,
+  Ban,
+  RotateCcw,
+  Scale,
+  Scroll,
+  FileCode2,
+  ShoppingCart,
+  LineChart,
+  FileSearch,
+  Accessibility,
 } from 'lucide-react';
 
-const HumanMotion8DStudio = lazy(() => import('../components/HumanMotion8DStudio'));
-
 export default function Services({ onOpenModal }) {
-  const [activeFilter, setActiveFilter] = useState('all');
+  const [searchParams, setSearchParams] = useSearchParams();
+  const catParam = searchParams.get('cat') || 'all';
+
+  const [activeCategory, setActiveCategory] = useState(catParam);
   const [searchQuery, setSearchQuery] = useState('');
 
+  useEffect(() => {
+    if (catParam) {
+      setActiveCategory(catParam);
+    }
+  }, [catParam]);
+
+  const handleCategoryChange = (catId) => {
+    setActiveCategory(catId);
+    setSearchParams(catId === 'all' ? {} : { cat: catId });
+  };
+
   const categories = [
-    { id: 'all', label: 'All Universal Services (70+)' },
-    { id: 'appsupport', label: 'Application Support (AMS)' },
-    { id: 'clouddevops', label: 'Cloud & DevOps' },
-    { id: 'customsoftware', label: 'Custom Software & Platforms' },
-    { id: 'ai_automation', label: 'AI & Hyper-Automation' },
-    { id: 'intlvoice', label: 'International Voice (US/UK/AUS)' },
-    { id: 'domesticvoice', label: 'Domestic Voice (Pan-India 12+ Langs)' },
-    { id: 'enterprise_erp', label: 'Enterprise ERP & CRM' },
-    { id: 'cybersecurity', label: 'Cyber Security & IT Governance' },
-    { id: 'it_staffing', label: 'IT Talent Pods & Staffing' },
-    { id: 'backoffice_bpo', label: 'Back-Office BPO & Processing' },
-    { id: 'healthcare', label: 'Healthcare BPO / RCM' },
-    { id: 'hrms', label: 'HRMS & AI Software' },
-    { id: 'verification', label: 'Background Verification (28 States)' },
+    { id: 'all', label: 'All Services (65+)' },
+    { id: 'ai_automation', label: 'AI & Automations' },
+    { id: 'hrms', label: 'HR & Payroll Software' },
+    { id: 'healthcare', label: 'Healthcare BPO & RCM' },
+    { id: 'customsoftware', label: 'IT & Software Solutions' },
+    { id: 'publishing', label: 'Publishing & Prepress' },
     { id: 'realestate', label: 'Real Estate & Title' },
-    { id: 'publishing', label: 'STM Publishing' },
-    { id: 'marketing', label: 'Performance Marketing & 8D Motion' },
+    { id: 'data_annotation', label: 'AI Data Annotation' },
     { id: 'accounting', label: 'Accounting & Payroll' },
+    { id: 'staffing', label: 'Manpower & Staffing' },
+    { id: 'logistics', label: 'Logistics & Supply Chain' },
+    { id: 'digitalmarketing', label: 'Digital Marketing & SEO' },
+    { id: 'technicalpub', label: 'Technical Publications' },
+    { id: 'verification', label: 'Background Verification' },
   ];
 
-  const services = [
+  const allServices = [
+    // 1. AI & Automations
     {
-      id: 'app-support-services',
-      cat: 'appsupport',
-      badge: '24/7 ENTERPRISE APPLICATION SUPPORT (AMS)',
-      icon: <Laptop size={32} color="#1d4ed8" />,
-      image: '/it_services.png',
-      title: 'Enterprise Application Support Services (AMS), L1/L2/L3 Maintenance & Cloud Observability',
-      desc: 'Mission-critical enterprise application maintenance and 24/7/365 production support. We ensure uninterrupted digital velocity for modern SaaS architectures, enterprise ERPs, cloud microservices, and client-facing web portals with industry-leading SLA commitments.',
+      id: 'ai-automation-services',
+      category: 'ai_automation',
+      badge: 'AI & HYPER-AUTOMATION',
+      icon: <Brain size={28} color="#CC2228" />,
+      title: 'AI Automation & Agentic Workflow Systems',
+      desc: 'Autonomous multi-agent workflows, robotic process automation (RPA), and custom Large Language Model (LLM) integrations engineered to eliminate repetitive operational bottlenecks across enterprise departments.',
       features: [
-        'Tier-1, Tier-2 & Tier-3 (L1/L2/L3) Incident Response & Bug Remediations',
-        'Strict SLA Commitment: <15 Minute Acknowledgment for Critical P1 Incidents',
-        '24/7 Full-Stack Cloud Observability (Datadog, Dynatrace, New Relic, Prometheus & Grafana)',
-        'Database Administration, Performance Tuning & Backups (PostgreSQL, MySQL, Oracle, MongoDB)',
-        'DevOps CI/CD Pipeline Maintenance, Rollbacks & Zero-Downtime Patch Releases',
-        'Proactive Capacity Planning, Security Vulnerability Scans & ITIL v4 Incident Management',
+        'Multi-agent autonomous systems using LangChain, AutoGen & custom LLM orchestrators',
+        'Intelligent Document Processing (IDP) for invoices, medical records & legal contracts',
+        'Natural Language Processing (NLP) summarization and custom vector knowledge bases (RAG)',
+        'Enterprise integration with ERP, CRM, and cloud REST APIs with zero human intervention',
+        'Continuous human-in-the-loop (HITL) quality validation and audit trail logging',
       ],
-      deliverables: '99.98% application uptime guarantee, 15-minute P1 critical response time, and detailed monthly root-cause analysis (RCA) reporting.',
-      roiTag: '52% TCO Reduction vs Onshore Support',
+      sla: '99.5% processing accuracy • <200ms model inference latency',
+      tag: '5x Operational Velocity',
     },
     {
-      id: 'cloud-devops-engineering',
-      cat: 'clouddevops',
-      badge: 'MULTI-CLOUD & DEVOPS INFRASTRUCTURE',
-      icon: <Server size={32} color="#0284c7" />,
-      image: '/images/hero_3d_mesh.jpg',
-      title: 'Cloud Architecture, Multi-Cloud Migration (AWS, Azure, GCP) & DevOps Automation',
-      desc: 'Enterprise-grade cloud transformation and infrastructure modernization: cloud migration roadmaps, Kubernetes container orchestration, Infrastructure-as-Code (Terraform, Ansible), GitOps CI/CD pipelines, FinOps cost optimization, and multi-region disaster recovery architectures.',
+      id: 'idp-services',
+      category: 'ai_automation',
+      badge: 'INTELLIGENT DOCUMENT PROCESSING',
+      icon: <FileText size={28} color="#CC2228" />,
+      title: 'Intelligent Document Processing (IDP) & OCR Automation',
+      desc: 'AI-driven computer vision and OCR pipelines that extract, categorize, validate, and index unstructured and semi-structured documents at massive enterprise scale.',
       features: [
-        'Cloud Migration & Enterprise Landing Zones on AWS, Microsoft Azure & Google Cloud Platform (GCP)',
-        'Container Orchestration with Kubernetes (EKS, AKS, GKE), Docker & Helm Charts',
-        'Infrastructure-as-Code (IaC) using Terraform, Terragrunt & AWS CloudFormation',
-        'GitOps & Automated CI/CD Pipelines (GitHub Actions, GitLab CI, ArgoCD, Jenkins)',
-        'Cloud FinOps: Continuous Cost Optimization, Resource Right-Sizing & Reserved Instance Governance',
-        'Hybrid Cloud Networking, Direct Connect, VPN Mesh & Zero-Downtime Multi-Region Failover',
+        'Multi-layout document OCR (handwritten, scanned, multilingual PDF, TIFF)',
+        'Deep learning table parsing, boundary bounding, and key-value pair extraction',
+        'Automated 3-way invoice and purchase order matching against ERP databases',
+        'Section 508 and HIPAA compliant encrypted document processing workflows',
       ],
-      deliverables: '99.99% infrastructure uptime SLA, zero-downtime deployment pipelines, and 30-45% documented cloud cost reduction.',
-      roiTag: '38% Cloud Spend Compression',
+      sla: 'Sub-second document extraction • 99.8% verified field accuracy',
+      tag: 'Zero Manual Data Entry',
+    },
+
+    // 2. HR & Payroll Software (CaretrixHRMS)
+    {
+      id: 'caretrix-hrms-platform',
+      category: 'hrms',
+      badge: 'PROPRIETARY AI HRMS SOFTWARE',
+      badgeHighlight: true,
+      icon: <UserCog size={28} color="#E11D48" />,
+      title: 'CaretrixHRMS — Enterprise AI HRMS & Autonomous Payroll Software',
+      desc: 'A unified enterprise workforce operating platform combining autonomous statutory payroll calculation, biometric attendance sync, automated employee onboarding, AI performance appraisal, and predictive retention analytics.',
+      features: [
+        'One-click multi-state statutory payroll computation (PF, ESI, TDS, PT, Gratuity)',
+        'Real-time biometric cloud synchronization (face recognition, fingerprint & geo-fenced mobile)',
+        'Employee Self-Service (ESS) web and mobile portal for tax declarations & pay slips',
+        'Automated digital onboarding with instant background document validation',
+        'AI KPI appraisal tracking and automated multi-tier leave approval routing',
+      ],
+      sla: '100% statutory compliance guarantee • Zero-payroll error tolerance',
+      tag: 'Proprietary Cloud Platform',
+    },
+
+    // 3. Healthcare BPO & RCM
+    {
+      id: 'medical-coding-services',
+      category: 'healthcare',
+      badge: 'HEALTHCARE REVENUE CYCLE',
+      icon: <HeartPulse size={28} color="#0284C7" />,
+      title: 'Medical Coding (ICD-10-CM, CPT, HCPCS & Risk Adjustment)',
+      desc: 'AAPC & AHIMA certified medical coding services ensuring maximum reimbursement compliance, reduced payer rejections, and comprehensive chart audit coverage across multi-specialty practices.',
+      features: [
+        'Certified professional coders (CPC, COC, CIC, CRC) with specialty-specific pods',
+        'Inpatient, outpatient, emergency room, and ambulatory surgical center (ASC) coding',
+        'HCC Risk Adjustment and Hierarchical Condition Category coding for Medicare Advantage',
+        'Comprehensive 100% pre-bill quality audit sampling ensuring 98%+ clean claims',
+      ],
+      sla: '98%+ coding accuracy • 24-hour chart turnaround time (TAT)',
+      tag: 'AAPC / AHIMA Certified',
     },
     {
-      id: 'custom-software-engineering',
-      cat: 'customsoftware',
-      badge: 'FULL-STACK SOFTWARE & PLATFORM ENGINEERING',
-      icon: <Code2 size={32} color="#8b5cf6" />,
-      image: '/it_services.png',
-      title: 'Custom Enterprise Software Engineering, Microservices & High-Scale Web/Mobile Platforms',
-      desc: 'Full-lifecycle software product engineering for high-throughput enterprise systems. We architect resilient microservices, distributed data streaming pipelines, responsive modern web frontends, and cross-platform mobile solutions tailored to complex business domains.',
+      id: 'medical-billing-rcm',
+      category: 'healthcare',
+      badge: 'END-TO-END RCM',
+      icon: <Receipt size={28} color="#0284C7" />,
+      title: 'Medical Billing, Payment Posting & Electronic Claim Submission',
+      desc: 'End-to-end medical billing operations covering electronic 837 claim submission, clearinghouse rejections resolution, ERA/EOB payment posting, and patient balance collections.',
       features: [
-        'Modern Web Applications with React 19, Next.js, TypeScript, Vue.js & Responsive UI Systems',
-        'High-Performance Backend Microservices in Node.js, Python (FastAPI/Django), Java Spring Boot & Go',
-        'Scalable API Architecture: RESTful, GraphQL, gRPC & Event-Driven Apache Kafka/RabbitMQ Messaging',
-        'Enterprise Database Engineering: PostgreSQL, MySQL, Redis Caching, MongoDB & DynamoDB',
-        'Cross-Platform Mobile Applications: React Native, Flutter & Native iOS/Android SDKs',
-        'End-to-End Automated Testing: Unit, Integration, E2E (Playwright/Cypress) & Load Testing (k6)',
+        'Real-time patient demographic verification and insurance eligibility checking',
+        'Daily electronic clearinghouse transmission with immediate scrub error remediation',
+        'Manual and automated ERA/835 payment posting and line-item contractual write-offs',
+        'Patient billing inquiries support and automated secondary/tertiary payer billing',
       ],
-      deliverables: 'Clean architecture with 90%+ automated test coverage, sub-200ms API response latency, and modular codebase with full IP ownership.',
-      roiTag: 'Full IP Transfer • Sub-200ms APIs',
+      sla: '<24 hour claim submission TAT • 99% posting accuracy',
+      tag: 'Accelerated Cash Flow',
     },
     {
-      id: 'ai-hyper-automation',
-      cat: 'ai_automation',
-      badge: 'ENTERPRISE AI & AUTOMATION',
-      icon: <Bot size={32} color="#ec4899" />,
-      image: '/images/martech_3d_engine.jpg',
-      title: 'Generative AI, Agentic Workflows, LLM Fine-Tuning & Intelligent Process Automation',
-      desc: 'Productionizing Artificial Intelligence for real-world enterprise velocity. From private enterprise LLMs and Retrieval-Augmented Generation (RAG) knowledge systems to autonomous multi-agent systems and Robotic Process Automation (RPA), we automate complex manual workflows safely.',
+      id: 'denial-management-ar',
+      category: 'healthcare',
+      badge: 'ACCOUNTS RECEIVABLE RECOVERY',
+      icon: <Ban size={28} color="#0284C7" />,
+      title: 'Denial Management & Accounts Receivable (AR) Recovery',
+      desc: 'Aggressive aged AR recovery and systematic denial resolution. We identify payer rejection root causes, appeal wrongful denials with medical documentation, and recover revenue over 90+ days aging.',
       features: [
-        'Enterprise RAG Architectures with Milvus/Pinecone Vector DBs & Private LLM Embeddings',
-        'Autonomous Agentic AI Workflows for Document Triage, Customer Queries & Data Synthesis',
-        'Fine-Tuning Open-Source LLMs (Llama 3, Mistral, Gemma) on Proprietary Domain Datasets',
-        'Intelligent Document Processing (IDP): OCR, LayoutLM & Neural Extraction for Invoices & KYC',
-        'Robotic Process Automation (RPA) with UiPath, Automation Anywhere & Python Workers',
-        'AI Safety, Guardrails, Data Privacy & SOC-2 Compliant Air-Gapped Deployment',
+        'Systematic root cause analysis across CARC/RARC denial reason codes',
+        'Formal multi-tier payer appeals with medical necessity documentation',
+        'Dedicated aged AR liquidation pods for 90+, 120+, and 180+ day accounts',
+        'Payer pattern tracking preventing recurring denials on future claims',
       ],
-      deliverables: '70% reduction in manual data processing hours, under 1.5-second LLM inference latency, and enterprise-grade data privacy guarantees.',
-      roiTag: '70% Manual Workload Automated',
+      sla: '35% average reduction in aged AR days • 85%+ appeal recovery rate',
+      tag: 'Recover Stalled Revenue',
+    },
+
+    // 4. IT & Custom Software Solutions
+    {
+      id: 'custom-software-solutions',
+      category: 'customsoftware',
+      badge: 'FULL-STACK CLOUD & SOFTWARE',
+      icon: <Laptop size={28} color="#1C2280" />,
+      title: 'Custom Enterprise Software Engineering & Offshore Development Centers (ODC)',
+      desc: 'Dedicated offshore software engineering teams building scalable web applications, enterprise microservices, cloud infrastructure, and cross-platform mobile products for high-growth global enterprises.',
+      features: [
+        'Modern full-stack web applications in React, Next.js, Node.js, Python & Java',
+        'High-throughput microservices architecture, RESTful APIs, and GraphQL gateways',
+        'Multi-cloud infrastructure deployment on AWS, Microsoft Azure & Google Cloud (IaC/Terraform)',
+        'Dedicated Agile development pods with direct sprint integration and full IP transfer',
+      ],
+      sla: '99.99% system uptime architecture • Full source code ownership',
+      tag: 'Dedicated Agile Pods',
     },
     {
-      id: 'intl-voice-process',
-      cat: 'intlvoice',
-      badge: 'GLOBAL 24/7 INTERNATIONAL VOICE OPERATIONS',
-      icon: <Headphones size={32} color="#059669" />,
-      image: '/bpo_outsourcing.png',
-      title: 'International Voice Process, Global Customer Experience & Technical Helpdesk',
-      desc: 'High-touch 24/7/365 inbound and outbound voice operations engineered for North American (US & Canada), UK/European, and Australian enterprises. Our C2 English-certified customer experience pods deliver empathy, deep technical troubleshooting, and superior First Contact Resolution.',
+      id: 'ecommerce-solutions',
+      category: 'customsoftware',
+      badge: 'E-COMMERCE & DIGITAL COMMERCE',
+      icon: <ShoppingCart size={28} color="#1C2280" />,
+      title: 'Omnichannel E-Commerce Platforms & Custom Storefronts',
+      desc: 'High-conversion e-commerce development, headless Shopify Plus, Magento, WooCommerce, and custom multi-vendor marketplace platforms with seamless payment gateways and inventory sync.',
       features: [
-        'Round-the-Clock Inbound Customer Support, Billing Inquiries & Order Resolution',
-        'Outbound Enterprise Telesales, Warm Lead Qualification & Executive Appointment Setting',
-        'Tier-1 & Tier-2 Technical Helpdesk, Software Troubleshooting & Hardware Triage',
-        'HIPAA-Compliant US Healthcare Intake, Patient Registration & Pre-Authorizations',
-        'FinTech & Banking Verification, KYC Validation & Fraud Alert Notifications',
-        'Omnichannel Cloud Contact Centers (Genesys Cloud, Five9, Avaya & Twilio Flex) with Real-Time AI Sentiment Analysis',
+        'Headless commerce architectures with sub-second page load times',
+        'ERP and warehouse management system (WMS) bi-directional inventory sync',
+        'Global multi-currency, multi-language checkout with automated tax calculation',
+        'High-availability hosting optimized for peak flash-sale traffic volumes',
       ],
-      deliverables: '96.4% verified CSAT benchmark, <20-second Average Speed of Answer (ASA), and 88%+ First Contact Resolution (FCR).',
-      roiTag: '96.4% CSAT • US/UK/AUS Specialized',
+      sla: 'Sub-1.2s mobile page load • 99.98% checkout availability',
+      tag: 'Conversion-Optimized',
+    },
+
+    // 5. Publishing & Prepress Services
+    {
+      id: 'digital-prepress-typesetting',
+      category: 'publishing',
+      badge: 'STM PUBLISHING & PREPRESS',
+      icon: <BookOpen size={28} color="#8B5CF6" />,
+      title: 'Digital Prepress, Automated Typesetting & STM Journal Production',
+      desc: 'Automated XML-first typesetting, LaTeX equation formatting, high-end design, and digital prepress services for global academic publishers, university presses, and commercial imprints.',
+      features: [
+        'XML-first automated pagination in Adobe InDesign, 3B2, and custom typesetting engines',
+        'Complex STM mathematical typesetting with MathML and LaTeX formatting',
+        'Rigorous copyediting, developmental editing, and proofreading by subject-matter experts',
+        'Print-ready high-resolution PDF generation with preflight verification',
+      ],
+      sla: '99.9% typographical accuracy • 5-day journal turnaround',
+      tag: 'Academic & STM Standards',
     },
     {
-      id: 'domestic-voice-process',
-      cat: 'domesticvoice',
-      badge: 'PAN-INDIA MULTILINGUAL VOICE OPERATIONS',
-      icon: <PhoneCall size={32} color="#d97706" />,
-      image: '/consulting_team.png',
-      title: 'Domestic Voice Process (Pan-India Multilingual Customer Care across 12+ Languages)',
-      desc: 'Comprehensive Indian domestic call center operations bridging language diversity with high conversion and prompt service. Serving leading Indian banks, NBFCs, e-commerce giants, telecom providers, and D2C brands with native fluency across all regional states.',
+      id: 'epub-ebook-conversion',
+      category: 'publishing',
+      badge: 'ACCESSIBLE DIGITAL FORMATS',
+      icon: <Tablet size={28} color="#8B5CF6" />,
+      title: 'eBook Conversion (ePUB3, Fixed Layout & Kindle KF8)',
+      desc: 'Flawless digital conversion from any source format (PDF, Word, InDesign, printed hardcopy) into modern reflowable and fixed-layout ePUB3 and Kindle formats compatible with all e-readers.',
       features: [
-        'Native Multilingual Voice Support: Hindi, Marathi, Tamil, Telugu, Kannada, Malayalam, Bengali, Gujarati, Punjabi, Odia & English',
-        'BFSI Loan Inquiries, Early-Bucket Collections & Digital KYC Verification',
-        'E-Commerce Hyperlocal Delivery Tracking, Order Confirmations & Return Audits',
-        'Healthcare Tele-Consultation Bookings, Diagnostic Follow-ups & Insurance Desk',
-        'Real-Time Call Recording, Speech Analytics & Regulatory Compliance Auditing',
-        'Automated Interactive Voice Response (IVR) with Seamless Human Specialist Fallback',
+        'Reflowable and fixed-layout ePUB3 with embedded audio, video & interactive scripts',
+        'Amazon Kindle KF8/MOBI conversion with validated NCX navigation structures',
+        'Section 508 and WCAG 2.1 AA digital accessibility tagging with alt-text integration',
+        '100% EpubCheck validated files passing all retail distributor ingestion checks',
       ],
-      deliverables: '<15 second average speed of answer (ASA), 99.8% telephony uptime, and Pan-India coverage matching all Indian business hours.',
-      roiTag: '12+ Regional Languages • <15s ASA',
+      sla: '100% validation on Apple Books, Amazon KDP & Google Play',
+      tag: 'Global Retail Ready',
+    },
+
+    // 6. Real Estate, CAM & Title
+    {
+      id: 'cam-audit-reconciliation',
+      category: 'realestate',
+      badge: 'COMMERCIAL REAL ESTATE BPO',
+      icon: <Scale size={28} color="#10B981" />,
+      title: 'CAM Audit, CAM Reconciliation & Property Accounting',
+      desc: 'Detailed Common Area Maintenance (CAM) reconciliations, operating expense audits, gross-up calculations, and variance reporting for commercial property owners and REITs.',
+      features: [
+        'Proration calculations, caps (cumulative & compounding), and base-year expense audits',
+        'Tenant bill-back schedules, real estate tax apportionments, and insurance audits',
+        'Yardi, MRI Software, RealPage, and AppFolio property accounting management',
+        'Detailed dispute resolution support and landlord expense variance defense',
+      ],
+      sla: '100% mathematical audit accuracy • 15% average recovered leakage',
+      tag: 'Yardi & MRI Certified',
     },
     {
-      id: 'enterprise-erp-crm',
-      cat: 'enterprise_erp',
-      badge: 'ENTERPRISE SYSTEMS PRACTICE',
-      icon: <Layers size={32} color="#0052cc" />,
-      image: '/images/sap_cloud_mesh.jpg',
-      title: 'Enterprise ERP & CRM Solutions (SAP S/4HANA, Salesforce, Microsoft Dynamics 365 & Oracle Cloud)',
-      desc: 'Strategic consulting, implementation, and application lifecycle support across the world’s leading enterprise business software platforms. We modernize core enterprise workflows including ERP financial consolidation, supply chain, CRM sales automation, and HR operations.',
+      id: 'lease-abstraction-admin',
+      category: 'realestate',
+      badge: 'LEASE ADMINISTRATION',
+      icon: <Scroll size={28} color="#10B981" />,
+      title: 'Commercial Lease Abstraction & Lease Administration',
+      desc: 'Comprehensive extraction of key business, financial, and legal lease clauses into structured formats. Overcoming language variations across retail, office, and industrial commercial leases.',
       features: [
-        'SAP S/4HANA Cloud Transformations: Greenfield, Brownfield, Central Finance (cFin) & BTP',
-        'Salesforce CRM Deployments: Sales Cloud, Service Cloud, CPQ & Custom Lightning Components',
-        'Microsoft Dynamics 365: Finance & Operations (F&O), Business Central & Power Platform Flows',
-        'Oracle Cloud ERP & NetSuite: Multi-Subsidiary Financial Consolidation & Global Procure-to-Pay',
-        'Seamless Cross-Platform Middleware Integration (MuleSoft, Boomi, SAP Cloud Connector & REST)',
-        'Enterprise Change Management, User Training, Master Data Governance & 24/7 L1-L3 Support',
+        'Extraction of rent schedules, escalation clauses, tenant options, and maintenance obligations',
+        'Multi-tier quality check: abstractor draft reviewed by senior real estate attorney',
+        'Direct data ingestion into Yardi Voyager, ProLease, CoStar, and custom databases',
+        'Critical date tracking (renewal options, ROFO/ROFR, expansion & termination dates)',
       ],
-      deliverables: 'Unified multi-entity financial consolidation, up to 60% acceleration in period close, and certified enterprise ERP/CRM solution architects.',
-      roiTag: 'SAP • Salesforce • Dynamics 365 • Oracle',
+      sla: '99.8% clause accuracy • 48-hour turnarounds per lease document',
+      tag: 'Institutional Real Estate',
     },
+
+    // 7. AI Data Annotation & Computer Vision
     {
-      id: 'cybersecurity-governance',
-      cat: 'cybersecurity',
-      badge: 'CYBER DEFENSE & COMPLIANCE',
-      icon: <ShieldCheck size={32} color="#10b981" />,
-      image: '/global_delivery.png',
-      title: 'Enterprise Cyber Security, Managed SOC Operations, Penetration Testing & IT Governance',
-      desc: 'Bank-grade cybersecurity defense and regulatory compliance management. We protect enterprise digital perimeters with 24/7 Security Operations Center (SOC) monitoring, threat hunting, continuous vulnerability management, and regulatory certification roadmaps.',
+      id: 'ai-data-annotation-services',
+      category: 'data_annotation',
+      badge: 'AI / ML TRAINING PIPELINES',
+      icon: <FileSpreadsheet size={28} color="#F59E0B" />,
+      title: 'AI Data Annotation & Computer Vision Training Data',
+      desc: 'Human-in-the-loop data labeling services for autonomous vehicles, medical imaging, retail automation, and robotics. Bounding boxes, polygons, semantic segmentation, LiDAR, and RLHF.',
       features: [
-        '24/7 Managed Security Operations Center (SOC) with SIEM/XDR (Splunk, Microsoft Sentinel, Wazuh)',
-        'Vulnerability Assessment & Penetration Testing (VAPT) for Web, Mobile, APIs & Cloud Infrastructure',
-        'Zero-Trust Network Architecture, Identity & Access Management (IAM), MFA & SSO Enforcement',
-        'Compliance & Certification Readiness: ISO 27001, SOC-2 Type II, HIPAA, GDPR & PCI-DSS',
-        'Incident Response, Digital Forensics & Comprehensive Disaster Recovery Tabletop Exercises',
-        'Continuous Employee Security Awareness, Phishing Simulations & Third-Party Vendor Risk Auditing',
+        '2D/3D bounding boxes, polygon masks, and pixel-level semantic segmentation',
+        '3D LiDAR point cloud annotation with cuboids and sensor fusion tracking',
+        'Video annotation: multi-frame object tracking, action recognition, and temporal labeling',
+        'Large Language Model (LLM) RLHF prompt evaluation, red-teaming, and factuality scoring',
       ],
-      deliverables: '<10 minute threat containment SLA, zero high-severity unpatched CVEs, and guaranteed audit readiness for global compliance standards.',
-      roiTag: 'SOC-2 • ISO 27001 • Zero-Trust',
+      sla: '99.5% consensus accuracy • Multi-tier QA validation before export',
+      tag: 'Autonomous & Robotics Ready',
     },
+
+    // 8. Accounting & Bookkeeping
     {
-      id: 'it-talent-augmentation',
-      cat: 'it_staffing',
-      badge: 'GLOBAL WORKFORCE CONSULTING',
-      icon: <Users size={32} color="#059669" />,
-      image: '/workforce_team.png',
-      title: 'IT Talent Augmentation, Dedicated Agile Engineering Pods & Offshore Development Centers (ODC)',
-      desc: 'Rapidly scale your technology organization with elite, pre-vetted senior software engineers, DevOps specialists, data scientists, and QA automation leads. We deploy self-sufficient, high-performance pods integrated directly into your agile rituals.',
+      id: 'accounting-bookkeeping-bpo',
+      category: 'accounting',
+      badge: 'OFFSHORE FINANCE BPO',
+      icon: <BarChart3 size={28} color="#CC2228" />,
+      title: 'Offshore Bookkeeping, Payroll Processing & Financial Reporting',
+      desc: 'Dedicated offshore accounting teams managing daily transaction classification, general ledger maintenance, accounts payable/receivable (AP/AR), and monthly GAAP/IFRS financial close.',
       features: [
-        'Top 3% Pre-Vetted Senior Engineers across Frontend, Backend, Cloud, Data & QA',
-        'Dedicated Offshore Development Center (ODC) Setup in Pune, Bengaluru & Hyderabad with Biometric Security',
-        'Flexible Engagement Models: Staff Augmentation, Dedicated Managed Pods & Fixed-Scope Deliverables',
-        'Zero Overhead: We Handle Global Payroll, Benefits, High-Spec Workstations & Local Compliance',
-        'Timezone Overlap Guarantee: Minimum 4-6 Hours Shared Operational Hours with US, UK, or EU Teams',
-        'Rapid 7 to 14-Day Deployment Runway with 2-Week No-Risk Trial Guarantee',
+        'Full-charge bookkeeping in QuickBooks Online, Xero, NetSuite, and Sage',
+        'End-to-end accounts payable automation: 3-way PO matching, vendor aging & disbursements',
+        'Accounts receivable tracking, customer invoice generation, and collection workflows',
+        'Monthly balance sheet reconciliation, P&L statements, and cash flow forecasts',
       ],
-      deliverables: '50-65% talent cost savings vs domestic hiring, 14-day replacement SLA, and 100% intellectual property ownership.',
-      roiTag: '50-65% Cost Savings • 7-Day Pod Setup',
+      sla: 'Monthly close by business day 5 • 100% audit-ready balance sheets',
+      tag: '50% Lower Accounting Cost',
     },
+
+    // 9. Manpower & Staffing
     {
-      id: 'backoffice-bpo-ops',
-      cat: 'backoffice_bpo',
-      badge: 'GLOBAL BACK-OFFICE OPERATIONS',
-      icon: <Workflow size={32} color="#d97706" />,
-      image: '/finance_accounting.png',
-      title: 'Global Back-Office Operations, Digital Transaction Processing & Catalog Management',
-      desc: 'Streamline mission-critical transactional workflows with speed, accuracy, and operational rigor. We manage complex data entry, order-to-cash processing, procurement administration, digital content moderation, and enterprise catalog enrichment.',
+      id: 'manpower-staffing-pods',
+      category: 'staffing',
+      badge: 'TALENT AUGMENTATION',
+      icon: <Users size={28} color="#10B981" />,
+      title: 'Dedicated Offshore Talent Pods & Strategic Staff Augmentation',
+      desc: 'Pre-vetted, highly skilled technical and operational talent deployed as dedicated extensions of your in-house teams. Scaling your bandwidth without recruiting overhead or employment liabilities.',
       features: [
-        'Automated & Human-in-the-Loop Invoice Processing, Purchase Order Matching & Three-Way Reconciliations',
-        'High-Volume Data Extraction, Document Cleansing, Deduplication & Data Migration Audits',
-        'E-Commerce Product Catalog Management, Taxonomy Classification & Multi-Channel SKU Enrichment',
-        'Digital Content Moderation: Multilingual Text, Image & Video Compliance Review',
-        'Customer Account Servicing, Order Tracking, Dispute Resolution & Exception Handling',
-        'Continuous Quality Assurance (QA) with Six Sigma Defect Tracking & Root-Cause Audits',
+        'Pre-screened software developers, QA engineers, RCM billers, and data analysts',
+        'Zero notice setup with 100% time-zone overlap matching US, UK, and European hours',
+        'Direct project management integration with your Jira, Slack, and GitHub workflows',
+        'Transparent monthly flat-rate billing with zero hidden recruitment fees',
       ],
-      deliverables: '99.85% data accuracy benchmark, 24-hour SLA turnaround for standard batches, and guaranteed scalability during seasonal volume surges.',
-      roiTag: '99.85% Processing Accuracy',
+      sla: 'Onboarding in 7–10 days • Replacement guarantee within 5 business days',
+      tag: 'Immediate Bandwidth Scale',
     },
+
+    // 10. Logistics & Supply Chain
     {
-      id: 'digital-marketing-growth',
-      cat: 'marketing',
-      badge: 'HIGH-VELOCITY GROWTH MARKETING & 8D MOTION',
-      icon: <BarChart3 size={32} color="#0284c7" />,
-      image: '/images/martech_3d_engine.jpg',
-      title: 'Performance Marketing, Generative Engine Optimization (GEO/AEO) & 3D/8D Motion Studio',
-      desc: 'Next-generation programmatic acquisition and brand acceleration. We combine high-converting multi-channel ad funnels (Meta, Google, LinkedIn) with cutting-edge 3D real-human cinematic motion, 8D spatial audio, and Generative Engine Optimization (GEO) to dominate AI search surfaces.',
+      id: 'logistics-supply-chain-bpo',
+      category: 'logistics',
+      badge: 'LOGISTICS OPERATIONS',
+      icon: <Truck size={28} color="#EC4899" />,
+      title: 'Logistics Data Support, Shipping Document Audits & Freight BPO',
+      desc: '24/7 back-office processing for freight forwarders, 3PL carriers, and supply chain operators. Bill of lading entry, freight invoice audits, and shipment tracking.',
       features: [
-        'Multi-Channel Performance Ad Campaigns (Meta Ads, Google Search/Performance Max & LinkedIn B2B)',
-        'Generative Engine Optimization (GEO) & Answer Engine Optimization (AEO) for ChatGPT, Perplexity & Gemini',
-        'Cinema-Grade 3D Product Motion, CGI Commercial Animation & 8D Spatial Audio',
-        'Conversion Rate Optimization (CRO), Multi-Variant Landing Page Funnels & Heatmap Audits',
-        'B2B Account-Based Marketing (ABM) Outreach Sequences with High-Converting Copy',
-        'Real-Time Attribution Modeling, ROAS Dashboards & Predictive CAC Minimization',
+        'Bill of Lading (BOL), airway bill, and customs entry documentation processing',
+        'Freight invoice auditing against agreed rate cards and tariff schedules',
+        'Carrier dispatch coordination and live exception tracking for shipping delays',
+        'Warehouse inventory cycle count reconciliations and ERP data synchronization',
       ],
-      deliverables: '5.2x average verified ROAS, 3x higher engagement on 8D motion videos, and top-tier indexing across AI search surfaces.',
-      roiTag: '5.2x Average ROAS • Next-Gen AEO/GEO',
+      sla: '<15 min document processing TAT • 99.8% entry accuracy',
+      tag: '24/7 Freight Operations',
     },
+
+    // 11. Digital Marketing & SEO
     {
-      id: 'global-accounting-payroll',
-      cat: 'accounting',
-      badge: 'CORPORATE FINANCE & TAX',
-      icon: <Briefcase size={32} color="#0284c7" />,
-      image: '/finance_accounting.png',
-      title: 'Global Accounting, US GAAP/IFRS Bookkeeping, AP/AR Management & Tax Filings',
-      desc: 'Full-service outsourced corporate accounting, accounts payable/receivable cycles, multi-currency ledger management, bank reconciliations, and statutory direct/indirect tax compliance for fast-growing global corporations.',
+      id: 'digital-marketing-seo-services',
+      category: 'digitalmarketing',
+      badge: 'DIGITAL PERFORMANCE',
+      icon: <Megaphone size={28} color="#1C2280" />,
+      title: 'Data-Driven Enterprise SEO, PPC & B2B Inbound Growth',
+      desc: 'Results-oriented digital marketing strategies engineered to drive organic search visibility, high-intent B2B qualified leads, and measurable customer acquisition ROI.',
       features: [
-        'Full-Cycle General Ledger Accounting & Monthly Financial Close Management',
-        'Accounts Payable (AP) Automation: Vendor Onboarding, Invoice Validation & Payment Batch Processing',
-        'Accounts Receivable (AR) Optimization: Invoicing, Collections Tracking & Aging Analysis',
-        'Multi-Currency Bank & Credit Card Reconciliations (QuickBooks, Xero, NetSuite & SAP)',
-        'US GAAP, IFRS & Indian AS Compliance with Audit-Ready Working Paper Preparation',
-        'Payroll Processing, Statutory Tax Deductions (TDS, PF, ESIC) & GST/Sales Tax Return Filings',
+        'Technical enterprise SEO audits, site architecture optimization, and keyword strategies',
+        'High-converting Google Ads and LinkedIn Ads campaigns with rigorous ROAS tracking',
+        'Authoritative B2B thought leadership content creation and white-hat backlink acquisition',
+        'Conversion Rate Optimization (CRO) and user journey analytics across all landing pages',
       ],
-      deliverables: 'Sub-5-day monthly financial close, 100% on-time statutory tax filings, and CPA-reviewed management reporting packages.',
-      roiTag: 'Sub-5-Day Monthly Close',
+      sla: 'Guaranteed page-1 ranking targets • Transparent weekly analytics reporting',
+      tag: 'Measurable B2B Pipeline',
     },
+
+    // 12. Technical Publications (S1000D)
     {
-      id: 'hrms-software',
-      cat: 'hrms',
-      badge: 'PROPRIETARY AI PLATFORM',
-      icon: <Cpu size={32} color="#e11d48" />,
-      image: '/consulting_team.png',
-      title: 'Enterprise HRMS & Payroll Software (vortexsofthrms)',
-      desc: 'Autonomous cloud HRMS and payroll software engineered for modern enterprises: autonomous multi-tier salary calculation, statutory tax compliance (PF, ESIC, PT, TDS), biometric and RFID attendance sync, and predictive workforce analytics.',
+      id: 'technical-publications-s1000d',
+      category: 'technicalpub',
+      badge: 'DEFENSE & AEROSPACE TECH PUBS',
+      icon: <FileSearch size={28} color="#0EA5E9" />,
+      title: 'Technical Publications, S1000D XML Conversion & Manual Authoring',
+      desc: 'Specialized technical documentation services conforming to international military and civilian specifications (S1000D, ATA 2200, DITA). Maintenance manuals, IPCs, and operator guides.',
       features: [
-        'Autonomous Multi-Tier Salary, Incentive & Overtime Calculation Engine',
-        'Biometric, Geo-Fence & RFID Real-Time Attendance Synchronization',
-        'Automated Employee Onboarding & Digital Compliance Vault',
-        'Statutory Tax Deductions & Automated Government Filing (PF, ESIC, TDS, PT)',
-        'Employee Mobile Self-Service Portal & Predictive Attrition AI',
+        'S1000D Issue 4.1 / 4.2 / 5.0 Data Module authoring and Common Source Database (CSDB) sync',
+        'Interactive Electronic Technical Publications (IETP / IETM) compilation',
+        'Illustrated Parts Catalog (IPC) creation with exploded 2D/3D vector schematics',
+        'Technical editing, safety standard audits, and multi-lingual technical localization',
       ],
-      deliverables: 'Instant cloud deployment, 99.99% payroll calculation accuracy, and zero compliance penalties.',
-      roiTag: '100% Statutory Compliance Zero Errors',
+      sla: '100% specification compliance • Military & civilian aviation certified',
+      tag: 'S1000D & ATA Compliant',
     },
+
+    // 13. Background Verification
     {
-      id: 'health-rcm',
-      cat: 'healthcare',
-      badge: 'FLAGSHIP HEALTHCARE BPO',
-      icon: <HeartPulse size={32} color="#0284c7" />,
-      image: '/healthcare_ops.png',
-      title: 'Healthcare BPO & Revenue Cycle Management (RCM)',
-      desc: 'Full-lifecycle HIPAA-compliant revenue cycle management, CPC/CCS certified medical coding (ICD-10-CM, CPT-4, HCPCS Level II), billing, claims scrubbing, denial resolution, and AR recovery.',
+      id: 'background-verification-bgv',
+      category: 'verification',
+      badge: 'PAN-INDIA & GLOBAL BGV',
+      icon: <ShieldCheck size={28} color="#10B981" />,
+      title: 'Pan-India Background Verification (BGV) & Compliance Screening',
+      desc: 'Comprehensive employee background checks covering employment history, educational credentials, criminal court records, physical address checks, and global database screenings.',
       features: [
-        'Medical Coding & Chart Audits (ICD-10-CM, CPT-4, HCPCS Level II)',
-        'Electronic Claims Scrubbing & Submission (HIPAA EDI 837/835)',
-        'Claims Denial Management, Root-Cause Auditing & Payer Appeals',
-        'Insurance Eligibility Verification & Prior Authorization Fast-Track',
-        'Payment Posting, Charge Entry Verification & AR Recovery Adjudication',
+        'Physical on-ground address verification across 28 states and Union Territories in India',
+        'University and board educational degree authentications with registrar verification',
+        'Prior employer HR verification: tenure, designation, exit conduct, and compensation',
+        'Police criminal record check and e-Court litigation database screening',
       ],
-      deliverables: '24-48 hr claim turnaround, 98.5%+ first-pass acceptance rate, and 40% reduction in AR days.',
-      roiTag: '98.5% First-Pass Clean Claims',
-    },
-    {
-      id: 'real-estate-title',
-      cat: 'realestate',
-      badge: 'FLAGSHIP REAL ESTATE & TITLE',
-      icon: <Building size={32} color="#10b981" />,
-      image: '/finance_accounting.png',
-      title: 'Real Estate, Title & Mortgage Settlement Services',
-      desc: 'Commercial lease abstraction, CAM expense reconciliation audits, property accounting, nationwide title searches, commitment typing, policy preparation, and mortgage settlement support.',
-      features: [
-        'Commercial Lease Abstraction & Multi-Tenant Lease Administration',
-        'Common Area Maintenance (CAM) Expense Reconciliation & Audit',
-        'Nationwide Title Search, Ownership Chain Verification & Encumbrance Identification',
-        'Title Commitment Typing, Policy Preparation & Endorsements',
-        'Mortgage Settlement Assistance, Closing Disclosure Review & Wire Auditing',
-      ],
-      deliverables: '99.8% title commitment typing accuracy, 24-hr turnaround on search packages, and audit-ready CAM calculations.',
-      roiTag: '24-Hr Title Turnaround Guarantee',
-    },
-    {
-      id: 'stm-publishing',
-      cat: 'publishing',
-      badge: 'ACADEMIC PREPRESS LEADERSHIP',
-      icon: <BookOpen size={32} color="#8b5cf6" />,
-      image: '/caretrix_about.png',
-      title: 'STM Academic Publishing, MathML XML & Prepress Typesetting',
-      desc: 'Scientific, Technical, and Medical (STM) digital publishing production: XML conversion (JATS, BITS, TEI), LaTeX to XML transformation, high-complexity MathML structuring, automated multi-platform eBook generation, and copyediting.',
-      features: [
-        'JATS, BITS & TEI Standard XML Transformation & Schema Validation',
-        'Complex MathML & ChemML Encoding with Semantic Structuring',
-        'Automated InDesign, 3B2 & LaTeX Prepress Typesetting Engines',
-        'ePub3, Kindle & Accessible PDF (WCAG 2.1 AA / PDF/UA) Production',
-        'Native English Academic Copyediting & Reference Verification',
-      ],
-      deliverables: 'Zero-schema-error guarantee, rapid turnaround on high-volume journal issues, and complete multi-format publication.',
-      roiTag: 'Zero-Schema-Error Publishing',
-    },
-    {
-      id: 'bgv-compliance',
-      cat: 'verification',
-      badge: 'COMPLIANCE & INTEGRITY',
-      icon: <ShieldCheck size={32} color="#10b981" />,
-      image: '/verification_services.png',
-      title: 'Employee Background Verification (BGV) & Compliance Screening (28 States)',
-      desc: 'Institutional-grade candidate background vetting: previous employment audits, highest education credentials, criminal court records across district and high courts, and geo-tagged physical address checks across all 28 Indian States.',
-      features: [
-        'Previous Employment & Compensation History Verification',
-        'University Degree & Professional Accreditation Authentication',
-        'Civil & Criminal Court Record Screening Across National Judicial Records',
-        'Physical Address Verification with Geo-Tagged Photographic Evidence',
-        'Global Sanctions, AML Watchlists & Politically Exposed Persons (PEP) Checks',
-      ],
-      deliverables: 'Encrypted digital BGV dossier delivered within 48-72 hours with 99.9% verified factual accuracy.',
-      roiTag: '99.9% Accuracy Across 28 States',
+      sla: 'Express 48-hour turnarounds • Encrypted tamper-proof digital reports',
+      tag: '100% Verified Screening',
     },
   ];
 
-  const filteredServices = services.filter((srv) => {
-    const matchCat = activeFilter === 'all' || srv.cat === activeFilter;
-    const matchSearch =
-      !searchQuery ||
+  const filteredServices = allServices.filter((srv) => {
+    const matchesCat = activeCategory === 'all' || srv.category === activeCategory;
+    const matchesSearch =
+      searchQuery === '' ||
       srv.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
       srv.desc.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      srv.features.some((f) => f.toLowerCase().includes(searchQuery.toLowerCase()));
-    return matchCat && matchSearch;
+      srv.badge.toLowerCase().includes(searchQuery.toLowerCase());
+    return matchesCat && matchesSearch;
   });
 
   return (
-    <div style={{ background: '#f8fafc', color: '#0f172a' }}>
-      {/* 1. Header Section */}
-      <section
+    <div style={{ background: '#f8faff', minHeight: '100vh' }}>
+      {/* ── HEADER BANNER ────────────────────────────────────── */}
+      <div
         style={{
-          background: 'linear-gradient(180deg, #f0f7ff 0%, #f8fafc 100%)',
-          padding: '5rem 0 3.5rem',
-          borderBottom: '1px solid #e2e8f0',
+          background: 'linear-gradient(135deg, #080B1A 0%, #101538 55%, #1C2280 100%)',
+          color: '#ffffff',
+          padding: '60px 0 50px',
+          textAlign: 'center',
+          position: 'relative',
         }}
       >
-        <div className="container text-center">
+        <div className="container" style={{ maxWidth: '900px' }}>
           <div
             style={{
               display: 'inline-flex',
               alignItems: 'center',
               gap: '8px',
+              background: 'rgba(255, 255, 255, 0.1)',
+              border: '1px solid rgba(255, 255, 255, 0.2)',
               padding: '6px 16px',
-              borderRadius: '30px',
-              background: '#eff6ff',
-              border: '1px solid #bfdbfe',
-              color: '#1d4ed8',
-              fontSize: '0.82rem',
+              borderRadius: '100px',
+              fontSize: '11.5px',
               fontWeight: 700,
-              textTransform: 'uppercase',
               letterSpacing: '1px',
-              marginBottom: '1.25rem',
+              textTransform: 'uppercase',
+              color: '#5BA8D4',
+              marginBottom: '18px',
             }}
           >
-            <Sparkles size={14} /> Full-Spectrum Enterprise Services Catalog (70+ Services)
+            <Sparkles size={13} color="#f59e0b" />
+            ISO 27001 Certified &bull; 65+ Global Services Portfolio
           </div>
           <h1
             style={{
-              fontSize: 'clamp(2.4rem, 4vw, 3.6rem)',
-              fontWeight: 900,
-              color: '#0f172a',
-              letterSpacing: '-0.03em',
-              marginBottom: '1.25rem',
+              fontSize: 'clamp(2.4rem, 4vw, 3.4rem)',
+              fontWeight: 800,
+              color: '#ffffff',
+              lineHeight: 1.2,
+              marginBottom: '16px',
             }}
           >
-            Universal Enterprise Services &amp; <span className="gradient-text-cyber">Global Delivery Pods</span>
+            Enterprise Services &amp; Global BPO Solutions
           </h1>
           <p
             style={{
-              fontSize: '1.15rem',
-              color: '#475569',
-              maxWidth: '820px',
-              margin: '0 auto 2rem',
-              lineHeight: '1.7',
+              fontSize: '16.5px',
+              color: 'rgba(255, 255, 255, 0.85)',
+              lineHeight: 1.7,
+              maxWidth: '740px',
+              margin: '0 auto 28px',
             }}
           >
-            From <strong>24/7 Application Support (AMS)</strong>, <strong>Multi-Cloud &amp; DevOps</strong>, 
-            <strong>Custom Software Engineering</strong>, and <strong>AI Hyper-Automation</strong> to <strong>Global Voice Operations (US/UK/AUS &amp; Pan-India 12+ Languages)</strong> and <strong>Enterprise ERP/CRM Modernization</strong> — explore our end-to-end universal delivery framework.
+            Delivering high-precision operational excellence, AI automation workflows, healthcare revenue cycle management, custom software, and specialized business processing for 150+ international clients.
           </p>
 
-          <div style={{ display: 'flex', justifyContent: 'center', gap: '1rem', flexWrap: 'wrap' }}>
-            <button onClick={onOpenModal} className="btn btn-primary" style={{ padding: '0.95rem 2.2rem', fontSize: '1rem' }}>
-              <Sparkles size={16} /> Request Custom Pod Architecture
-            </button>
-            <a href="tel:+917758088438" className="btn btn-secondary" style={{ padding: '0.95rem 1.8rem', fontSize: '1rem' }}>
-              <PhoneCall size={16} color="#0052cc" /> Call +91 77580 88438
-            </a>
-          </div>
-        </div>
-      </section>
-
-      {/* 2. Strategic Quality & Regulatory Trust Bar */}
-      <section style={{ background: '#ffffff', padding: '1.5rem 0', borderBottom: '1px solid #e2e8f0' }}>
-        <div className="container">
+          {/* Live Search Bar */}
           <div
             style={{
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'space-between',
-              flexWrap: 'wrap',
-              gap: '1.5rem',
+              position: 'relative',
+              maxWidth: '560px',
+              margin: '0 auto',
             }}
           >
-            <div style={{ display: 'flex', alignItems: 'center', gap: '8px', fontSize: '0.88rem', color: '#334155', fontWeight: 600 }}>
-              <ShieldCheck size={18} color="#059669" /> ISO 9001:2015 &amp; ISO 27001 Certified
-            </div>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '8px', fontSize: '0.88rem', color: '#334155', fontWeight: 600 }}>
-              <HeartPulse size={18} color="#0284c7" /> HIPAA Compliant US Healthcare Pods
-            </div>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '8px', fontSize: '0.88rem', color: '#334155', fontWeight: 600 }}>
-              <Clock size={18} color="#1d4ed8" /> 15-Minute Critical P1 Incident SLA
-            </div>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '8px', fontSize: '0.88rem', color: '#334155', fontWeight: 600 }}>
-              <Globe2 size={18} color="#d97706" /> 28 Indian States &amp; Follow-The-Sun US Grid
-            </div>
+            <Search
+              size={18}
+              color="#94a3b8"
+              style={{ position: 'absolute', left: '16px', top: '50%', transform: 'translateY(-50%)' }}
+            />
+            <input
+              type="text"
+              placeholder="Search services (e.g. Medical Coding, Payroll, AI Annotation, S1000D)..."
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              style={{
+                width: '100%',
+                background: '#ffffff',
+                border: 'none',
+                padding: '14px 18px 14px 46px',
+                borderRadius: '12px',
+                fontSize: '14.5px',
+                color: '#0f172a',
+                boxShadow: '0 8px 30px rgba(0, 0, 0, 0.25)',
+                outline: 'none',
+              }}
+            />
           </div>
         </div>
-      </section>
+      </div>
 
-      {/* 3. 3D 8D Real-Human Video Studio Demonstration */}
-      <Suspense fallback={<div style={{ minHeight: '280px', background: '#f8fafc' }} />}>
-        <HumanMotion8DStudio onOpenModal={onOpenModal} />
-      </Suspense>
-
-      {/* 4. Search & Filter Bar */}
-      <section
+      {/* ── CATEGORY FILTER TABS ────────────────────────────────────── */}
+      <div
         style={{
           background: '#ffffff',
-          padding: '1.25rem 0',
           borderBottom: '1px solid #e2e8f0',
           position: 'sticky',
-          top: '76px',
-          zIndex: 90,
-          boxShadow: '0 4px 20px -2px rgba(15, 23, 42, 0.06)',
+          top: '68px',
+          zIndex: 100,
+          boxShadow: '0 2px 10px rgba(0, 0, 0, 0.03)',
         }}
       >
-        <div className="container">
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
-            {/* Search Input */}
-            <div style={{ position: 'relative', maxWidth: '540px' }}>
-              <Search size={18} color="#1d4ed8" style={{ position: 'absolute', left: '14px', top: '50%', transform: 'translateY(-50%)' }} />
-              <input
-                type="text"
-                placeholder="Search across all 70+ universal services (e.g. Cloud, Custom Software, AMS, Voice, AI, Cybersecurity, ERP, RCM, BGV)..."
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
+        <div className="container" style={{ padding: '12px 20px', overflowX: 'auto' }}>
+          <div style={{ display: 'flex', gap: '8px', minWidth: 'max-content' }}>
+            {categories.map((cat) => (
+              <button
+                key={cat.id}
+                type="button"
+                onClick={() => handleCategoryChange(cat.id)}
                 style={{
-                  width: '100%',
-                  paddingLeft: '2.6rem',
-                  paddingRight: '1rem',
-                  height: '46px',
-                  fontSize: '0.92rem',
-                  background: '#f8fafc',
-                  border: '1.5px solid #cbd5e1',
-                  color: '#0f172a',
-                  borderRadius: '12px',
-                  outline: 'none',
-                }}
-              />
-            </div>
-
-            {/* Category Filter Pills */}
-            <div
-              style={{
-                display: 'flex',
-                gap: '0.5rem',
-                overflowX: 'auto',
-                paddingBottom: '0.4rem',
-                whiteSpace: 'nowrap',
-              }}
-            >
-              {categories.map((cat) => (
-                <button
-                  key={cat.id}
-                  onClick={() => setActiveFilter(cat.id)}
-                  style={{
-                    padding: '0.55rem 1.15rem',
-                    borderRadius: '20px',
-                    border: activeFilter === cat.id ? '1.5px solid #2563eb' : '1px solid #e2e8f0',
-                    background: activeFilter === cat.id ? '#eff6ff' : '#ffffff',
-                    color: activeFilter === cat.id ? '#1d4ed8' : '#475569',
-                    fontWeight: 700,
-                    fontSize: '0.84rem',
-                    cursor: 'pointer',
-                    transition: 'all 0.2s',
-                    boxShadow: activeFilter === cat.id ? '0 2px 8px rgba(37, 99, 235, 0.15)' : 'none',
-                  }}
-                >
-                  {cat.label}
-                </button>
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* 5. Services Listing Grid */}
-      <section className="section-py" style={{ background: '#f8fafc' }}>
-        <div className="container-fluid">
-          <div style={{ marginBottom: '2rem', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-            <span style={{ fontSize: '0.92rem', color: '#64748b', fontWeight: 600 }}>
-              Showing <strong style={{ color: '#0f172a' }}>{filteredServices.length}</strong> enterprise service suites &amp; SLA frameworks
-            </span>
-          </div>
-
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '2.5rem' }}>
-            {filteredServices.map((srv) => (
-              <div
-                key={srv.id}
-                style={{
-                  display: 'grid',
-                  gridTemplateColumns: '1.25fr 1fr',
-                  gap: '2.5rem',
-                  alignItems: 'center',
-                  padding: '2.5rem',
-                  background: '#ffffff',
-                  border: '1px solid #e2e8f0',
-                  borderRadius: '22px',
-                  boxShadow: '0 4px 25px -3px rgba(15, 23, 42, 0.07)',
+                  background: activeCategory === cat.id ? '#1C2280' : 'rgba(28, 34, 128, 0.04)',
+                  color: activeCategory === cat.id ? '#ffffff' : '#334155',
+                  border: activeCategory === cat.id ? '1px solid #1C2280' : '1px solid rgba(28, 34, 128, 0.1)',
+                  borderRadius: '100px',
+                  padding: '8px 18px',
+                  fontSize: '13px',
+                  fontWeight: 600,
+                  cursor: 'pointer',
+                  transition: 'all 0.2s',
+                  whiteSpace: 'nowrap',
                 }}
               >
-                <div>
-                  <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', marginBottom: '1rem' }}>
-                    <div
-                      style={{
-                        background: '#eff6ff',
-                        border: '1px solid #bfdbfe',
-                        padding: '12px',
-                        borderRadius: '12px',
-                        display: 'flex',
-                        alignItems: 'center',
-                        justifyContent: 'center',
-                      }}
-                    >
-                      {srv.icon}
-                    </div>
-                    <div>
-                      <div style={{ display: 'flex', alignItems: 'center', gap: '8px', flexWrap: 'wrap' }}>
-                        <span
-                          style={{
-                            background: '#eff6ff',
-                            border: '1px solid #bfdbfe',
-                            color: '#1d4ed8',
-                            padding: '3px 10px',
-                            borderRadius: '4px',
-                            fontSize: '0.72rem',
-                            fontWeight: 800,
-                            letterSpacing: '0.5px',
-                          }}
-                        >
-                          {srv.badge}
-                        </span>
-                        {srv.roiTag && (
-                          <span
-                            style={{
-                              background: '#ecfdf5',
-                              border: '1px solid #a7f3d0',
-                              color: '#059669',
-                              padding: '3px 8px',
-                              borderRadius: '4px',
-                              fontSize: '0.7rem',
-                              fontWeight: 700,
-                            }}
-                          >
-                            ✓ {srv.roiTag}
-                          </span>
-                        )}
-                      </div>
-                      <h2 style={{ fontSize: '1.45rem', marginTop: '6px', color: '#0f172a', fontWeight: 800 }}>{srv.title}</h2>
-                    </div>
-                  </div>
-
-                  <p style={{ color: '#475569', fontSize: '0.96rem', lineHeight: '1.7', marginBottom: '1.25rem' }}>
-                    {srv.desc}
-                  </p>
-
-                  <div style={{ marginBottom: '1.25rem' }}>
-                    <strong style={{ display: 'block', fontSize: '0.92rem', marginBottom: '0.6rem', color: '#0f172a' }}>
-                      Key Capabilities &amp; SLA Framework:
-                    </strong>
-                    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))', gap: '0.6rem' }}>
-                      {srv.features.map((feat, idx) => (
-                        <div key={idx} style={{ display: 'flex', gap: '0.6rem', alignItems: 'flex-start' }}>
-                          <CheckCircle2 size={16} color="#059669" style={{ flexShrink: 0, marginTop: '3px' }} />
-                          <span style={{ fontSize: '0.86rem', color: '#334155' }}>{feat}</span>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-
-                  <div
-                    style={{
-                      background: '#f8fafc',
-                      padding: '0.9rem 1.25rem',
-                      borderRadius: '10px',
-                      borderLeft: '4px solid #2563eb',
-                      marginBottom: '1.75rem',
-                      border: '1px solid #e2e8f0',
-                      borderLeftWidth: '4px',
-                    }}
-                  >
-                    <span style={{ fontSize: '0.86rem', color: '#334155' }}>
-                      <strong style={{ color: '#1d4ed8' }}>Delivery Guarantee:</strong> {srv.deliverables}
-                    </span>
-                  </div>
-
-                  <button
-                    onClick={onOpenModal}
-                    className="btn btn-primary"
-                    style={{ display: 'inline-flex', alignItems: 'center', gap: '0.5rem', padding: '0.8rem 1.8rem', fontSize: '0.92rem' }}
-                  >
-                    <Send size={15} /> Request Customized Proposal for this Pod
-                  </button>
-                </div>
-
-                <div style={{ borderRadius: '18px', overflow: 'hidden', border: '1px solid #e2e8f0', height: '100%', minHeight: '340px', boxShadow: '0 4px 20px rgba(0,0,0,0.06)' }}>
-                  <img
-                    src={srv.image}
-                    alt={srv.title}
-                    style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
-                  />
-                </div>
-              </div>
+                {cat.label}
+              </button>
             ))}
           </div>
         </div>
-      </section>
+      </div>
 
-      {/* 6. Strategic Value Framework */}
-      <section style={{ background: '#ffffff', padding: '5.5rem 0', borderTop: '1px solid #e2e8f0', borderBottom: '1px solid #e2e8f0' }}>
-        <div className="container-fluid">
-          <div className="text-center mx-auto" style={{ maxWidth: '800px', marginBottom: '3.5rem' }}>
-            <span className="eyebrow eyebrow-cyber">Enterprise Partnership Framework</span>
-            <h2 className="section-title">Why Global Enterprises Partner With Caretrix</h2>
-            <p className="section-subtitle mx-auto">
-              Delivering high-velocity technical depth, 24/7 operational execution, and proven capital compression for North American, European, and Pan-India leaders.
-            </p>
+      {/* ── SERVICES LISTING GRID ────────────────────────────────────── */}
+      <div className="container section-pad">
+        <div style={{ marginBottom: '24px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+          <div style={{ fontSize: '15px', color: '#64748b' }}>
+            Showing <strong>{filteredServices.length}</strong> specialized services
           </div>
-
-          <div className="grid-4" style={{ gap: '1.75rem' }}>
-            <div className="card">
-              <div style={{ color: '#1d4ed8', marginBottom: '0.75rem' }}>
-                <Laptop size={32} />
-              </div>
-              <h4 style={{ fontSize: '1.15rem', color: '#0f172a', marginBottom: '0.5rem' }}>15-Min Application Support SLA</h4>
-              <p style={{ color: '#64748b', fontSize: '0.88rem', lineHeight: '1.65' }}>
-                Guaranteed &lt;15-minute response on mission-critical P1 incidents with 24/7/365 full-stack cloud observability and root-cause prevention.
-              </p>
-            </div>
-
-            <div className="card">
-              <div style={{ color: '#059669', marginBottom: '0.75rem' }}>
-                <Headphones size={32} />
-              </div>
-              <h4 style={{ fontSize: '1.15rem', color: '#0f172a', marginBottom: '0.5rem' }}>Global &amp; Domestic Voice Pods</h4>
-              <p style={{ color: '#64748b', fontSize: '0.88rem', lineHeight: '1.65' }}>
-                C2 English neutral-accent voice operations for US/UK/AUS alongside 12+ regional Pan-India languages with 96.4% CSAT benchmarks.
-              </p>
-            </div>
-
-            <div className="card">
-              <div style={{ color: '#0284c7', marginBottom: '0.75rem' }}>
-                <BarChart3 size={32} />
-              </div>
-              <h4 style={{ fontSize: '1.15rem', color: '#0f172a', marginBottom: '0.5rem' }}>5.2x ROAS &amp; AEO Marketing</h4>
-              <p style={{ color: '#64748b', fontSize: '0.88rem', lineHeight: '1.65' }}>
-                Data-driven programmatic media buying, high-converting copywriting, and specialized entity schema indexing for AI search engines (ChatGPT, Perplexity).
-              </p>
-            </div>
-
-            <div className="card">
-              <div style={{ color: '#d97706', marginBottom: '0.75rem' }}>
-                <ShieldCheck size={32} />
-              </div>
-              <h4 style={{ fontSize: '1.15rem', color: '#0f172a', marginBottom: '0.5rem' }}>ISO 27001 &amp; HIPAA Governance</h4>
-              <p style={{ color: '#64748b', fontSize: '0.88rem', lineHeight: '1.65' }}>
-                Institutional security governance, biometric delivery floors, and full regulatory compliance for sensitive healthcare and financial data.
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* 7. CTA Bottom Banner */}
-      <section style={{ background: 'linear-gradient(135deg, #0a192f 0%, #123d6b 100%)', color: 'white', padding: '5.5rem 0', textAlign: 'center' }}>
-        <div className="container">
-          <span className="eyebrow eyebrow-white" style={{ marginBottom: '1.25rem' }}>
-            <Sparkles size={14} /> Ready to Deploy
-          </span>
-          <h2 style={{ color: 'white', fontSize: '2.5rem', fontWeight: 800, marginBottom: '1rem' }}>
-            Require a Customized Multi-Disciplinary Scope?
-          </h2>
-          <p style={{ color: 'rgba(255, 255, 255, 0.85)', maxWidth: '700px', margin: '0 auto 2.5rem', fontSize: '1.1rem', lineHeight: '1.7' }}>
-            Our enterprise solutions architects assemble dedicated pods combining Application Support engineers, Cloud &amp; DevOps specialists, Full-Stack Developers, AI engineers, or Voice &amp; BPO agents tailored to your target SLA.
-          </p>
-          <div style={{ display: 'flex', justifyContent: 'center', gap: '1rem', flexWrap: 'wrap' }}>
-            <button onClick={onOpenModal} className="btn btn-accent btn-lg" style={{ padding: '1rem 2.5rem', fontSize: '1.05rem' }}>
-              <Sparkles size={18} /> Consult With Our Solutions Directorate
+          {searchQuery && (
+            <button
+              type="button"
+              onClick={() => setSearchQuery('')}
+              style={{ background: 'none', border: 'none', color: '#CC2228', fontSize: '13px', cursor: 'pointer', fontWeight: 600 }}
+            >
+              Clear Search
             </button>
-            <a href="tel:+917758088438" className="btn btn-secondary" style={{ padding: '1rem 2.2rem', fontSize: '1.05rem', background: 'rgba(255,255,255,0.1)', color: '#fff', borderColor: 'rgba(255,255,255,0.3)' }}>
-              Call Directorate +91 77580 88438
+          )}
+        </div>
+
+        <div
+          style={{
+            display: 'grid',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(350px, 1fr))',
+            gap: '30px',
+          }}
+        >
+          {filteredServices.map((srv) => (
+            <div
+              key={srv.id}
+              style={{
+                background: '#ffffff',
+                borderRadius: '20px',
+                border: srv.badgeHighlight ? '2px solid rgba(225, 29, 72, 0.4)' : '1px solid #e2e8f0',
+                padding: '34px 30px',
+                boxShadow: srv.badgeHighlight
+                  ? '0 12px 35px rgba(225, 29, 72, 0.1)'
+                  : '0 4px 20px rgba(28, 34, 128, 0.05)',
+                display: 'flex',
+                flexDirection: 'column',
+                transition: 'all 0.3s ease',
+                position: 'relative',
+              }}
+            >
+              {/* Top Row: Badge & ROI Tag */}
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '18px' }}>
+                <span
+                  style={{
+                    background: srv.badgeHighlight ? '#E11D48' : 'rgba(28, 34, 128, 0.08)',
+                    color: srv.badgeHighlight ? '#ffffff' : '#1C2280',
+                    fontSize: '10.5px',
+                    fontWeight: 800,
+                    letterSpacing: '0.8px',
+                    padding: '4px 10px',
+                    borderRadius: '6px',
+                    textTransform: 'uppercase',
+                  }}
+                >
+                  {srv.badge}
+                </span>
+                <span style={{ fontSize: '11.5px', fontWeight: 700, color: '#10b981' }}>
+                  {srv.tag}
+                </span>
+              </div>
+
+              {/* Title & Icon */}
+              <div style={{ display: 'flex', gap: '14px', alignItems: 'flex-start', marginBottom: '14px' }}>
+                <div
+                  style={{
+                    width: '50px',
+                    height: '50px',
+                    borderRadius: '14px',
+                    background: 'rgba(28, 34, 128, 0.06)',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    flexShrink: 0,
+                  }}
+                >
+                  {srv.icon}
+                </div>
+                <h3 style={{ fontSize: '19px', fontWeight: 700, color: '#0f172a', lineHeight: 1.3 }}>
+                  {srv.title}
+                </h3>
+              </div>
+
+              {/* Description */}
+              <p style={{ fontSize: '14px', color: '#475569', lineHeight: 1.7, marginBottom: '20px' }}>
+                {srv.desc}
+              </p>
+
+              {/* Key Features / Capabilities */}
+              <div style={{ marginBottom: '24px', flex: 1 }}>
+                <div style={{ fontSize: '12px', fontWeight: 700, textTransform: 'uppercase', color: '#1C2280', marginBottom: '10px' }}>
+                  Key Capabilities &amp; Deliverables
+                </div>
+                <ul style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+                  {srv.features.map((feat, fidx) => (
+                    <li key={fidx} style={{ display: 'flex', gap: '8px', fontSize: '13.5px', color: '#334155' }}>
+                      <CheckCircle2 size={16} color="#10b981" style={{ flexShrink: 0, marginTop: '2px' }} />
+                      <span>{feat}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+
+              {/* SLA Metrics Box */}
+              <div
+                style={{
+                  background: '#f8fafc',
+                  border: '1px solid #e2e8f0',
+                  borderRadius: '10px',
+                  padding: '10px 14px',
+                  fontSize: '12.5px',
+                  color: '#475569',
+                  marginBottom: '20px',
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: '8px',
+                }}
+              >
+                <Clock size={15} color="#CC2228" style={{ flexShrink: 0 }} />
+                <span>
+                  <strong>SLA:</strong> {srv.sla}
+                </span>
+              </div>
+
+              {/* Action Button */}
+              <button
+                type="button"
+                onClick={onOpenModal}
+                className="btn-accent-custom"
+                style={{ width: '100%', justifyContent: 'center', padding: '12px' }}
+              >
+                <Send size={14} /> Request Quote &amp; Scope Discussion
+              </button>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* ── BOTTOM CTA ────────────────────────────────────── */}
+      <div className="cta-banner">
+        <div className="container" style={{ textAlign: 'center' }}>
+          <h2>Need a Custom Dedicated Pod or Service SLA?</h2>
+          <p>
+            We customize pods with specific skill sets, software proficiencies, and strict turnaround agreements. Talk to our solutions director today.
+          </p>
+          <div style={{ display: 'flex', gap: '14px', justifyContent: 'center', flexWrap: 'wrap' }}>
+            <button
+              type="button"
+              onClick={onOpenModal}
+              className="btn-cta-white"
+            >
+              <Send size={16} /> Request Custom Pod Proposal
+            </button>
+            <a
+              href="tel:+918308906690"
+              style={{
+                background: 'rgba(255, 255, 255, 0.15)',
+                color: '#ffffff',
+                border: '1.5px solid rgba(255, 255, 255, 0.3)',
+                padding: '14px 28px',
+                borderRadius: '10px',
+                fontWeight: 700,
+                fontSize: '15px',
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: '8px',
+              }}
+            >
+              Call +91-8308906690
             </a>
           </div>
         </div>
-      </section>
+      </div>
     </div>
   );
 }
