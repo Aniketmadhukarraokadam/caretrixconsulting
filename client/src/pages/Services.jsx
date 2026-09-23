@@ -36,6 +36,16 @@ import {
   LineChart,
   FileSearch,
   Accessibility,
+  Cloud,
+  CloudCog,
+  Headphones,
+  PhoneCall,
+  HeartHandshake,
+  Leaf,
+  Boxes,
+  Database,
+  TrendingUp,
+  LifeBuoy,
 } from 'lucide-react';
 
 export default function Services({ onOpenModal }) {
@@ -57,7 +67,11 @@ export default function Services({ onOpenModal }) {
   };
 
   const categories = [
-    { id: 'all', label: 'All Services (65+)' },
+    { id: 'all', label: 'All Services (75+)' },
+    { id: 'sap', label: 'SAP Enterprise Solutions' },
+    { id: 'cloud', label: 'Cloud Support & DevOps' },
+    { id: 'bpo', label: 'BPO & Contact Center' },
+    { id: 'kpo', label: 'KPO & Research Services' },
     { id: 'ai_automation', label: 'AI & Automations' },
     { id: 'healthcare', label: 'Healthcare BPO & RCM' },
     { id: 'customsoftware', label: 'IT & Software Solutions' },
@@ -65,6 +79,7 @@ export default function Services({ onOpenModal }) {
     { id: 'realestate', label: 'Real Estate & Title' },
     { id: 'data_annotation', label: 'AI Data Annotation' },
     { id: 'accounting', label: 'Finance & Accounting BPO' },
+    { id: 'csr', label: 'CSR Activity & ESG' },
     { id: 'staffing', label: 'Manpower & Staffing' },
     { id: 'logistics', label: 'Logistics & Supply Chain' },
     { id: 'digitalmarketing', label: 'Digital Marketing & SEO' },
@@ -385,6 +400,178 @@ export default function Services({ onOpenModal }) {
       sla: 'Express 48-hour turnarounds • Encrypted tamper-proof digital reports',
       tag: '100% Verified Screening',
     },
+
+    // 14. SAP Enterprise Solutions
+    {
+      id: 'sap-s4hana-consulting',
+      category: 'sap',
+      badge: 'SAP S/4HANA & ENTERPRISE ERP',
+      icon: <Boxes size={28} color="#2563EB" />,
+      title: 'SAP S/4HANA Implementation, Cloud Migration & Brownfield Cutover',
+      desc: 'Comprehensive SAP enterprise advisory, S/4HANA transformation, Central Finance rollout, custom ABAP code remediation, and seamless brownfield/greenfield migrations for multinational corporations.',
+      features: [
+        'SAP S/4HANA Finance (FICO), Controlling (CO-PA), and New GL transformation',
+        'Supply chain module harmonization: Materials Management (MM) & Sales/Distribution (SD)',
+        'Custom ABAP on HANA refactoring, Core Data Services (CDS) views, and OData services',
+        'Zero-downtime cutover strategy, legacy data extraction, and cutover rehearsals',
+        'SAP Business Technology Platform (BTP) integration and automated testing pipelines',
+      ],
+      sla: 'Zero-data-loss cutover guarantee • 24/7 hypercare support during go-live',
+      tag: 'Global SAP Excellence',
+    },
+    {
+      id: 'sap-ams-support',
+      category: 'sap',
+      badge: '24/7 SAP AMS MANAGED SERVICES',
+      icon: <Database size={28} color="#0284C7" />,
+      title: 'SAP Application Management Services (AMS), BASIS Administration & Security',
+      desc: 'Dedicated follow-the-sun SAP support pods ensuring high availability, continuous patch management, security authorizations, BASIS system administration, and rapid defect resolution.',
+      features: [
+        'Tier 1 to Tier 3 SAP incident resolution across FICO, MM, SD, PP, QM, and PM modules',
+        '24/7 proactive SAP BASIS monitoring, kernel updates, database tuning, and backup audits',
+        'SAP GRC security role redesign, Segregation of Duties (SoD) audits, and compliance reviews',
+        'Continuous enhancement delivery via agile sprint cycles and ITIL-aligned change control',
+      ],
+      sla: '<15 min critical P1 incident response • 99.9% SAP landscape uptime',
+      tag: '24/7 SAP AMS Support',
+    },
+
+    // 15. Cloud Support & Managed Infrastructure
+    {
+      id: 'cloud-infrastructure-support',
+      category: 'cloud',
+      badge: 'MANAGED CLOUD & INFRASTRUCTURE',
+      icon: <Cloud size={28} color="#0284C7" />,
+      title: '24/7 Managed Cloud Support & Infrastructure Operations (AWS, Azure, GCP)',
+      desc: 'End-to-end cloud infrastructure management, multi-cloud cost optimization (FinOps), architecture modernization, and round-the-clock sysadmin support sustaining enterprise workloads.',
+      features: [
+        '24/7/365 Cloud NOC monitoring across AWS, Microsoft Azure, and Google Cloud environments',
+        'Infrastructure as Code (IaC) provisioning using Terraform, OpenTofu, and Ansible',
+        'Cloud FinOps cost governance: resource right-sizing, reserved instances & auto-scaling',
+        'Disaster Recovery (DR) automation with verified Recovery Time Objective (RTO) under 15 minutes',
+        'Cloud security posture management (CSPM), IAM privilege hardening, and firewall audits',
+      ],
+      sla: '99.98% sustained cloud uptime • <10 min P1 alert acknowledgment',
+      tag: 'Follow-The-Sun Cloud NOC',
+    },
+    {
+      id: 'devops-kubernetes-support',
+      category: 'cloud',
+      badge: 'DEVOPS & CONTAINER PLATFORMS',
+      icon: <CloudCog size={28} color="#2563EB" />,
+      title: 'DevOps Automation, CI/CD Engineering & Kubernetes Platform Management',
+      desc: 'Automated software delivery pipelines, container orchestration, Kubernetes cluster hardening, service mesh integration, and GitOps workflows for high-velocity software engineering.',
+      features: [
+        'Enterprise Kubernetes orchestration (EKS, AKS, GKE, and on-premises OpenShift)',
+        'Zero-downtime deployment pipelines (Canary, Blue/Green) via GitHub Actions, GitLab & ArgoCD',
+        'Observability instrumentation with Prometheus, Grafana, Datadog, and OpenTelemetry',
+        'Automated secret management with HashiCorp Vault and cloud-native KMS',
+      ],
+      sla: 'Zero-downtime release deployments • Sub-minute container auto-scaling',
+      tag: 'GitOps & Zero Downtime',
+    },
+
+    // 16. BPO Services
+    {
+      id: 'omnichannel-bpo-contact-center',
+      category: 'bpo',
+      badge: 'GLOBAL CONTACT CENTER BPO',
+      icon: <Headphones size={28} color="#10B981" />,
+      title: 'Omnichannel Customer Care, Inbound/Outbound Support & Technical Helpdesk BPO',
+      desc: 'Multichannel customer engagement pods delivering superior CSAT across voice, email, live chat, WhatsApp, and social media. Native language support with strict SLA adherence.',
+      features: [
+        '24/7 follow-the-sun customer care pods for international and domestic enterprise clients',
+        'Technical helpdesk (Tier 1-2) with rapid first-contact resolution (FCR > 92%)',
+        'Omnichannel ticketing integration with Zendesk, Freshdesk, Salesforce Service Cloud',
+        'Rigorous QA speech analytics, weekly quality scoring, and accent-neutralized delivery',
+      ],
+      sla: '95%+ CSAT rating • <20s average speed to answer (ASA)',
+      tag: '92%+ First Contact Resolution',
+    },
+    {
+      id: 'backoffice-transaction-bpo',
+      category: 'bpo',
+      badge: 'BACK-OFFICE OPERATIONS BPO',
+      icon: <PhoneCall size={28} color="#0284C7" />,
+      title: 'Back-Office Processing, Claims Adjudication & Order Management BPO',
+      desc: 'High-throughput transaction processing teams handling insurance claims, customer onboarding verification, billing reconciliations, chargeback management, and structured data audits.',
+      features: [
+        'High-volume data processing and digital transaction indexing with multi-tier QA audits',
+        'Claims validation, policy verification, and automated dispute resolution workflows',
+        'E-commerce merchant onboarding, catalog enrichment, and return ticket processing',
+        'End-to-end SLA tracking with real-time management dashboards and KPI telemetry',
+      ],
+      sla: '99.8% transactional accuracy • Same-day queue clearance SLA',
+      tag: 'Zero Backlog Guarantee',
+    },
+
+    // 17. KPO Services
+    {
+      id: 'kpo-financial-market-research',
+      category: 'kpo',
+      badge: 'FINANCIAL & STRATEGIC KPO',
+      icon: <TrendingUp size={28} color="#6366F1" />,
+      title: 'Financial Analytics, Valuation Modeling & Market Intelligence KPO',
+      desc: 'Specialized analysts and domain experts delivering high-level financial research, DCF/LBO equity valuation models, competitive landscape intelligence, and macroeconomic industry briefings.',
+      features: [
+        'Financial statement spreading, 3-statement financial modeling, and covenant compliance tracking',
+        'Industry market sizing, addressable market (TAM/SAM/SOM) analysis, and competitor benchmarking',
+        'M&A transaction support: due diligence data rooms, target screening, and investment teasers',
+        'Custom executive dashboards in Power BI, Tableau, and automated Python data models',
+      ],
+      sla: 'CFA / MBA-led analysis pods • 100% rigorous source citation and validation',
+      tag: 'Domain Expert Intelligence',
+    },
+    {
+      id: 'kpo-legal-ip-research',
+      category: 'kpo',
+      badge: 'LEGAL & IP PROCESS OUTSOURCING',
+      icon: <Scale size={28} color="#1E3A8A" />,
+      title: 'Intellectual Property (IP) Research, Patent Analytics & Legal Process Outsourcing (LPO)',
+      desc: 'Knowledge pods assisting corporate legal counsels and law firms with patent prior art searches, patent portfolio landscaping, contract lifecycle redlining, and compliance discovery.',
+      features: [
+        'Patent novelty and prior-art search across USPTO, EPO, WIPO, and national patent databases',
+        'Freedom-to-Operate (FTO) searches and patent invalidity / infringement claim charting',
+        'Contract review, lease abstract extraction, and regulatory compliance clause tagging',
+        'eDiscovery support: document review, privilege logging, and litigation binder preparation',
+      ],
+      sla: 'Strict attorney-client privilege NDAs • ISO 27001 encrypted data handling',
+      tag: 'IP & Legal Defense Ready',
+    },
+
+    // 18. CSR Activity & ESG Sustainability
+    {
+      id: 'csr-program-execution',
+      category: 'csr',
+      badge: 'CSR & COMMUNITY IMPACT',
+      icon: <HeartHandshake size={28} color="#10B981" />,
+      title: 'Corporate Social Responsibility (CSR) Strategy, Implementation & Community Engagement',
+      desc: 'End-to-end CSR program orchestration for corporate entities under Companies Act Section 135: skill development, rural digital literacy, STEM education enablement, and healthcare drives.',
+      features: [
+        'CSR project identification, baseline need assessments, and accredited NGO partner vetting',
+        'Youth skill development programs under National Apprenticeship Promotion Scheme (NAPS)',
+        'Community health checkup camps, preventive healthcare drives, and diagnostic initiatives',
+        'Transparent fund tracking, milestone-based fund disbursement, and geo-tagged audit proof',
+      ],
+      sla: '100% Section 135 CSR compliance • Third-party social impact audit reporting',
+      tag: 'Measurable Social Impact',
+    },
+    {
+      id: 'esg-sustainability-reporting',
+      category: 'csr',
+      badge: 'ESG & SUSTAINABILITY AUDITING',
+      icon: <Leaf size={28} color="#059669" />,
+      title: 'ESG Auditing, Carbon Footprint Accounting & Corporate Sustainability Reporting',
+      desc: 'Helping enterprises achieve ESG excellence through Scope 1-3 greenhouse gas emissions auditing, sustainability disclosures (BRSR, GRI, SASB), and circular economy supply chain roadmaps.',
+      features: [
+        'Business Responsibility and Sustainability Reporting (BRSR) mandatory compliance filings',
+        'Greenhouse gas (GHG) Scope 1, 2 & 3 carbon footprint calculation and decarbonization paths',
+        'Supply chain sustainability audits, vendor code of conduct checks, and fair labor reviews',
+        'Board-level ESG risk governance metrics and investor-ready sustainability disclosures',
+      ],
+      sla: 'Audit-ready ESG disclosures aligned with GRI Standards & SEBI BRSR mandates',
+      tag: 'Verified ESG Governance',
+    },
   ];
 
   const filteredServices = allServices.filter((srv) => {
@@ -428,7 +615,7 @@ export default function Services({ onOpenModal }) {
             }}
           >
             <Sparkles size={13} color="#60A5FA" />
-            ISO 27001 Certified &bull; 65+ Global Services Portfolio
+            ISO 27001 Certified &bull; 75+ Global Services Portfolio
           </div>
           <h1
             style={{

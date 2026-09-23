@@ -32,6 +32,11 @@ import {
   Activity,
   Layers,
   Check,
+  Cloud,
+  Server,
+  Headphones,
+  Database,
+  Leaf,
 } from 'lucide-react';
 import { useToast } from '../components/Toast';
 
@@ -40,13 +45,15 @@ export default function Home({ onOpenModal }) {
 
   // Dynamic Typed Capability Text
   const typedWords = [
-    'Intelligent AI Automations',
-    'Enterprise Cloud Systems',
-    'HIPAA Healthcare BPO',
-    'STM Publishing Prepress',
-    'Commercial Real Estate BPO',
-    'Computer Vision Datasets',
-    'Global Managed IT Pods',
+    'SAP S/4HANA Enterprise Solutions',
+    '24/7 Managed Cloud Support & NOC',
+    'Intelligent AI & LLM Automations',
+    'Omnichannel BPO & Helpdesk Pods',
+    'Strategic KPO & Equity Valuation',
+    'HIPAA Healthcare RCM Operations',
+    'STM Publishing & S1000D XML',
+    'Corporate CSR & ESG Auditing',
+    'Global Managed IT Offshore Pods',
   ];
   const [currentWordIndex, setCurrentWordIndex] = useState(0);
   const [currentText, setCurrentText] = useState('');
@@ -123,7 +130,12 @@ export default function Home({ onOpenModal }) {
 
   // Marquee Cards Data (Updated to Sapphire & Cerulean Theme)
   const marqueeItems = [
-    { tag: 'Enterprise BPO', icon: <Users size={18} color="#2563EB" />, title: 'Enterprise BPO & Operations', desc: 'Omnichannel customer support, back-office processing & transactional excellence.' },
+    { tag: 'SAP Enterprise', icon: <Cpu size={18} color="#0284C7" />, title: 'SAP S/4HANA & AMS Support', desc: 'S/4HANA migrations, BASIS managed services, Fiori UX & custom ABAP modules.' },
+    { tag: 'Cloud Support', icon: <Cloud size={18} color="#2563EB" />, title: '24/7 Managed Cloud & DevOps', desc: 'AWS, Azure, GCP infrastructure management, Kubernetes orchestration & 24/7 NOC.' },
+    { tag: 'Omnichannel BPO', icon: <Headphones size={18} color="#059669" />, title: 'Customer Care & Helpdesk BPO', desc: 'Omnichannel support, Tier 1-3 technical helpdesk & back-office transaction pods.' },
+    { tag: 'Strategic KPO', icon: <BarChart3 size={18} color="#6366F1" />, title: 'KPO & Financial Intelligence', desc: 'Equity valuation, financial modeling, market research & IP legal analytics.' },
+    { tag: 'CSR & ESG', icon: <Leaf size={18} color="#10B981" />, title: 'Corporate CSR & ESG Auditing', desc: 'Section 135 CSR execution, carbon footprint audits & BRSR compliance reporting.' },
+    { tag: 'Enterprise BPO', icon: <Users size={18} color="#2563EB" />, title: 'Enterprise Operations BPO', desc: 'Omnichannel customer support, back-office processing & transactional excellence.' },
     { tag: 'AI / ML', icon: <Brain size={18} color="#0284C7" />, title: 'AI Automations', desc: 'Agentic AI workflows, intelligent document processing (IDP) & task agents.' },
     { tag: 'Engineering', icon: <Laptop size={18} color="#1E3A8A" />, title: 'Custom Software', desc: 'Scalable cloud, web & mobile applications engineered for high throughput.' },
     { tag: 'Medical BPO', icon: <HeartPulse size={18} color="#10B981" />, title: 'Healthcare RCM', desc: 'End-to-end medical billing, ICD-10 coding & denial recovery maximizing ROI.' },
@@ -136,8 +148,53 @@ export default function Home({ onOpenModal }) {
     { tag: 'Legal Escrow', icon: <FileText size={18} color="#0284C7" />, title: 'Title & Settlement', desc: 'Comprehensive title searches, policy typing & mortgage settlement support.' },
   ];
 
-  // 10 Flagship Services Data
+  // Flagship Services Data
   const flagshipServices = [
+    {
+      icon: <Cpu size={28} />,
+      iconBg: 'rgba(2, 132, 199, 0.1)',
+      iconColor: '#0284C7',
+      title: 'SAP S/4HANA Enterprise Migration & AMS Support',
+      badge: 'SAP SPECIALIZATION',
+      badgeBg: 'linear-gradient(135deg, #0284C7 0%, #1E3A8A 100%)',
+      desc: 'End-to-end Greenfield/Brownfield SAP S/4HANA migration, 24/7 L1-L3 BASIS AMS support, Fiori UX modernization, and custom ABAP on HANA extensions.',
+      link: '/services?cat=sap',
+      highlightBorder: true,
+    },
+    {
+      icon: <Cloud size={28} />,
+      iconBg: 'rgba(37, 99, 235, 0.08)',
+      iconColor: '#2563EB',
+      title: '24/7 Managed Cloud Support & Infrastructure',
+      badge: '24/7 GLOBAL NOC',
+      badgeBg: 'linear-gradient(135deg, #2563EB 0%, #0D9488 100%)',
+      desc: 'Multi-cloud administration across AWS, Azure, and Google Cloud. Kubernetes container orchestration, Infrastructure as Code (Terraform), and proactive DevOps monitoring.',
+      link: '/services?cat=cloud',
+    },
+    {
+      icon: <Headphones size={28} />,
+      iconBg: 'rgba(5, 150, 105, 0.08)',
+      iconColor: '#059669',
+      title: 'Omnichannel Customer Care & Helpdesk BPO',
+      desc: 'Multi-lingual customer support (Voice, Email, Chat, In-App), multi-tier technical helpdesk, back-office claims verification, and high-volume transaction processing.',
+      link: '/services?cat=bpo',
+    },
+    {
+      icon: <BarChart3 size={28} />,
+      iconBg: 'rgba(99, 102, 241, 0.08)',
+      iconColor: '#6366F1',
+      title: 'Strategic KPO, Financial Research & Market Intelligence',
+      desc: 'Equity research, financial DCF/LBO modeling, competitive landscape mapping, business intelligence, and patent / Intellectual Property (IP) search analytics.',
+      link: '/services?cat=kpo',
+    },
+    {
+      icon: <Leaf size={28} />,
+      iconBg: 'rgba(16, 185, 129, 0.08)',
+      iconColor: '#10B981',
+      title: 'Corporate Social Responsibility (CSR) & ESG Sustainability',
+      desc: 'End-to-end Section 135 CSR lifecycle execution, NGO due diligence, carbon footprint GHG auditing, and SEBI-aligned Business Responsibility and Sustainability Reporting (BRSR).',
+      link: '/services?cat=csr',
+    },
     {
       icon: <Laptop size={28} />,
       iconBg: 'rgba(37, 99, 235, 0.08)',
@@ -151,11 +208,8 @@ export default function Home({ onOpenModal }) {
       iconBg: 'rgba(30, 58, 138, 0.1)',
       iconColor: '#1E3A8A',
       title: 'AI Solutions, LLM Engineering & Data Annotation',
-      badge: 'ENTERPRISE AI PODS',
-      badgeBg: 'linear-gradient(135deg, #1E3A8A 0%, #2563EB 100%)',
       desc: 'Specialized machine learning workflows, retrieval-augmented generation (RAG), automated document intelligence (IDP), and high-precision computer vision data labeling.',
       link: '/services?cat=ai_automation',
-      highlightBorder: true,
     },
     {
       icon: <HeartPulse size={28} />,
@@ -197,30 +251,6 @@ export default function Home({ onOpenModal }) {
       desc: 'Offshore bookkeeping, general ledger management, accounts payable/receivable, financial statement preparation, and statutory tax compliance support.',
       link: '/services?cat=accounting',
     },
-    {
-      icon: <Truck size={28} />,
-      iconBg: 'rgba(14, 165, 233, 0.08)',
-      iconColor: '#0EA5E9',
-      title: 'Logistics & Supply Chain Back-Office',
-      desc: 'Freight data processing, shipping documentation audits, inventory tracking, bill of lading entry, and predictive supply chain analytics.',
-      link: '/services?cat=logistics',
-    },
-    {
-      icon: <Megaphone size={28} />,
-      iconBg: 'rgba(30, 58, 138, 0.08)',
-      iconColor: '#1E3A8A',
-      title: 'Digital Marketing & Performance SEO',
-      desc: 'Data-driven search engine optimization (SEO), high-ROI PPC campaigns, social media management, technical content marketing, and B2B lead generation.',
-      link: '/services?cat=digitalmarketing',
-    },
-    {
-      icon: <FileText size={28} />,
-      iconBg: 'rgba(6, 182, 212, 0.08)',
-      iconColor: '#06B6D4',
-      title: 'Technical Publications & S1000D XML',
-      desc: 'Technical authoring, regulatory compliance manuals, illustrated parts catalogs (IPC), JATS XML conversion, and multilingual localization.',
-      link: '/services?cat=technicalpub',
-    },
   ];
 
   // FAQ Data
@@ -248,6 +278,18 @@ export default function Home({ onOpenModal }) {
     {
       q: 'What is S1000D XML conversion used for in publishing?',
       a: 'S1000D is the global international specification for technical publications used primarily in aerospace, defense, and heavy equipment manufacturing. We restructure complex technical documentation into modular, standard XML Data Modules for compliant, multi-channel technical publishing.',
+    },
+    {
+      q: 'What SAP consulting and AMS support services does Caretrix provide?',
+      a: 'We offer full-lifecycle SAP services including Greenfield and Brownfield SAP S/4HANA migrations, 24/7 L1-L3 BASIS AMS managed support, Fiori UX modernization, custom ABAP on HANA module development, and database backup / recovery automation.',
+    },
+    {
+      q: 'What is the distinction between BPO and KPO services at Caretrix?',
+      a: 'Our Business Process Outsourcing (BPO) focuses on high-volume, process-driven operational workflows such as 24/7 omnichannel customer care, technical helpdesks, and transaction processing. Our Knowledge Process Outsourcing (KPO) provides high-value analytical expertise including equity research, financial valuation modeling, competitive intelligence, and patent / IP legal analytics.',
+    },
+    {
+      q: 'How does Caretrix assist corporations with CSR activities and ESG compliance?',
+      a: 'Caretrix provides turnkey Corporate Social Responsibility (CSR) execution aligned with Section 135 of the Companies Act, including NGO due diligence, education & healthcare community outreach, impact assessment, and SEBI Business Responsibility and Sustainability Reporting (BRSR) along with GHG Scope 1-3 carbon footprint auditing.',
     },
     {
       q: 'Is Caretrix Consulting ISO 27001 certified and HIPAA compliant?',
@@ -412,6 +454,21 @@ export default function Home({ onOpenModal }) {
                   <span style={{ fontSize: '10px', color: '#64748B' }}>Click to explore</span>
                 </div>
                 <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px' }}>
+                  <Link to="/services?cat=sap" className="hero-chip">
+                    <Cpu size={13} color="#0284C7" /> SAP S/4HANA &amp; AMS
+                  </Link>
+                  <Link to="/services?cat=cloud" className="hero-chip">
+                    <Cloud size={13} color="#2563EB" /> 24/7 Cloud NOC
+                  </Link>
+                  <Link to="/services?cat=bpo" className="hero-chip">
+                    <Headphones size={13} color="#059669" /> Omnichannel BPO
+                  </Link>
+                  <Link to="/services?cat=kpo" className="hero-chip">
+                    <BarChart3 size={13} color="#6366F1" /> Strategic KPO
+                  </Link>
+                  <Link to="/services?cat=csr" className="hero-chip">
+                    <Leaf size={13} color="#10B981" /> Corporate CSR &amp; ESG
+                  </Link>
                   <Link to="/services?cat=ai_automation" className="hero-chip">
                     <Brain size={13} color="#0284C7" /> AI &amp; Automations
                   </Link>
@@ -422,13 +479,10 @@ export default function Home({ onOpenModal }) {
                     <HeartPulse size={13} color="#10B981" /> Healthcare RCM
                   </Link>
                   <Link to="/services?cat=customsoftware" className="hero-chip">
-                    <Laptop size={13} color="#2563EB" /> Custom Software &amp; Cloud
+                    <Laptop size={13} color="#2563EB" /> Custom Software
                   </Link>
                   <Link to="/services?cat=publishing" className="hero-chip">
-                    <BookOpen size={13} color="#6366F1" /> STM Publishing Prepress
-                  </Link>
-                  <Link to="/services?cat=staffing" className="hero-chip">
-                    <Users size={13} color="#059669" /> 24/7 Global Staffing
+                    <BookOpen size={13} color="#6366F1" /> STM Prepress
                   </Link>
                 </div>
               </div>
@@ -455,7 +509,7 @@ export default function Home({ onOpenModal }) {
                   <div className="stat-lbl">Clients</div>
                 </div>
                 <div className="stat-chip">
-                  <div className="stat-num">65<span>+</span></div>
+                  <div className="stat-num">75<span>+</span></div>
                   <div className="stat-lbl">Services</div>
                 </div>
                 <div className="stat-chip">
@@ -577,7 +631,7 @@ export default function Home({ onOpenModal }) {
                   <div style={{ fontSize: '11px', fontWeight: 700, color: '#94A3B8', textTransform: 'uppercase', letterSpacing: '0.8px', marginBottom: '8px' }}>
                     Select Live Division Telemetry:
                   </div>
-                  <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '8px' }}>
+                  <div style={{ display: 'flex', flexWrap: 'wrap', gap: '6px' }}>
                     <button
                       type="button"
                       onClick={() => setActiveCockpitTab('ai')}
@@ -585,9 +639,9 @@ export default function Home({ onOpenModal }) {
                         background: activeCockpitTab === 'ai' ? 'linear-gradient(135deg, #1E3A8A 0%, #2563EB 100%)' : 'rgba(255, 255, 255, 0.06)',
                         border: activeCockpitTab === 'ai' ? '1px solid #60A5FA' : '1px solid rgba(255, 255, 255, 0.1)',
                         color: '#ffffff',
-                        padding: '8px 10px',
-                        borderRadius: '10px',
-                        fontSize: '11.5px',
+                        padding: '6px 12px',
+                        borderRadius: '8px',
+                        fontSize: '11px',
                         fontWeight: 700,
                         cursor: 'pointer',
                         transition: 'all 0.2s ease',
@@ -597,14 +651,48 @@ export default function Home({ onOpenModal }) {
                     </button>
                     <button
                       type="button"
+                      onClick={() => setActiveCockpitTab('sap')}
+                      style={{
+                        background: activeCockpitTab === 'sap' ? 'linear-gradient(135deg, #0284C7 0%, #1E3A8A 100%)' : 'rgba(255, 255, 255, 0.06)',
+                        border: activeCockpitTab === 'sap' ? '1px solid #38BDF8' : '1px solid rgba(255, 255, 255, 0.1)',
+                        color: '#ffffff',
+                        padding: '6px 12px',
+                        borderRadius: '8px',
+                        fontSize: '11px',
+                        fontWeight: 700,
+                        cursor: 'pointer',
+                        transition: 'all 0.2s ease',
+                      }}
+                    >
+                      SAP &amp; Cloud NOC
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => setActiveCockpitTab('bpo')}
+                      style={{
+                        background: activeCockpitTab === 'bpo' ? 'linear-gradient(135deg, #0D9488 0%, #059669 100%)' : 'rgba(255, 255, 255, 0.06)',
+                        border: activeCockpitTab === 'bpo' ? '1px solid #34D399' : '1px solid rgba(255, 255, 255, 0.1)',
+                        color: '#ffffff',
+                        padding: '6px 12px',
+                        borderRadius: '8px',
+                        fontSize: '11px',
+                        fontWeight: 700,
+                        cursor: 'pointer',
+                        transition: 'all 0.2s ease',
+                      }}
+                    >
+                      BPO &amp; KPO Pods
+                    </button>
+                    <button
+                      type="button"
                       onClick={() => setActiveCockpitTab('rcm')}
                       style={{
                         background: activeCockpitTab === 'rcm' ? 'linear-gradient(135deg, #059669 0%, #10B981 100%)' : 'rgba(255, 255, 255, 0.06)',
                         border: activeCockpitTab === 'rcm' ? '1px solid #34D399' : '1px solid rgba(255, 255, 255, 0.1)',
                         color: '#ffffff',
-                        padding: '8px 10px',
-                        borderRadius: '10px',
-                        fontSize: '11.5px',
+                        padding: '6px 12px',
+                        borderRadius: '8px',
+                        fontSize: '11px',
                         fontWeight: 700,
                         cursor: 'pointer',
                         transition: 'all 0.2s ease',
@@ -614,20 +702,20 @@ export default function Home({ onOpenModal }) {
                     </button>
                     <button
                       type="button"
-                      onClick={() => setActiveCockpitTab('publishing')}
+                      onClick={() => setActiveCockpitTab('csr')}
                       style={{
-                        background: activeCockpitTab === 'publishing' ? 'linear-gradient(135deg, #4F46E5 0%, #6366F1 100%)' : 'rgba(255, 255, 255, 0.06)',
-                        border: activeCockpitTab === 'publishing' ? '1px solid #A5B4FC' : '1px solid rgba(255, 255, 255, 0.1)',
+                        background: activeCockpitTab === 'csr' ? 'linear-gradient(135deg, #10B981 0%, #059669 100%)' : 'rgba(255, 255, 255, 0.06)',
+                        border: activeCockpitTab === 'csr' ? '1px solid #6EE7B7' : '1px solid rgba(255, 255, 255, 0.1)',
                         color: '#ffffff',
-                        padding: '8px 10px',
-                        borderRadius: '10px',
-                        fontSize: '11.5px',
+                        padding: '6px 12px',
+                        borderRadius: '8px',
+                        fontSize: '11px',
                         fontWeight: 700,
                         cursor: 'pointer',
                         transition: 'all 0.2s ease',
                       }}
                     >
-                      Publishing Prepress
+                      CSR &amp; ESG
                     </button>
                   </div>
                 </div>
@@ -673,6 +761,68 @@ export default function Home({ onOpenModal }) {
                     </div>
                   )}
 
+                  {activeCockpitTab === 'sap' && (
+                    <div>
+                      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '12px' }}>
+                        <div>
+                          <strong style={{ fontSize: '14.5px', color: '#ffffff' }}>SAP S/4HANA &amp; 24/7 Cloud NOC</strong>
+                          <div style={{ fontSize: '11px', color: '#94A3B8' }}>S/4HANA Cloud Migration, BASIS AMS &amp; DevOps</div>
+                        </div>
+                        <span style={{ background: 'rgba(2, 132, 199, 0.3)', border: '1px solid #0284C7', color: '#7DD3FC', fontSize: '10px', fontWeight: 700, padding: '2px 8px', borderRadius: '4px' }}>
+                          24/7 MANAGED
+                        </span>
+                      </div>
+                      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '10px', marginBottom: '12px' }}>
+                        <div style={{ background: 'rgba(0, 0, 0, 0.2)', padding: '10px', borderRadius: '8px' }}>
+                          <div style={{ fontSize: '10px', color: '#94A3B8' }}>Cloud Uptime</div>
+                          <div style={{ fontSize: '18px', fontWeight: 800, color: '#34D399' }}>99.99%</div>
+                        </div>
+                        <div style={{ background: 'rgba(0, 0, 0, 0.2)', padding: '10px', borderRadius: '8px' }}>
+                          <div style={{ fontSize: '10px', color: '#94A3B8' }}>Incident SLA</div>
+                          <div style={{ fontSize: '18px', fontWeight: 800, color: '#38BDF8' }}>&lt;15 Mins</div>
+                        </div>
+                        <div style={{ background: 'rgba(0, 0, 0, 0.2)', padding: '10px', borderRadius: '8px' }}>
+                          <div style={{ fontSize: '10px', color: '#94A3B8' }}>Migration Speed</div>
+                          <div style={{ fontSize: '18px', fontWeight: 800, color: '#A5B4FC' }}>Zero Downtime</div>
+                        </div>
+                      </div>
+                      <div style={{ fontSize: '11.5px', color: '#CBD5E1', display: 'flex', alignItems: 'center', gap: '6px' }}>
+                        <Check size={14} color="#10B981" /> Active: AWS / Azure / GCP Infrastructure &amp; SAP BASIS L1-L3
+                      </div>
+                    </div>
+                  )}
+
+                  {activeCockpitTab === 'bpo' && (
+                    <div>
+                      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '12px' }}>
+                        <div>
+                          <strong style={{ fontSize: '14.5px', color: '#ffffff' }}>Omnichannel BPO &amp; Strategic KPO</strong>
+                          <div style={{ fontSize: '11px', color: '#94A3B8' }}>Helpdesk, Claims, Financial Valuation &amp; IP Research</div>
+                        </div>
+                        <span style={{ background: 'rgba(13, 148, 136, 0.3)', border: '1px solid #14B8A6', color: '#99F6E4', fontSize: '10px', fontWeight: 700, padding: '2px 8px', borderRadius: '4px' }}>
+                          SLA ASSURED
+                        </span>
+                      </div>
+                      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '10px', marginBottom: '12px' }}>
+                        <div style={{ background: 'rgba(0, 0, 0, 0.2)', padding: '10px', borderRadius: '8px' }}>
+                          <div style={{ fontSize: '10px', color: '#94A3B8' }}>First Contact Res.</div>
+                          <div style={{ fontSize: '18px', fontWeight: 800, color: '#34D399' }}>94.6%</div>
+                        </div>
+                        <div style={{ background: 'rgba(0, 0, 0, 0.2)', padding: '10px', borderRadius: '8px' }}>
+                          <div style={{ fontSize: '10px', color: '#94A3B8' }}>SLA Compliance</div>
+                          <div style={{ fontSize: '18px', fontWeight: 800, color: '#38BDF8' }}>99.8%</div>
+                        </div>
+                        <div style={{ background: 'rgba(0, 0, 0, 0.2)', padding: '10px', borderRadius: '8px' }}>
+                          <div style={{ fontSize: '10px', color: '#94A3B8' }}>Pod Deployment</div>
+                          <div style={{ fontSize: '18px', fontWeight: 800, color: '#FCD34D' }}>&lt;48 Hrs</div>
+                        </div>
+                      </div>
+                      <div style={{ fontSize: '11.5px', color: '#CBD5E1', display: 'flex', alignItems: 'center', gap: '6px' }}>
+                        <Check size={14} color="#10B981" /> Active: 24/7 Multi-Lingual Helpdesk &amp; Quantitative Analytics
+                      </div>
+                    </div>
+                  )}
+
                   {activeCockpitTab === 'rcm' && (
                     <div>
                       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '12px' }}>
@@ -704,33 +854,33 @@ export default function Home({ onOpenModal }) {
                     </div>
                   )}
 
-                  {activeCockpitTab === 'publishing' && (
+                  {activeCockpitTab === 'csr' && (
                     <div>
                       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '12px' }}>
                         <div>
-                          <strong style={{ fontSize: '14.5px', color: '#ffffff' }}>STM Publishing Prepress CoE</strong>
-                          <div style={{ fontSize: '11px', color: '#94A3B8' }}>S1000D XML, ePUB3 &amp; PDF Remediation</div>
+                          <strong style={{ fontSize: '14.5px', color: '#ffffff' }}>Corporate CSR &amp; ESG Sustainability</strong>
+                          <div style={{ fontSize: '11px', color: '#94A3B8' }}>Section 135 Execution, Carbon Accounting &amp; BRSR</div>
                         </div>
-                        <span style={{ background: 'rgba(99, 102, 241, 0.2)', border: '1px solid #6366F1', color: '#C7D2FE', fontSize: '10px', fontWeight: 700, padding: '2px 8px', borderRadius: '4px' }}>
-                          WCAG 2.1 AA
+                        <span style={{ background: 'rgba(16, 185, 129, 0.3)', border: '1px solid #10B981', color: '#A7F3D0', fontSize: '10px', fontWeight: 700, padding: '2px 8px', borderRadius: '4px' }}>
+                          SEBI BRSR COMPLIANT
                         </span>
                       </div>
                       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '10px', marginBottom: '12px' }}>
                         <div style={{ background: 'rgba(0, 0, 0, 0.2)', padding: '10px', borderRadius: '8px' }}>
-                          <div style={{ fontSize: '10px', color: '#94A3B8' }}>S1000D XML</div>
-                          <div style={{ fontSize: '18px', fontWeight: 800, color: '#A5B4FC' }}>100% Valid</div>
+                          <div style={{ fontSize: '10px', color: '#94A3B8' }}>BRSR Audit Ready</div>
+                          <div style={{ fontSize: '18px', fontWeight: 800, color: '#34D399' }}>100%</div>
                         </div>
                         <div style={{ background: 'rgba(0, 0, 0, 0.2)', padding: '10px', borderRadius: '8px' }}>
-                          <div style={{ fontSize: '10px', color: '#94A3B8' }}>Typesetting</div>
-                          <div style={{ fontSize: '18px', fontWeight: 800, color: '#38BDF8' }}>Zero-Defect</div>
+                          <div style={{ fontSize: '10px', color: '#94A3B8' }}>Projects Audited</div>
+                          <div style={{ fontSize: '18px', fontWeight: 800, color: '#38BDF8' }}>50+</div>
                         </div>
                         <div style={{ background: 'rgba(0, 0, 0, 0.2)', padding: '10px', borderRadius: '8px' }}>
-                          <div style={{ fontSize: '10px', color: '#94A3B8' }}>Turnaround</div>
-                          <div style={{ fontSize: '18px', fontWeight: 800, color: '#34D399' }}>&lt;24 Hrs</div>
+                          <div style={{ fontSize: '10px', color: '#94A3B8' }}>Carbon Offset</div>
+                          <div style={{ fontSize: '18px', fontWeight: 800, color: '#FCD34D' }}>28,000+ Tn</div>
                         </div>
                       </div>
                       <div style={{ fontSize: '11.5px', color: '#CBD5E1', display: 'flex', alignItems: 'center', gap: '6px' }}>
-                        <Check size={14} color="#10B981" /> Active: High-volume STM conversion &amp; Section 508 compliance
+                        <Check size={14} color="#10B981" /> Active: Verified NGO Due Diligence &amp; GHG Protocol Scope 1-3 Audits
                       </div>
                     </div>
                   )}
@@ -819,7 +969,7 @@ export default function Home({ onOpenModal }) {
             </h2>
             <div className="section-divider" />
             <p className="section-subtitle">
-              From enterprise custom software architecture to HIPAA-compliant healthcare operations, we cover every dimension of your organization's outsourcing with 65+ specialized services.
+              From enterprise SAP S/4HANA transformations and 24/7 managed cloud support to HIPAA-compliant healthcare operations and omnichannel BPO, we cover every dimension of your organization's outsourcing with 75+ specialized services.
             </p>
           </div>
 
@@ -878,7 +1028,7 @@ export default function Home({ onOpenModal }) {
 
           <div style={{ textAlign: 'center', marginTop: '50px' }}>
             <Link to="/services" className="btn-sapphire">
-              <Sparkles size={16} /> Explore All 65+ Specialized Services
+              <Sparkles size={16} /> Explore All 75+ Specialized Services
             </Link>
           </div>
         </div>

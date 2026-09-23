@@ -64,7 +64,7 @@ export default function About({ onOpenModal }) {
     {
       year: '2026',
       title: 'Global Delivery Across 150+ Clients',
-      desc: 'Serving 150+ international enterprise clients across the US, UK, EU, and APAC with 24/7 continuous operations and 65+ specialized service lines.',
+      desc: 'Serving 150+ international enterprise clients across the US, UK, EU, and APAC with 24/7 continuous operations and 75+ specialized service lines.',
     },
   ];
 

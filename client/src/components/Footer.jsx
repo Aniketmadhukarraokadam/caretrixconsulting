@@ -204,22 +204,23 @@ export default function Footer({ onOpenModal }) {
           {/* Col 3: Core Services */}
           <div>
             <h6 className="footer-col-title">Our Services</h6>
-            <ul style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
+            <ul style={{ display: 'flex', flexDirection: 'column', gap: '9px' }}>
               <li>
-                <Link to="/services?cat=ai_automation" className="footer-link" style={{ color: '#60A5FA', fontWeight: 700 }}>
-                  <Sparkles size={12} color="#60A5FA" style={{ display: 'inline', marginRight: '6px' }} />
-                  AI Automations &amp; Workflows
+                <Link to="/services?cat=sap" className="footer-link" style={{ color: '#38BDF8', fontWeight: 700 }}>
+                  <Sparkles size={12} color="#38BDF8" style={{ display: 'inline', marginRight: '6px' }} />
+                  SAP S/4HANA &amp; AMS Support
                 </Link>
               </li>
+              <li><Link to="/services?cat=cloud" className="footer-link">24/7 Cloud Support &amp; DevOps</Link></li>
+              <li><Link to="/services?cat=bpo" className="footer-link">Omnichannel BPO &amp; Helpdesks</Link></li>
+              <li><Link to="/services?cat=kpo" className="footer-link">KPO &amp; Financial Intelligence</Link></li>
+              <li><Link to="/services?cat=csr" className="footer-link">Corporate CSR &amp; ESG Auditing</Link></li>
+              <li><Link to="/services?cat=ai_automation" className="footer-link">AI Automations &amp; Workflows</Link></li>
               <li><Link to="/services?cat=customsoftware" className="footer-link">Software &amp; Cloud Engineering</Link></li>
               <li><Link to="/services?cat=publishing" className="footer-link">STM Publishing &amp; Prepress</Link></li>
               <li><Link to="/services?cat=healthcare" className="footer-link">Healthcare BPO &amp; RCM Services</Link></li>
               <li><Link to="/services?cat=realestate" className="footer-link">Real Estate &amp; CAM Audit</Link></li>
               <li><Link to="/services?cat=data_annotation" className="footer-link">AI Data Annotation &amp; CV</Link></li>
-              <li><Link to="/services?cat=accounting" className="footer-link">Accounting &amp; Bookkeeping</Link></li>
-              <li><Link to="/services?cat=staffing" className="footer-link">Manpower &amp; Staff Augmentation</Link></li>
-              <li><Link to="/services?cat=digitalmarketing" className="footer-link">Digital Marketing &amp; SEO</Link></li>
-              <li><Link to="/services?cat=realestate" className="footer-link">Title &amp; Settlement Services</Link></li>
             </ul>
           </div>
 

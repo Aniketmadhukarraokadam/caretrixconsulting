@@ -3,9 +3,9 @@ import { NavLink, Link, useNavigate } from 'react-router-dom';
 import {
   Phone,
   Mail,
-  MapPin,
   Send,
   ChevronDown,
+  ChevronRight,
   Menu,
   X,
   Bot,
@@ -16,7 +16,6 @@ import {
   FileText,
   Printer,
   Tablet,
-  Image as ImageIcon,
   HeartPulse,
   Receipt,
   CreditCard,
@@ -26,7 +25,6 @@ import {
   Scale,
   Scroll,
   Building,
-  UserCog,
   BookCheck,
   CircleDollarSign,
   Users,
@@ -42,14 +40,27 @@ import {
   Grid,
   Sparkles,
   ArrowRight,
-  ExternalLink,
+  Cloud,
+  CloudCog,
+  Headphones,
+  PhoneCall,
+  HeartHandshake,
+  Leaf,
+  Boxes,
+  Database,
+  TrendingUp,
+  Activity,
+  Layers,
+  Award,
 } from 'lucide-react';
 
 export default function Navbar({ onOpenModal }) {
   const [isScrolled, setIsScrolled] = useState(false);
   const [servicesOpen, setServicesOpen] = useState(false);
+  const [activeSubDropdown, setActiveSubDropdown] = useState('sap');
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [mobileServicesAccordion, setMobileServicesAccordion] = useState(false);
+  const [mobileActiveSub, setMobileActiveSub] = useState(null);
 
   const navRef = useRef(null);
   const timeoutRef = useRef(null);
@@ -57,7 +68,7 @@ export default function Navbar({ onOpenModal }) {
 
   useEffect(() => {
     const handleScroll = () => {
-      if (window.scrollY > 30) {
+      if (window.scrollY > 25) {
         setIsScrolled(true);
       } else {
         setIsScrolled(false);
@@ -75,7 +86,7 @@ export default function Navbar({ onOpenModal }) {
   const handleMouseLeave = () => {
     timeoutRef.current = setTimeout(() => {
       setServicesOpen(false);
-    }, 200);
+    }, 220);
   };
 
   const closeDropdown = () => {
@@ -89,17 +100,329 @@ export default function Navbar({ onOpenModal }) {
     navigate(`/services?cat=${category}`);
   };
 
+  // Structured Sub-Dropdown Data Dictionary
+  const subDropdownData = {
+    sap: {
+      categoryKey: 'sap',
+      title: 'SAP Enterprise Solutions',
+      badge: 'ENTERPRISE ERP & S/4HANA',
+      badgeColor: '#60A5FA',
+      sla: 'Zero-downtime cutovers • 24/7 AMS follow-the-sun',
+      desc: 'End-to-end SAP advisory, S/4HANA cloud migration, Central Finance implementation, and 24/7 AMS BASIS and functional support.',
+      items: [
+        {
+          title: 'SAP S/4HANA Cloud Migration',
+          desc: 'Greenfield & brownfield cutover, Central Finance, and automated business testing.',
+          icon: <Boxes size={16} color="#38BDF8" />,
+          cat: 'sap',
+        },
+        {
+          title: '24/7 SAP AMS Managed Services',
+          desc: 'Tier 1–3 incident resolution across FICO, MM, SD, PP with guaranteed <15m P1 SLA.',
+          icon: <Database size={16} color="#60A5FA" />,
+          cat: 'sap',
+        },
+        {
+          title: 'SAP BASIS & Landscape Management',
+          desc: 'Kernel updates, database tuning, cloud hosting (AWS/Azure), and system recovery.',
+          icon: <Layers size={16} color="#818CF8" />,
+          cat: 'sap',
+        },
+        {
+          title: 'Custom ABAP on HANA & BTP',
+          desc: 'CDS views, OData services, Fiori UX modernization, and cloud REST integrations.',
+          icon: <FileCode2 size={16} color="#34D399" />,
+          cat: 'sap',
+        },
+      ],
+    },
+    cloud: {
+      categoryKey: 'cloud',
+      title: 'Cloud Support & DevOps Operations',
+      badge: '24/7 FOLLOW-THE-SUN NOC',
+      badgeColor: '#38BDF8',
+      sla: '99.98% uptime SLA • <10 min P1 alert acknowledgment',
+      desc: 'Follow-the-sun cloud infrastructure management, FinOps cost control, multi-cloud sysadmin, and Kubernetes platform engineering.',
+      items: [
+        {
+          title: '24/7 Cloud NOC & SysAdmin',
+          desc: 'Live telemetry, metric alerts, and round-the-clock incident response across AWS/Azure/GCP.',
+          icon: <Cloud size={16} color="#38BDF8" />,
+          cat: 'cloud',
+        },
+        {
+          title: 'DevOps & CI/CD Pipelines',
+          desc: 'Zero-downtime deployments via GitHub Actions, GitLab, and automated canary releases.',
+          icon: <CloudCog size={16} color="#60A5FA" />,
+          cat: 'cloud',
+        },
+        {
+          title: 'Kubernetes & Container Hardening',
+          desc: 'EKS, AKS, GKE clusters, service mesh security, Helm charts, and GitOps workflows.',
+          icon: <Layers size={16} color="#A78BFA" />,
+          cat: 'cloud',
+        },
+        {
+          title: 'Cloud FinOps & Cost Governance',
+          desc: 'Resource right-sizing, auto-scaling policy, and sustained 30-45% cloud bill savings.',
+          icon: <CircleDollarSign size={16} color="#34D399" />,
+          cat: 'cloud',
+        },
+      ],
+    },
+    bpo: {
+      categoryKey: 'bpo',
+      title: 'BPO Services & Contact Center',
+      badge: 'OMNICHANNEL OUTSOURCING',
+      badgeColor: '#34D399',
+      sla: '95%+ CSAT rating • <20s average speed to answer',
+      desc: 'Dedicated customer experience pods, omnichannel voice and digital ticketing, tier 1-2 helpdesk, and high-throughput back-office transaction execution.',
+      items: [
+        {
+          title: 'Omnichannel Contact Center BPO',
+          desc: 'Inbound customer care, phone support, live chat, email, and WhatsApp messaging.',
+          icon: <Headphones size={16} color="#34D399" />,
+          cat: 'bpo',
+        },
+        {
+          title: 'Technical Helpdesk (Tier 1–2)',
+          desc: 'Software troubleshooting, user authentication, and multi-tier IT support workflows.',
+          icon: <PhoneCall size={16} color="#38BDF8" />,
+          cat: 'bpo',
+        },
+        {
+          title: 'Back-Office Transaction Processing',
+          desc: 'Claims adjudication, customer KYC verification, chargeback audits, and ledger reconciliations.',
+          icon: <Receipt size={16} color="#FBBF24" />,
+          cat: 'bpo',
+        },
+        {
+          title: 'E-Commerce Operations BPO',
+          desc: 'Seller onboarding, catalog enrichment, order processing, and returns handling.',
+          icon: <ShoppingCart size={16} color="#F472B6" />,
+          cat: 'bpo',
+        },
+      ],
+    },
+    kpo: {
+      categoryKey: 'kpo',
+      title: 'KPO & Research Services',
+      badge: 'HIGH-VALUE KNOWLEDGE PODS',
+      badgeColor: '#A78BFA',
+      sla: 'CFA / MBA-led analysis • ISO 27001 encrypted data handling',
+      desc: 'Domain-expert research pods delivering financial modeling, equity research, intellectual property landscaping, and legal process outsourcing (LPO).',
+      items: [
+        {
+          title: 'Financial Modeling & Valuation',
+          desc: '3-statement financial models, DCF/LBO equity valuations, and M&A due diligence.',
+          icon: <TrendingUp size={16} color="#A78BFA" />,
+          cat: 'kpo',
+        },
+        {
+          title: 'Market & Industry Intelligence',
+          desc: 'TAM/SAM/SOM market sizing, competitor benchmarking, and customized executive briefings.',
+          icon: <LineChart size={16} color="#38BDF8" />,
+          cat: 'kpo',
+        },
+        {
+          title: 'Patent & IP Research',
+          desc: 'Patent novelty search, prior-art landscaping, and freedom-to-operate (FTO) charting.',
+          icon: <Scale size={16} color="#FBBF24" />,
+          cat: 'kpo',
+        },
+        {
+          title: 'Legal Process Outsourcing (LPO)',
+          desc: 'Contract lifecycle redlining, lease abstraction summaries, and eDiscovery review.',
+          icon: <FileText size={16} color="#34D399" />,
+          cat: 'kpo',
+        },
+      ],
+    },
+    ai_automation: {
+      categoryKey: 'ai_automation',
+      title: 'AI Solutions & Data Annotation',
+      badge: 'AGENTIC WORKFLOWS & CV',
+      badgeColor: '#38BDF8',
+      sla: '99.5% annotation consensus • <200ms model inference',
+      desc: 'Agentic workflow automation, intelligent document processing (IDP), LLM fine-tuning, and high-precision computer vision data labeling.',
+      items: [
+        {
+          title: 'Agentic AI Automations',
+          desc: 'Autonomous multi-agent systems using LangChain, AutoGen & custom LLM orchestrators.',
+          icon: <Bot size={16} color="#38BDF8" />,
+          cat: 'ai_automation',
+        },
+        {
+          title: 'Intelligent Document Processing (IDP)',
+          desc: 'OCR pipelines extracting data from invoices, medical records, and legal agreements.',
+          icon: <FileText size={16} color="#60A5FA" />,
+          cat: 'ai_automation',
+        },
+        {
+          title: 'Computer Vision 2D/3D Labeling',
+          desc: 'Bounding boxes, polygon segmentation, and 3D LiDAR point clouds for ML models.',
+          icon: <FileSpreadsheet size={16} color="#34D399" />,
+          cat: 'data_annotation',
+        },
+        {
+          title: 'LLM Fine-Tuning & RLHF',
+          desc: 'Domain-specific model alignment, factuality grading, and red-teaming datasets.',
+          icon: <Brain size={16} color="#A78BFA" />,
+          cat: 'ai_automation',
+        },
+      ],
+    },
+    healthcare: {
+      categoryKey: 'healthcare',
+      title: 'Healthcare BPO & Revenue Cycle (RCM)',
+      badge: 'HIPAA COMPLIANT & CERTIFIED',
+      badgeColor: '#34D399',
+      sla: '98%+ clean claim first-pass • <15 day AR turnaround',
+      desc: 'End-to-end medical coding, claims billing, payment posting, denial appeals, and accounts receivable (AR) recovery under strict HIPAA compliance.',
+      items: [
+        {
+          title: 'Medical Coding (ICD-10-CM / CPT)',
+          desc: 'AAPC & AHIMA certified coders ensuring accurate code assignment and documentation audit.',
+          icon: <HeartPulse size={16} color="#34D399" />,
+          cat: 'healthcare',
+        },
+        {
+          title: 'Claim Submission & Billing',
+          desc: 'Electronic EDI claim clearinghouse validation and timely filing compliance.',
+          icon: <Receipt size={16} color="#38BDF8" />,
+          cat: 'healthcare',
+        },
+        {
+          title: 'Payment Posting & Reconciliation',
+          desc: 'ERA/EOB reconciliation, patient co-pay posting, and contractual adjustment tracking.',
+          icon: <CreditCard size={16} color="#FBBF24" />,
+          cat: 'healthcare',
+        },
+        {
+          title: 'Denial Management & AR Recovery',
+          desc: 'Root-cause denial investigation, resubmission appeals, and aged balance recovery.',
+          icon: <RotateCcw size={16} color="#F472B6" />,
+          cat: 'healthcare',
+        },
+      ],
+    },
+    customsoftware: {
+      categoryKey: 'customsoftware',
+      title: 'IT & Software Engineering',
+      badge: 'DEDICATED OFFSHORE PODS',
+      badgeColor: '#60A5FA',
+      sla: 'Agile 2-week sprints • 100% time-zone aligned',
+      desc: 'Custom software architecture, modern microservices, full-stack web and mobile apps, and dedicated offshore development pods (ODC).',
+      items: [
+        {
+          title: 'Enterprise Software Engineering',
+          desc: 'Full-stack cloud architectures built with React, Next.js, Node.js, Python, and Java.',
+          icon: <Laptop size={16} color="#60A5FA" />,
+          cat: 'customsoftware',
+        },
+        {
+          title: 'API & Microservice Development',
+          desc: 'High-throughput RESTful, GraphQL, and event-driven microservices on AWS/Azure.',
+          icon: <FileCode2 size={16} color="#38BDF8" />,
+          cat: 'customsoftware',
+        },
+        {
+          title: 'Cross-Platform Mobile Apps',
+          desc: 'Native iOS & Android performance using React Native and Flutter frameworks.',
+          icon: <Tablet size={16} color="#A78BFA" />,
+          cat: 'customsoftware',
+        },
+        {
+          title: 'Global Staff Augmentation',
+          desc: 'Dedicated full-stack developers, QA engineers, and architects for sprint velocity.',
+          icon: <Users size={16} color="#34D399" />,
+          cat: 'staffing',
+        },
+      ],
+    },
+    publishing: {
+      categoryKey: 'publishing',
+      title: 'STM Publishing & Prepress',
+      badge: 'WCAG 2.1 & S1000D CERTIFIED',
+      badgeColor: '#38BDF8',
+      sla: 'Zero-defect composition • <24 hr journal turnaround',
+      desc: 'Digital prepress, automated typesetting, ePUB3 conversion, S1000D XML authoring, and PDF digital accessibility remediation.',
+      items: [
+        {
+          title: 'Typesetting & Journal Production',
+          desc: 'High-volume composition in InDesign, 3B2, LaTeX, and XML-first automated workflows.',
+          icon: <Printer size={16} color="#38BDF8" />,
+          cat: 'publishing',
+        },
+        {
+          title: 'eBook & ePUB3 Conversion',
+          desc: 'Reflowable and fixed-layout ePUB3, Kindle KF8, and interactive media conversion.',
+          icon: <Tablet size={16} color="#60A5FA" />,
+          cat: 'publishing',
+        },
+        {
+          title: 'S1000D & DITA XML Authoring',
+          desc: 'Technical authoring, CSDB compilation, and IETP/IETM manuals for aerospace & defense.',
+          icon: <FileSearch size={16} color="#A78BFA" />,
+          cat: 'technicalpub',
+        },
+        {
+          title: 'Section 508 & WCAG Accessibility',
+          desc: 'PDF/UA document tagging, alt-text authoring, and screen-reader accessibility audits.',
+          icon: <Accessibility size={16} color="#34D399" />,
+          cat: 'publishing',
+        },
+      ],
+    },
+    csr: {
+      categoryKey: 'csr',
+      title: 'CSR Activity & ESG Sustainability',
+      badge: 'SECTION 135 & BRSR COMPLIANT',
+      badgeColor: '#34D399',
+      sla: '100% statutory compliance • Verified social impact audit',
+      desc: 'Orchestrating end-to-end corporate social responsibility initiatives, community engagement drives, carbon footprint accounting, and SEBI BRSR disclosures.',
+      items: [
+        {
+          title: 'CSR Program Execution & Strategy',
+          desc: 'Companies Act Section 135 project identification, NGO vetting, and fund governance.',
+          icon: <HeartHandshake size={16} color="#34D399" />,
+          cat: 'csr',
+        },
+        {
+          title: 'Youth Skill Development & NAPS',
+          desc: 'Apprenticeship incubation, technical skill training, and rural digital literacy drives.',
+          icon: <Award size={16} color="#38BDF8" />,
+          cat: 'csr',
+        },
+        {
+          title: 'ESG & Carbon Footprint Audits',
+          desc: 'Scope 1-3 greenhouse gas emissions accounting and decarbonization roadmaps.',
+          icon: <Leaf size={16} color="#10B981" />,
+          cat: 'csr',
+        },
+        {
+          title: 'BRSR & Sustainability Disclosures',
+          desc: 'SEBI-mandated Business Responsibility reporting and GRI standard filings.',
+          icon: <FileText size={16} color="#60A5FA" />,
+          cat: 'csr',
+        },
+      ],
+    },
+  };
+
+  const activeSubData = subDropdownData[activeSubDropdown] || subDropdownData.sap;
+
   return (
     <div id="site-header" style={{ position: 'sticky', top: 0, zIndex: 1030, width: '100%' }}>
       {/* ── TOPBAR ────────────────────────────────────── */}
       <div
         className="topbar"
         style={{
-          background: 'linear-gradient(90deg, #070C1E 0%, #0B1228 50%, #111A38 100%)',
-          padding: '10px 0',
+          background: '#050A18',
+          padding: '8px 0',
           fontSize: '12px',
           fontWeight: 500,
-          color: 'rgba(255, 255, 255, 0.8)',
+          color: 'rgba(255, 255, 255, 0.75)',
           borderBottom: '1px solid rgba(255, 255, 255, 0.08)',
         }}
       >
@@ -143,35 +466,31 @@ export default function Navbar({ onOpenModal }) {
               >
                 <Phone size={12} color="#0284C7" /> +91-8308906690
               </a>
-              <span style={{ width: '1px', height: '14px', background: 'rgba(255,255,255,0.15)' }} />
-              <span style={{ display: 'inline-flex', alignItems: 'center', gap: '6px', color: 'rgba(255,255,255,0.75)' }}>
-                <MapPin size={12} color="#0284C7" /> Pune HQ &amp; Bengaluru, India | USA
-              </span>
             </div>
 
             <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
               <span style={{ fontSize: '11px', color: '#10B981', fontWeight: 600 }}>
-                ● ISO 27001 Certified &bull; HIPAA Compliant
+                ● ISO 27001 Certified &bull; HIPAA Compliant &bull; 24/7 Global Hubs
               </span>
             </div>
           </div>
         </div>
       </div>
 
-      {/* ── MAIN FLOATING NAVBAR ────────────────────────────────────── */}
+      {/* ── MAIN DEEP OBSIDIAN SAPPHIRE NAVBAR ────────────────────────────────────── */}
       <nav
         ref={navRef}
         style={{
-          background: isScrolled ? 'rgba(255, 255, 255, 0.98)' : 'rgba(255, 255, 255, 0.94)',
-          backdropFilter: 'blur(20px)',
-          WebkitBackdropFilter: 'blur(20px)',
-          border: '1px solid rgba(28, 34, 128, 0.08)',
+          background: isScrolled ? 'rgba(7, 12, 30, 0.95)' : 'rgba(10, 17, 40, 0.9)',
+          backdropFilter: 'blur(28px)',
+          WebkitBackdropFilter: 'blur(28px)',
+          border: '1px solid rgba(59, 130, 246, 0.22)',
           boxShadow: isScrolled
-            ? '0 15px 45px rgba(28, 34, 128, 0.12)'
-            : '0 10px 35px rgba(28, 34, 128, 0.06)',
+            ? '0 20px 50px rgba(0, 0, 0, 0.5), 0 0 30px rgba(37, 99, 235, 0.15)'
+            : '0 12px 35px rgba(0, 0, 0, 0.35)',
           width: '96%',
           maxWidth: '1740px',
-          margin: isScrolled ? '6px auto 10px' : '12px auto 14px',
+          margin: isScrolled ? '6px auto 10px' : '10px auto 14px',
           borderRadius: '18px',
           transition: 'all 0.3s ease',
           position: 'relative',
@@ -197,7 +516,7 @@ export default function Navbar({ onOpenModal }) {
               src="/logo.png"
               alt="Caretrix Consulting"
               style={{
-                height: '48px',
+                height: '46px',
                 width: 'auto',
                 objectFit: 'contain',
                 transition: 'all 0.3s ease',
@@ -232,7 +551,7 @@ export default function Navbar({ onOpenModal }) {
               About
             </NavLink>
 
-            {/* Services Dropdown Item */}
+            {/* Interactive Services Sub-Dropdown Trigger */}
             <div
               style={{ position: 'relative' }}
               onMouseEnter={handleMouseEnter}
@@ -254,7 +573,7 @@ export default function Navbar({ onOpenModal }) {
                 Services <ChevronDown size={14} style={{ transform: servicesOpen ? 'rotate(180deg)' : 'none', transition: 'transform 0.2s' }} />
               </button>
 
-              {/* 4-Column Mega Menu Dropdown */}
+              {/* ── TWO-PANE MASTER-DETAIL SUB-DROPDOWN ── */}
               {servicesOpen && (
                 <div
                   style={{
@@ -262,201 +581,256 @@ export default function Navbar({ onOpenModal }) {
                     top: '100%',
                     left: '50%',
                     transform: 'translateX(-50%)',
-                    width: '960px',
-                    maxWidth: '92vw',
-                    background: '#ffffff',
-                    borderRadius: '16px',
-                    boxShadow: '0 25px 60px rgba(13, 16, 53, 0.18), 0 0 0 1px rgba(28, 34, 128, 0.08)',
+                    width: '1040px',
+                    maxWidth: '94vw',
+                    background: '#070C1E',
+                    border: '1.5px solid rgba(59, 130, 246, 0.28)',
+                    borderRadius: '20px',
+                    boxShadow: '0 30px 80px rgba(0, 0, 0, 0.7), 0 0 40px rgba(37, 99, 235, 0.2)',
                     padding: '24px',
                     zIndex: 1050,
-                    animation: 'dropFade 0.2s ease',
+                    animation: 'dropFade 0.22s cubic-bezier(0.16, 1, 0.3, 1)',
+                    color: '#ffffff',
                   }}
                 >
                   <div
                     style={{
                       display: 'grid',
-                      gridTemplateColumns: 'repeat(4, 1fr)',
-                      gap: '20px',
+                      gridTemplateColumns: '320px 1fr',
+                      gap: '24px',
+                      alignItems: 'stretch',
                     }}
                   >
-                    {/* Column 1: AI & Automations + Publishing */}
-                    <div>
-                      <div className="mega-col-header" style={{ color: '#0284C7' }}>
-                        <Brain size={14} /> AI &amp; Automations
-                      </div>
-                      <div className="mega-links-group">
-                        <Link to="/services?cat=ai_automation" onClick={closeDropdown} className="mega-item">
-                          <Bot size={13} color="#0284C7" /> AI Automation Services
-                        </Link>
-                        <Link to="/services?cat=ai_automation" onClick={closeDropdown} className="mega-item">
-                          <FileCode2 size={13} color="#0284C7" /> Agentic AI Workflows
-                        </Link>
-                        <Link to="/services?cat=ai_automation" onClick={closeDropdown} className="mega-item">
-                          <FileText size={13} color="#0284C7" /> Intelligent Doc Processing
-                        </Link>
-                        <Link to="/services?cat=data_annotation" onClick={closeDropdown} className="mega-item">
-                          <FileSpreadsheet size={13} color="#0284C7" /> AI Data Annotation
-                        </Link>
+                    {/* Left Pane: Sub-Dropdown Category Selector */}
+                    <div
+                      style={{
+                        background: 'rgba(255, 255, 255, 0.03)',
+                        borderRadius: '14px',
+                        padding: '10px',
+                        border: '1px solid rgba(255, 255, 255, 0.08)',
+                        display: 'flex',
+                        flexDirection: 'column',
+                        gap: '4px',
+                        maxHeight: '480px',
+                        overflowY: 'auto',
+                      }}
+                    >
+                      <div
+                        style={{
+                          fontSize: '10px',
+                          fontWeight: 800,
+                          textTransform: 'uppercase',
+                          letterSpacing: '1.2px',
+                          color: '#60A5FA',
+                          padding: '6px 12px',
+                          marginBottom: '4px',
+                        }}
+                      >
+                        Select Service Capability
                       </div>
 
-                      <div className="mega-col-header mt-3" style={{ color: '#1E3A8A' }}>
-                        <BookOpen size={14} /> STM Publishing
-                      </div>
-                      <div className="mega-links-group">
-                        <Link to="/services?cat=publishing" onClick={closeDropdown} className="mega-item">
-                          <BookOpen size={13} /> Publishing Services
-                        </Link>
-                        <Link to="/services?cat=publishing" onClick={closeDropdown} className="mega-item">
-                          <FileText size={13} /> Editorial Services
-                        </Link>
-                        <Link to="/services?cat=publishing" onClick={closeDropdown} className="mega-item">
-                          <Printer size={13} /> Digital Prepress
-                        </Link>
-                        <Link to="/services?cat=publishing" onClick={closeDropdown} className="mega-item">
-                          <Tablet size={13} /> eBook &amp; ePUB3 Conversion
-                        </Link>
-                        <Link to="/services?cat=publishing" onClick={closeDropdown} className="mega-item">
-                          <ImageIcon size={13} /> Alt Text &amp; Accessibility
-                        </Link>
-                      </div>
+                      {Object.keys(subDropdownData).map((catKey) => {
+                        const data = subDropdownData[catKey];
+                        const isSelected = activeSubDropdown === catKey;
+                        return (
+                          <div
+                            key={catKey}
+                            onMouseEnter={() => setActiveSubDropdown(catKey)}
+                            onClick={() => navigateToService(data.categoryKey)}
+                            style={{
+                              display: 'flex',
+                              alignItems: 'center',
+                              justifyContent: 'space-between',
+                              padding: '10px 14px',
+                              borderRadius: '10px',
+                              cursor: 'pointer',
+                              background: isSelected
+                                ? 'linear-gradient(90deg, rgba(37, 99, 235, 0.3) 0%, rgba(2, 132, 199, 0.12) 100%)'
+                                : 'transparent',
+                              border: isSelected
+                                ? '1px solid rgba(96, 165, 250, 0.45)'
+                                : '1px solid transparent',
+                              transition: 'all 0.18s ease',
+                            }}
+                          >
+                            <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+                              <span
+                                style={{
+                                  width: '8px',
+                                  height: '8px',
+                                  borderRadius: '50%',
+                                  background: isSelected ? '#38BDF8' : 'rgba(255, 255, 255, 0.3)',
+                                  boxShadow: isSelected ? '0 0 8px #38BDF8' : 'none',
+                                }}
+                              />
+                              <span
+                                style={{
+                                  fontSize: '13px',
+                                  fontWeight: isSelected ? 700 : 500,
+                                  color: isSelected ? '#ffffff' : '#CBD5E1',
+                                }}
+                              >
+                                {data.title}
+                              </span>
+                            </div>
+                            <ChevronRight
+                              size={14}
+                              color={isSelected ? '#38BDF8' : '#64748B'}
+                              style={{
+                                transform: isSelected ? 'translateX(2px)' : 'none',
+                                transition: 'transform 0.18s ease',
+                              }}
+                            />
+                          </div>
+                        );
+                      })}
                     </div>
 
-                    {/* Column 2: Healthcare BPO + Real Estate */}
-                    <div>
-                      <div className="mega-col-header" style={{ color: '#0284C7' }}>
-                        <HeartPulse size={14} /> Health Care
-                      </div>
-                      <div className="mega-links-group">
-                        <Link to="/services?cat=healthcare" onClick={closeDropdown} className="mega-item">
-                          <HeartPulse size={13} color="#0284C7" /> Medical Coding (ICD-10)
-                        </Link>
-                        <Link to="/services?cat=healthcare" onClick={closeDropdown} className="mega-item">
-                          <Receipt size={13} color="#0284C7" /> Medical Billing
-                        </Link>
-                        <Link to="/services?cat=healthcare" onClick={closeDropdown} className="mega-item">
-                          <CreditCard size={13} color="#0284C7" /> Payment Posting
-                        </Link>
-                        <Link to="/services?cat=healthcare" onClick={closeDropdown} className="mega-item">
-                          <Ban size={13} color="#0284C7" /> Denial Management
-                        </Link>
-                        <Link to="/services?cat=healthcare" onClick={closeDropdown} className="mega-item">
-                          <RotateCcw size={13} color="#0284C7" /> AR Recovery
-                        </Link>
-                      </div>
+                    {/* Right Pane: Dynamic Sub-Dropdown Details & Sub-Services */}
+                    <div
+                      style={{
+                        display: 'flex',
+                        flexDirection: 'column',
+                        justifyContent: 'space-between',
+                        padding: '6px 4px',
+                      }}
+                    >
+                      {/* Sub-Category Header */}
+                      <div>
+                        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '8px' }}>
+                          <span
+                            style={{
+                              fontSize: '10px',
+                              fontWeight: 800,
+                              textTransform: 'uppercase',
+                              letterSpacing: '1px',
+                              color: activeSubData.badgeColor,
+                              background: 'rgba(255, 255, 255, 0.06)',
+                              border: `1px solid ${activeSubData.badgeColor}40`,
+                              padding: '3px 10px',
+                              borderRadius: '100px',
+                            }}
+                          >
+                            {activeSubData.badge}
+                          </span>
+                          <span style={{ fontSize: '11px', color: '#94A3B8', fontWeight: 600 }}>
+                            {activeSubData.sla}
+                          </span>
+                        </div>
 
-                      <div className="mega-col-header mt-3">
-                        <Building size={14} /> Real Estate
-                      </div>
-                      <div className="mega-links-group">
-                        <Link to="/services?cat=realestate" onClick={closeDropdown} className="mega-item">
-                          <Search size={13} /> CAM Audit Services
-                        </Link>
-                        <Link to="/services?cat=realestate" onClick={closeDropdown} className="mega-item">
-                          <Scale size={13} /> CAM Reconciliation
-                        </Link>
-                        <Link to="/services?cat=realestate" onClick={closeDropdown} className="mega-item">
-                          <Scroll size={13} /> Lease Administration
-                        </Link>
-                        <Link to="/services?cat=realestate" onClick={closeDropdown} className="mega-item">
-                          <FileText size={13} /> Lease Abstraction
-                        </Link>
-                        <Link to="/services?cat=realestate" onClick={closeDropdown} className="mega-item">
-                          <CircleDollarSign size={13} /> Property Accounting
-                        </Link>
-                      </div>
-                    </div>
-
-                    {/* Column 3: Finance & Accounting BPO + IT & Digital */}
-                    <div>
-                      <div className="mega-col-header" style={{ color: '#1E3A8A' }}>
-                        <CircleDollarSign size={14} /> Finance &amp; Accounting BPO
-                      </div>
-                      <div className="mega-links-group">
-                        <Link to="/services?cat=accounting" onClick={closeDropdown} className="mega-item">
-                          <BookCheck size={13} /> General Ledger &amp; Bookkeeping
-                        </Link>
-                        <Link to="/services?cat=accounting" onClick={closeDropdown} className="mega-item">
-                          <Receipt size={13} /> Accounts Payable / Receivable
-                        </Link>
-                        <Link to="/services?cat=accounting" onClick={closeDropdown} className="mega-item">
-                          <BarChart3 size={13} /> Financial Planning &amp; Reporting
-                        </Link>
-                        <Link to="/services?cat=staffing" onClick={closeDropdown} className="mega-item">
-                          <Users size={13} /> Global Staff Augmentation
-                        </Link>
-                      </div>
-
-                      <div className="mega-col-header mt-3">
-                        <Laptop size={14} /> IT &amp; Digital
-                      </div>
-                      <div className="mega-links-group">
-                        <Link to="/services?cat=customsoftware" onClick={closeDropdown} className="mega-item">
-                          <Laptop size={13} /> Software Solutions
-                        </Link>
-                        <Link to="/services?cat=digitalmarketing" onClick={closeDropdown} className="mega-item">
-                          <Megaphone size={13} /> Digital Marketing &amp; SEO
-                        </Link>
-                        <Link to="/services?cat=customsoftware" onClick={closeDropdown} className="mega-item">
-                          <ShoppingCart size={13} /> E-Commerce Solutions
-                        </Link>
-                        <Link to="/services?cat=customsoftware" onClick={closeDropdown} className="mega-item">
-                          <LineChart size={13} /> Data Analytics
-                        </Link>
-                      </div>
-                    </div>
-
-                    {/* Column 4: More Services + View All */}
-                    <div>
-                      <div className="mega-col-header">
-                        <Grid size={14} /> More Services
-                      </div>
-                      <div className="mega-links-group">
-                        <Link to="/services?cat=logistics" onClick={closeDropdown} className="mega-item">
-                          <Truck size={13} /> Logistics Services
-                        </Link>
-                        <Link to="/services?cat=realestate" onClick={closeDropdown} className="mega-item">
-                          <Building size={13} /> Title &amp; Settlement
-                        </Link>
-                        <Link to="/services?cat=realestate" onClick={closeDropdown} className="mega-item">
-                          <Receipt size={13} /> Mortgage &amp; Escrow
-                        </Link>
-                        <Link to="/services?cat=verification" onClick={closeDropdown} className="mega-item">
-                          <ShieldCheck size={13} /> Background Verification
-                        </Link>
-                        <Link to="/services?cat=technicalpub" onClick={closeDropdown} className="mega-item">
-                          <FileSearch size={13} /> Technical Writing (S1000D)
-                        </Link>
-                        <Link to="/services?cat=publishing" onClick={closeDropdown} className="mega-item">
-                          <Accessibility size={13} /> Digital Accessibility
-                        </Link>
-                      </div>
-
-                      <div className="mega-col-header mt-3" style={{ color: '#1E3A8A' }}>
-                        <Grid size={14} /> View All
-                      </div>
-                      <div className="mega-links-group">
-                        <Link
-                          to="/services"
-                          onClick={closeDropdown}
-                          className="mega-item"
+                        <h4
                           style={{
-                            fontWeight: 700,
-                            color: '#2563EB',
-                            background: 'rgba(37, 99, 235, 0.08)',
-                            borderRadius: '8px',
-                            padding: '8px 10px',
+                            fontSize: '20px',
+                            fontWeight: 800,
+                            color: '#ffffff',
+                            marginBottom: '6px',
+                            letterSpacing: '-0.02em',
                           }}
                         >
-                          <Grid size={13} color="#2563EB" /> Explore All 65+ Services <ArrowRight size={12} />
+                          {activeSubData.title}
+                        </h4>
+                        <p style={{ fontSize: '13px', color: '#94A3B8', lineHeight: 1.6, marginBottom: '20px' }}>
+                          {activeSubData.desc}
+                        </p>
+
+                        {/* Sub-Services 2x2 Grid */}
+                        <div
+                          style={{
+                            display: 'grid',
+                            gridTemplateColumns: 'repeat(2, 1fr)',
+                            gap: '12px',
+                            marginBottom: '22px',
+                          }}
+                        >
+                          {activeSubData.items.map((item, idx) => (
+                            <Link
+                              key={idx}
+                              to={`/services?cat=${item.cat}`}
+                              onClick={closeDropdown}
+                              className="sub-dropdown-card"
+                              style={{
+                                background: 'rgba(255, 255, 255, 0.04)',
+                                border: '1px solid rgba(255, 255, 255, 0.09)',
+                                borderRadius: '12px',
+                                padding: '14px',
+                                textDecoration: 'none',
+                                transition: 'all 0.2s ease',
+                                display: 'flex',
+                                gap: '12px',
+                                alignItems: 'flex-start',
+                              }}
+                            >
+                              <div
+                                style={{
+                                  width: '32px',
+                                  height: '32px',
+                                  borderRadius: '8px',
+                                  background: 'rgba(255, 255, 255, 0.06)',
+                                  display: 'flex',
+                                  alignItems: 'center',
+                                  justifyContent: 'center',
+                                  flexShrink: 0,
+                                }}
+                              >
+                                {item.icon}
+                              </div>
+                              <div>
+                                <div style={{ fontSize: '13px', fontWeight: 700, color: '#ffffff', marginBottom: '3px' }}>
+                                  {item.title}
+                                </div>
+                                <div style={{ fontSize: '11.5px', color: '#94A3B8', lineHeight: 1.45 }}>
+                                  {item.desc}
+                                </div>
+                              </div>
+                            </Link>
+                          ))}
+                        </div>
+                      </div>
+
+                      {/* Right Pane Footer Action Bar */}
+                      <div
+                        style={{
+                          display: 'flex',
+                          alignItems: 'center',
+                          justifyContent: 'space-between',
+                          paddingTop: '14px',
+                          borderTop: '1px solid rgba(255, 255, 255, 0.08)',
+                        }}
+                      >
+                        <Link
+                          to={`/services?cat=${activeSubData.categoryKey}`}
+                          onClick={closeDropdown}
+                          style={{
+                            fontSize: '12.5px',
+                            fontWeight: 700,
+                            color: '#38BDF8',
+                            display: 'inline-flex',
+                            alignItems: 'center',
+                            gap: '6px',
+                          }}
+                        >
+                          Explore All {activeSubData.title} <ArrowRight size={13} />
                         </Link>
+
+                        <button
+                          type="button"
+                          onClick={() => {
+                            closeDropdown();
+                            onOpenModal();
+                          }}
+                          className="btn-sapphire"
+                          style={{ padding: '8px 18px', fontSize: '12.5px' }}
+                        >
+                          Request B2B Quote
+                        </button>
                       </div>
                     </div>
                   </div>
 
-                  {/* Global Delivery Assurance Strip */}
+                  {/* Bottom Multi-Shore Universal Assurance Strip */}
                   <div
                     style={{
-                      borderTop: '1px solid #e2e8f0',
+                      borderTop: '1px solid rgba(255, 255, 255, 0.08)',
                       marginTop: '18px',
                       paddingTop: '14px',
                       display: 'flex',
@@ -464,34 +838,31 @@ export default function Navbar({ onOpenModal }) {
                       justifyContent: 'space-between',
                       flexWrap: 'wrap',
                       gap: '10px',
-                      background: 'rgba(37, 99, 235, 0.04)',
-                      padding: '12px 18px',
-                      borderRadius: '10px',
+                      background: 'rgba(37, 99, 235, 0.08)',
+                      padding: '10px 18px',
+                      borderRadius: '12px',
                     }}
                   >
-                    <div style={{ display: 'flex', alignItems: 'center', gap: '8px', fontSize: '13px', color: '#1E293B' }}>
-                      <Sparkles size={16} color="#0284C7" />
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '8px', fontSize: '12px', color: '#E2E8F0' }}>
+                      <Sparkles size={14} color="#38BDF8" />
                       <span>
-                        Global Delivery Assurance: <strong style={{ color: '#1E3A8A' }}>ISO 27001 Certified &amp; HIPAA Compliant</strong> Multi-Shore Pods
+                        Global Delivery Model &bull; <strong style={{ color: '#60A5FA' }}>Pune HQ &bull; Bengaluru CoE &bull; Wyoming Hub</strong> &bull; 99.98% SLA
                       </span>
                     </div>
+
                     <Link
-                      to="/contact"
+                      to="/services"
                       onClick={closeDropdown}
                       style={{
-                        background: 'linear-gradient(135deg, #1E3A8A 0%, #2563EB 100%)',
-                        color: '#ffffff',
+                        color: '#93C5FD',
                         fontSize: '11.5px',
                         fontWeight: 700,
-                        padding: '7px 16px',
-                        borderRadius: '100px',
                         display: 'inline-flex',
                         alignItems: 'center',
                         gap: '6px',
-                        boxShadow: '0 4px 14px rgba(37, 99, 235, 0.3)',
                       }}
                     >
-                      Consult Our Solutions Team <ArrowRight size={12} />
+                      View Full 75+ Service Catalog <ArrowRight size={12} />
                     </Link>
                   </div>
                 </div>
@@ -517,6 +888,15 @@ export default function Navbar({ onOpenModal }) {
             </NavLink>
 
             <NavLink
+              to="/case-studies"
+              className={({ isActive }) =>
+                `nav-link-item ${isActive ? 'active' : ''}`
+              }
+            >
+              Case Studies
+            </NavLink>
+
+            <NavLink
               to="/careers"
               className={({ isActive }) =>
                 `nav-link-item ${isActive ? 'active' : ''}`
@@ -535,145 +915,143 @@ export default function Navbar({ onOpenModal }) {
             </NavLink>
           </div>
 
-          {/* Right Action Items */}
-          <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
-            {/* Direct Phone Info Box */}
-            <div
-              className="d-desktop"
-              style={{
-                borderLeft: '1.5px solid rgba(37, 99, 235, 0.15)',
-                paddingLeft: '16px',
-                textAlign: 'left',
-              }}
-            >
-              <div
-                style={{
-                  fontFamily: 'var(--font-heading)',
-                  fontSize: '13px',
-                  fontWeight: 700,
-                  color: '#0F172A',
-                  display: 'flex',
-                  alignItems: 'center',
-                  gap: '6px',
-                }}
-              >
-                <Phone size={12} color="#0284C7" /> +91-8308906690
-              </div>
-              <div style={{ fontSize: '11px', color: '#64748B', fontWeight: 500 }}>
-                24/7 Digital Inquiry &bull; Mon–Sat 9AM–6PM IST
-              </div>
-            </div>
-
-            {/* Primary CTA Button */}
+          {/* Right Action Button & Mobile Hamburger */}
+          <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
             <button
               type="button"
               onClick={onOpenModal}
-              className="btn-sapphire"
-              style={{
-                padding: '10px 22px',
-                fontSize: '13.5px',
-                whiteSpace: 'nowrap',
-              }}
+              className="btn-sapphire d-desktop"
+              style={{ padding: '11px 24px', fontSize: '13.5px' }}
             >
-              <Send size={14} /> Get Free Quote
+              <Send size={14} /> Request Proposal
             </button>
 
             {/* Mobile Hamburger Toggle */}
             <button
               type="button"
-              className="d-mobile"
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+              className="d-mobile"
               style={{
-                background: 'none',
-                border: 'none',
+                background: 'rgba(255, 255, 255, 0.08)',
+                border: '1px solid rgba(255, 255, 255, 0.15)',
+                color: '#ffffff',
+                padding: '8px',
+                borderRadius: '10px',
                 cursor: 'pointer',
-                padding: '6px',
-                color: '#1E3A8A',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
               }}
-              aria-label="Toggle navigation"
+              aria-label="Toggle Navigation Menu"
             >
-              {mobileMenuOpen ? <X size={26} /> : <Menu size={26} />}
+              {mobileMenuOpen ? <X size={22} /> : <Menu size={22} />}
             </button>
           </div>
         </div>
 
-        {/* Mobile Accordion Drawer */}
+        {/* ── MOBILE DRAWER MENU ────────────────────────────────────── */}
         {mobileMenuOpen && (
           <div
             style={{
-              background: '#ffffff',
-              borderTop: '1px solid #e2e8f0',
+              padding: '16px 20px 24px',
+              borderTop: '1px solid rgba(255, 255, 255, 0.1)',
+              background: '#070C1E',
               borderRadius: '0 0 18px 18px',
-              padding: '20px',
               display: 'flex',
               flexDirection: 'column',
               gap: '12px',
+              color: '#ffffff',
             }}
           >
             <Link to="/" onClick={closeDropdown} className="mobile-nav-link">
               Home
             </Link>
+
             <Link to="/about" onClick={closeDropdown} className="mobile-nav-link">
               About Us
             </Link>
 
             {/* Mobile Services Accordion */}
             <div>
-              <button
-                type="button"
+              <div
                 onClick={() => setMobileServicesAccordion(!mobileServicesAccordion)}
                 className="mobile-nav-link"
-                style={{
-                  width: '100%',
-                  display: 'flex',
-                  justifyContent: 'space-between',
-                  alignItems: 'center',
-                  background: 'none',
-                  border: 'none',
-                  textAlign: 'left',
-                }}
+                style={{ cursor: 'pointer', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}
               >
-                Services <ChevronDown size={16} style={{ transform: mobileServicesAccordion ? 'rotate(180deg)' : 'none', transition: 'transform 0.2s' }} />
-              </button>
+                <span>Services (75+)</span>
+                <ChevronDown
+                  size={16}
+                  style={{
+                    transform: mobileServicesAccordion ? 'rotate(180deg)' : 'none',
+                    transition: 'transform 0.2s',
+                  }}
+                />
+              </div>
 
               {mobileServicesAccordion && (
                 <div
                   style={{
-                    padding: '10px 16px',
-                    background: '#f8fafc',
-                    borderRadius: '10px',
-                    marginTop: '6px',
+                    padding: '10px 14px',
+                    background: 'rgba(255, 255, 255, 0.04)',
+                    border: '1px solid rgba(255, 255, 255, 0.08)',
+                    borderRadius: '12px',
+                    marginTop: '8px',
                     display: 'flex',
                     flexDirection: 'column',
-                    gap: '10px',
+                    gap: '8px',
                   }}
                 >
-                  <Link to="/services?cat=ai_automation" onClick={closeDropdown} className="mobile-sub-link">
-                    &bull; AI &amp; Automations
-                  </Link>
-                  <Link to="/services?cat=healthcare" onClick={closeDropdown} className="mobile-sub-link">
-                    &bull; Healthcare BPO &amp; RCM
-                  </Link>
-                  <Link to="/services?cat=customsoftware" onClick={closeDropdown} className="mobile-sub-link">
-                    &bull; IT &amp; Custom Software Solutions
-                  </Link>
-                  <Link to="/services?cat=publishing" onClick={closeDropdown} className="mobile-sub-link">
-                    &bull; STM Publishing &amp; Prepress
-                  </Link>
-                  <Link to="/services?cat=realestate" onClick={closeDropdown} className="mobile-sub-link">
-                    &bull; Real Estate, CAM &amp; Title
-                  </Link>
-                  <Link to="/services?cat=data_annotation" onClick={closeDropdown} className="mobile-sub-link">
-                    &bull; AI Data Annotation
-                  </Link>
-                  <Link to="/services?cat=accounting" onClick={closeDropdown} className="mobile-sub-link">
-                    &bull; Accounting &amp; Bookkeeping
-                  </Link>
-                  <Link to="/services?cat=digitalmarketing" onClick={closeDropdown} className="mobile-sub-link">
-                    &bull; Digital Marketing &amp; SEO
-                  </Link>
-                  <Link to="/services" onClick={closeDropdown} className="mobile-sub-link fw-bold" style={{ color: '#2563EB' }}>
-                    &bull; View All 65+ Services &rarr;
+                  {Object.keys(subDropdownData).map((catKey) => {
+                    const data = subDropdownData[catKey];
+                    const isSubOpen = mobileActiveSub === catKey;
+                    return (
+                      <div key={catKey} style={{ borderBottom: '1px solid rgba(255, 255, 255, 0.06)', paddingBottom: '6px' }}>
+                        <div
+                          onClick={() => setMobileActiveSub(isSubOpen ? null : catKey)}
+                          style={{
+                            display: 'flex',
+                            justifyContent: 'space-between',
+                            alignItems: 'center',
+                            padding: '6px 4px',
+                            cursor: 'pointer',
+                            fontSize: '13.5px',
+                            fontWeight: 700,
+                            color: isSubOpen ? '#38BDF8' : '#E2E8F0',
+                          }}
+                        >
+                          <span>&bull; {data.title}</span>
+                          <ChevronDown size={13} style={{ transform: isSubOpen ? 'rotate(180deg)' : 'none' }} />
+                        </div>
+                        {isSubOpen && (
+                          <div style={{ paddingLeft: '12px', paddingTop: '4px', display: 'flex', flexDirection: 'column', gap: '6px' }}>
+                            {data.items.map((it, idx) => (
+                              <Link
+                                key={idx}
+                                to={`/services?cat=${it.cat}`}
+                                onClick={closeDropdown}
+                                style={{ fontSize: '12px', color: '#94A3B8', textDecoration: 'none', display: 'block' }}
+                              >
+                                &ndash; {it.title}
+                              </Link>
+                            ))}
+                          </div>
+                        )}
+                      </div>
+                    );
+                  })}
+
+                  <Link
+                    to="/services"
+                    onClick={closeDropdown}
+                    style={{
+                      fontSize: '13px',
+                      fontWeight: 700,
+                      color: '#38BDF8',
+                      marginTop: '6px',
+                      padding: '4px',
+                    }}
+                  >
+                    View All 75+ Services &rarr;
                   </Link>
                 </div>
               )}
@@ -682,31 +1060,34 @@ export default function Navbar({ onOpenModal }) {
             <Link to="/industries" onClick={closeDropdown} className="mobile-nav-link">
               Industries
             </Link>
+
             <Link to="/projects" onClick={closeDropdown} className="mobile-nav-link">
               Projects
             </Link>
+
+            <Link to="/case-studies" onClick={closeDropdown} className="mobile-nav-link">
+              Case Studies
+            </Link>
+
             <Link to="/careers" onClick={closeDropdown} className="mobile-nav-link">
               Careers
             </Link>
+
             <Link to="/contact" onClick={closeDropdown} className="mobile-nav-link">
               Contact
             </Link>
 
-            <div style={{ marginTop: '10px', paddingTop: '10px', borderTop: '1px solid #e2e8f0' }}>
-              <div style={{ fontSize: '13px', fontWeight: 700, color: '#1a1d3a', marginBottom: '8px' }}>
-                <Phone size={13} color="#CC2228" style={{ display: 'inline', marginRight: '6px' }} />
-                +91-8308906690
-              </div>
+            <div style={{ paddingTop: '10px' }}>
               <button
                 type="button"
                 onClick={() => {
                   closeDropdown();
                   onOpenModal();
                 }}
-                className="btn-accent-custom"
+                className="btn-sapphire"
                 style={{ width: '100%', justifyContent: 'center' }}
               >
-                <Send size={14} /> Get Free Quote
+                <Send size={14} /> Request Proposal
               </button>
             </div>
           </div>
@@ -719,86 +1100,42 @@ export default function Navbar({ onOpenModal }) {
           font-family: var(--font-heading);
           font-size: 14.5px;
           font-weight: 600;
-          color: #1a1d3a;
+          color: #E2E8F0;
           padding: 8px 14px;
-          border-radius: 8px;
+          border-radius: 100px;
           position: relative;
-          transition: color 0.2s, background 0.2s;
-        }
-        .nav-link-item:hover, .nav-link-item.active {
-          color: #1E3A8A;
-          background: rgba(37, 99, 235, 0.06);
-        }
-        .nav-link-item::after {
-          content: '';
-          position: absolute;
-          bottom: 2px;
-          left: 14px;
-          right: 14px;
-          height: 2.5px;
-          background: linear-gradient(90deg, #1E3A8A, #2563EB, #0284C7);
-          border-radius: 2px;
-          transform: scaleX(0);
-          transform-origin: left;
-          transition: transform 0.25s ease;
-        }
-        .nav-link-item:hover::after, .nav-link-item.active::after {
-          transform: scaleX(1);
-        }
-        .mega-col-header {
-          font-family: var(--font-heading);
-          font-size: 11px;
-          font-weight: 800;
-          text-transform: uppercase;
-          letter-spacing: 1px;
-          color: #1E3A8A;
-          padding-bottom: 6px;
-          border-bottom: 1.5px solid rgba(37, 99, 235, 0.12);
-          margin-bottom: 8px;
-          display: flex;
+          transition: all 0.2s ease;
+          display: inline-flex;
           align-items: center;
-          gap: 6px;
+          border: 1px solid transparent;
         }
-        .mega-links-group {
-          display: flex;
-          flex-direction: column;
-          gap: 3px;
+        .nav-link-item:hover {
+          color: #38BDF8;
+          background: rgba(37, 99, 235, 0.15);
+          border-color: rgba(56, 189, 248, 0.25);
         }
-        .mega-item {
-          font-size: 13px;
-          font-weight: 500;
-          color: #334155;
-          padding: 6px 10px;
-          border-radius: 8px;
-          display: flex;
-          align-items: center;
-          gap: 8px;
-          transition: all 0.15s ease;
+        .nav-link-item.active {
+          color: #ffffff;
+          background: linear-gradient(135deg, rgba(30, 58, 138, 0.45) 0%, rgba(37, 99, 235, 0.3) 100%);
+          border-color: rgba(96, 165, 250, 0.4);
+          box-shadow: 0 0 16px rgba(37, 99, 235, 0.2);
         }
-        .mega-item:hover {
-          background: rgba(37, 99, 235, 0.08);
-          color: #1E3A8A;
-          padding-left: 14px;
+        .sub-dropdown-card:hover {
+          background: rgba(37, 99, 235, 0.12) !important;
+          border-color: rgba(96, 165, 250, 0.35) !important;
+          transform: translateY(-2px);
         }
         .mobile-nav-link {
-          font-family: var(--font-heading);
           font-size: 15px;
           font-weight: 600;
-          color: #1a1d3a;
-          padding: 8px 12px;
-          border-radius: 8px;
+          color: #F1F5F9;
+          padding: 8px 0;
+          display: block;
+          text-decoration: none;
+          transition: color 0.2s;
         }
-        .mobile-sub-link {
-          font-size: 13.5px;
-          color: #475569;
-          padding: 4px 8px;
-        }
-        @media (max-width: 991px) {
-          .d-desktop { display: none !important; }
-          .d-mobile { display: block !important; }
-        }
-        @media (min-width: 992px) {
-          .d-mobile { display: none !important; }
+        .mobile-nav-link:hover {
+          color: #38BDF8;
         }
       `}</style>
     </div>

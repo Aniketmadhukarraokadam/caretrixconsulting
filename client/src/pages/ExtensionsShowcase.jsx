@@ -497,7 +497,7 @@ export default function ExtensionsShowcase({ onOpenModal }) {
                 title="Autonomous Enterprise Copilot"
                 subtitle="Vengeance AI Reasoning Engine"
                 stat="24/7 Live"
-                description="Trained on Caretrix's 65+ service catalogs, SAP S/4HANA workflows, and Indian regulatory frameworks for immediate client advisory."
+                description="Trained on Caretrix's 75+ service catalogs, SAP S/4HANA workflows, and Indian regulatory frameworks for immediate client advisory."
               />
 
               <VengeanceDisplacementCard
