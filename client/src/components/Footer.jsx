@@ -230,21 +230,21 @@ export default function Footer({ onOpenModal }) {
             {/* Highlighted Pune HQ Card */}
             <div
               style={{
-                background: 'rgba(204, 34, 40, 0.12)',
+                background: 'rgba(37, 99, 235, 0.12)',
                 padding: '12px 14px',
-                borderRadius: '12px',
-                border: '1px solid rgba(204, 34, 40, 0.3)',
+                borderRadius: '14px',
+                border: '1px solid rgba(37, 99, 235, 0.3)',
                 marginBottom: '14px',
               }}
             >
               <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '4px' }}>
                 <span
                   style={{
-                    background: '#CC2228',
+                    background: 'linear-gradient(135deg, #1E3A8A 0%, #2563EB 100%)',
                     color: '#fff',
                     fontSize: '9.5px',
                     fontWeight: 800,
-                    padding: '2px 7px',
+                    padding: '2px 8px',
                     borderRadius: '4px',
                     textTransform: 'uppercase',
                   }}
@@ -261,7 +261,7 @@ export default function Footer({ onOpenModal }) {
             {/* Bengaluru Tech Branch */}
             <div style={{ marginBottom: '12px', fontSize: '12.5px', color: 'rgba(255, 255, 255, 0.75)' }}>
               <div style={{ fontWeight: 700, color: '#ffffff', marginBottom: '2px' }}>
-                <MapPin size={12} color="#5BA8D4" style={{ display: 'inline', marginRight: '5px' }} />
+                <MapPin size={12} color="#0284C7" style={{ display: 'inline', marginRight: '5px' }} />
                 Bengaluru Tech Delivery Hub
               </div>
               No.125, Ranganath Complex, Madiwala, HSR Layout, Bengaluru, Karnataka 560068
@@ -270,7 +270,7 @@ export default function Footer({ onOpenModal }) {
             {/* USA Corporate Presence */}
             <div style={{ marginBottom: '16px', fontSize: '12.5px', color: 'rgba(255, 255, 255, 0.75)' }}>
               <div style={{ fontWeight: 700, color: '#ffffff', marginBottom: '2px' }}>
-                <Globe2 size={12} color="#5BA8D4" style={{ display: 'inline', marginRight: '5px' }} />
+                <Globe2 size={12} color="#0284C7" style={{ display: 'inline', marginRight: '5px' }} />
                 USA Corporate Entity
               </div>
               30 N Gould St Ste 100, Sheridan, WY 82801, USA
@@ -278,13 +278,13 @@ export default function Footer({ onOpenModal }) {
 
             {/* Direct Contact Points */}
             <div style={{ display: 'flex', flexDirection: 'column', gap: '6px', fontSize: '13px', marginBottom: '18px' }}>
-              <a href="mailto:support@caretrixconsulting.com" style={{ color: '#5BA8D4', display: 'flex', alignItems: 'center', gap: '6px' }}>
-                <Mail size={13} color="#CC2228" /> support@caretrixconsulting.com
+              <a href="mailto:support@caretrixconsulting.com" style={{ color: '#60A5FA', display: 'flex', alignItems: 'center', gap: '6px' }}>
+                <Mail size={13} color="#0284C7" /> support@caretrixconsulting.com
               </a>
               <a href="tel:+918308906690" style={{ color: '#ffffff', fontWeight: 600, display: 'flex', alignItems: 'center', gap: '6px' }}>
-                <Phone size={13} color="#CC2228" /> +91-8308906690
+                <Phone size={13} color="#0284C7" /> +91-8308906690
               </a>
-              <div style={{ color: '#10b981', fontSize: '12px', display: 'flex', alignItems: 'center', gap: '6px' }}>
+              <div style={{ color: '#10B981', fontSize: '12px', display: 'flex', alignItems: 'center', gap: '6px' }}>
                 <Clock size={12} /> 24/7 Digital Support &bull; Mon–Sat 9AM–6PM IST
               </div>
             </div>
@@ -316,14 +316,15 @@ export default function Footer({ onOpenModal }) {
                   type="submit"
                   disabled={loading}
                   style={{
-                    background: '#CC2228',
+                    background: 'linear-gradient(135deg, #1E3A8A 0%, #2563EB 100%)',
                     color: '#ffffff',
                     border: 'none',
-                    padding: '8px 14px',
+                    padding: '8px 16px',
                     borderRadius: '8px',
                     fontSize: '12.5px',
                     fontWeight: 700,
                     cursor: 'pointer',
+                    boxShadow: '0 4px 12px rgba(37, 99, 235, 0.3)',
                   }}
                 >
                   {loading ? '...' : 'Subscribe'}
@@ -603,7 +604,7 @@ export default function Footer({ onOpenModal }) {
           left: 0;
           width: 32px;
           height: 2.5px;
-          background: #CC2228;
+          background: linear-gradient(90deg, #2563EB, #0284C7);
           border-radius: 2px;
         }
         .footer-link {
@@ -613,7 +614,7 @@ export default function Footer({ onOpenModal }) {
           transition: all 0.2s ease;
         }
         .footer-link:hover {
-          color: #5BA8D4;
+          color: #60A5FA;
           transform: translateX(4px);
         }
         .footer-cert-pill {
@@ -642,7 +643,7 @@ export default function Footer({ onOpenModal }) {
           transition: all 0.2s ease;
         }
         .footer-social-btn:hover {
-          background: #CC2228;
+          background: #2563EB;
           transform: translateY(-2px);
         }
       `}</style>

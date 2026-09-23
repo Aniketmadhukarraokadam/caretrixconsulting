@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import {
   Brain,
@@ -21,36 +21,40 @@ import {
   Phone,
   Mail,
   Send,
-  Star,
-  Plus,
-  Minus,
   Sparkles,
   Zap,
   Clock,
   CircleDollarSign,
   UserCog,
   ChevronRight,
+  Plus,
+  Minus,
+  Activity,
+  Layers,
+  Check,
 } from 'lucide-react';
 import { useToast } from '../components/Toast';
 
 export default function Home({ onOpenModal }) {
   const { addToast } = useToast();
 
-  // Typed Text Effect State
+  // Dynamic Typed Capability Text
   const typedWords = [
-    'Outsourcing',
-    'HR & Payroll Software',
-    'AI Solutions',
-    'Healthcare BPO',
-    'Publishing Services',
-    'Data Annotation',
-    'Digital Marketing',
-    'Real Estate BPO',
+    'Intelligent AI Automations',
+    'Cloud Software Platforms',
+    'HIPAA Healthcare BPO',
+    'STM Publishing Prepress',
+    'CaretrixHRMS Payroll',
+    'Computer Vision Datasets',
+    'Real Estate BPO Solutions',
   ];
   const [currentWordIndex, setCurrentWordIndex] = useState(0);
   const [currentText, setCurrentText] = useState('');
   const [isDeleting, setIsDeleting] = useState(false);
-  const [typingSpeed, setTypingSpeed] = useState(100);
+  const [typingSpeed, setTypingSpeed] = useState(90);
+
+  // Cockpit active interactive tab
+  const [activeCockpitTab, setActiveCockpitTab] = useState('ai');
 
   // Active FAQ accordion state
   const [openFaq, setOpenFaq] = useState('faq-0');
@@ -73,19 +77,19 @@ export default function Home({ onOpenModal }) {
       if (!isDeleting) {
         setCurrentText(fullWord.substring(0, currentText.length + 1));
         if (currentText === fullWord) {
-          setTimeout(() => setIsDeleting(true), 1500);
-          setTypingSpeed(50);
+          setTimeout(() => setIsDeleting(true), 1600);
+          setTypingSpeed(45);
         } else {
-          setTypingSpeed(90);
+          setTypingSpeed(80);
         }
       } else {
         setCurrentText(fullWord.substring(0, currentText.length - 1));
         if (currentText === '') {
           setIsDeleting(false);
           setCurrentWordIndex((prev) => (prev + 1) % typedWords.length);
-          setTypingSpeed(100);
+          setTypingSpeed(90);
         } else {
-          setTypingSpeed(40);
+          setTypingSpeed(35);
         }
       }
     }, typingSpeed);
@@ -110,110 +114,110 @@ export default function Home({ onOpenModal }) {
         service: 'General Inquiry',
         msgText: '',
       });
-    }, 800);
+    }, 700);
   };
 
   const toggleFaq = (id) => {
     setOpenFaq(openFaq === id ? null : id);
   };
 
-  // Marquee Cards Data
+  // Marquee Cards Data (Updated to Sapphire & Cerulean Theme)
   const marqueeItems = [
-    { tag: 'AI HRMS', icon: <UserCog size={18} color="#E11D48" />, title: 'HR & Payroll Software', desc: 'CaretrixHRMS: Autonomous salary calculation & biometric attendance.' },
-    { tag: 'AI / ML', icon: <Brain size={18} color="#CC2228" />, title: 'AI Automations', desc: 'Agentic AI workflows, intelligent document processing (IDP) & task agents.' },
-    { tag: 'Tech', icon: <Laptop size={18} color="#1C2280" />, title: 'Custom Software', desc: 'Scalable cloud, web & mobile applications built for high-throughput scale.' },
-    { tag: 'Medical', icon: <HeartPulse size={18} color="#0284C7" />, title: 'Healthcare BPO', desc: 'End-to-end medical billing, ICD-10 coding & denial recovery maximizing ROI.' },
-    { tag: 'Finance', icon: <CircleDollarSign size={18} color="#10B981" />, title: 'Accounting & Payroll', desc: 'Accurate bookkeeping, statutory payroll processing & financial reports.' },
-    { tag: 'Media', icon: <BookOpen size={18} color="#8B5CF6" />, title: 'Publishing Prepress', desc: 'ePUB3 conversion, typesetting, S1000D XML & WCAG accessibility.' },
-    { tag: 'Property', icon: <Building size={18} color="#F59E0B" />, title: 'Real Estate BPO', desc: 'Lease abstraction, CAM audits & proactive property accounting workflows.' },
-    { tag: 'AI Training', icon: <FileSpreadsheet size={18} color="#EC4899" />, title: 'AI Data Annotation', desc: 'High-precision computer vision, LiDAR 3D & RLHF datasets for AI models.' },
-    { tag: 'Growth', icon: <Megaphone size={18} color="#1C2280" />, title: 'Digital Marketing', desc: 'Data-driven SEO, dynamic PPC campaigns & high-conversion B2B pipelines.' },
-    { tag: 'HR Staffing', icon: <Users size={18} color="#0D9488" />, title: 'Manpower Supply', desc: 'Strategic staff augmentation & dedicated offshore pods for rapid scale.' },
-    { tag: 'Legal', icon: <FileText size={18} color="#CC2228" />, title: 'Title & Settlement', desc: 'Comprehensive title searches, policy typing & mortgage settlement support.' },
+    { tag: 'AI HRMS', icon: <UserCog size={18} color="#2563EB" />, title: 'HR & Payroll Software', desc: 'CaretrixHRMS: Autonomous salary calculation & biometric attendance sync.' },
+    { tag: 'AI / ML', icon: <Brain size={18} color="#0284C7" />, title: 'AI Automations', desc: 'Agentic AI workflows, intelligent document processing (IDP) & task agents.' },
+    { tag: 'Engineering', icon: <Laptop size={18} color="#1E3A8A" />, title: 'Custom Software', desc: 'Scalable cloud, web & mobile applications engineered for high throughput.' },
+    { tag: 'Medical BPO', icon: <HeartPulse size={18} color="#10B981" />, title: 'Healthcare RCM', desc: 'End-to-end medical billing, ICD-10 coding & denial recovery maximizing ROI.' },
+    { tag: 'Finance', icon: <CircleDollarSign size={18} color="#6366F1" />, title: 'Accounting & Payroll', desc: 'Accurate bookkeeping, statutory payroll processing & financial reports.' },
+    { tag: 'Publishing', icon: <BookOpen size={18} color="#0EA5E9" />, title: 'Publishing Prepress', desc: 'ePUB3 conversion, typesetting, S1000D XML & WCAG 2.1 accessibility.' },
+    { tag: 'Real Estate', icon: <Building size={18} color="#F59E0B" />, title: 'Real Estate BPO', desc: 'Lease abstraction, CAM audits & proactive property accounting workflows.' },
+    { tag: 'AI Datasets', icon: <FileSpreadsheet size={18} color="#3B82F6" />, title: 'AI Data Annotation', desc: 'High-precision computer vision, LiDAR 3D & RLHF datasets for AI models.' },
+    { tag: 'MarTech', icon: <Megaphone size={18} color="#6366F1" />, title: 'Digital Growth & SEO', desc: 'Data-driven SEO, dynamic PPC campaigns & high-conversion B2B pipelines.' },
+    { tag: 'Staffing', icon: <Users size={18} color="#059669" />, title: 'Global Staff Augmentation', desc: 'Dedicated offshore pods & certified subject-matter specialists.' },
+    { tag: 'Legal Escrow', icon: <FileText size={18} color="#0284C7" />, title: 'Title & Settlement', desc: 'Comprehensive title searches, policy typing & mortgage settlement support.' },
   ];
 
   // 10 Flagship Services Data
   const flagshipServices = [
     {
       icon: <Laptop size={28} />,
-      iconBg: 'rgba(28, 34, 128, 0.08)',
-      iconColor: '#1C2280',
-      title: 'IT & Software Solutions',
-      desc: 'Custom software development, web & mobile apps, cloud architectures, enterprise ERP integrations, and AI-enabled business tools tailored to your operational workflows.',
+      iconBg: 'rgba(37, 99, 235, 0.08)',
+      iconColor: '#2563EB',
+      title: 'IT & Cloud Software Engineering',
+      desc: 'Custom software architecture, full-stack web & mobile apps, cloud infrastructure (AWS/Azure), enterprise integrations, and AI-enabled business tools tailored to your operational workflows.',
       link: '/services?cat=customsoftware',
     },
     {
       icon: <UserCog size={28} />,
-      iconBg: 'rgba(225, 29, 72, 0.1)',
-      iconColor: '#E11D48',
+      iconBg: 'rgba(30, 58, 138, 0.1)',
+      iconColor: '#1E3A8A',
       title: 'HR & Payroll Software (CaretrixHRMS)',
-      badge: 'PROPRIETARY AI SOFTWARE',
-      badgeBg: '#E11D48',
+      badge: 'PROPRIETARY PLATFORM',
+      badgeBg: 'linear-gradient(135deg, #1E3A8A 0%, #2563EB 100%)',
       desc: 'Cloud-native AI HRMS & payroll software: autonomous salary calculation, biometric attendance sync, automated employee onboarding, and predictive workforce analytics.',
       link: '/services?cat=hrms',
       highlightBorder: true,
     },
     {
       icon: <HeartPulse size={28} />,
-      iconBg: 'rgba(2, 132, 199, 0.08)',
-      iconColor: '#0284C7',
-      title: 'Healthcare BPO & RCM',
+      iconBg: 'rgba(16, 185, 129, 0.08)',
+      iconColor: '#10B981',
+      title: 'Healthcare BPO & Revenue Cycle (RCM)',
       desc: 'End-to-end medical coding (ICD-10-CM / CPT), claim billing, payment posting, denial management, prior authorization, and accounts receivable (AR) recovery.',
       link: '/services?cat=healthcare',
     },
     {
       icon: <BookOpen size={28} />,
-      iconBg: 'rgba(139, 92, 246, 0.08)',
-      iconColor: '#8B5CF6',
-      title: 'Publishing & Prepress Services',
+      iconBg: 'rgba(2, 132, 199, 0.08)',
+      iconColor: '#0284C7',
+      title: 'STM Publishing & Prepress Services',
       desc: 'Digital prepress, typesetting, ePUB3 conversion, S1000D XML structuring, copy editing, and Section 508 / WCAG 2.1 AA PDF accessibility remediation.',
       link: '/services?cat=publishing',
     },
     {
       icon: <Building size={28} />,
-      iconBg: 'rgba(16, 185, 129, 0.08)',
-      iconColor: '#10B981',
-      title: 'Real Estate & Title Services',
+      iconBg: 'rgba(245, 158, 11, 0.08)',
+      iconColor: '#F59E0B',
+      title: 'Real Estate & Commercial Lease BPO',
       desc: 'Commercial lease abstraction, CAM audit & reconciliation, property accounting, title search, settlement processing, and mortgage escrow support.',
       link: '/services?cat=realestate',
     },
     {
       icon: <FileSpreadsheet size={28} />,
-      iconBg: 'rgba(245, 158, 11, 0.08)',
-      iconColor: '#F59E0B',
-      title: 'AI Data Annotation & CV',
-      desc: 'Precision image, video, audio, and text labeling for machine learning pipelines. Bounding box, semantic segmentation, 3D LiDAR point clouds, and RLHF data.',
+      iconBg: 'rgba(99, 102, 241, 0.08)',
+      iconColor: '#6366F1',
+      title: 'AI Data Annotation & Computer Vision',
+      desc: 'Precision image, video, audio, and text labeling for machine learning pipelines. 2D bounding boxes, polygon semantic segmentation, 3D LiDAR point clouds, and RLHF data.',
       link: '/services?cat=data_annotation',
     },
     {
       icon: <BarChart3 size={28} />,
-      iconBg: 'rgba(204, 34, 40, 0.08)',
-      iconColor: '#CC2228',
-      title: 'Accounting & Financial BPO',
+      iconBg: 'rgba(37, 99, 235, 0.08)',
+      iconColor: '#2563EB',
+      title: 'Accounting & Financial Operations',
       desc: 'Offshore bookkeeping, payroll processing, accounts payable/receivable, financial statement preparation, and statutory tax compliance support.',
       link: '/services?cat=accounting',
     },
     {
       icon: <Truck size={28} />,
-      iconBg: 'rgba(236, 72, 153, 0.08)',
-      iconColor: '#EC4899',
-      title: 'Logistics & Supply Chain',
+      iconBg: 'rgba(14, 165, 233, 0.08)',
+      iconColor: '#0EA5E9',
+      title: 'Logistics & Supply Chain Back-Office',
       desc: 'Freight data processing, shipping documentation audits, inventory tracking, bill of lading entry, and predictive supply chain analytics.',
       link: '/services?cat=logistics',
     },
     {
       icon: <Megaphone size={28} />,
-      iconBg: 'rgba(28, 34, 128, 0.08)',
-      iconColor: '#1C2280',
-      title: 'Digital Marketing & SEO',
+      iconBg: 'rgba(30, 58, 138, 0.08)',
+      iconColor: '#1E3A8A',
+      title: 'Digital Marketing & Performance SEO',
       desc: 'Data-driven search engine optimization (SEO), high-ROI PPC campaigns, social media management, technical content marketing, and B2B lead generation.',
       link: '/services?cat=digitalmarketing',
     },
     {
       icon: <FileText size={28} />,
-      iconBg: 'rgba(14, 165, 233, 0.08)',
-      iconColor: '#0EA5E9',
-      title: 'Technical Publications (S1000D)',
+      iconBg: 'rgba(6, 182, 212, 0.08)',
+      iconColor: '#06B6D4',
+      title: 'Technical Publications & S1000D XML',
       desc: 'Technical authoring, regulatory compliance manuals, illustrated parts catalogs (IPC), JATS XML conversion, and multilingual localization.',
       link: '/services?cat=technicalpub',
     },
@@ -261,8 +265,8 @@ export default function Home({ onOpenModal }) {
       <section
         className="hero-section"
         style={{
-          background: 'linear-gradient(155deg, #f8faff 0%, #eef2ff 35%, #f0f4fc 70%, #fafcff 100%)',
-          padding: '40px 0 30px',
+          background: 'radial-gradient(ellipse at 50% -10%, #e0e7ff 0%, #f0f7ff 38%, #ffffff 80%)',
+          padding: '48px 0 35px',
           position: 'relative',
           overflow: 'hidden',
           minHeight: '88vh',
@@ -276,7 +280,7 @@ export default function Home({ onOpenModal }) {
             style={{
               display: 'grid',
               gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))',
-              gap: '40px',
+              gap: '44px',
               alignItems: 'center',
             }}
           >
@@ -287,14 +291,14 @@ export default function Home({ onOpenModal }) {
                 style={{
                   display: 'inline-flex',
                   alignItems: 'center',
-                  gap: '8px',
-                  background: 'rgba(255, 255, 255, 0.9)',
-                  backdropFilter: 'blur(10px)',
-                  border: '1px solid rgba(28, 34, 128, 0.12)',
-                  padding: '6px 16px',
+                  gap: '9px',
+                  background: 'rgba(255, 255, 255, 0.95)',
+                  backdropFilter: 'blur(14px)',
+                  border: '1px solid rgba(37, 99, 235, 0.2)',
+                  padding: '7px 18px',
                   borderRadius: '100px',
-                  marginBottom: '20px',
-                  boxShadow: '0 4px 15px rgba(28, 34, 128, 0.05)',
+                  marginBottom: '22px',
+                  boxShadow: '0 4px 20px rgba(37, 99, 235, 0.08)',
                 }}
               >
                 <span
@@ -302,32 +306,32 @@ export default function Home({ onOpenModal }) {
                     width: '8px',
                     height: '8px',
                     borderRadius: '50%',
-                    background: '#CC2228',
+                    background: '#10B981',
+                    boxShadow: '0 0 10px #10B981',
                     display: 'inline-block',
-                    animation: 'pulseGlow 1.5s infinite alternate',
+                    animation: 'pulseGlow 1.6s infinite alternate',
                   }}
                 />
-                <span style={{ fontSize: '12px', fontWeight: 700, letterSpacing: '0.8px', textTransform: 'uppercase', color: '#1C2280' }}>
-                  6+ Years Global Delivery &bull; ISO 27001 Certified &bull; HIPAA Compliant
+                <span style={{ fontSize: '11.5px', fontWeight: 800, letterSpacing: '1px', textTransform: 'uppercase', color: '#1E3A8A' }}>
+                  GLOBAL ENTERPRISE DELIVERY &bull; ISO 27001 CERTIFIED &bull; HIPAA COMPLIANT
                 </span>
               </div>
 
               {/* Dynamic Typing Title */}
               <h1
                 style={{
-                  fontSize: 'clamp(2.4rem, 4vw, 3.6rem)',
+                  fontSize: 'clamp(2.4rem, 4vw, 3.8rem)',
                   fontWeight: 800,
-                  color: '#0f172a',
+                  color: '#0F172A',
                   lineHeight: 1.15,
-                  marginBottom: '18px',
-                  letterSpacing: '-0.02em',
+                  marginBottom: '20px',
+                  letterSpacing: '-0.03em',
                 }}
               >
-                Empowering Global Enterprises with Next-Gen{' '}
+                Architecting Next-Gen IT, AI Automations &amp; Global{' '}
                 <span
                   style={{
-                    background: 'linear-gradient(100deg, #CC2228 0%, #1C2280 45%, #5BA8D4 80%, #CC2228 100%)',
-                    backgroundSize: '250% auto',
+                    background: 'linear-gradient(135deg, #1E3A8A 0%, #2563EB 35%, #0284C7 70%, #6366F1 100%)',
                     WebkitBackgroundClip: 'text',
                     WebkitTextFillColor: 'transparent',
                     display: 'inline-block',
@@ -338,11 +342,12 @@ export default function Home({ onOpenModal }) {
                 <span
                   style={{
                     display: 'inline-block',
-                    width: '3px',
+                    width: '3.5px',
                     height: '0.85em',
-                    background: '#CC2228',
-                    marginLeft: '3px',
+                    background: '#2563EB',
+                    marginLeft: '4px',
                     verticalAlign: 'middle',
+                    boxShadow: '0 0 8px #2563EB',
                   }}
                 />
               </h1>
@@ -353,81 +358,81 @@ export default function Home({ onOpenModal }) {
                   fontSize: '17px',
                   color: '#475569',
                   lineHeight: 1.75,
-                  marginBottom: '28px',
+                  marginBottom: '30px',
                   maxWidth: '650px',
                 }}
               >
-                We engineer full-stack IT systems, autonomous AI agent workflows, and 24/7 global BPO operations. Driving measurable ROI across Healthcare RCM, Real Estate, Publishing Prepress, and Custom Software for <strong>150+ global clients</strong> with <strong>200+ delivered projects</strong>.
+                We deliver enterprise custom software, proprietary AI workforce systems (CaretrixHRMS), and 24/7 global BPO operations. Driving measurable ROI across Healthcare RCM, Real Estate, Publishing Prepress, and Custom Software for <strong>150+ international clients</strong> with <strong>200+ delivered projects</strong>.
               </p>
 
               {/* CTA Buttons */}
-              <div style={{ display: 'flex', gap: '14px', flexWrap: 'wrap', marginBottom: '28px' }}>
+              <div style={{ display: 'flex', gap: '14px', flexWrap: 'wrap', marginBottom: '32px' }}>
                 <button
                   type="button"
                   onClick={onOpenModal}
-                  className="btn-accent-custom"
-                  style={{ padding: '14px 30px', fontSize: '15px' }}
+                  className="btn-sapphire"
+                  style={{ padding: '15px 32px', fontSize: '15px' }}
                 >
-                  <Send size={15} /> Get Free Consultation
+                  <Send size={16} /> Request Executive Proposal
                 </button>
                 <Link
                   to="/about"
-                  className="btn-outline-custom"
-                  style={{ padding: '14px 30px', fontSize: '15px' }}
+                  className="btn-glass"
+                  style={{ padding: '15px 30px', fontSize: '15px' }}
                 >
-                  <Zap size={15} /> Explore Company Profile
+                  <Zap size={16} /> Explore Organization Profile
                 </Link>
               </div>
 
               {/* Interactive Service Chips Bar */}
               <div
                 style={{
-                  background: 'rgba(255, 255, 255, 0.85)',
-                  backdropFilter: 'blur(12px)',
-                  border: '1px solid rgba(28, 34, 128, 0.08)',
-                  borderRadius: '16px',
-                  padding: '14px 18px',
-                  boxShadow: '0 6px 20px rgba(28, 34, 128, 0.04)',
+                  background: 'rgba(255, 255, 255, 0.9)',
+                  backdropFilter: 'blur(16px)',
+                  border: '1px solid rgba(37, 99, 235, 0.12)',
+                  borderRadius: '18px',
+                  padding: '16px 20px',
+                  boxShadow: '0 10px 30px rgba(15, 23, 42, 0.04)',
                 }}
               >
                 <div
                   style={{
                     fontSize: '11px',
-                    fontWeight: 700,
+                    fontWeight: 800,
                     textTransform: 'uppercase',
-                    letterSpacing: '0.8px',
-                    color: '#1C2280',
+                    letterSpacing: '1px',
+                    color: '#1E3A8A',
                     marginBottom: '10px',
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'space-between',
                   }}
                 >
-                  <span>Interactive Service Constellation</span>
-                  <span style={{ fontSize: '10px', color: '#64748b' }}>Click to explore</span>
+                  <span>Quick Service Router</span>
+                  <span style={{ fontSize: '10px', color: '#64748B' }}>Click to explore</span>
                 </div>
                 <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px' }}>
                   <Link to="/services?cat=ai_automation" className="hero-chip">
-                    <Brain size={13} color="#CC2228" /> AI &amp; Automation
+                    <Brain size={13} color="#0284C7" /> AI &amp; Automations
                   </Link>
                   <Link
                     to="/services?cat=hrms"
                     className="hero-chip"
-                    style={{ background: 'rgba(225, 29, 72, 0.06)', borderColor: 'rgba(225, 29, 72, 0.3)' }}
+                    style={{ background: 'rgba(37, 99, 235, 0.08)', borderColor: 'rgba(37, 99, 235, 0.3)' }}
                   >
-                    <UserCog size={13} color="#E11D48" /> HR &amp; Payroll Software
+                    <UserCog size={13} color="#1E3A8A" /> HR &amp; Payroll Software
                   </Link>
                   <Link to="/services?cat=healthcare" className="hero-chip">
-                    <HeartPulse size={13} color="#0284C7" /> Healthcare RCM
+                    <HeartPulse size={13} color="#10B981" /> Healthcare RCM
                   </Link>
                   <Link to="/services?cat=customsoftware" className="hero-chip">
-                    <Laptop size={13} color="#6366F1" /> Custom Web &amp; Cloud
+                    <Laptop size={13} color="#2563EB" /> Custom Software &amp; Cloud
                   </Link>
                   <Link to="/services?cat=publishing" className="hero-chip">
-                    <BookOpen size={13} color="#8B5CF6" /> Publishing AI
+                    <BookOpen size={13} color="#6366F1" /> STM Publishing Prepress
                   </Link>
                   <Link to="/services?cat=staffing" className="hero-chip">
-                    <Users size={13} color="#10B981" /> 24/7 Global BPO
+                    <Users size={13} color="#059669" /> 24/7 Global Staffing
                   </Link>
                 </div>
               </div>
@@ -437,8 +442,8 @@ export default function Home({ onOpenModal }) {
                 style={{
                   display: 'grid',
                   gridTemplateColumns: 'repeat(auto-fit, minmax(100px, 1fr))',
-                  gap: '10px',
-                  marginTop: '24px',
+                  gap: '12px',
+                  marginTop: '26px',
                 }}
               >
                 <div className="stat-chip">
@@ -464,108 +469,304 @@ export default function Home({ onOpenModal }) {
               </div>
             </div>
 
-            {/* Right Column: Interactive Constellation Stage */}
+            {/* Right Column: ALL-NEW INTERACTIVE 3D ENTERPRISE OPERATIONS COCKPIT */}
             <div style={{ position: 'relative', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
               <div
                 style={{
                   position: 'relative',
                   width: '100%',
-                  maxWidth: '520px',
-                  height: '480px',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
+                  maxWidth: '560px',
+                  background: 'linear-gradient(160deg, #070C1E 0%, #0B1228 60%, #111A38 100%)',
+                  borderRadius: '26px',
+                  border: '1.5px solid rgba(255, 255, 255, 0.14)',
+                  boxShadow: '0 25px 70px rgba(7, 12, 30, 0.4), 0 0 40px rgba(37, 99, 235, 0.15)',
+                  padding: '30px',
+                  color: '#ffffff',
+                  overflow: 'hidden',
                 }}
               >
-                {/* Orbital Rings */}
-                <div className="orbit-ring orbit-ring-1" />
-                <div className="orbit-ring orbit-ring-2" />
-                <div className="orbit-ring orbit-ring-3" />
-
-                {/* Central Caretrix Core Hub */}
-                <Link
-                  to="/services"
+                {/* Background Ambient Glow Grid */}
+                <div
                   style={{
                     position: 'absolute',
-                    width: '130px',
-                    height: '130px',
-                    borderRadius: '50%',
-                    background: 'radial-gradient(circle at 35% 35%, #ffffff 0%, #f8faff 60%, rgba(28, 34, 128, 0.08) 100%)',
-                    border: '2px solid rgba(28, 34, 128, 0.18)',
-                    boxShadow: '0 15px 45px rgba(28, 34, 128, 0.18), 0 0 50px rgba(91, 168, 212, 0.25)',
+                    top: '-50%',
+                    right: '-20%',
+                    width: '320px',
+                    height: '320px',
+                    background: 'radial-gradient(circle, rgba(37, 99, 235, 0.3) 0%, transparent 70%)',
+                    filter: 'blur(40px)',
+                    pointerEvents: 'none',
+                  }}
+                />
+
+                {/* Console Header Bar */}
+                <div
+                  style={{
                     display: 'flex',
-                    flexDirection: 'column',
                     alignItems: 'center',
-                    justifyContent: 'center',
-                    zIndex: 15,
-                    cursor: 'pointer',
-                    transition: 'transform 0.3s ease, box-shadow 0.3s ease',
+                    justifyContent: 'space-between',
+                    paddingBottom: '18px',
+                    borderBottom: '1px solid rgba(255, 255, 255, 0.1)',
+                    marginBottom: '20px',
                   }}
                 >
-                  <Sparkles size={30} color="#CC2228" />
-                  <span style={{ fontFamily: 'var(--font-heading)', fontSize: '11px', fontWeight: 900, color: '#1C2280', letterSpacing: '1px', marginTop: '4px' }}>
-                    CARETRIX
-                  </span>
-                  <span style={{ fontSize: '7.5px', fontWeight: 700, color: '#64748B', letterSpacing: '0.8px', textTransform: 'uppercase' }}>
-                    AI &amp; IT HUB
-                  </span>
-                </Link>
-
-                {/* 6 Connected Nodes (Distributed Around Hub) */}
-                <Link to="/services?cat=ai_automation" className="constellation-node node-top">
-                  <Brain size={16} color="#CC2228" />
-                  <div>
-                    <div className="node-title">AI &amp; Automation</div>
-                    <div className="node-sub">Agentic AI &amp; IDP</div>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+                    <div
+                      style={{
+                        width: '34px',
+                        height: '34px',
+                        borderRadius: '10px',
+                        background: 'linear-gradient(135deg, #1E3A8A 0%, #2563EB 100%)',
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        boxShadow: '0 0 15px rgba(37, 99, 235, 0.5)',
+                      }}
+                    >
+                      <Activity size={18} color="#ffffff" />
+                    </div>
+                    <div>
+                      <div style={{ fontFamily: 'var(--font-heading)', fontWeight: 800, fontSize: '13.5px', letterSpacing: '0.6px' }}>
+                        CARETRIX COMMAND COCKPIT
+                      </div>
+                      <div style={{ fontSize: '10.5px', color: '#94A3B8' }}>
+                        Autonomous Operations Telemetry &bull; v4.2
+                      </div>
+                    </div>
                   </div>
-                </Link>
 
-                <Link to="/services?cat=healthcare" className="constellation-node node-top-right">
-                  <HeartPulse size={16} color="#0284C7" />
-                  <div>
-                    <div className="node-title">Healthcare RCM</div>
-                    <div className="node-sub">Billing &amp; Coding</div>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '7px' }}>
+                    <span
+                      style={{
+                        width: '8px',
+                        height: '8px',
+                        borderRadius: '50%',
+                        background: '#10B981',
+                        boxShadow: '0 0 10px #10B981',
+                        display: 'inline-block',
+                        animation: 'pulseGlow 1.5s infinite alternate',
+                      }}
+                    />
+                    <span style={{ fontSize: '11px', fontWeight: 700, color: '#10B981', textTransform: 'uppercase' }}>
+                      SYNCHRONIZED
+                    </span>
                   </div>
-                </Link>
+                </div>
 
-                <Link to="/services?cat=customsoftware" className="constellation-node node-bottom-right">
-                  <Laptop size={16} color="#6366F1" />
-                  <div>
-                    <div className="node-title">Cloud &amp; Software</div>
-                    <div className="node-sub">Web, SaaS &amp; APIs</div>
+                {/* Global Hubs Grid Status */}
+                <div
+                  style={{
+                    display: 'grid',
+                    gridTemplateColumns: 'repeat(3, 1fr)',
+                    gap: '10px',
+                    marginBottom: '20px',
+                  }}
+                >
+                  <div style={{ background: 'rgba(255, 255, 255, 0.05)', borderRadius: '12px', padding: '10px 12px', border: '1px solid rgba(255, 255, 255, 0.08)' }}>
+                    <div style={{ fontSize: '9.5px', color: '#94A3B8', textTransform: 'uppercase', fontWeight: 600 }}>Pune Global HQ</div>
+                    <div style={{ fontSize: '12.5px', fontWeight: 700, color: '#60A5FA', marginTop: '3px' }}>24/7 BPO &bull; Active</div>
                   </div>
-                </Link>
+                  <div style={{ background: 'rgba(255, 255, 255, 0.05)', borderRadius: '12px', padding: '10px 12px', border: '1px solid rgba(255, 255, 255, 0.08)' }}>
+                    <div style={{ fontSize: '9.5px', color: '#94A3B8', textTransform: 'uppercase', fontWeight: 600 }}>Bengaluru CoE</div>
+                    <div style={{ fontSize: '12.5px', fontWeight: 700, color: '#34D399', marginTop: '3px' }}>AI Lab &bull; Online</div>
+                  </div>
+                  <div style={{ background: 'rgba(255, 255, 255, 0.05)', borderRadius: '12px', padding: '10px 12px', border: '1px solid rgba(255, 255, 255, 0.08)' }}>
+                    <div style={{ fontSize: '9.5px', color: '#94A3B8', textTransform: 'uppercase', fontWeight: 600 }}>Wyoming Hub</div>
+                    <div style={{ fontSize: '12.5px', fontWeight: 700, color: '#FCD34D', marginTop: '3px' }}>US Entity &bull; Active</div>
+                  </div>
+                </div>
 
-                <Link to="/services?cat=staffing" className="constellation-node node-bottom">
-                  <Users size={16} color="#10B981" />
-                  <div>
-                    <div className="node-title">Global BPO Pods</div>
-                    <div className="node-sub">24/7 Operations</div>
+                {/* Interactive Cockpit Capability Switcher */}
+                <div style={{ marginBottom: '18px' }}>
+                  <div style={{ fontSize: '11px', fontWeight: 700, color: '#94A3B8', textTransform: 'uppercase', letterSpacing: '0.8px', marginBottom: '8px' }}>
+                    Select Live Division Telemetry:
                   </div>
-                </Link>
+                  <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '8px' }}>
+                    <button
+                      type="button"
+                      onClick={() => setActiveCockpitTab('ai')}
+                      style={{
+                        background: activeCockpitTab === 'ai' ? 'linear-gradient(135deg, #1E3A8A 0%, #2563EB 100%)' : 'rgba(255, 255, 255, 0.06)',
+                        border: activeCockpitTab === 'ai' ? '1px solid #60A5FA' : '1px solid rgba(255, 255, 255, 0.1)',
+                        color: '#ffffff',
+                        padding: '8px 10px',
+                        borderRadius: '10px',
+                        fontSize: '11.5px',
+                        fontWeight: 700,
+                        cursor: 'pointer',
+                        transition: 'all 0.2s ease',
+                      }}
+                    >
+                      AI &amp; Software
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => setActiveCockpitTab('rcm')}
+                      style={{
+                        background: activeCockpitTab === 'rcm' ? 'linear-gradient(135deg, #059669 0%, #10B981 100%)' : 'rgba(255, 255, 255, 0.06)',
+                        border: activeCockpitTab === 'rcm' ? '1px solid #34D399' : '1px solid rgba(255, 255, 255, 0.1)',
+                        color: '#ffffff',
+                        padding: '8px 10px',
+                        borderRadius: '10px',
+                        fontSize: '11.5px',
+                        fontWeight: 700,
+                        cursor: 'pointer',
+                        transition: 'all 0.2s ease',
+                      }}
+                    >
+                      Healthcare RCM
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => setActiveCockpitTab('publishing')}
+                      style={{
+                        background: activeCockpitTab === 'publishing' ? 'linear-gradient(135deg, #4F46E5 0%, #6366F1 100%)' : 'rgba(255, 255, 255, 0.06)',
+                        border: activeCockpitTab === 'publishing' ? '1px solid #A5B4FC' : '1px solid rgba(255, 255, 255, 0.1)',
+                        color: '#ffffff',
+                        padding: '8px 10px',
+                        borderRadius: '10px',
+                        fontSize: '11.5px',
+                        fontWeight: 700,
+                        cursor: 'pointer',
+                        transition: 'all 0.2s ease',
+                      }}
+                    >
+                      Publishing Prepress
+                    </button>
+                  </div>
+                </div>
 
-                <Link to="/services?cat=publishing" className="constellation-node node-bottom-left">
-                  <BookOpen size={16} color="#8B5CF6" />
-                  <div>
-                    <div className="node-title">Publishing AI</div>
-                    <div className="node-sub">ePUB3 &amp; S1000D</div>
-                  </div>
-                </Link>
+                {/* Dynamic Telemetry Display Card */}
+                <div
+                  style={{
+                    background: 'rgba(255, 255, 255, 0.06)',
+                    borderRadius: '16px',
+                    padding: '18px',
+                    border: '1px solid rgba(255, 255, 255, 0.12)',
+                    marginBottom: '20px',
+                  }}
+                >
+                  {activeCockpitTab === 'ai' && (
+                    <div>
+                      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '12px' }}>
+                        <div>
+                          <strong style={{ fontSize: '14.5px', color: '#ffffff' }}>Agentic AI &amp; Cloud Systems</strong>
+                          <div style={{ fontSize: '11px', color: '#94A3B8' }}>Autonomous task agents &amp; CaretrixHRMS</div>
+                        </div>
+                        <span style={{ background: 'rgba(37, 99, 235, 0.3)', border: '1px solid #3B82F6', color: '#93C5FD', fontSize: '10px', fontWeight: 700, padding: '2px 8px', borderRadius: '4px' }}>
+                          SOC 2 &bull; ISO 27001
+                        </span>
+                      </div>
+                      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '10px', marginBottom: '12px' }}>
+                        <div style={{ background: 'rgba(0, 0, 0, 0.2)', padding: '10px', borderRadius: '8px' }}>
+                          <div style={{ fontSize: '10px', color: '#94A3B8' }}>Model Accuracy</div>
+                          <div style={{ fontSize: '18px', fontWeight: 800, color: '#38BDF8' }}>99.6%</div>
+                        </div>
+                        <div style={{ background: 'rgba(0, 0, 0, 0.2)', padding: '10px', borderRadius: '8px' }}>
+                          <div style={{ fontSize: '10px', color: '#94A3B8' }}>Throughput</div>
+                          <div style={{ fontSize: '18px', fontWeight: 800, color: '#34D399' }}>4.8x</div>
+                        </div>
+                        <div style={{ background: 'rgba(0, 0, 0, 0.2)', padding: '10px', borderRadius: '8px' }}>
+                          <div style={{ fontSize: '10px', color: '#94A3B8' }}>Pipeline</div>
+                          <div style={{ fontSize: '18px', fontWeight: 800, color: '#A5B4FC' }}>24/7 CI/CD</div>
+                        </div>
+                      </div>
+                      <div style={{ fontSize: '11.5px', color: '#CBD5E1', display: 'flex', alignItems: 'center', gap: '6px' }}>
+                        <Check size={14} color="#10B981" /> Active: 3D LiDAR, Polygon Segmentation &amp; LLM Automation
+                      </div>
+                    </div>
+                  )}
 
-                <Link to="/services?cat=hrms" className="constellation-node node-top-left">
-                  <UserCog size={16} color="#E11D48" />
-                  <div>
-                    <div className="node-title">HR &amp; Payroll</div>
-                    <div className="node-sub">CaretrixHRMS</div>
+                  {activeCockpitTab === 'rcm' && (
+                    <div>
+                      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '12px' }}>
+                        <div>
+                          <strong style={{ fontSize: '14.5px', color: '#ffffff' }}>Healthcare Revenue Cycle (RCM)</strong>
+                          <div style={{ fontSize: '11px', color: '#94A3B8' }}>ICD-10-CM, Prior Auth &amp; AR Recovery</div>
+                        </div>
+                        <span style={{ background: 'rgba(16, 185, 129, 0.2)', border: '1px solid #10B981', color: '#6EE7B7', fontSize: '10px', fontWeight: 700, padding: '2px 8px', borderRadius: '4px' }}>
+                          HIPAA COMPLIANT
+                        </span>
+                      </div>
+                      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '10px', marginBottom: '12px' }}>
+                        <div style={{ background: 'rgba(0, 0, 0, 0.2)', padding: '10px', borderRadius: '8px' }}>
+                          <div style={{ fontSize: '10px', color: '#94A3B8' }}>Clean Claims</div>
+                          <div style={{ fontSize: '18px', fontWeight: 800, color: '#34D399' }}>98.6%</div>
+                        </div>
+                        <div style={{ background: 'rgba(0, 0, 0, 0.2)', padding: '10px', borderRadius: '8px' }}>
+                          <div style={{ fontSize: '10px', color: '#94A3B8' }}>AR Reduction</div>
+                          <div style={{ fontSize: '18px', fontWeight: 800, color: '#38BDF8' }}>&lt;15 Days</div>
+                        </div>
+                        <div style={{ background: 'rgba(0, 0, 0, 0.2)', padding: '10px', borderRadius: '8px' }}>
+                          <div style={{ fontSize: '10px', color: '#94A3B8' }}>Denial Appeal</div>
+                          <div style={{ fontSize: '18px', fontWeight: 800, color: '#FCD34D' }}>91.4%</div>
+                        </div>
+                      </div>
+                      <div style={{ fontSize: '11.5px', color: '#CBD5E1', display: 'flex', alignItems: 'center', gap: '6px' }}>
+                        <Check size={14} color="#10B981" /> Active: Dedicated US Healthcare Pods (PST/EST Coverage)
+                      </div>
+                    </div>
+                  )}
+
+                  {activeCockpitTab === 'publishing' && (
+                    <div>
+                      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '12px' }}>
+                        <div>
+                          <strong style={{ fontSize: '14.5px', color: '#ffffff' }}>STM Publishing Prepress CoE</strong>
+                          <div style={{ fontSize: '11px', color: '#94A3B8' }}>S1000D XML, ePUB3 &amp; PDF Remediation</div>
+                        </div>
+                        <span style={{ background: 'rgba(99, 102, 241, 0.2)', border: '1px solid #6366F1', color: '#C7D2FE', fontSize: '10px', fontWeight: 700, padding: '2px 8px', borderRadius: '4px' }}>
+                          WCAG 2.1 AA
+                        </span>
+                      </div>
+                      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '10px', marginBottom: '12px' }}>
+                        <div style={{ background: 'rgba(0, 0, 0, 0.2)', padding: '10px', borderRadius: '8px' }}>
+                          <div style={{ fontSize: '10px', color: '#94A3B8' }}>S1000D XML</div>
+                          <div style={{ fontSize: '18px', fontWeight: 800, color: '#A5B4FC' }}>100% Valid</div>
+                        </div>
+                        <div style={{ background: 'rgba(0, 0, 0, 0.2)', padding: '10px', borderRadius: '8px' }}>
+                          <div style={{ fontSize: '10px', color: '#94A3B8' }}>Typesetting</div>
+                          <div style={{ fontSize: '18px', fontWeight: 800, color: '#38BDF8' }}>Zero-Defect</div>
+                        </div>
+                        <div style={{ background: 'rgba(0, 0, 0, 0.2)', padding: '10px', borderRadius: '8px' }}>
+                          <div style={{ fontSize: '10px', color: '#94A3B8' }}>Turnaround</div>
+                          <div style={{ fontSize: '18px', fontWeight: 800, color: '#34D399' }}>&lt;24 Hrs</div>
+                        </div>
+                      </div>
+                      <div style={{ fontSize: '11.5px', color: '#CBD5E1', display: 'flex', alignItems: 'center', gap: '6px' }}>
+                        <Check size={14} color="#10B981" /> Active: High-volume STM conversion &amp; Section 508 compliance
+                      </div>
+                    </div>
+                  )}
+                </div>
+
+                {/* Guaranteed SLA Meters */}
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', fontSize: '12px', color: '#94A3B8' }}>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+                    <Clock size={14} color="#60A5FA" /> Incident SLA: <strong style={{ color: '#ffffff' }}>&lt;15 Mins</strong>
                   </div>
-                </Link>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+                    <ShieldCheck size={14} color="#10B981" /> Uptime SLA: <strong style={{ color: '#ffffff' }}>99.98%</strong>
+                  </div>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+                    <Award size={14} color="#FCD34D" /> ISO 27001 Certified
+                  </div>
+                </div>
+
+                {/* Floating Satellite Badges */}
+                <div className="satellite-pill satellite-1">
+                  <Sparkles size={12} color="#38BDF8" /> 45% Operational Savings
+                </div>
+                <div className="satellite-pill satellite-2">
+                  <ShieldCheck size={12} color="#34D399" /> Dedicated Security Pods
+                </div>
               </div>
             </div>
           </div>
         </div>
 
         {/* ── DUAL TRACK EDGE-TO-EDGE MARQUEE ────────────────────────────────────── */}
-        <div className="hero-scroll-container full-bleed" style={{ marginTop: '30px' }}>
+        <div className="hero-scroll-container full-bleed" style={{ marginTop: '35px' }}>
           <div className="hero-scroll-track">
             {marqueeItems.concat(marqueeItems).map((item, idx) => (
               <div key={`m1-${idx}`} className="hero-card">
@@ -600,7 +801,7 @@ export default function Home({ onOpenModal }) {
           <div className="trust-item"><div className="trust-icon-box gold"><BarChart3 size={20} /></div> 200+ Projects Delivered</div>
           <div className="trust-item"><div className="trust-icon-box"><Users size={20} /></div> 200+ Professionals</div>
           <div className="trust-item"><div className="trust-icon-box green"><Award size={20} /></div> Startup India Registered</div>
-          {/* Duplicate for infinite seamless flow */}
+          {/* Infinite mirror items */}
           <div className="trust-item"><div className="trust-icon-box cyan"><ShieldCheck size={20} /></div> ISO 27001 Certified</div>
           <div className="trust-item"><div className="trust-icon-box gold"><Award size={20} /></div> ISO 9001:2015 Quality</div>
           <div className="trust-item"><div className="trust-icon-box"><HeartPulse size={20} /></div> HIPAA Compliant</div>
@@ -612,17 +813,17 @@ export default function Home({ onOpenModal }) {
         </div>
       </div>
 
-      {/* ═══════ COMPREHENSIVE SERVICES SECTION ═══════ */}
-      <section className="section-pad" id="services" style={{ background: '#f8faff' }}>
+      {/* ═══════ COMPREHENSIVE SERVICES SECTION (BENTO GRID) ═══════ */}
+      <section className="section-pad" id="services" style={{ background: '#F8FAFC' }}>
         <div className="container">
-          <div className="text-center" style={{ marginBottom: '50px' }}>
-            <div className="section-tag">Our Expertise</div>
+          <div className="text-center" style={{ marginBottom: '55px' }}>
+            <div className="section-tag">Enterprise Capabilities</div>
             <h2 className="section-title">
-              Comprehensive <span className="highlight">Services</span> We Offer
+              Comprehensive <span className="highlight">Services</span> We Deliver
             </h2>
             <div className="section-divider" />
             <p className="section-subtitle">
-              From full-stack IT systems to healthcare revenue cycle management, we cover every dimension of your enterprise outsourcing needs with 65+ specialized services.
+              From enterprise custom software architecture to HIPAA-compliant healthcare operations, we cover every dimension of your organization's outsourcing with 65+ specialized services.
             </p>
           </div>
 
@@ -640,8 +841,9 @@ export default function Home({ onOpenModal }) {
                 style={
                   srv.highlightBorder
                     ? {
-                        border: '2px solid rgba(225, 29, 72, 0.35)',
-                        boxShadow: '0 10px 30px rgba(225, 29, 72, 0.08)',
+                        border: '2px solid rgba(37, 99, 235, 0.4)',
+                        background: 'linear-gradient(160deg, #ffffff 0%, #f0f7ff 100%)',
+                        boxShadow: '0 12px 35px rgba(37, 99, 235, 0.12)',
                       }
                     : {}
                 }
@@ -653,11 +855,11 @@ export default function Home({ onOpenModal }) {
                       background: srv.badgeBg,
                       color: '#ffffff',
                       fontSize: '10.5px',
-                      fontWeight: 700,
-                      padding: '3px 10px',
-                      borderRadius: '20px',
-                      marginBottom: '14px',
-                      letterSpacing: '0.5px',
+                      fontWeight: 800,
+                      padding: '4px 12px',
+                      borderRadius: '100px',
+                      marginBottom: '16px',
+                      letterSpacing: '0.6px',
                       textTransform: 'uppercase',
                       width: 'fit-content',
                     }}
@@ -672,31 +874,31 @@ export default function Home({ onOpenModal }) {
                 <h4>{srv.title}</h4>
                 <p>{srv.desc}</p>
                 <Link to={srv.link} className="service-link">
-                  Explore Service <ArrowRight size={14} />
+                  Explore Service Specification <ArrowRight size={14} />
                 </Link>
               </div>
             ))}
           </div>
 
-          <div style={{ textAlign: 'center', marginTop: '48px' }}>
-            <Link to="/services" className="btn-primary-custom">
-              <Sparkles size={16} /> View All 65+ Services Portfolio
+          <div style={{ textAlign: 'center', marginTop: '50px' }}>
+            <Link to="/services" className="btn-sapphire">
+              <Sparkles size={16} /> Explore All 65+ Specialized Services
             </Link>
           </div>
         </div>
       </section>
 
-      {/* ═══════ STRATEGIC VALUE POSITIONING SECTION ═══════ */}
+      {/* ═══════ STRATEGIC VALUE POSITIONING (WHY CARETRIX) ═══════ */}
       <section className="section-pad" id="why-us" style={{ background: '#ffffff' }}>
         <div className="container">
-          <div className="text-center" style={{ marginBottom: '50px' }}>
+          <div className="text-center" style={{ marginBottom: '55px' }}>
             <div className="section-tag">Strategic Value Framework</div>
             <h2 className="section-title">
-              Innovative Positioning <span className="highlight">Built For Scale</span>
+              Engineered For Measurable <span className="highlight">Enterprise Scale</span>
             </h2>
             <div className="section-divider" />
             <p className="section-subtitle">
-              Combining institutional data security, operational excellence, and agile offshore talent pods to drive measurable business transformation.
+              Combining institutional data security, operational agility, and certified offshore talent pods to drive transformative business results.
             </p>
           </div>
 
@@ -708,15 +910,15 @@ export default function Home({ onOpenModal }) {
             }}
           >
             <div className="whyus-card">
-              <div className="icon"><ShieldCheck size={38} color="#1C2280" /></div>
+              <div className="icon"><ShieldCheck size={38} color="#1E3A8A" /></div>
               <h3>99.9<span>%</span></h3>
-              <p>Security &amp; SLA Compliance (ISO 27001 &bull; HIPAA Compliant Ops)</p>
+              <p>Security &amp; SLA Compliance (ISO 27001 &bull; HIPAA Compliant Delivery)</p>
             </div>
 
             <div className="whyus-card">
-              <div className="icon"><Clock size={38} color="#CC2228" /></div>
+              <div className="icon"><Clock size={38} color="#2563EB" /></div>
               <h3>24<span>/7</span></h3>
-              <p>Continuous Global Delivery (Pune HQ, Bengaluru &amp; US Overlap)</p>
+              <p>Continuous Global Delivery (Pune HQ, Bengaluru CoE &amp; US Overlap)</p>
             </div>
 
             <div className="whyus-card">
@@ -726,29 +928,31 @@ export default function Home({ onOpenModal }) {
             </div>
 
             <div className="whyus-card">
-              <div className="icon"><Users size={38} color="#5BA8D4" /></div>
+              <div className="icon"><Users size={38} color="#0284C7" /></div>
               <h3>150<span>+</span></h3>
-              <p>Global Enterprise Clients Powered Across US, UK, EU &amp; APAC</p>
+              <p>Global Enterprise Clients Empowered Across US, UK, EU &amp; APAC</p>
             </div>
           </div>
         </div>
       </section>
 
-      {/* ═══════ FEATURED PLATFORM: CAREtrixHRMS ═══════ */}
+      {/* ═══════ FEATURED PLATFORM: CARETRIXHRMS ═══════ */}
       <section
         className="section-pad"
         id="ai-platform"
         style={{
-          background: 'linear-gradient(135deg, #080B1A 0%, #101538 60%, #1C2280 100%)',
+          background: 'linear-gradient(135deg, #070C1E 0%, #0B1228 50%, #111A38 100%)',
           color: '#ffffff',
+          position: 'relative',
+          overflow: 'hidden',
         }}
       >
-        <div className="container">
+        <div className="container" style={{ position: 'relative', zIndex: 2 }}>
           <div
             style={{
               display: 'grid',
               gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))',
-              gap: '40px',
+              gap: '44px',
               alignItems: 'center',
             }}
           >
@@ -757,55 +961,55 @@ export default function Home({ onOpenModal }) {
                 style={{
                   display: 'inline-flex',
                   alignItems: 'center',
-                  gap: '6px',
-                  background: 'rgba(225, 29, 72, 0.2)',
-                  border: '1px solid rgba(225, 29, 72, 0.4)',
-                  padding: '5px 14px',
+                  gap: '7px',
+                  background: 'rgba(37, 99, 235, 0.2)',
+                  border: '1px solid rgba(37, 99, 235, 0.4)',
+                  padding: '6px 16px',
                   borderRadius: '100px',
                   fontSize: '11px',
-                  fontWeight: 700,
-                  color: '#ff8585',
+                  fontWeight: 800,
+                  color: '#93C5FD',
                   textTransform: 'uppercase',
-                  marginBottom: '16px',
+                  marginBottom: '18px',
                 }}
               >
-                <Sparkles size={13} /> Flagship AI Enterprise Platform
+                <Sparkles size={13} /> Flagship AI Enterprise Software
               </div>
-              <h2 style={{ fontSize: 'clamp(2rem, 3.5vw, 2.8rem)', fontWeight: 800, color: '#ffffff', marginBottom: '16px' }}>
-                CaretrixHRMS — Autonomous AI HRMS &amp; Payroll System
+              <h2 style={{ fontSize: 'clamp(2rem, 3.5vw, 2.9rem)', fontWeight: 800, color: '#ffffff', marginBottom: '18px', letterSpacing: '-0.025em' }}>
+                CaretrixHRMS — Autonomous AI HR &amp; Payroll Platform
               </h2>
-              <p style={{ fontSize: '16px', color: 'rgba(255, 255, 255, 0.8)', lineHeight: 1.7, marginBottom: '24px' }}>
-                Engineered to replace fragmented workforce software. CaretrixHRMS automates multi-entity payroll calculations, biometric hardware sync, compliance tax filing, leave approvals, and employee lifecycle tracking with enterprise-grade security.
+              <p style={{ fontSize: '16.5px', color: 'rgba(255, 255, 255, 0.82)', lineHeight: 1.75, marginBottom: '26px' }}>
+                Engineered to replace fragmented legacy workforce systems. CaretrixHRMS automates multi-entity statutory payroll calculations, biometric hardware sync, compliance tax filing, leave approvals, and employee lifecycle tracking with enterprise-grade encryption.
               </p>
 
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '12px', marginBottom: '28px' }}>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '14px', marginBottom: '30px' }}>
                 <div style={{ display: 'flex', alignItems: 'center', gap: '10px', fontSize: '14.5px' }}>
-                  <CheckCircle2 size={18} color="#10b981" /> One-Click Statutory Payroll (PF, ESI, TDS, Professional Tax)
+                  <CheckCircle2 size={18} color="#10B981" /> One-Click Statutory Payroll (PF, ESI, TDS, Professional Tax)
                 </div>
                 <div style={{ display: 'flex', alignItems: 'center', gap: '10px', fontSize: '14.5px' }}>
-                  <CheckCircle2 size={18} color="#10b981" /> Biometric Fingerprint &amp; Face Recognition Cloud Sync
+                  <CheckCircle2 size={18} color="#10B981" /> Biometric Fingerprint &amp; Face Recognition Cloud Sync
                 </div>
                 <div style={{ display: 'flex', alignItems: 'center', gap: '10px', fontSize: '14.5px' }}>
-                  <CheckCircle2 size={18} color="#10b981" /> Employee Self-Service (ESS) Mobile Portal &amp; Tax Slips
+                  <CheckCircle2 size={18} color="#10B981" /> Employee Self-Service (ESS) Mobile Portal &amp; Tax Slips
                 </div>
                 <div style={{ display: 'flex', alignItems: 'center', gap: '10px', fontSize: '14.5px' }}>
-                  <CheckCircle2 size={18} color="#10b981" /> AI Predictive Performance KPI &amp; Attrition Analytics
+                  <CheckCircle2 size={18} color="#10B981" /> AI Predictive Performance KPI &amp; Attrition Analytics
                 </div>
               </div>
 
-              <div style={{ display: 'flex', gap: '12px', flexWrap: 'wrap' }}>
+              <div style={{ display: 'flex', gap: '14px', flexWrap: 'wrap' }}>
                 <button
                   type="button"
                   onClick={onOpenModal}
-                  className="btn-accent-custom"
-                  style={{ padding: '13px 28px' }}
+                  className="btn-sapphire"
+                  style={{ padding: '14px 30px' }}
                 >
                   <Send size={15} /> Request Live Platform Demo
                 </button>
                 <Link
                   to="/services?cat=hrms"
-                  className="btn-outline-custom"
-                  style={{ background: 'transparent', color: '#ffffff', borderColor: 'rgba(255, 255, 255, 0.4)' }}
+                  className="btn-glass"
+                  style={{ background: 'rgba(255, 255, 255, 0.1)', color: '#ffffff', borderColor: 'rgba(255, 255, 255, 0.3)' }}
                 >
                   Platform Specifications &rarr;
                 </Link>
@@ -817,40 +1021,40 @@ export default function Home({ onOpenModal }) {
               style={{
                 background: 'rgba(255, 255, 255, 0.05)',
                 backdropFilter: 'blur(20px)',
-                border: '1px solid rgba(255, 255, 255, 0.12)',
-                borderRadius: '20px',
-                padding: '30px',
-                boxShadow: '0 20px 50px rgba(0, 0, 0, 0.4)',
+                border: '1px solid rgba(255, 255, 255, 0.14)',
+                borderRadius: '24px',
+                padding: '32px',
+                boxShadow: '0 25px 60px rgba(0, 0, 0, 0.45)',
               }}
             >
-              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '20px' }}>
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '22px' }}>
                 <div>
-                  <div style={{ fontSize: '11px', color: 'rgba(255, 255, 255, 0.6)', textTransform: 'uppercase' }}>CaretrixHRMS Cloud</div>
-                  <strong style={{ fontSize: '16px', color: '#ffffff' }}>Enterprise Workforce Overview</strong>
+                  <div style={{ fontSize: '11px', color: 'rgba(255, 255, 255, 0.65)', textTransform: 'uppercase', fontWeight: 600 }}>CaretrixHRMS Cloud</div>
+                  <strong style={{ fontSize: '17px', color: '#ffffff' }}>Enterprise Workforce Telemetry</strong>
                 </div>
-                <span style={{ background: '#10b981', color: '#fff', fontSize: '10px', fontWeight: 700, padding: '3px 8px', borderRadius: '4px' }}>
+                <span style={{ background: '#10B981', color: '#fff', fontSize: '10px', fontWeight: 700, padding: '3px 9px', borderRadius: '4px' }}>
                   LIVE
                 </span>
               </div>
 
-              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '12px', marginBottom: '20px' }}>
-                <div style={{ background: 'rgba(255, 255, 255, 0.07)', padding: '14px', borderRadius: '12px' }}>
-                  <div style={{ fontSize: '11px', color: 'rgba(255, 255, 255, 0.6)' }}>Active Employees</div>
-                  <div style={{ fontSize: '22px', fontWeight: 800, color: '#ffffff', marginTop: '2px' }}>1,480+</div>
+              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '14px', marginBottom: '20px' }}>
+                <div style={{ background: 'rgba(255, 255, 255, 0.07)', padding: '16px', borderRadius: '14px' }}>
+                  <div style={{ fontSize: '11px', color: 'rgba(255, 255, 255, 0.65)' }}>Active Managed Employees</div>
+                  <div style={{ fontSize: '24px', fontWeight: 800, color: '#ffffff', marginTop: '2px' }}>1,480+</div>
                 </div>
-                <div style={{ background: 'rgba(255, 255, 255, 0.07)', padding: '14px', borderRadius: '12px' }}>
-                  <div style={{ fontSize: '11px', color: 'rgba(255, 255, 255, 0.6)' }}>Payroll Accuracy</div>
-                  <div style={{ fontSize: '22px', fontWeight: 800, color: '#10b981', marginTop: '2px' }}>99.98%</div>
+                <div style={{ background: 'rgba(255, 255, 255, 0.07)', padding: '16px', borderRadius: '14px' }}>
+                  <div style={{ fontSize: '11px', color: 'rgba(255, 255, 255, 0.65)' }}>Payroll Accuracy</div>
+                  <div style={{ fontSize: '24px', fontWeight: 800, color: '#10B981', marginTop: '2px' }}>99.98%</div>
                 </div>
               </div>
 
-              <div style={{ background: 'rgba(255, 255, 255, 0.06)', borderRadius: '12px', padding: '14px', fontSize: '13px' }}>
+              <div style={{ background: 'rgba(255, 255, 255, 0.06)', borderRadius: '14px', padding: '16px', fontSize: '13px' }}>
                 <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '8px' }}>
-                  <span>Monthly Payroll Batch Processing</span>
-                  <span style={{ color: '#10b981', fontWeight: 700 }}>Ready (0 errors)</span>
+                  <span>Monthly Automated Payroll Batch Processing</span>
+                  <span style={{ color: '#10B981', fontWeight: 700 }}>Ready (0 errors)</span>
                 </div>
-                <div style={{ width: '100%', height: '6px', background: 'rgba(255, 255, 255, 0.1)', borderRadius: '4px', overflow: 'hidden' }}>
-                  <div style={{ width: '100%', height: '100%', background: 'linear-gradient(90deg, #CC2228, #10b981)' }} />
+                <div style={{ width: '100%', height: '7px', background: 'rgba(255, 255, 255, 0.12)', borderRadius: '6px', overflow: 'hidden' }}>
+                  <div style={{ width: '100%', height: '100%', background: 'linear-gradient(90deg, #1E3A8A, #2563EB, #10B981)' }} />
                 </div>
               </div>
             </div>
@@ -859,16 +1063,16 @@ export default function Home({ onOpenModal }) {
       </section>
 
       {/* ═══════ CLIENT TESTIMONIALS SECTION ═══════ */}
-      <section className="section-pad" style={{ background: '#f8faff' }}>
+      <section className="section-pad" style={{ background: '#F8FAFC' }}>
         <div className="container">
-          <div className="text-center" style={{ marginBottom: '50px' }}>
+          <div className="text-center" style={{ marginBottom: '55px' }}>
             <div className="section-tag">Client Success Stories</div>
             <h2 className="section-title">
               Trusted by <span className="highlight">Global Leaders</span>
             </h2>
             <div className="section-divider" />
             <p className="section-subtitle">
-              Read how our multidisciplinary technology delivery and specialized BPO pods drive measurable growth for our international partners.
+              Discover how our multidisciplinary technology delivery and specialized BPO pods drive measurable growth for our international partners.
             </p>
           </div>
 
@@ -926,8 +1130,8 @@ export default function Home({ onOpenModal }) {
 
       {/* ═══════ COMPREHENSIVE FAQ SECTION ═══════ */}
       <section className="section-pad" id="faq" style={{ background: '#ffffff' }}>
-        <div className="container" style={{ maxWidth: '900px' }}>
-          <div className="text-center" style={{ marginBottom: '40px' }}>
+        <div className="container" style={{ maxWidth: '920px' }}>
+          <div className="text-center" style={{ marginBottom: '45px' }}>
             <div className="section-tag">Frequently Asked Questions</div>
             <h2 className="section-title">
               Everything You Need <span className="highlight">To Know</span>
@@ -964,56 +1168,57 @@ export default function Home({ onOpenModal }) {
       </section>
 
       {/* ═══════ CONTACT MINI SECTION ═══════ */}
-      <section className="section-pad" style={{ background: '#f8faff' }} id="contact-mini">
+      <section className="section-pad" style={{ background: '#F8FAFC' }} id="contact-mini">
         <div className="container">
           <div
             style={{
               display: 'grid',
               gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))',
-              gap: '30px',
+              gap: '32px',
             }}
           >
             {/* Left: Contact Info Card */}
             <div
               style={{
                 background: 'var(--gradient-primary)',
-                borderRadius: '20px',
-                padding: '40px 32px',
+                borderRadius: '24px',
+                padding: '44px 34px',
                 color: '#ffffff',
                 display: 'flex',
                 flexDirection: 'column',
                 justifyContent: 'space-between',
+                boxShadow: '0 20px 50px rgba(30, 58, 138, 0.25)',
               }}
             >
               <div>
-                <h3 style={{ fontSize: '26px', fontWeight: 800, color: '#ffffff', marginBottom: '10px' }}>
+                <h3 style={{ fontSize: '28px', fontWeight: 800, color: '#ffffff', marginBottom: '12px', letterSpacing: '-0.02em' }}>
                   Let's Work Together
                 </h3>
-                <p style={{ color: 'rgba(255, 255, 255, 0.85)', fontSize: '14.5px', marginBottom: '32px' }}>
+                <p style={{ color: 'rgba(255, 255, 255, 0.88)', fontSize: '15px', marginBottom: '34px', lineHeight: 1.7 }}>
                   Tell us about your project or operational requirements, and our solution architects will respond within 24 hours with a customized proposal.
                 </p>
 
-                <div style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '22px' }}>
                   <div style={{ display: 'flex', gap: '14px', alignItems: 'center' }}>
                     <div
                       style={{
-                        width: '42px',
-                        height: '42px',
-                        borderRadius: '10px',
-                        background: 'rgba(255, 255, 255, 0.15)',
+                        width: '44px',
+                        height: '44px',
+                        borderRadius: '12px',
+                        background: 'rgba(255, 255, 255, 0.16)',
                         display: 'flex',
                         alignItems: 'center',
                         justifyContent: 'center',
                         flexShrink: 0,
                       }}
                     >
-                      <Phone size={18} />
+                      <Phone size={19} />
                     </div>
                     <div>
-                      <div style={{ fontSize: '11px', textTransform: 'uppercase', color: 'rgba(255, 255, 255, 0.65)', fontWeight: 600 }}>
-                        Direct Call (India / Global)
+                      <div style={{ fontSize: '11px', textTransform: 'uppercase', color: 'rgba(255, 255, 255, 0.7)', fontWeight: 600 }}>
+                        Direct Phone (India / Global)
                       </div>
-                      <a href="tel:+918308906690" style={{ color: '#ffffff', fontWeight: 700, fontSize: '15px' }}>
+                      <a href="tel:+918308906690" style={{ color: '#ffffff', fontWeight: 700, fontSize: '15.5px' }}>
                         +91-8308906690
                       </a>
                     </div>
@@ -1022,23 +1227,23 @@ export default function Home({ onOpenModal }) {
                   <div style={{ display: 'flex', gap: '14px', alignItems: 'center' }}>
                     <div
                       style={{
-                        width: '42px',
-                        height: '42px',
-                        borderRadius: '10px',
-                        background: 'rgba(255, 255, 255, 0.15)',
+                        width: '44px',
+                        height: '44px',
+                        borderRadius: '12px',
+                        background: 'rgba(255, 255, 255, 0.16)',
                         display: 'flex',
                         alignItems: 'center',
                         justifyContent: 'center',
                         flexShrink: 0,
                       }}
                     >
-                      <Mail size={18} />
+                      <Mail size={19} />
                     </div>
                     <div>
-                      <div style={{ fontSize: '11px', textTransform: 'uppercase', color: 'rgba(255, 255, 255, 0.65)', fontWeight: 600 }}>
+                      <div style={{ fontSize: '11px', textTransform: 'uppercase', color: 'rgba(255, 255, 255, 0.7)', fontWeight: 600 }}>
                         Corporate Email
                       </div>
-                      <a href="mailto:support@caretrixconsulting.com" style={{ color: '#ffffff', fontWeight: 700, fontSize: '15px' }}>
+                      <a href="mailto:support@caretrixconsulting.com" style={{ color: '#ffffff', fontWeight: 700, fontSize: '15.5px' }}>
                         support@caretrixconsulting.com
                       </a>
                     </div>
@@ -1047,20 +1252,20 @@ export default function Home({ onOpenModal }) {
                   <div style={{ display: 'flex', gap: '14px', alignItems: 'center' }}>
                     <div
                       style={{
-                        width: '42px',
-                        height: '42px',
-                        borderRadius: '10px',
-                        background: 'rgba(255, 255, 255, 0.15)',
+                        width: '44px',
+                        height: '44px',
+                        borderRadius: '12px',
+                        background: 'rgba(255, 255, 255, 0.16)',
                         display: 'flex',
                         alignItems: 'center',
                         justifyContent: 'center',
                         flexShrink: 0,
                       }}
                     >
-                      <Clock size={18} />
+                      <Clock size={19} />
                     </div>
                     <div>
-                      <div style={{ fontSize: '11px', textTransform: 'uppercase', color: 'rgba(255, 255, 255, 0.65)', fontWeight: 600 }}>
+                      <div style={{ fontSize: '11px', textTransform: 'uppercase', color: 'rgba(255, 255, 255, 0.7)', fontWeight: 600 }}>
                         Operational Working Hours
                       </div>
                       <div style={{ color: '#ffffff', fontWeight: 600, fontSize: '14px' }}>
@@ -1071,7 +1276,7 @@ export default function Home({ onOpenModal }) {
                 </div>
               </div>
 
-              <div style={{ marginTop: '30px', fontSize: '12.5px', color: 'rgba(255, 255, 255, 0.7)' }}>
+              <div style={{ marginTop: '32px', fontSize: '13px', color: 'rgba(255, 255, 255, 0.75)' }}>
                 📍 Pune Headquarters &bull; Bengaluru Tech Hub &bull; Wyoming, USA
               </div>
             </div>
@@ -1080,23 +1285,23 @@ export default function Home({ onOpenModal }) {
             <div
               style={{
                 background: '#ffffff',
-                borderRadius: '20px',
-                padding: '36px',
-                boxShadow: '0 4px 20px rgba(28, 34, 128, 0.08)',
-                border: '1px solid #e2e8f0',
+                borderRadius: '24px',
+                padding: '38px',
+                boxShadow: '0 4px 25px rgba(15, 23, 42, 0.06)',
+                border: '1px solid #E2E8F0',
               }}
             >
-              <h4 style={{ fontSize: '22px', fontWeight: 800, color: '#0f172a', marginBottom: '6px' }}>
+              <h4 style={{ fontSize: '24px', fontWeight: 800, color: '#0F172A', marginBottom: '6px' }}>
                 Send Us a Message
               </h4>
-              <p style={{ fontSize: '14px', color: '#64748b', marginBottom: '24px' }}>
+              <p style={{ fontSize: '14.5px', color: '#64748B', marginBottom: '24px' }}>
                 Fill in the details below and our solution team will respond promptly.
               </p>
 
               <form onSubmit={handleContactSubmit}>
                 <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '14px', marginBottom: '14px' }}>
                   <div>
-                    <label style={{ display: 'block', fontSize: '13px', fontWeight: 600, color: '#1e293b', marginBottom: '4px' }}>
+                    <label style={{ display: 'block', fontSize: '13px', fontWeight: 600, color: '#1E293B', marginBottom: '5px' }}>
                       Full Name *
                     </label>
                     <input
@@ -1110,7 +1315,7 @@ export default function Home({ onOpenModal }) {
                   </div>
 
                   <div>
-                    <label style={{ display: 'block', fontSize: '13px', fontWeight: 600, color: '#1e293b', marginBottom: '4px' }}>
+                    <label style={{ display: 'block', fontSize: '13px', fontWeight: 600, color: '#1E293B', marginBottom: '5px' }}>
                       Email Address *
                     </label>
                     <input
@@ -1126,7 +1331,7 @@ export default function Home({ onOpenModal }) {
 
                 <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '14px', marginBottom: '14px' }}>
                   <div>
-                    <label style={{ display: 'block', fontSize: '13px', fontWeight: 600, color: '#1e293b', marginBottom: '4px' }}>
+                    <label style={{ display: 'block', fontSize: '13px', fontWeight: 600, color: '#1E293B', marginBottom: '5px' }}>
                       Phone Number
                     </label>
                     <input
@@ -1139,7 +1344,7 @@ export default function Home({ onOpenModal }) {
                   </div>
 
                   <div>
-                    <label style={{ display: 'block', fontSize: '13px', fontWeight: 600, color: '#1e293b', marginBottom: '4px' }}>
+                    <label style={{ display: 'block', fontSize: '13px', fontWeight: 600, color: '#1E293B', marginBottom: '5px' }}>
                       Service Required
                     </label>
                     <select
@@ -1161,8 +1366,8 @@ export default function Home({ onOpenModal }) {
                   </div>
                 </div>
 
-                <div style={{ marginBottom: '18px' }}>
-                  <label style={{ display: 'block', fontSize: '13px', fontWeight: 600, color: '#1e293b', marginBottom: '4px' }}>
+                <div style={{ marginBottom: '20px' }}>
+                  <label style={{ display: 'block', fontSize: '13px', fontWeight: 600, color: '#1E293B', marginBottom: '5px' }}>
                     Your Message / Requirements *
                   </label>
                   <textarea
@@ -1178,8 +1383,8 @@ export default function Home({ onOpenModal }) {
                 <button
                   type="submit"
                   disabled={formSubmitting}
-                  className="btn-accent-custom"
-                  style={{ width: '100%', justifyContent: 'center', padding: '13px' }}
+                  className="btn-sapphire"
+                  style={{ width: '100%', justifyContent: 'center', padding: '14px' }}
                 >
                   <Send size={15} /> {formSubmitting ? 'Sending...' : 'Send Message'}
                 </button>
@@ -1192,12 +1397,12 @@ export default function Home({ onOpenModal }) {
       {/* ═══════ READY TO TRANSFORM CTA BANNER ═══════ */}
       <div className="cta-banner">
         <div className="container" style={{ textAlign: 'center', position: 'relative', zIndex: 2 }}>
-          <div className="section-tag" style={{ background: 'rgba(255, 255, 255, 0.15)', color: '#ffffff', borderColor: 'rgba(255, 255, 255, 0.25)' }}>
-            Start Today
+          <div className="section-tag" style={{ background: 'rgba(255, 255, 255, 0.16)', color: '#ffffff', borderColor: 'rgba(255, 255, 255, 0.3)' }}>
+            Start Your Transformation
           </div>
           <h2>Ready to Transform Your Business Operations?</h2>
           <p>
-            Partner with an ISO 27001 certified global delivery leader. Connect with our solution specialists for a no-obligation consultation.
+            Partner with an ISO 27001 certified global IT &amp; BPO delivery leader. Connect with our solution specialists for an immediate custom assessment.
           </p>
           <div style={{ display: 'flex', gap: '14px', justifyContent: 'center', flexWrap: 'wrap' }}>
             <button
@@ -1205,21 +1410,22 @@ export default function Home({ onOpenModal }) {
               onClick={onOpenModal}
               className="btn-cta-white"
             >
-              <Send size={16} /> Start a Project With Us
+              <Send size={16} /> Request Free Consultation
             </button>
             <a
               href="tel:+918308906690"
               style={{
-                background: 'rgba(255, 255, 255, 0.15)',
+                background: 'rgba(255, 255, 255, 0.16)',
                 color: '#ffffff',
-                border: '1.5px solid rgba(255, 255, 255, 0.3)',
-                padding: '14px 28px',
-                borderRadius: '10px',
+                border: '1.5px solid rgba(255, 255, 255, 0.35)',
+                padding: '14px 30px',
+                borderRadius: '100px',
                 fontWeight: 700,
                 fontSize: '15px',
                 display: 'inline-flex',
                 alignItems: 'center',
                 gap: '8px',
+                transition: 'all 0.2s',
               }}
             >
               <Phone size={16} /> +91-8308906690
@@ -1234,131 +1440,91 @@ export default function Home({ onOpenModal }) {
           display: inline-flex;
           align-items: center;
           gap: 6px;
-          padding: 6px 14px;
+          padding: 7px 15px;
           border-radius: 100px;
           background: #ffffff;
-          border: 1px solid rgba(28, 34, 128, 0.09);
+          border: 1px solid rgba(37, 99, 235, 0.14);
           font-size: 11.5px;
           font-weight: 600;
           color: #334155;
           transition: all 0.25s ease;
-          box-shadow: 0 2px 6px rgba(0, 0, 0, 0.02);
+          box-shadow: 0 2px 6px rgba(15, 23, 42, 0.03);
         }
         .hero-chip:hover {
-          background: #0D0F2B;
+          background: #0F172A;
           color: #ffffff !important;
           transform: translateY(-2px);
           border-color: transparent;
         }
         .stat-chip {
-          background: rgba(255, 255, 255, 0.9);
+          background: rgba(255, 255, 255, 0.95);
           backdrop-filter: blur(10px);
-          border: 1px solid rgba(28, 34, 128, 0.09);
-          border-radius: 12px;
-          padding: 12px 14px;
-          box-shadow: 0 4px 15px rgba(28, 34, 128, 0.05);
+          border: 1px solid rgba(37, 99, 235, 0.12);
+          border-radius: 14px;
+          padding: 13px 15px;
+          box-shadow: 0 4px 16px rgba(37, 99, 235, 0.06);
           text-align: left;
         }
         .stat-num {
           font-family: var(--font-heading);
-          font-size: 1.55rem;
-          font-weight: 900;
-          color: var(--primary);
+          font-size: 1.6rem;
+          font-weight: 800;
+          color: var(--primary-dark);
           line-height: 1;
           margin-bottom: 2px;
         }
         .stat-num span {
-          color: var(--accent);
+          color: var(--primary-light);
         }
         .stat-lbl {
           font-size: 10.5px;
           font-weight: 600;
-          color: #64748b;
+          color: #64748B;
           text-transform: uppercase;
-          letter-spacing: 0.5px;
+          letter-spacing: 0.6px;
         }
-        .orbit-ring {
+        .satellite-pill {
           position: absolute;
-          border-radius: 50%;
-          pointer-events: none;
-        }
-        .orbit-ring-1 {
-          width: 320px;
-          height: 320px;
-          border: 1px dashed rgba(91, 168, 212, 0.35);
-          animation: spinSlow 30s linear infinite;
-        }
-        .orbit-ring-2 {
-          width: 420px;
-          height: 420px;
-          border: 1px dashed rgba(204, 34, 40, 0.22);
-          animation: spinSlow 40s linear infinite reverse;
-        }
-        .orbit-ring-3 {
-          width: 240px;
-          height: 240px;
-          border: 1px dashed rgba(16, 185, 129, 0.25);
-          animation: spinSlow 20s linear infinite;
-        }
-        @keyframes spinSlow {
-          0% { transform: rotate(0deg); }
-          100% { transform: rotate(360deg); }
-        }
-        .constellation-node {
-          position: absolute;
-          background: rgba(255, 255, 255, 0.95);
-          backdrop-filter: blur(14px);
-          border: 1px solid rgba(28, 34, 128, 0.12);
-          border-radius: 12px;
-          padding: 7px 12px;
-          display: inline-flex;
-          align-items: center;
-          gap: 8px;
-          box-shadow: 0 8px 24px rgba(13, 16, 53, 0.08);
-          transition: all 0.3s ease;
-          z-index: 12;
-        }
-        .constellation-node:hover {
-          background: #ffffff;
-          transform: translateY(-3px) scale(1.05);
-          box-shadow: 0 12px 30px rgba(28, 34, 128, 0.18);
-          border-color: #1C2280;
-        }
-        .node-title {
-          font-family: var(--font-heading);
+          background: rgba(15, 23, 42, 0.85);
+          backdrop-filter: blur(12px);
+          border: 1px solid rgba(255, 255, 255, 0.18);
+          color: #ffffff;
           font-size: 11px;
           font-weight: 700;
-          color: #0f172a;
-          line-height: 1.2;
-          white-space: nowrap;
+          padding: 6px 14px;
+          border-radius: 100px;
+          display: inline-flex;
+          align-items: center;
+          gap: 6px;
+          box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+          pointer-events: none;
         }
-        .node-sub {
-          font-size: 9px;
-          font-weight: 500;
-          color: #64748b;
-          white-space: nowrap;
+        .satellite-1 {
+          top: -12px;
+          right: 20px;
+          animation: floatSlow 4s ease-in-out infinite;
         }
-        .node-top { top: 10px; }
-        .node-top-right { top: 90px; right: 10px; }
-        .node-bottom-right { bottom: 90px; right: 10px; }
-        .node-bottom { bottom: 10px; }
-        .node-bottom-left { bottom: 90px; left: 10px; }
-        .node-top-left { top: 90px; left: 10px; }
+        .satellite-2 {
+          bottom: -12px;
+          left: 20px;
+          animation: floatSlow 5s ease-in-out infinite reverse;
+        }
 
         .testimonial-card {
           background: #ffffff;
           border-radius: var(--radius-lg);
-          padding: 32px 28px;
+          padding: 34px 28px;
           border: 1px solid var(--border-light);
-          transition: var(--transition-slow);
+          transition: var(--transition);
           position: relative;
         }
         .testimonial-card:hover {
           box-shadow: var(--shadow-hover);
           transform: translateY(-5px);
+          border-color: rgba(37, 99, 235, 0.25);
         }
         .testimonial-card .stars {
-          color: #f59e0b;
+          color: #F59E0B;
           font-size: 16px;
           margin-bottom: 12px;
         }
@@ -1367,7 +1533,7 @@ export default function Home({ onOpenModal }) {
           color: var(--text-dark);
           line-height: 1.7;
           font-style: italic;
-          margin-bottom: 20px;
+          margin-bottom: 22px;
         }
         .testimonial-card .reviewer {
           display: flex;
@@ -1375,20 +1541,20 @@ export default function Home({ onOpenModal }) {
           gap: 12px;
         }
         .testimonial-card .reviewer-icon {
-          width: 42px;
-          height: 42px;
+          width: 44px;
+          height: 44px;
           border-radius: 50%;
           background: var(--gradient-primary);
           color: #ffffff;
-          font-weight: 700;
+          font-weight: 800;
           display: flex;
           align-items: center;
           justify-content: center;
-          font-size: 14px;
+          font-size: 14.5px;
         }
         .testimonial-card .reviewer-name {
           font-weight: 700;
-          font-size: 14px;
+          font-size: 14.5px;
           color: var(--text-dark);
         }
         .testimonial-card .reviewer-title {

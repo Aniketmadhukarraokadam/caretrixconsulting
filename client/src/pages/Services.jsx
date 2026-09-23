@@ -423,9 +423,9 @@ export default function Services({ onOpenModal }) {
       {/* ── HEADER BANNER ────────────────────────────────────── */}
       <div
         style={{
-          background: 'linear-gradient(135deg, #080B1A 0%, #101538 55%, #1C2280 100%)',
+          background: 'linear-gradient(135deg, #070C1E 0%, #0B1228 50%, #111A38 100%)',
           color: '#ffffff',
-          padding: '60px 0 50px',
+          padding: '65px 0 55px',
           textAlign: 'center',
           position: 'relative',
         }}
@@ -436,19 +436,19 @@ export default function Services({ onOpenModal }) {
               display: 'inline-flex',
               alignItems: 'center',
               gap: '8px',
-              background: 'rgba(255, 255, 255, 0.1)',
-              border: '1px solid rgba(255, 255, 255, 0.2)',
-              padding: '6px 16px',
+              background: 'rgba(37, 99, 235, 0.15)',
+              border: '1px solid rgba(37, 99, 235, 0.3)',
+              padding: '6px 18px',
               borderRadius: '100px',
               fontSize: '11.5px',
-              fontWeight: 700,
+              fontWeight: 800,
               letterSpacing: '1px',
               textTransform: 'uppercase',
-              color: '#5BA8D4',
+              color: '#93C5FD',
               marginBottom: '18px',
             }}
           >
-            <Sparkles size={13} color="#f59e0b" />
+            <Sparkles size={13} color="#60A5FA" />
             ISO 27001 Certified &bull; 65+ Global Services Portfolio
           </div>
           <h1
@@ -458,6 +458,7 @@ export default function Services({ onOpenModal }) {
               color: '#ffffff',
               lineHeight: 1.2,
               marginBottom: '16px',
+              letterSpacing: '-0.025em',
             }}
           >
             Enterprise Services &amp; Global BPO Solutions
@@ -527,9 +528,9 @@ export default function Services({ onOpenModal }) {
                 type="button"
                 onClick={() => handleCategoryChange(cat.id)}
                 style={{
-                  background: activeCategory === cat.id ? '#1C2280' : 'rgba(28, 34, 128, 0.04)',
+                  background: activeCategory === cat.id ? 'linear-gradient(135deg, #1E3A8A 0%, #2563EB 100%)' : 'rgba(37, 99, 235, 0.04)',
                   color: activeCategory === cat.id ? '#ffffff' : '#334155',
-                  border: activeCategory === cat.id ? '1px solid #1C2280' : '1px solid rgba(28, 34, 128, 0.1)',
+                  border: activeCategory === cat.id ? '1px solid #2563EB' : '1px solid rgba(37, 99, 235, 0.12)',
                   borderRadius: '100px',
                   padding: '8px 18px',
                   fontSize: '13px',
@@ -537,6 +538,7 @@ export default function Services({ onOpenModal }) {
                   cursor: 'pointer',
                   transition: 'all 0.2s',
                   whiteSpace: 'nowrap',
+                  boxShadow: activeCategory === cat.id ? '0 4px 14px rgba(37, 99, 235, 0.25)' : 'none',
                 }}
               >
                 {cat.label}

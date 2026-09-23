@@ -19,12 +19,12 @@ import {
 export default function About({ onOpenModal }) {
   const values = [
     {
-      icon: <ShieldCheck size={28} color="#1C2280" />,
+      icon: <ShieldCheck size={28} color="#1E3A8A" />,
       title: 'Institutional Security & ISO Governance',
       desc: 'Strict adherence to global data privacy laws, ISO 27001:2013 data security standards, and HIPAA compliance mandates for sensitive healthcare and enterprise processing.',
     },
     {
-      icon: <Target size={28} color="#CC2228" />,
+      icon: <Target size={28} color="#2563EB" />,
       title: 'Precision in Execution (99.8%+ SLA)',
       desc: 'Rigorous multi-tier Quality Assurance frameworks guaranteeing 99.8%+ accuracy across medical coding, lease abstraction, automated publishing, and software systems.',
     },
@@ -34,7 +34,7 @@ export default function About({ onOpenModal }) {
       desc: 'Rapid ramping capability to mobilize expert technical pods and operational desks within 7-10 business days, perfectly synced with your time zone.',
     },
     {
-      icon: <Users size={28} color="#5BA8D4" />,
+      icon: <Users size={28} color="#0284C7" />,
       title: 'Transparent Client Alignment',
       desc: 'Transparent SLAs, dedicated delivery directors, regular executive reviews, and direct communication ensuring alignment with your strategic growth targets.',
     },
@@ -69,13 +69,13 @@ export default function About({ onOpenModal }) {
   ];
 
   return (
-    <div style={{ background: '#ffffff', color: '#0D0F2B' }}>
+    <div style={{ background: '#ffffff', color: '#0F172A' }}>
       {/* ── PAGE HEADER ────────────────────────────────────── */}
       <section
         style={{
-          background: 'linear-gradient(135deg, #080B1A 0%, #101538 55%, #1C2280 100%)',
+          background: 'linear-gradient(135deg, #070C1E 0%, #0B1228 50%, #111A38 100%)',
           color: '#ffffff',
-          padding: '60px 0 50px',
+          padding: '65px 0 55px',
           textAlign: 'center',
         }}
       >
@@ -85,19 +85,19 @@ export default function About({ onOpenModal }) {
               display: 'inline-flex',
               alignItems: 'center',
               gap: '6px',
-              background: 'rgba(255, 255, 255, 0.1)',
-              border: '1px solid rgba(255, 255, 255, 0.2)',
-              padding: '5px 14px',
+              background: 'rgba(37, 99, 235, 0.15)',
+              border: '1px solid rgba(37, 99, 235, 0.3)',
+              padding: '6px 18px',
               borderRadius: '100px',
               fontSize: '11px',
-              fontWeight: 700,
+              fontWeight: 800,
               letterSpacing: '1px',
               textTransform: 'uppercase',
-              color: '#5BA8D4',
+              color: '#93C5FD',
               marginBottom: '16px',
             }}
           >
-            <Sparkles size={13} color="#f59e0b" /> Corporate Heritage &amp; Mission
+            <Sparkles size={13} color="#60A5FA" /> Corporate Heritage &amp; Mission
           </div>
           <h1
             style={{

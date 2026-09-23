@@ -95,12 +95,12 @@ export default function Navbar({ onOpenModal }) {
       <div
         className="topbar"
         style={{
-          background: 'linear-gradient(90deg, #080B1A 0%, #111536 100%)',
-          padding: '9px 0',
-          fontSize: '12.5px',
+          background: 'linear-gradient(90deg, #070C1E 0%, #0B1228 50%, #111A38 100%)',
+          padding: '10px 0',
+          fontSize: '12px',
           fontWeight: 500,
-          color: 'rgba(255, 255, 255, 0.75)',
-          borderBottom: '1px solid rgba(255, 255, 255, 0.06)',
+          color: 'rgba(255, 255, 255, 0.8)',
+          borderBottom: '1px solid rgba(255, 255, 255, 0.08)',
         }}
       >
         <div className="container">
@@ -116,14 +116,15 @@ export default function Navbar({ onOpenModal }) {
             <div style={{ display: 'flex', alignItems: 'center', gap: '14px', flexWrap: 'wrap' }}>
               <span
                 style={{
-                  background: '#CC2228',
+                  background: 'linear-gradient(135deg, #1E3A8A 0%, #2563EB 100%)',
                   color: '#ffffff',
-                  fontSize: '10px',
+                  fontSize: '9.5px',
                   fontWeight: 800,
                   padding: '3px 12px',
                   borderRadius: '100px',
                   letterSpacing: '1px',
                   textTransform: 'uppercase',
+                  boxShadow: '0 0 12px rgba(37, 99, 235, 0.3)',
                 }}
               >
                 Caretrix Consulting Private Limited
@@ -131,25 +132,25 @@ export default function Navbar({ onOpenModal }) {
               <span style={{ width: '1px', height: '14px', background: 'rgba(255,255,255,0.15)' }} />
               <a
                 href="mailto:support@caretrixconsulting.com"
-                style={{ display: 'inline-flex', alignItems: 'center', gap: '6px', color: 'rgba(255,255,255,0.8)' }}
+                style={{ display: 'inline-flex', alignItems: 'center', gap: '6px', color: 'rgba(255,255,255,0.85)' }}
               >
-                <Mail size={12} color="#CC2228" /> support@caretrixconsulting.com
+                <Mail size={12} color="#0284C7" /> support@caretrixconsulting.com
               </a>
               <span style={{ width: '1px', height: '14px', background: 'rgba(255,255,255,0.15)' }} />
               <a
                 href="tel:+918308906690"
-                style={{ display: 'inline-flex', alignItems: 'center', gap: '6px', color: 'rgba(255,255,255,0.8)' }}
+                style={{ display: 'inline-flex', alignItems: 'center', gap: '6px', color: 'rgba(255,255,255,0.85)' }}
               >
-                <Phone size={12} color="#CC2228" /> +91-8308906690
+                <Phone size={12} color="#0284C7" /> +91-8308906690
               </a>
               <span style={{ width: '1px', height: '14px', background: 'rgba(255,255,255,0.15)' }} />
-              <span style={{ display: 'inline-flex', alignItems: 'center', gap: '6px', color: 'rgba(255,255,255,0.7)' }}>
-                <MapPin size={12} color="#CC2228" /> Pune HQ &amp; Bengaluru, India | USA
+              <span style={{ display: 'inline-flex', alignItems: 'center', gap: '6px', color: 'rgba(255,255,255,0.75)' }}>
+                <MapPin size={12} color="#0284C7" /> Pune HQ &amp; Bengaluru, India | USA
               </span>
             </div>
 
             <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-              <span style={{ fontSize: '11px', color: '#10b981', fontWeight: 600 }}>
+              <span style={{ fontSize: '11px', color: '#10B981', fontWeight: 600 }}>
                 ● ISO 27001 Certified &bull; HIPAA Compliant
               </span>
             </div>
@@ -280,26 +281,26 @@ export default function Navbar({ onOpenModal }) {
                   >
                     {/* Column 1: AI & Automations + Publishing */}
                     <div>
-                      <div className="mega-col-header" style={{ color: '#CC2228' }}>
+                      <div className="mega-col-header" style={{ color: '#0284C7' }}>
                         <Brain size={14} /> AI &amp; Automations
                       </div>
                       <div className="mega-links-group">
                         <Link to="/services?cat=ai_automation" onClick={closeDropdown} className="mega-item">
-                          <Bot size={13} color="#CC2228" /> AI Automation Services
+                          <Bot size={13} color="#0284C7" /> AI Automation Services
                         </Link>
                         <Link to="/services?cat=ai_automation" onClick={closeDropdown} className="mega-item">
-                          <FileCode2 size={13} color="#CC2228" /> Agentic AI Workflows
+                          <FileCode2 size={13} color="#0284C7" /> Agentic AI Workflows
                         </Link>
                         <Link to="/services?cat=ai_automation" onClick={closeDropdown} className="mega-item">
-                          <FileText size={13} color="#CC2228" /> Intelligent Doc Processing
+                          <FileText size={13} color="#0284C7" /> Intelligent Doc Processing
                         </Link>
                         <Link to="/services?cat=data_annotation" onClick={closeDropdown} className="mega-item">
-                          <FileSpreadsheet size={13} color="#CC2228" /> AI Data Annotation
+                          <FileSpreadsheet size={13} color="#0284C7" /> AI Data Annotation
                         </Link>
                       </div>
 
-                      <div className="mega-col-header mt-3">
-                        <BookOpen size={14} /> Publishing
+                      <div className="mega-col-header mt-3" style={{ color: '#1E3A8A' }}>
+                        <BookOpen size={14} /> STM Publishing
                       </div>
                       <div className="mega-links-group">
                         <Link to="/services?cat=publishing" onClick={closeDropdown} className="mega-item">
@@ -496,22 +497,23 @@ export default function Navbar({ onOpenModal }) {
                     <div style={{ display: 'flex', alignItems: 'center', gap: '8px', fontSize: '13px' }}>
                       <Sparkles size={16} color="#f59e0b" />
                       <span>
-                        Featured Platform: <strong style={{ color: '#E11D48' }}>CaretrixHRMS</strong> — Enterprise AI HRMS &amp; Autonomous Payroll Software
+                        Featured Platform: <strong style={{ color: '#2563EB' }}>CaretrixHRMS</strong> — Enterprise AI HRMS &amp; Autonomous Payroll Software
                       </span>
                     </div>
                     <Link
                       to="/services?cat=hrms"
                       onClick={closeDropdown}
                       style={{
-                        background: '#E11D48',
+                        background: 'linear-gradient(135deg, #1E3A8A 0%, #2563EB 100%)',
                         color: '#ffffff',
                         fontSize: '11.5px',
                         fontWeight: 700,
-                        padding: '6px 14px',
-                        borderRadius: '6px',
+                        padding: '7px 16px',
+                        borderRadius: '100px',
                         display: 'inline-flex',
                         alignItems: 'center',
                         gap: '6px',
+                        boxShadow: '0 4px 14px rgba(37, 99, 235, 0.3)',
                       }}
                     >
                       Explore CaretrixHRMS <ArrowRight size={12} />
@@ -564,7 +566,7 @@ export default function Navbar({ onOpenModal }) {
             <div
               className="d-desktop"
               style={{
-                borderLeft: '1.5px solid rgba(28, 34, 128, 0.1)',
+                borderLeft: '1.5px solid rgba(37, 99, 235, 0.15)',
                 paddingLeft: '16px',
                 textAlign: 'left',
               }}
@@ -574,15 +576,15 @@ export default function Navbar({ onOpenModal }) {
                   fontFamily: 'var(--font-heading)',
                   fontSize: '13px',
                   fontWeight: 700,
-                  color: '#1a1d3a',
+                  color: '#0F172A',
                   display: 'flex',
                   alignItems: 'center',
                   gap: '6px',
                 }}
               >
-                <Phone size={12} color="#CC2228" /> +91-8308906690
+                <Phone size={12} color="#0284C7" /> +91-8308906690
               </div>
-              <div style={{ fontSize: '11px', color: 'rgba(28, 34, 128, 0.6)', fontWeight: 500 }}>
+              <div style={{ fontSize: '11px', color: '#64748B', fontWeight: 500 }}>
                 24/7 Digital Inquiry &bull; Mon–Sat 9AM–6PM IST
               </div>
             </div>
@@ -591,7 +593,7 @@ export default function Navbar({ onOpenModal }) {
             <button
               type="button"
               onClick={onOpenModal}
-              className="btn-accent-custom"
+              className="btn-sapphire"
               style={{
                 padding: '10px 22px',
                 fontSize: '13.5px',
@@ -611,7 +613,7 @@ export default function Navbar({ onOpenModal }) {
                 border: 'none',
                 cursor: 'pointer',
                 padding: '6px',
-                color: '#1C2280',
+                color: '#1E3A8A',
               }}
               aria-label="Toggle navigation"
             >
@@ -752,8 +754,8 @@ export default function Navbar({ onOpenModal }) {
           transition: color 0.2s, background 0.2s;
         }
         .nav-link-item:hover, .nav-link-item.active {
-          color: #1C2280;
-          background: rgba(28, 34, 128, 0.05);
+          color: #1E3A8A;
+          background: rgba(37, 99, 235, 0.06);
         }
         .nav-link-item::after {
           content: '';
@@ -762,7 +764,7 @@ export default function Navbar({ onOpenModal }) {
           left: 14px;
           right: 14px;
           height: 2.5px;
-          background: #CC2228;
+          background: linear-gradient(90deg, #1E3A8A, #2563EB, #0284C7);
           border-radius: 2px;
           transform: scaleX(0);
           transform-origin: left;
@@ -777,9 +779,9 @@ export default function Navbar({ onOpenModal }) {
           font-weight: 800;
           text-transform: uppercase;
           letter-spacing: 1px;
-          color: #1C2280;
+          color: #1E3A8A;
           padding-bottom: 6px;
-          border-bottom: 1.5px solid rgba(28, 34, 128, 0.1);
+          border-bottom: 1.5px solid rgba(37, 99, 235, 0.12);
           margin-bottom: 8px;
           display: flex;
           align-items: center;
@@ -793,18 +795,18 @@ export default function Navbar({ onOpenModal }) {
         .mega-item {
           font-size: 13px;
           font-weight: 500;
-          color: #2d3060;
-          padding: 5px 8px;
-          border-radius: 6px;
+          color: #334155;
+          padding: 6px 10px;
+          border-radius: 8px;
           display: flex;
           align-items: center;
           gap: 8px;
           transition: all 0.15s ease;
         }
         .mega-item:hover {
-          background: rgba(28, 34, 128, 0.06);
-          color: #1C2280;
-          padding-left: 12px;
+          background: rgba(37, 99, 235, 0.08);
+          color: #1E3A8A;
+          padding-left: 14px;
         }
         .mobile-nav-link {
           font-family: var(--font-heading);
