@@ -16,6 +16,7 @@ import {
   Briefcase,
   GraduationCap,
   ChevronRight,
+  HeartPulse,
   X,
 } from 'lucide-react';
 import { useToast } from './Toast';
