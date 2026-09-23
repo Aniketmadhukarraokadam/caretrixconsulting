@@ -132,13 +132,13 @@ export function initDatabase() {
     );
 
     insertJob.run(
-      'Enterprise HRMS & Payroll Implementation Consultant',
-      'HRMS & AI Software',
-      'Bengaluru, India (Hybrid)',
+      'Senior Cloud & DevOps Solutions Architect',
+      'Cloud & Infrastructure Services',
+      'Pune, India (Hybrid)',
       'Full-time',
-      '3-5 years',
-      'Deploy and configure the vortexsofthrms platform for enterprise clients: biometric attendance sync, statutory compliance (PF, ESIC, TDS), and automated salary engines.',
-      'Hands-on experience in enterprise HRMS rollouts, payroll rules engine customization, and client change management.',
+      '4-6 years',
+      'Architect, deploy, and manage enterprise cloud infrastructure, Kubernetes clusters, CI/CD pipelines, and high-throughput microservices for global enterprise clients.',
+      'Hands-on expertise in AWS/Azure cloud architecture, Terraform IaC, Docker, Kubernetes, and enterprise observability stacks.',
       'active'
     );
 

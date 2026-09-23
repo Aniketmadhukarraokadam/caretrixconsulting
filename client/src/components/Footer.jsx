@@ -206,9 +206,9 @@ export default function Footer({ onOpenModal }) {
             <h6 className="footer-col-title">Our Services</h6>
             <ul style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
               <li>
-                <Link to="/services?cat=hrms" className="footer-link" style={{ color: '#ff8585', fontWeight: 700 }}>
-                  <Sparkles size={12} color="#ff8585" style={{ display: 'inline', marginRight: '6px' }} />
-                  HR &amp; Payroll Software (CaretrixHRMS)
+                <Link to="/services?cat=ai_automation" className="footer-link" style={{ color: '#60A5FA', fontWeight: 700 }}>
+                  <Sparkles size={12} color="#60A5FA" style={{ display: 'inline', marginRight: '6px' }} />
+                  AI Automations &amp; Workflows
                 </Link>
               </li>
               <li><Link to="/services?cat=customsoftware" className="footer-link">Software &amp; Cloud Engineering</Link></li>

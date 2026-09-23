@@ -61,7 +61,7 @@ export default function CaseStudies({ onOpenModal }) {
       title: 'Global Omnichannel B2B Growth Funnel & 8D Motion Commercial Campaign',
       client: 'Enterprise AI & Cloud SaaS Conglomerate (California, USA)',
       challenge: 'Client faced escalating customer acquisition costs (CAC exceeding $1,450) and low engagement on static ad creatives, with demo-to-close conversion stagnating at 4.2%.',
-      solution: 'Orchestrated an automated multi-touch intent funnel (Vortexreach), engineered 3D cinematic motion product visuals with 8D binaural sound design, and deployed Generative Engine Optimization (GEO) across AI search surfaces.',
+      solution: 'Orchestrated an automated multi-touch intent funnel (Caretrix Omnichannel Funnel), engineered 3D cinematic motion brand visuals with 8D binaural sound design, and deployed Generative Engine Optimization (GEO) across AI search surfaces.',
       outcome: 'Customer acquisition cost slashed by 58% ($610 CAC). Pipeline velocity surged by 340%, and video engagement retention reached an industry-leading 82%.',
       stats: [{ label: 'CAC Reduced', val: '58%' }, { label: 'Pipeline Surge', val: '3.4x' }, { label: 'ROAS Peak', val: '5.2x' }],
     },

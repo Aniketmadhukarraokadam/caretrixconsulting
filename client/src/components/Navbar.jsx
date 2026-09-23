@@ -366,48 +366,23 @@ export default function Navbar({ onOpenModal }) {
                       </div>
                     </div>
 
-                    {/* Column 3: Accounting & HR Software + IT & Digital */}
+                    {/* Column 3: Finance & Accounting BPO + IT & Digital */}
                     <div>
-                      <div className="mega-col-header" style={{ color: '#E11D48' }}>
-                        <UserCog size={14} /> Accounting &amp; HR Software
+                      <div className="mega-col-header" style={{ color: '#1E3A8A' }}>
+                        <CircleDollarSign size={14} /> Finance &amp; Accounting BPO
                       </div>
                       <div className="mega-links-group">
-                        <Link
-                          to="/services?cat=hrms"
-                          onClick={closeDropdown}
-                          className="mega-item fw-bold"
-                          style={{
-                            background: 'rgba(225, 29, 72, 0.08)',
-                            color: '#E11D48',
-                            borderRadius: '8px',
-                            padding: '6px 10px',
-                          }}
-                        >
-                          <UserCog size={13} color="#E11D48" /> CaretrixHRMS
-                          <span
-                            style={{
-                              background: '#E11D48',
-                              color: '#fff',
-                              fontSize: '9px',
-                              padding: '2px 5px',
-                              borderRadius: '4px',
-                              marginLeft: 'auto',
-                            }}
-                          >
-                            AI SOFTWARE
-                          </span>
+                        <Link to="/services?cat=accounting" onClick={closeDropdown} className="mega-item">
+                          <BookCheck size={13} /> General Ledger &amp; Bookkeeping
                         </Link>
                         <Link to="/services?cat=accounting" onClick={closeDropdown} className="mega-item">
-                          <BookCheck size={13} /> Bookkeeping
+                          <Receipt size={13} /> Accounts Payable / Receivable
                         </Link>
                         <Link to="/services?cat=accounting" onClick={closeDropdown} className="mega-item">
-                          <CircleDollarSign size={13} /> Payroll Processing
+                          <BarChart3 size={13} /> Financial Planning &amp; Reporting
                         </Link>
                         <Link to="/services?cat=staffing" onClick={closeDropdown} className="mega-item">
-                          <Users size={13} /> Manpower &amp; Staffing
-                        </Link>
-                        <Link to="/services?cat=accounting" onClick={closeDropdown} className="mega-item">
-                          <BarChart3 size={13} /> Financial Reporting
+                          <Users size={13} /> Global Staff Augmentation
                         </Link>
                       </div>
 
@@ -456,7 +431,7 @@ export default function Navbar({ onOpenModal }) {
                         </Link>
                       </div>
 
-                      <div className="mega-col-header mt-3" style={{ color: '#CC2228' }}>
+                      <div className="mega-col-header mt-3" style={{ color: '#1E3A8A' }}>
                         <Grid size={14} /> View All
                       </div>
                       <div className="mega-links-group">
@@ -466,19 +441,19 @@ export default function Navbar({ onOpenModal }) {
                           className="mega-item"
                           style={{
                             fontWeight: 700,
-                            color: '#CC2228',
-                            background: 'rgba(204, 34, 40, 0.06)',
+                            color: '#2563EB',
+                            background: 'rgba(37, 99, 235, 0.08)',
                             borderRadius: '8px',
                             padding: '8px 10px',
                           }}
                         >
-                          <Grid size={13} color="#CC2228" /> Explore All 65+ Services <ArrowRight size={12} />
+                          <Grid size={13} color="#2563EB" /> Explore All 65+ Services <ArrowRight size={12} />
                         </Link>
                       </div>
                     </div>
                   </div>
 
-                  {/* Featured Software Strip at Bottom of Mega Menu */}
+                  {/* Global Delivery Assurance Strip */}
                   <div
                     style={{
                       borderTop: '1px solid #e2e8f0',
@@ -489,19 +464,19 @@ export default function Navbar({ onOpenModal }) {
                       justifyContent: 'space-between',
                       flexWrap: 'wrap',
                       gap: '10px',
-                      background: 'rgba(225, 29, 72, 0.04)',
-                      padding: '10px 16px',
+                      background: 'rgba(37, 99, 235, 0.04)',
+                      padding: '12px 18px',
                       borderRadius: '10px',
                     }}
                   >
-                    <div style={{ display: 'flex', alignItems: 'center', gap: '8px', fontSize: '13px' }}>
-                      <Sparkles size={16} color="#f59e0b" />
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '8px', fontSize: '13px', color: '#1E293B' }}>
+                      <Sparkles size={16} color="#0284C7" />
                       <span>
-                        Featured Platform: <strong style={{ color: '#2563EB' }}>CaretrixHRMS</strong> — Enterprise AI HRMS &amp; Autonomous Payroll Software
+                        Global Delivery Assurance: <strong style={{ color: '#1E3A8A' }}>ISO 27001 Certified &amp; HIPAA Compliant</strong> Multi-Shore Pods
                       </span>
                     </div>
                     <Link
-                      to="/services?cat=hrms"
+                      to="/contact"
                       onClick={closeDropdown}
                       style={{
                         background: 'linear-gradient(135deg, #1E3A8A 0%, #2563EB 100%)',
@@ -516,7 +491,7 @@ export default function Navbar({ onOpenModal }) {
                         boxShadow: '0 4px 14px rgba(37, 99, 235, 0.3)',
                       }}
                     >
-                      Explore CaretrixHRMS <ArrowRight size={12} />
+                      Consult Our Solutions Team <ArrowRight size={12} />
                     </Link>
                   </div>
                 </div>
@@ -676,9 +651,6 @@ export default function Navbar({ onOpenModal }) {
                   <Link to="/services?cat=ai_automation" onClick={closeDropdown} className="mobile-sub-link">
                     &bull; AI &amp; Automations
                   </Link>
-                  <Link to="/services?cat=hrms" onClick={closeDropdown} className="mobile-sub-link fw-bold" style={{ color: '#E11D48' }}>
-                    &bull; CaretrixHRMS (AI HR &amp; Payroll Software)
-                  </Link>
                   <Link to="/services?cat=healthcare" onClick={closeDropdown} className="mobile-sub-link">
                     &bull; Healthcare BPO &amp; RCM
                   </Link>
@@ -700,7 +672,7 @@ export default function Navbar({ onOpenModal }) {
                   <Link to="/services?cat=digitalmarketing" onClick={closeDropdown} className="mobile-sub-link">
                     &bull; Digital Marketing &amp; SEO
                   </Link>
-                  <Link to="/services" onClick={closeDropdown} className="mobile-sub-link fw-bold" style={{ color: '#CC2228' }}>
+                  <Link to="/services" onClick={closeDropdown} className="mobile-sub-link fw-bold" style={{ color: '#2563EB' }}>
                     &bull; View All 65+ Services &rarr;
                   </Link>
                 </div>

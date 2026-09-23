@@ -41,12 +41,12 @@ export default function Home({ onOpenModal }) {
   // Dynamic Typed Capability Text
   const typedWords = [
     'Intelligent AI Automations',
-    'Cloud Software Platforms',
+    'Enterprise Cloud Systems',
     'HIPAA Healthcare BPO',
     'STM Publishing Prepress',
-    'CaretrixHRMS Payroll',
+    'Commercial Real Estate BPO',
     'Computer Vision Datasets',
-    'Real Estate BPO Solutions',
+    'Global Managed IT Pods',
   ];
   const [currentWordIndex, setCurrentWordIndex] = useState(0);
   const [currentText, setCurrentText] = useState('');
@@ -123,11 +123,11 @@ export default function Home({ onOpenModal }) {
 
   // Marquee Cards Data (Updated to Sapphire & Cerulean Theme)
   const marqueeItems = [
-    { tag: 'AI HRMS', icon: <UserCog size={18} color="#2563EB" />, title: 'HR & Payroll Software', desc: 'CaretrixHRMS: Autonomous salary calculation & biometric attendance sync.' },
+    { tag: 'Enterprise BPO', icon: <Users size={18} color="#2563EB" />, title: 'Enterprise BPO & Operations', desc: 'Omnichannel customer support, back-office processing & transactional excellence.' },
     { tag: 'AI / ML', icon: <Brain size={18} color="#0284C7" />, title: 'AI Automations', desc: 'Agentic AI workflows, intelligent document processing (IDP) & task agents.' },
     { tag: 'Engineering', icon: <Laptop size={18} color="#1E3A8A" />, title: 'Custom Software', desc: 'Scalable cloud, web & mobile applications engineered for high throughput.' },
     { tag: 'Medical BPO', icon: <HeartPulse size={18} color="#10B981" />, title: 'Healthcare RCM', desc: 'End-to-end medical billing, ICD-10 coding & denial recovery maximizing ROI.' },
-    { tag: 'Finance', icon: <CircleDollarSign size={18} color="#6366F1" />, title: 'Accounting & Payroll', desc: 'Accurate bookkeeping, statutory payroll processing & financial reports.' },
+    { tag: 'Finance BPO', icon: <CircleDollarSign size={18} color="#6366F1" />, title: 'Accounting & Finance BPO', desc: 'Accounts payable/receivable, ledger reconciliation & financial reporting.' },
     { tag: 'Publishing', icon: <BookOpen size={18} color="#0EA5E9" />, title: 'Publishing Prepress', desc: 'ePUB3 conversion, typesetting, S1000D XML & WCAG 2.1 accessibility.' },
     { tag: 'Real Estate', icon: <Building size={18} color="#F59E0B" />, title: 'Real Estate BPO', desc: 'Lease abstraction, CAM audits & proactive property accounting workflows.' },
     { tag: 'AI Datasets', icon: <FileSpreadsheet size={18} color="#3B82F6" />, title: 'AI Data Annotation', desc: 'High-precision computer vision, LiDAR 3D & RLHF datasets for AI models.' },
@@ -147,14 +147,14 @@ export default function Home({ onOpenModal }) {
       link: '/services?cat=customsoftware',
     },
     {
-      icon: <UserCog size={28} />,
+      icon: <Brain size={28} />,
       iconBg: 'rgba(30, 58, 138, 0.1)',
       iconColor: '#1E3A8A',
-      title: 'HR & Payroll Software (CaretrixHRMS)',
-      badge: 'PROPRIETARY PLATFORM',
+      title: 'AI Solutions, LLM Engineering & Data Annotation',
+      badge: 'ENTERPRISE AI PODS',
       badgeBg: 'linear-gradient(135deg, #1E3A8A 0%, #2563EB 100%)',
-      desc: 'Cloud-native AI HRMS & payroll software: autonomous salary calculation, biometric attendance sync, automated employee onboarding, and predictive workforce analytics.',
-      link: '/services?cat=hrms',
+      desc: 'Specialized machine learning workflows, retrieval-augmented generation (RAG), automated document intelligence (IDP), and high-precision computer vision data labeling.',
+      link: '/services?cat=ai_automation',
       highlightBorder: true,
     },
     {
@@ -194,7 +194,7 @@ export default function Home({ onOpenModal }) {
       iconBg: 'rgba(37, 99, 235, 0.08)',
       iconColor: '#2563EB',
       title: 'Accounting & Financial Operations',
-      desc: 'Offshore bookkeeping, payroll processing, accounts payable/receivable, financial statement preparation, and statutory tax compliance support.',
+      desc: 'Offshore bookkeeping, general ledger management, accounts payable/receivable, financial statement preparation, and statutory tax compliance support.',
       link: '/services?cat=accounting',
     },
     {
@@ -234,8 +234,8 @@ export default function Home({ onOpenModal }) {
       a: 'Denial management investigates the root causes of claim rejections (coding mismatches, missing documentation, or eligibility errors), corrects them, and resubmits within tight payer deadlines. Our systematic tracking prevents repeat rejections, immediately lifting first-pass clean claim acceptance rates to 98%+',
     },
     {
-      q: 'What is CaretrixHRMS and how does it automate payroll?',
-      a: 'CaretrixHRMS is our proprietary enterprise Human Resource Management System powered by AI. It unifies autonomous payroll calculations, biometric attendance synchronization, tax filing compliance, employee self-service, automated onboarding, and predictive retention analytics into one cloud platform.',
+      q: 'What engagement models does Caretrix Consulting offer for enterprise clients?',
+      a: 'We offer flexible, client-centric engagement models tailored to your operational scale: Dedicated Offshore Pods (fully managed teams integrated into your daily standups and toolchain), Time & Materials for agile development projects, and Fixed-SLA Managed Services for ongoing BPO operations such as Healthcare RCM, Publishing Prepress, and Customer Care.',
     },
     {
       q: 'What does an AI data annotation company do?',
@@ -362,7 +362,7 @@ export default function Home({ onOpenModal }) {
                   maxWidth: '650px',
                 }}
               >
-                We deliver enterprise custom software, proprietary AI workforce systems (CaretrixHRMS), and 24/7 global BPO operations. Driving measurable ROI across Healthcare RCM, Real Estate, Publishing Prepress, and Custom Software for <strong>150+ international clients</strong> with <strong>200+ delivered projects</strong>.
+                We provide premier enterprise IT consulting, custom software engineering, intelligent AI workflows, and 24/7 global BPO services. Delivering SLA-backed excellence across Healthcare RCM, STM Publishing Prepress, Real Estate BPO, and Cloud Infrastructure for <strong>150+ international clients</strong> with <strong>200+ delivered engagements</strong>.
               </p>
 
               {/* CTA Buttons */}
@@ -415,12 +415,8 @@ export default function Home({ onOpenModal }) {
                   <Link to="/services?cat=ai_automation" className="hero-chip">
                     <Brain size={13} color="#0284C7" /> AI &amp; Automations
                   </Link>
-                  <Link
-                    to="/services?cat=hrms"
-                    className="hero-chip"
-                    style={{ background: 'rgba(37, 99, 235, 0.08)', borderColor: 'rgba(37, 99, 235, 0.3)' }}
-                  >
-                    <UserCog size={13} color="#1E3A8A" /> HR &amp; Payroll Software
+                  <Link to="/services?cat=realestate" className="hero-chip">
+                    <Building size={13} color="#F59E0B" /> Commercial Real Estate BPO
                   </Link>
                   <Link to="/services?cat=healthcare" className="hero-chip">
                     <HeartPulse size={13} color="#10B981" /> Healthcare RCM
@@ -651,7 +647,7 @@ export default function Home({ onOpenModal }) {
                       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '12px' }}>
                         <div>
                           <strong style={{ fontSize: '14.5px', color: '#ffffff' }}>Agentic AI &amp; Cloud Systems</strong>
-                          <div style={{ fontSize: '11px', color: '#94A3B8' }}>Autonomous task agents &amp; CaretrixHRMS</div>
+                          <div style={{ fontSize: '11px', color: '#94A3B8' }}>Autonomous task agents &amp; cloud microservices</div>
                         </div>
                         <span style={{ background: 'rgba(37, 99, 235, 0.3)', border: '1px solid #3B82F6', color: '#93C5FD', fontSize: '10px', fontWeight: 700, padding: '2px 8px', borderRadius: '4px' }}>
                           SOC 2 &bull; ISO 27001
@@ -936,10 +932,10 @@ export default function Home({ onOpenModal }) {
         </div>
       </section>
 
-      {/* ═══════ FEATURED PLATFORM: CARETRIXHRMS ═══════ */}
+      {/* ═══════ ENTERPRISE GLOBAL DELIVERY METHODOLOGY ═══════ */}
       <section
         className="section-pad"
-        id="ai-platform"
+        id="delivery-framework"
         style={{
           background: 'linear-gradient(135deg, #070C1E 0%, #0B1228 50%, #111A38 100%)',
           color: '#ffffff',
@@ -973,27 +969,27 @@ export default function Home({ onOpenModal }) {
                   marginBottom: '18px',
                 }}
               >
-                <Sparkles size={13} /> Flagship AI Enterprise Software
+                <Sparkles size={13} /> Multi-Shore Delivery Framework
               </div>
               <h2 style={{ fontSize: 'clamp(2rem, 3.5vw, 2.9rem)', fontWeight: 800, color: '#ffffff', marginBottom: '18px', letterSpacing: '-0.025em' }}>
-                CaretrixHRMS — Autonomous AI HR &amp; Payroll Platform
+                Precision Service Execution. Dedicated Pods. Guaranteed SLAs.
               </h2>
               <p style={{ fontSize: '16.5px', color: 'rgba(255, 255, 255, 0.82)', lineHeight: 1.75, marginBottom: '26px' }}>
-                Engineered to replace fragmented legacy workforce systems. CaretrixHRMS automates multi-entity statutory payroll calculations, biometric hardware sync, compliance tax filing, leave approvals, and employee lifecycle tracking with enterprise-grade encryption.
+                We deploy dedicated, client-tailored service pods combining senior technology consultants with high-throughput delivery teams across Pune and Bengaluru. 100% focused on your tech stack, business logic, and operational SLAs.
               </p>
 
               <div style={{ display: 'flex', flexDirection: 'column', gap: '14px', marginBottom: '30px' }}>
                 <div style={{ display: 'flex', alignItems: 'center', gap: '10px', fontSize: '14.5px' }}>
-                  <CheckCircle2 size={18} color="#10B981" /> One-Click Statutory Payroll (PF, ESI, TDS, Professional Tax)
+                  <CheckCircle2 size={18} color="#10B981" /> Dedicated Offshore Pods Integrated Directly Into Client Standups
                 </div>
                 <div style={{ display: 'flex', alignItems: 'center', gap: '10px', fontSize: '14.5px' }}>
-                  <CheckCircle2 size={18} color="#10B981" /> Biometric Fingerprint &amp; Face Recognition Cloud Sync
+                  <CheckCircle2 size={18} color="#10B981" /> Stringent ISO 27001 Security, NDAs &amp; HIPAA Compliant Workstations
                 </div>
                 <div style={{ display: 'flex', alignItems: 'center', gap: '10px', fontSize: '14.5px' }}>
-                  <CheckCircle2 size={18} color="#10B981" /> Employee Self-Service (ESS) Mobile Portal &amp; Tax Slips
+                  <CheckCircle2 size={18} color="#10B981" /> Multi-Tier Incident Escalation with &lt;15-Minute Response P1 Guarantee
                 </div>
                 <div style={{ display: 'flex', alignItems: 'center', gap: '10px', fontSize: '14.5px' }}>
-                  <CheckCircle2 size={18} color="#10B981" /> AI Predictive Performance KPI &amp; Attrition Analytics
+                  <CheckCircle2 size={18} color="#10B981" /> Transparent Weekly Sprint Telemetry &amp; Bi-Weekly Executive Reviews
                 </div>
               </div>
 
@@ -1004,19 +1000,19 @@ export default function Home({ onOpenModal }) {
                   className="btn-sapphire"
                   style={{ padding: '14px 30px' }}
                 >
-                  <Send size={15} /> Request Live Platform Demo
+                  <Send size={15} /> Request Consultation &amp; SLA Deck
                 </button>
                 <Link
-                  to="/services?cat=hrms"
+                  to="/about"
                   className="btn-glass"
                   style={{ background: 'rgba(255, 255, 255, 0.1)', color: '#ffffff', borderColor: 'rgba(255, 255, 255, 0.3)' }}
                 >
-                  Platform Specifications &rarr;
+                  Explore Delivery Model &rarr;
                 </Link>
               </div>
             </div>
 
-            {/* Platform Mock Dashboard Card */}
+            {/* Service Delivery Telemetry Card */}
             <div
               style={{
                 background: 'rgba(255, 255, 255, 0.05)',
@@ -1029,29 +1025,29 @@ export default function Home({ onOpenModal }) {
             >
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '22px' }}>
                 <div>
-                  <div style={{ fontSize: '11px', color: 'rgba(255, 255, 255, 0.65)', textTransform: 'uppercase', fontWeight: 600 }}>CaretrixHRMS Cloud</div>
-                  <strong style={{ fontSize: '17px', color: '#ffffff' }}>Enterprise Workforce Telemetry</strong>
+                  <div style={{ fontSize: '11px', color: 'rgba(255, 255, 255, 0.65)', textTransform: 'uppercase', fontWeight: 600 }}>Caretrix Global Delivery</div>
+                  <strong style={{ fontSize: '17px', color: '#ffffff' }}>Active Client Pod Operations</strong>
                 </div>
                 <span style={{ background: '#10B981', color: '#fff', fontSize: '10px', fontWeight: 700, padding: '3px 9px', borderRadius: '4px' }}>
-                  LIVE
+                  24/7 ACTIVE
                 </span>
               </div>
 
               <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '14px', marginBottom: '20px' }}>
                 <div style={{ background: 'rgba(255, 255, 255, 0.07)', padding: '16px', borderRadius: '14px' }}>
-                  <div style={{ fontSize: '11px', color: 'rgba(255, 255, 255, 0.65)' }}>Active Managed Employees</div>
-                  <div style={{ fontSize: '24px', fontWeight: 800, color: '#ffffff', marginTop: '2px' }}>1,480+</div>
+                  <div style={{ fontSize: '11px', color: 'rgba(255, 255, 255, 0.65)' }}>Dedicated Specialists</div>
+                  <div style={{ fontSize: '24px', fontWeight: 800, color: '#ffffff', marginTop: '2px' }}>200+ Experts</div>
                 </div>
                 <div style={{ background: 'rgba(255, 255, 255, 0.07)', padding: '16px', borderRadius: '14px' }}>
-                  <div style={{ fontSize: '11px', color: 'rgba(255, 255, 255, 0.65)' }}>Payroll Accuracy</div>
-                  <div style={{ fontSize: '24px', fontWeight: 800, color: '#10B981', marginTop: '2px' }}>99.98%</div>
+                  <div style={{ fontSize: '11px', color: 'rgba(255, 255, 255, 0.65)' }}>First-Pass SLA Accuracy</div>
+                  <div style={{ fontSize: '24px', fontWeight: 800, color: '#10B981', marginTop: '2px' }}>99.8%</div>
                 </div>
               </div>
 
               <div style={{ background: 'rgba(255, 255, 255, 0.06)', borderRadius: '14px', padding: '16px', fontSize: '13px' }}>
                 <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '8px' }}>
-                  <span>Monthly Automated Payroll Batch Processing</span>
-                  <span style={{ color: '#10B981', fontWeight: 700 }}>Ready (0 errors)</span>
+                  <span>Sprint Delivery &amp; SLA Compliance Index</span>
+                  <span style={{ color: '#10B981', fontWeight: 700 }}>100% Target Met</span>
                 </div>
                 <div style={{ width: '100%', height: '7px', background: 'rgba(255, 255, 255, 0.12)', borderRadius: '6px', overflow: 'hidden' }}>
                   <div style={{ width: '100%', height: '100%', background: 'linear-gradient(90deg, #1E3A8A, #2563EB, #10B981)' }} />
@@ -1353,7 +1349,7 @@ export default function Home({ onOpenModal }) {
                       onChange={(e) => setContactForm({ ...contactForm, service: e.target.value })}
                     >
                       <option value="General Inquiry">General Inquiry</option>
-                      <option value="HR & Payroll Software (CaretrixHRMS)">HR &amp; Payroll Software (CaretrixHRMS)</option>
+                      <option value="AI Solutions & Data Annotation">AI Solutions &amp; Data Annotation</option>
                       <option value="IT & Software Solutions">IT &amp; Software Solutions</option>
                       <option value="Healthcare BPO & RCM">Healthcare BPO &amp; RCM</option>
                       <option value="Publishing Services">Publishing Services</option>

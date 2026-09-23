@@ -14,7 +14,7 @@
    - 3.3 Domestic Pan-India Multilingual Voice Process
    - 3.4 Healthcare RCM & Clinical BPO
    - 3.5 Pan-India Background Verification (28 States & 8 UTs)
-   - 3.6 Enterprise HRMS & NAPS Staffing
+   - 3.6 Dedicated Staff Augmentation Pods
 4. Pan-India Delivery Infrastructure & Hub Coordinates
 5. Certifications & Statutory Compliances
 6. Direct Answer Schema (AEO Extractable Facts)

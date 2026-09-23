@@ -59,13 +59,12 @@ export default function Services({ onOpenModal }) {
   const categories = [
     { id: 'all', label: 'All Services (65+)' },
     { id: 'ai_automation', label: 'AI & Automations' },
-    { id: 'hrms', label: 'HR & Payroll Software' },
     { id: 'healthcare', label: 'Healthcare BPO & RCM' },
     { id: 'customsoftware', label: 'IT & Software Solutions' },
     { id: 'publishing', label: 'Publishing & Prepress' },
     { id: 'realestate', label: 'Real Estate & Title' },
     { id: 'data_annotation', label: 'AI Data Annotation' },
-    { id: 'accounting', label: 'Accounting & Payroll' },
+    { id: 'accounting', label: 'Finance & Accounting BPO' },
     { id: 'staffing', label: 'Manpower & Staffing' },
     { id: 'logistics', label: 'Logistics & Supply Chain' },
     { id: 'digitalmarketing', label: 'Digital Marketing & SEO' },
@@ -79,7 +78,7 @@ export default function Services({ onOpenModal }) {
       id: 'ai-automation-services',
       category: 'ai_automation',
       badge: 'AI & HYPER-AUTOMATION',
-      icon: <Brain size={28} color="#CC2228" />,
+      icon: <Brain size={28} color="#0284C7" />,
       title: 'AI Automation & Agentic Workflow Systems',
       desc: 'Autonomous multi-agent workflows, robotic process automation (RPA), and custom Large Language Model (LLM) integrations engineered to eliminate repetitive operational bottlenecks across enterprise departments.',
       features: [
@@ -96,7 +95,7 @@ export default function Services({ onOpenModal }) {
       id: 'idp-services',
       category: 'ai_automation',
       badge: 'INTELLIGENT DOCUMENT PROCESSING',
-      icon: <FileText size={28} color="#CC2228" />,
+      icon: <FileText size={28} color="#2563EB" />,
       title: 'Intelligent Document Processing (IDP) & OCR Automation',
       desc: 'AI-driven computer vision and OCR pipelines that extract, categorize, validate, and index unstructured and semi-structured documents at massive enterprise scale.',
       features: [
@@ -107,26 +106,6 @@ export default function Services({ onOpenModal }) {
       ],
       sla: 'Sub-second document extraction • 99.8% verified field accuracy',
       tag: 'Zero Manual Data Entry',
-    },
-
-    // 2. HR & Payroll Software (CaretrixHRMS)
-    {
-      id: 'caretrix-hrms-platform',
-      category: 'hrms',
-      badge: 'PROPRIETARY AI HRMS SOFTWARE',
-      badgeHighlight: true,
-      icon: <UserCog size={28} color="#E11D48" />,
-      title: 'CaretrixHRMS — Enterprise AI HRMS & Autonomous Payroll Software',
-      desc: 'A unified enterprise workforce operating platform combining autonomous statutory payroll calculation, biometric attendance sync, automated employee onboarding, AI performance appraisal, and predictive retention analytics.',
-      features: [
-        'One-click multi-state statutory payroll computation (PF, ESI, TDS, PT, Gratuity)',
-        'Real-time biometric cloud synchronization (face recognition, fingerprint & geo-fenced mobile)',
-        'Employee Self-Service (ESS) web and mobile portal for tax declarations & pay slips',
-        'Automated digital onboarding with instant background document validation',
-        'AI KPI appraisal tracking and automated multi-tier leave approval routing',
-      ],
-      sla: '100% statutory compliance guarantee • Zero-payroll error tolerance',
-      tag: 'Proprietary Cloud Platform',
     },
 
     // 3. Healthcare BPO & RCM
@@ -186,7 +165,7 @@ export default function Services({ onOpenModal }) {
       badge: 'FULL-STACK CLOUD & SOFTWARE',
       icon: <Laptop size={28} color="#1C2280" />,
       title: 'Custom Enterprise Software Engineering & Offshore Development Centers (ODC)',
-      desc: 'Dedicated offshore software engineering teams building scalable web applications, enterprise microservices, cloud infrastructure, and cross-platform mobile products for high-growth global enterprises.',
+      desc: 'Dedicated offshore software engineering teams building scalable web applications, enterprise microservices, cloud infrastructure, and cross-platform mobile applications for high-growth global enterprises.',
       features: [
         'Modern full-stack web applications in React, Next.js, Node.js, Python & Java',
         'High-throughput microservices architecture, RESTful APIs, and GraphQL gateways',
@@ -304,8 +283,8 @@ export default function Services({ onOpenModal }) {
       id: 'accounting-bookkeeping-bpo',
       category: 'accounting',
       badge: 'OFFSHORE FINANCE BPO',
-      icon: <BarChart3 size={28} color="#CC2228" />,
-      title: 'Offshore Bookkeeping, Payroll Processing & Financial Reporting',
+      icon: <BarChart3 size={28} color="#2563EB" />,
+      title: 'Offshore Bookkeeping, AP/AR & Financial Reporting BPO',
       desc: 'Dedicated offshore accounting teams managing daily transaction classification, general ledger maintenance, accounts payable/receivable (AP/AR), and monthly GAAP/IFRS financial close.',
       features: [
         'Full-charge bookkeeping in QuickBooks Online, Xero, NetSuite, and Sage',
@@ -490,7 +469,7 @@ export default function Services({ onOpenModal }) {
             />
             <input
               type="text"
-              placeholder="Search services (e.g. Medical Coding, Payroll, AI Annotation, S1000D)..."
+              placeholder="Search services (e.g. Medical Coding, Cloud Engineering, AI Annotation, S1000D)..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               style={{
@@ -558,7 +537,7 @@ export default function Services({ onOpenModal }) {
             <button
               type="button"
               onClick={() => setSearchQuery('')}
-              style={{ background: 'none', border: 'none', color: '#CC2228', fontSize: '13px', cursor: 'pointer', fontWeight: 600 }}
+              style={{ background: 'none', border: 'none', color: '#2563EB', fontSize: '13px', cursor: 'pointer', fontWeight: 600 }}
             >
               Clear Search
             </button>
@@ -578,11 +557,9 @@ export default function Services({ onOpenModal }) {
               style={{
                 background: '#ffffff',
                 borderRadius: '20px',
-                border: srv.badgeHighlight ? '2px solid rgba(225, 29, 72, 0.4)' : '1px solid #e2e8f0',
+                border: '1px solid #e2e8f0',
                 padding: '34px 30px',
-                boxShadow: srv.badgeHighlight
-                  ? '0 12px 35px rgba(225, 29, 72, 0.1)'
-                  : '0 4px 20px rgba(28, 34, 128, 0.05)',
+                boxShadow: '0 4px 20px rgba(15, 23, 42, 0.05)',
                 display: 'flex',
                 flexDirection: 'column',
                 transition: 'all 0.3s ease',
@@ -593,8 +570,8 @@ export default function Services({ onOpenModal }) {
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '18px' }}>
                 <span
                   style={{
-                    background: srv.badgeHighlight ? '#E11D48' : 'rgba(28, 34, 128, 0.08)',
-                    color: srv.badgeHighlight ? '#ffffff' : '#1C2280',
+                    background: 'rgba(37, 99, 235, 0.08)',
+                    color: '#1E3A8A',
                     fontSize: '10.5px',
                     fontWeight: 800,
                     letterSpacing: '0.8px',
@@ -617,7 +594,7 @@ export default function Services({ onOpenModal }) {
                     width: '50px',
                     height: '50px',
                     borderRadius: '14px',
-                    background: 'rgba(28, 34, 128, 0.06)',
+                    background: 'rgba(37, 99, 235, 0.08)',
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'center',
@@ -638,7 +615,7 @@ export default function Services({ onOpenModal }) {
 
               {/* Key Features / Capabilities */}
               <div style={{ marginBottom: '24px', flex: 1 }}>
-                <div style={{ fontSize: '12px', fontWeight: 700, textTransform: 'uppercase', color: '#1C2280', marginBottom: '10px' }}>
+                <div style={{ fontSize: '12px', fontWeight: 700, textTransform: 'uppercase', color: '#1E3A8A', marginBottom: '10px' }}>
                   Key Capabilities &amp; Deliverables
                 </div>
                 <ul style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
@@ -666,7 +643,7 @@ export default function Services({ onOpenModal }) {
                   gap: '8px',
                 }}
               >
-                <Clock size={15} color="#CC2228" style={{ flexShrink: 0 }} />
+                <Clock size={15} color="#0284C7" style={{ flexShrink: 0 }} />
                 <span>
                   <strong>SLA:</strong> {srv.sla}
                 </span>

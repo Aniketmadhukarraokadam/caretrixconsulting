@@ -261,16 +261,15 @@ export default function Contact() {
                         onChange={handleChange}
                         className="form-control"
                       >
-                        <option value="SAP S/4HANA & Enterprise ERP">SAP S/4HANA &amp; Enterprise ERP (FICO, MM, SD, BTP, BASIS)</option>
-                        <option value="HRMS & Payroll Software">HRMS &amp; Payroll Software (vortexsofthrms)</option>
+                        <option value="Enterprise IT & Cloud Engineering">Enterprise IT &amp; Cloud Engineering (React, Node, AWS, DevOps)</option>
                         <option value="Healthcare BPO & RCM">Healthcare BPO &amp; RCM (Medical Coding, Billing, AR)</option>
                         <option value="Real Estate & Title Services">Real Estate &amp; Title (Lease Abstraction, CAM Audit)</option>
                         <option value="STM Publishing & Prepress">STM Publishing (ePUB3, XML, Typesetting, WCAG)</option>
                         <option value="AI & Data Annotation">AI &amp; Data Annotation (Agentic AI, LiDAR, Vision, NLP)</option>
-                        <option value="Custom Software & Web Dev">Custom Software &amp; Web Apps (React, Node, Cloud)</option>
-                        <option value="ERP & SAP Solutions">ERP &amp; SAP Systems &amp; AMS Support</option>
+                        <option value="Custom Software & Web Dev">Custom Software &amp; Enterprise Architecture</option>
+                        <option value="ERP & Enterprise Systems">ERP &amp; Enterprise Systems Support</option>
                         <option value="Marketing Automation">Marketing Automation (Lead Gen, CRM Sequences)</option>
-                        <option value="Accounting & Financial BPO">Accounting &amp; Financial BPO (Bookkeeping, Payroll)</option>
+                        <option value="Accounting & Financial BPO">Accounting &amp; Financial BPO (Bookkeeping, AP/AR, Reporting)</option>
                         <option value="Logistics & Supply Chain">Logistics &amp; Supply Chain (BOL, Waybill, Rate Audit)</option>
                         <option value="Technical Publications">Technical Publications &amp; S1000D / DITA XML</option>
                         <option value="Background Verification">Background Verification (BGV Compliance Screening)</option>
