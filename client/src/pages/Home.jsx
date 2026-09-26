@@ -294,11 +294,11 @@ export default function Home({ onOpenModal }) {
     },
     {
       q: 'Is Caretrix Consulting ISO 27001 certified and HIPAA compliant?',
-      a: 'Yes. Caretrix Consulting Private Limited operates under verified ISO 27001:2013 information security standards and maintains strict HIPAA compliance protocols across all healthcare operations, medical data handling, and confidential enterprise processing.',
+      a: 'Yes. Caretrix Consulting operates under verified ISO 27001:2013 information security standards and maintains strict HIPAA compliance protocols across all healthcare operations, medical data handling, and confidential enterprise processing.',
     },
     {
       q: 'Where are Caretrix Consulting delivery hubs and offices located?',
-      a: 'We are headquartered in Pune (Maharashtra) with our state-of-the-art technology delivery center in Bengaluru (Karnataka) and a corporate US presence in Sheridan, Wyoming. We serve 150+ international clients across the US, UK, Europe, Australia, and India.',
+      a: 'We are headquartered in Pune (Vadgaon Budruk) with our specialized operations delivery center in Navi Mumbai (Vashi Station Complex). We serve 150+ international clients across the US, UK, Europe, Australia, and India.',
     },
   ];
 
@@ -567,7 +567,7 @@ export default function Home({ onOpenModal }) {
               </span>
               <span style={{ color: 'rgba(255,255,255,0.3)', fontSize: '12px' }}>&bull;</span>
               <span style={{ fontSize: '11px', color: '#CBD5E1', fontWeight: 600 }}>
-                PUNE HQ &bull; BENGALURU CoE &bull; WYOMING HUB
+                PUNE GLOBAL HQ &bull; NAVI MUMBAI DELIVERY CENTER
               </span>
               <span style={{ color: 'rgba(255,255,255,0.3)', fontSize: '12px' }}>&bull;</span>
               <span style={{ fontSize: '11px', color: '#34D399', fontWeight: 700 }}>
@@ -646,7 +646,7 @@ export default function Home({ onOpenModal }) {
                 className="btn-cyber-ghost"
                 style={{ borderColor: 'rgba(94, 14, 215, 0.5)', background: 'rgba(94, 14, 215, 0.15)', color: '#DDD6FE' }}
               >
-                <ArrowUpRight size={16} color="#A78BFA" /> Studio Hero
+                <ArrowUpRight size={16} color="#A78BFA" /> Full-Screen Video Hero
               </Link>
               <a
                 href="tel:+917758088438"

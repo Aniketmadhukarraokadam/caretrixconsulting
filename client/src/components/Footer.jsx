@@ -140,7 +140,7 @@ export default function Footer({ onOpenModal }) {
             </Link>
 
             <p style={{ fontSize: '13.5px', color: 'rgba(255, 255, 255, 0.75)', lineHeight: 1.75, marginBottom: '20px' }}>
-              <strong style={{ color: '#ffffff' }}>Caretrix Consulting Private Limited</strong> is an ISO 27001:2013 certified and HIPAA-compliant global IT and BPO outsourcing partner headquartered in Pune with a specialized delivery center in Navi Mumbai. Empowering 150+ international clients across AI Software, Healthcare RCM, Publishing, Data Annotation, and Enterprise BPO operations.
+              <strong style={{ color: '#ffffff' }}>Caretrix Consulting</strong> is an ISO 27001:2013 certified and HIPAA-compliant global IT and BPO outsourcing partner headquartered in Pune with a specialized delivery center in Navi Mumbai. Empowering 150+ international clients across AI Software, Healthcare RCM, Publishing, Data Annotation, and Enterprise BPO operations.
             </p>
 
             <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap', marginBottom: '22px' }}>
@@ -349,7 +349,7 @@ export default function Footer({ onOpenModal }) {
             }}
           >
             <div>
-              Copyright &copy; 2026 Caretrix Consulting Private Limited. All rights reserved.
+              Copyright &copy; 2026 Caretrix Consulting. All rights reserved.
             </div>
             <div style={{ display: 'flex', gap: '20px' }}>
               <a href="#faq" style={{ color: 'rgba(255, 255, 255, 0.6)' }}>FAQ</a>

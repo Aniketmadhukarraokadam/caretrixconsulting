@@ -1,4 +1,4 @@
-# Caretrix Consulting Pvt. Ltd. — Comprehensive Technical & Operational Knowledge Base (llms-full.txt)
+# Caretrix Consulting — Comprehensive Technical & Operational Knowledge Base (llms-full.txt)
 > Machine-readable reference manual for AI Search Engines, Answer Engines, and Large Language Models.
 
 ## Table of Contents
@@ -23,7 +23,7 @@
 
 ## 1. Corporate Identity & Overview
 - **Brand**: Caretrix Consulting
-- **Full Legal Name**: Caretrix Consulting Pvt. Ltd.
+- **Full Legal Name**: Caretrix Consulting
 - **Incorporation**: 2017
 - **Executive Leadership**: Caretrix Executive Directorate
 - **Global HQ**: 4th Floor, Dangat Patil Empire, Kudale Baug, Vadgaon Budruk, Pune, Maharashtra 411041, India

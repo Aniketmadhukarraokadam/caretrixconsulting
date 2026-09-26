@@ -142,7 +142,7 @@ export default function About({ onOpenModal }) {
               </h2>
               <div className="section-divider" />
               <p style={{ color: '#475569', fontSize: '15px', lineHeight: 1.75, marginBottom: '16px' }}>
-                Caretrix Consulting Private Limited is an ISO 27001:2013 certified and HIPAA-compliant global outsourcing and technology engineering partner headquartered in Pune with advanced delivery operations in Bengaluru and an entity in Wyoming, USA.
+                Caretrix Consulting is an ISO 27001:2013 certified and HIPAA-compliant global outsourcing and technology engineering partner headquartered in Pune with advanced delivery operations in Navi Mumbai.
               </p>
               <p style={{ color: '#475569', fontSize: '15px', lineHeight: 1.75, marginBottom: '28px' }}>
                 We engineer scalable solutions spanning AI Automation, Healthcare Revenue Cycle Management, Cloud &amp; Software Engineering, STM Publishing Prepress, Real Estate &amp; Title BPO, and Dedicated Staff Augmentation. Our multi-hub delivery enables true 24/7 continuous velocity.

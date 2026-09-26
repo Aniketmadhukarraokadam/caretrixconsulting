@@ -1,28 +1,45 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ArrowUpRight, X } from 'lucide-react';
+import { ArrowUpRight, X, Phone, ShieldCheck } from 'lucide-react';
 
-const NAV_LINKS = ['Story', 'Expertise', 'Studios', 'Feedback'];
+const NAV_LINKS = [
+  { label: 'Services', href: '/services' },
+  { label: 'Industries', href: '/industries' },
+  { label: 'Cloud & SAP', href: '/services?cat=sap' },
+  { label: 'Global Hubs', href: '/global' },
+];
 
+const MOBILE_LINKS = [
+  { label: 'Services Directory', href: '/services' },
+  { label: 'Industries & Verticals', href: '/industries' },
+  { label: 'SAP & Cloud Engineering', href: '/services?cat=sap' },
+  { label: 'Global Delivery Hubs', href: '/global' },
+  { label: 'Case Studies', href: '/case-studies' },
+  { label: 'About Caretrix', href: '/about' },
+  { label: 'Contact Advisory Desk', href: '/contact' },
+];
+
+// Content Strategy aligned with Caretrix Consulting
 const STATS = [
   {
     prefix: '+',
-    value: '300',
-    label: 'CRAFTED\nBRANDS',
+    value: '150',
+    label: 'GLOBAL\nCLIENTS',
   },
   {
     prefix: '+',
-    value: '200',
-    label: 'DIGITAL\nPRODUCTS',
+    value: '75',
+    label: 'MANAGED\nSERVICES',
   },
   {
     prefix: '+',
-    value: '100',
-    label: 'VENTURES\nFUNDED',
+    value: '250',
+    label: 'ENTERPRISE\nPROJECTS',
   },
 ];
 
-const HEADING_WORDS = ['Fearless', 'Vision', 'Delivered'];
+const HEADING_WORDS = ['Enterprise', 'Solutions', 'Delivered'];
 
 // Animation Variants according to exact specs
 const fadeDownVariant = {
@@ -63,8 +80,15 @@ const headingWordVariant = {
   }),
 };
 
-export default function FullScreenHero() {
+export default function FullScreenHero({ onOpenModal }) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+
+  const handleCtaClick = (e) => {
+    if (onOpenModal) {
+      e.preventDefault();
+      onOpenModal();
+    }
+  };
 
   return (
     <div
@@ -77,13 +101,16 @@ export default function FullScreenHero() {
         loop
         muted
         playsInline
-        className="absolute inset-0 w-full h-full object-cover -z-10 pointer-events-none"
+        className="absolute inset-0 w-full h-full object-cover -z-20 pointer-events-none"
         src="https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260517_222138_3e3205be-3364-417b-a64a-bfe087acbec4.mp4"
       />
 
+      {/* Subtle overlay ensuring sharp contrast & reading comfort */}
+      <div className="absolute inset-0 bg-white/[0.04] backdrop-contrast-105 -z-10 pointer-events-none" />
+
       {/* ── 1. NAVIGATION BAR (Top, fixed height) ───────────────────────────── */}
       <header className="w-full flex items-center justify-between px-5 sm:px-8 md:px-12 pt-5 md:pt-6 z-20">
-        {/* Left: Circular Logo (32px round div, 2px border in accent color, 10px solid circle in accent color) */}
+        {/* Left: Caretrix Consulting Circular Logo + Identity */}
         <motion.div
           custom={0}
           initial="initial"
@@ -91,29 +118,42 @@ export default function FullScreenHero() {
           variants={fadeDownVariant}
           className="flex items-center"
         >
-          <div className="w-8 h-8 rounded-full border-2 border-[#5E0ED7] flex items-center justify-center cursor-pointer transition-transform duration-300 hover:scale-105">
-            <div className="w-[10px] h-[10px] rounded-full bg-[#5E0ED7]" />
-          </div>
+          <Link to="/" className="flex items-center gap-2.5 sm:gap-3 group">
+            <div className="w-8 h-8 rounded-full border-2 border-[#5E0ED7] flex items-center justify-center bg-white/80 backdrop-blur-sm cursor-pointer transition-transform duration-300 group-hover:scale-105 shadow-sm">
+              <div className="w-[10px] h-[10px] rounded-full bg-[#5E0ED7]" />
+            </div>
+            <div className="flex flex-col">
+              <span className="text-[13px] sm:text-[14px] font-bold tracking-[0.16em] text-black leading-tight">
+                CARETRIX
+              </span>
+              <span className="text-[9px] sm:text-[9.5px] font-bold tracking-[0.24em] text-[#5E0ED7] leading-none">
+                CONSULTING
+              </span>
+            </div>
+          </Link>
         </motion.div>
 
-        {/* Center: Four Nav Links (Hidden on mobile, visible md+) */}
+        {/* Center: Four Nav Links aligned with Caretrix Services (Hidden on mobile, visible md+) */}
         <nav className="hidden md:flex items-center gap-8 lg:gap-12">
           {NAV_LINKS.map((link, idx) => (
-            <motion.a
-              key={link}
-              href={`#${link.toLowerCase()}`}
+            <motion.div
+              key={link.label}
               custom={idx + 1}
               initial="initial"
               animate="animate"
               variants={fadeDownVariant}
-              className="text-[14px] font-semibold tracking-widest uppercase text-black hover:text-[#5E0ED7] transition-colors duration-200"
             >
-              {link}
-            </motion.a>
+              <Link
+                to={link.href}
+                className="text-[14px] font-semibold tracking-widest uppercase text-black hover:text-[#5E0ED7] transition-colors duration-200"
+              >
+                {link.label}
+              </Link>
+            </motion.div>
           ))}
         </nav>
 
-        {/* Right: 36px round black button with hamburger icon (three horizontal white lines) */}
+        {/* Right: 36px round black button with hamburger icon */}
         <motion.button
           type="button"
           aria-label="Open Navigation Menu"
@@ -138,13 +178,19 @@ export default function FullScreenHero() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
             transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
-            className="fixed inset-0 z-50 bg-white flex flex-col justify-between px-5 sm:px-8 pt-5 md:pt-6 pb-8 sm:pb-10"
+            className="fixed inset-0 z-50 bg-white flex flex-col justify-between px-5 sm:px-8 pt-5 md:pt-6 pb-8 sm:pb-10 overflow-y-auto"
             style={{ fontFamily: "'Inter', sans-serif" }}
           >
-            {/* Top row: same logo (left) and 36px round black close button with X icon (right) */}
+            {/* Top row: Caretrix logo (left) and 36px round black close button with X icon (right) */}
             <div className="flex items-center justify-between">
-              <div className="w-8 h-8 rounded-full border-2 border-[#5E0ED7] flex items-center justify-center">
-                <div className="w-[10px] h-[10px] rounded-full bg-[#5E0ED7]" />
+              <div className="flex items-center gap-3">
+                <div className="w-8 h-8 rounded-full border-2 border-[#5E0ED7] flex items-center justify-center">
+                  <div className="w-[10px] h-[10px] rounded-full bg-[#5E0ED7]" />
+                </div>
+                <div className="flex flex-col">
+                  <span className="text-[14px] font-bold tracking-[0.16em] text-black leading-tight">CARETRIX</span>
+                  <span className="text-[9.5px] font-bold tracking-[0.24em] text-[#5E0ED7] leading-none">CONSULTING</span>
+                </div>
               </div>
               <button
                 type="button"
@@ -156,29 +202,39 @@ export default function FullScreenHero() {
               </button>
             </div>
 
-            {/* Middle: vertical list of 4 nav links at text-3xl, gap-8, mt-16 */}
-            <div className="flex flex-col gap-8 mt-16 text-3xl font-semibold tracking-widest uppercase text-black">
-              {NAV_LINKS.map((link) => (
-                <a
-                  key={link}
-                  href={`#${link.toLowerCase()}`}
+            {/* Middle: vertical list of Caretrix nav links */}
+            <div className="flex flex-col gap-6 mt-12 text-2xl sm:text-3xl font-semibold tracking-widest uppercase text-black">
+              {MOBILE_LINKS.map((link) => (
+                <Link
+                  key={link.label}
+                  to={link.href}
                   onClick={() => setMobileMenuOpen(false)}
                   className="hover:text-[#5E0ED7] transition-colors duration-200"
                 >
-                  {link}
-                </a>
+                  {link.label}
+                </Link>
               ))}
             </div>
 
-            {/* Bottom (mt-auto): "Work With Us" CTA in accent color with ArrowUpRight icon */}
-            <div className="mt-auto pt-8">
+            {/* Bottom (mt-auto): Proposal CTA in accent color with ArrowUpRight icon */}
+            <div className="mt-auto pt-8 border-t border-neutral-100 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
               <a
                 href="#contact"
-                onClick={() => setMobileMenuOpen(false)}
-                className="inline-flex items-center gap-2 text-xl font-semibold tracking-widest uppercase text-[#5E0ED7] hover:opacity-80 transition-opacity"
+                onClick={(e) => {
+                  setMobileMenuOpen(false);
+                  handleCtaClick(e);
+                }}
+                className="inline-flex items-center gap-2 text-lg sm:text-xl font-semibold tracking-widest uppercase text-[#5E0ED7] hover:opacity-80 transition-opacity"
               >
-                <span>Work With Us</span>
+                <span>Request Proposal</span>
                 <ArrowUpRight size={22} />
+              </a>
+
+              <a
+                href="tel:+917758088438"
+                className="inline-flex items-center gap-2 text-xs font-semibold tracking-wider uppercase text-neutral-600 hover:text-black"
+              >
+                <Phone size={14} color="#5E0ED7" /> +91 77580 88438
               </a>
             </div>
           </motion.div>
@@ -197,7 +253,7 @@ export default function FullScreenHero() {
               variants={fadeUpVariant}
               className="text-right"
             >
-              {/* Number styling: fontSize clamp(1.5rem, 5vw, 3.5rem), weight 600, '+' separately in accent color */}
+              {/* Number styling: fontSize clamp(1.5rem, 5vw, 3.5rem), weight 600, '+' in accent color */}
               <div
                 style={{ fontSize: 'clamp(1.5rem, 5vw, 3.5rem)', lineHeight: 1 }}
                 className="font-semibold text-black tracking-tight"
@@ -210,7 +266,7 @@ export default function FullScreenHero() {
                 </span>
                 <span>{stat.value}</span>
               </div>
-              {/* Label: text-[10px] sm:text-xs md:text-sm, font-semibold, tracking-widest, uppercase, black, whitespace-pre-line */}
+              {/* Label: text-[10px] sm:text-xs md:text-sm, font-semibold, tracking-widest, uppercase, black */}
               <div className="text-[10px] sm:text-xs md:text-sm font-semibold tracking-widest uppercase text-black whitespace-pre-line leading-tight mt-1 sm:mt-2">
                 {stat.label}
               </div>
@@ -223,20 +279,20 @@ export default function FullScreenHero() {
       <footer className="w-full px-5 sm:px-8 md:px-12 pb-8 md:pb-12 flex flex-col gap-6 md:gap-12 z-10">
         {/* Row A (tagline + CTA): Flex row, items-center, justify-between, gap-4 */}
         <div className="flex items-center justify-between gap-4">
-          {/* Left: Small uppercase tagline paragraph */}
+          {/* Left: Small uppercase Caretrix enterprise tagline */}
           <motion.p
             custom={5}
             initial="initial"
             animate="animate"
             variants={fadeUpVariant}
-            className="text-[10px] sm:text-xs md:text-sm font-semibold tracking-widest uppercase text-black max-w-[130px] sm:max-w-[160px] md:max-w-xs leading-normal"
+            className="text-[10px] sm:text-xs md:text-sm font-semibold tracking-widest uppercase text-black max-w-[140px] sm:max-w-[180px] md:max-w-xs leading-normal"
           >
-            Shaping Bold <br />
-            Visions Into Power <br />
-            For Your Tribe
+            Accelerating Cloud <br />
+            Enterprise IT &amp; BPO <br />
+            For Global Scale
           </motion.p>
 
-          {/* Right: CTA link "Work With Us" with ArrowUpRight icon */}
+          {/* Right: CTA link "Request Proposal" with ArrowUpRight icon */}
           <motion.div
             custom={6}
             initial="initial"
@@ -245,9 +301,10 @@ export default function FullScreenHero() {
           >
             <a
               href="#contact"
+              onClick={handleCtaClick}
               className="group inline-flex items-center gap-1.5 sm:gap-2 text-base sm:text-xl md:text-2xl text-[#5E0ED7] font-semibold whitespace-nowrap tracking-widest uppercase hover:opacity-85 transition-opacity"
             >
-              <span>Work With Us</span>
+              <span>Request Proposal</span>
               <ArrowUpRight className="w-[18px] h-[18px] sm:w-[22px] sm:h-[22px] transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
             </a>
           </motion.div>
@@ -255,20 +312,20 @@ export default function FullScreenHero() {
 
         {/* Row B (description + main heading): Flex row, items-end, justify-between, gap-3 sm:gap-4 */}
         <div className="flex items-end justify-between gap-3 sm:gap-4">
-          {/* Left: Fixed-width container containing description paragraph */}
+          {/* Left: Fixed-width container containing Caretrix strategic mission paragraph */}
           <motion.div
             custom={7}
             initial="initial"
             animate="animate"
             variants={fadeUpVariant}
-            className="w-[120px] sm:w-[180px] md:w-[280px] shrink-0"
+            className="w-[125px] sm:w-[190px] md:w-[300px] shrink-0"
           >
             <p className="text-[9px] sm:text-xs md:text-sm font-semibold tracking-widest uppercase text-black text-left md:text-right leading-relaxed">
-              Creative Studios Built Around Elevating Your Vision Into Striking Reality
+              Global IT Consulting, SAP Cloud Architecture, and 24/7 Enterprise Managed Services Engineered for Fortune-500 Scale.
             </p>
           </motion.div>
 
-          {/* Right: The main heading — three words stacked vertically: "Fearless", "Vision", "Delivered" */}
+          {/* Right: The main heading — three words stacked vertically: "Enterprise", "Solutions", "Delivered" */}
           <div className="flex flex-col items-end text-right">
             {HEADING_WORDS.map((word, wordIndex) => (
               <div key={word} className="overflow-hidden">

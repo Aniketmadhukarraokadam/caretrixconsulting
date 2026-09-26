@@ -450,7 +450,7 @@ export default function Navbar({ onOpenModal }) {
                   boxShadow: '0 0 12px rgba(37, 99, 235, 0.3)',
                 }}
               >
-                Caretrix Consulting Private Limited
+                Caretrix Consulting
               </span>
               <span style={{ width: '1px', height: '14px', background: 'rgba(255,255,255,0.15)' }} />
               <a

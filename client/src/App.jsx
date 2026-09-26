@@ -67,7 +67,8 @@ export default function App() {
     return (
       <ToastProvider>
         <Suspense fallback={<PageLoader />}>
-          <FullScreenHero />
+          <FullScreenHero onOpenModal={openModal} />
+          <ConsultationModal isOpen={isModalOpen} onClose={closeModal} />
         </Suspense>
       </ToastProvider>
     );
@@ -84,8 +85,8 @@ export default function App() {
           <Suspense fallback={<PageLoader />}>
             <Routes>
               <Route path="/" element={<Home onOpenModal={openModal} />} />
-              <Route path="/hero" element={<FullScreenHero />} />
-              <Route path="/fullscreen-hero" element={<FullScreenHero />} />
+              <Route path="/hero" element={<FullScreenHero onOpenModal={openModal} />} />
+              <Route path="/fullscreen-hero" element={<FullScreenHero onOpenModal={openModal} />} />
               <Route path="/about" element={<About onOpenModal={openModal} />} />
               <Route path="/services" element={<Services onOpenModal={openModal} />} />
               <Route path="/industries" element={<Industries onOpenModal={openModal} />} />
