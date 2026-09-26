@@ -105,8 +105,8 @@ export default function Footer({ onOpenModal }) {
 
             <div style={{ display: 'flex', gap: '18px', flexWrap: 'wrap', fontSize: '12px' }}>
               <span>Pune HQ: <strong style={{ color: '#5BA8D4' }}>IST Active (24/7)</strong></span>
-              <span>Bengaluru: <strong style={{ color: '#5BA8D4' }}>Tech Hub Operational</strong></span>
-              <span>USA Entity: <strong style={{ color: '#10b981' }}>EST/PST Overlap Active</strong></span>
+              <span>Navi Mumbai: <strong style={{ color: '#5BA8D4' }}>Delivery Hub (24/7)</strong></span>
+              <span>North America: <strong style={{ color: '#10b981' }}>EST/PST Overlap Active</strong></span>
               <span>Europe: <strong style={{ color: '#f59e0b' }}>GMT/CET Overlap</strong></span>
             </div>
           </div>
@@ -140,7 +140,7 @@ export default function Footer({ onOpenModal }) {
             </Link>
 
             <p style={{ fontSize: '13.5px', color: 'rgba(255, 255, 255, 0.75)', lineHeight: 1.75, marginBottom: '20px' }}>
-              <strong style={{ color: '#ffffff' }}>Caretrix Consulting Private Limited</strong> is an ISO 27001:2013 certified and HIPAA-compliant global IT and BPO outsourcing partner headquartered in Pune with an advanced technology delivery center in Bengaluru and a corporate presence in Wyoming, USA. Empowering 150+ international clients across AI Software, Healthcare RCM, Publishing, Data Annotation, and Enterprise BPO operations.
+              <strong style={{ color: '#ffffff' }}>Caretrix Consulting Private Limited</strong> is an ISO 27001:2013 certified and HIPAA-compliant global IT and BPO outsourcing partner headquartered in Pune with a specialized delivery center in Navi Mumbai. Empowering 150+ international clients across AI Software, Healthcare RCM, Publishing, Data Annotation, and Enterprise BPO operations.
             </p>
 
             <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap', marginBottom: '22px' }}>
@@ -255,38 +255,31 @@ export default function Footer({ onOpenModal }) {
                 <strong style={{ color: '#ffffff', fontSize: '13.5px' }}>Pune Headquarters</strong>
               </div>
               <p style={{ fontSize: '12px', color: 'rgba(255, 255, 255, 0.75)', margin: 0, lineHeight: 1.5 }}>
-                502, 4th Floor, Dangat Patil Empire, Kudale Baug, Vadgaon Budruk, Pune, Maharashtra 411041
+                4th Floor, Dangat Patil Empire, Kudale Baug, Vadgaon Budruk, Pune, Maharashtra 411041
               </p>
             </div>
 
-            {/* Bengaluru Tech Branch */}
-            <div style={{ marginBottom: '12px', fontSize: '12.5px', color: 'rgba(255, 255, 255, 0.75)' }}>
-              <div style={{ fontWeight: 700, color: '#ffffff', marginBottom: '2px' }}>
+            {/* Navi Mumbai Delivery Center */}
+            <div style={{ marginBottom: '14px', fontSize: '12.5px', color: 'rgba(255, 255, 255, 0.75)' }}>
+              <div style={{ fontWeight: 700, color: '#ffffff', marginBottom: '3px' }}>
                 <MapPin size={12} color="#0284C7" style={{ display: 'inline', marginRight: '5px' }} />
-                Bengaluru Tech Delivery Hub
+                Navi Mumbai Delivery Center
               </div>
-              No.125, Ranganath Complex, Madiwala, HSR Layout, Bengaluru, Karnataka 560068
-            </div>
-
-            {/* USA Corporate Presence */}
-            <div style={{ marginBottom: '16px', fontSize: '12.5px', color: 'rgba(255, 255, 255, 0.75)' }}>
-              <div style={{ fontWeight: 700, color: '#ffffff', marginBottom: '2px' }}>
-                <Globe2 size={12} color="#0284C7" style={{ display: 'inline', marginRight: '5px' }} />
-                USA Corporate Entity
-              </div>
-              30 N Gould St Ste 100, Sheridan, WY 82801, USA
+              <p style={{ fontSize: '12px', color: 'rgba(255, 255, 255, 0.75)', margin: 0, lineHeight: 1.5 }}>
+                C-207, 2nd Floor, Tower 2, Above Vashi Railway Station, Vashi, Navi Mumbai, Maharashtra 400703
+              </p>
             </div>
 
             {/* Direct Contact Points */}
             <div style={{ display: 'flex', flexDirection: 'column', gap: '6px', fontSize: '13px', marginBottom: '18px' }}>
-              <a href="mailto:support@caretrixconsulting.com" style={{ color: '#60A5FA', display: 'flex', alignItems: 'center', gap: '6px' }}>
-                <Mail size={13} color="#0284C7" /> support@caretrixconsulting.com
+              <a href="mailto:Contact@caretrixconsulting.com" style={{ color: '#60A5FA', display: 'flex', alignItems: 'center', gap: '6px' }}>
+                <Mail size={13} color="#0284C7" /> Contact@caretrixconsulting.com
               </a>
-              <a href="tel:+918308906690" style={{ color: '#ffffff', fontWeight: 600, display: 'flex', alignItems: 'center', gap: '6px' }}>
-                <Phone size={13} color="#0284C7" /> +91-8308906690
+              <a href="tel:+917758088438" style={{ color: '#ffffff', fontWeight: 600, display: 'flex', alignItems: 'center', gap: '6px' }}>
+                <Phone size={13} color="#0284C7" /> +91 77580 88438
               </a>
               <div style={{ color: '#10B981', fontSize: '12px', display: 'flex', alignItems: 'center', gap: '6px' }}>
-                <Clock size={12} /> 24/7 Digital Support &bull; Mon–Sat 9AM–6PM IST
+                <Clock size={12} /> Mon &ndash; Sat 9:00 AM &ndash; 7:00 PM IST
               </div>
             </div>
 
@@ -442,7 +435,7 @@ export default function Footer({ onOpenModal }) {
 
             {/* Option 1: Business */}
             <a
-              href="https://wa.me/918308906690?text=Hello%20Caretrix%20Consulting%20Sales%20Team%2C%20I%20am%20looking%20for%20business%20services%20(IT%20%2F%20BPO%20%2F%20AI).%20I%20would%20like%20to%20discuss%20our%20project%20requirements%20and%20request%20a%20quote."
+              href="https://wa.me/917758088438?text=Hello%20Caretrix%20Consulting%20Sales%20Team%2C%20I%20am%20looking%20for%20business%20services%20(IT%20%2F%20BPO%20%2F%20AI).%20I%20would%20like%20to%20discuss%20our%20project%20requirements%20and%20request%20a%20quote."
               target="_blank"
               rel="noopener noreferrer"
               onClick={() => setWhatsappModalOpen(false)}
@@ -486,7 +479,7 @@ export default function Footer({ onOpenModal }) {
 
             {/* Option 2: Careers */}
             <a
-              href="https://wa.me/918308906690?text=Hello%20Caretrix%20Consulting%20HR%20Team%2C%20I%20am%20a%20job%20candidate%20inquiring%20about%20career%20opportunities%20and%20openings.%20I%20would%20like%20to%20share%20my%20profile%20for%20review."
+              href="https://wa.me/917758088438?text=Hello%20Caretrix%20Consulting%20HR%20Team%2C%20I%20am%20a%20job%20candidate%20inquiring%20about%20career%20opportunities%20and%20openings.%20I%20would%20like%20to%20share%20my%20profile%20for%20review."
               target="_blank"
               rel="noopener noreferrer"
               onClick={() => setWhatsappModalOpen(false)}

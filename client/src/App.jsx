@@ -19,6 +19,7 @@ const CaseStudies = lazy(() => import('./pages/CaseStudies'));
 const Careers = lazy(() => import('./pages/Careers'));
 const Contact = lazy(() => import('./pages/Contact'));
 const Admin = lazy(() => import('./pages/Admin'));
+const FullScreenHero = lazy(() => import('./components/FullScreenHero'));
 
 function ScrollToTop() {
   const { pathname } = useLocation();
@@ -55,9 +56,22 @@ function PageLoader() {
 
 export default function App() {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const location = useLocation();
+
+  const isHeroRoute = location.pathname === '/hero' || location.pathname === '/fullscreen-hero';
 
   const openModal = () => setIsModalOpen(true);
   const closeModal = () => setIsModalOpen(false);
+
+  if (isHeroRoute) {
+    return (
+      <ToastProvider>
+        <Suspense fallback={<PageLoader />}>
+          <FullScreenHero />
+        </Suspense>
+      </ToastProvider>
+    );
+  }
 
   return (
     <ToastProvider>
@@ -70,6 +84,8 @@ export default function App() {
           <Suspense fallback={<PageLoader />}>
             <Routes>
               <Route path="/" element={<Home onOpenModal={openModal} />} />
+              <Route path="/hero" element={<FullScreenHero />} />
+              <Route path="/fullscreen-hero" element={<FullScreenHero />} />
               <Route path="/about" element={<About onOpenModal={openModal} />} />
               <Route path="/services" element={<Services onOpenModal={openModal} />} />
               <Route path="/industries" element={<Industries onOpenModal={openModal} />} />

@@ -18,6 +18,7 @@ import {
   Users,
   CheckCircle2,
   ArrowRight,
+  ArrowUpRight,
   Phone,
   Mail,
   Send,
@@ -60,8 +61,8 @@ export default function Home({ onOpenModal }) {
   const [isDeleting, setIsDeleting] = useState(false);
   const [typingSpeed, setTypingSpeed] = useState(90);
 
-  // Cockpit active interactive tab
-  const [activeCockpitTab, setActiveCockpitTab] = useState('ai');
+  // Orchestrator active interactive division tab
+  const [activeOrchestratorTab, setActiveOrchestratorTab] = useState('sap');
 
   // Active FAQ accordion state
   const [openFaq, setOpenFaq] = useState('faq-0');
@@ -301,635 +302,716 @@ export default function Home({ onOpenModal }) {
     },
   ];
 
+  // 6 Interactive Holographic Orchestrator Divisions
+  const orchestratorDivisions = [
+    {
+      id: 'sap',
+      name: 'SAP S/4HANA & ERP',
+      shortName: 'SAP S/4HANA',
+      icon: <Cpu size={16} />,
+      color: '#38BDF8',
+      gradient: 'linear-gradient(135deg, #0284C7 0%, #1E3A8A 100%)',
+      glow: 'rgba(56, 189, 248, 0.4)',
+      badge: 'ENTERPRISE SAP ERP',
+      title: 'SAP S/4HANA Migration & 24/7 BASIS AMS Pods',
+      subtitle: 'Zero-downtime Greenfield & Brownfield cutovers with 24/7 dedicated BASIS L1-L3 SLA support.',
+      pipeline: [
+        { num: '01', title: 'Landscape Discovery', desc: 'Custom code & DB readiness analysis' },
+        { num: '02', title: 'Cloud Cutover', desc: 'Automated zero-downtime migration' },
+        { num: '03', title: 'Fiori Modernization', desc: 'Role-based UX & custom ABAP modules' },
+        { num: '04', title: '24/7 AMS BASIS Pod', desc: '<15 min P1 incident response SLA' },
+      ],
+      metrics: [
+        { val: '99.99%', lbl: 'Cloud Uptime SLA' },
+        { val: '<15 Mins', lbl: 'P1 Incident Response' },
+        { val: '100%', lbl: 'Data Integrity Audit' },
+      ],
+      stack: ['SAP S/4HANA', 'SAP BASIS', 'ABAP on HANA', 'SAP Fiori', 'HANA Cloud', 'Disaster Recovery'],
+      cat: 'sap',
+      modalService: 'SAP Enterprise Solutions',
+    },
+    {
+      id: 'cloud',
+      name: '24/7 Cloud NOC & DevOps',
+      shortName: 'Cloud & DevOps',
+      icon: <Cloud size={16} />,
+      color: '#60A5FA',
+      gradient: 'linear-gradient(135deg, #2563EB 0%, #0D9488 100%)',
+      glow: 'rgba(96, 165, 250, 0.4)',
+      badge: 'MULTI-CLOUD PLATFORMS',
+      title: 'Multi-Cloud Infrastructure, Kubernetes & 24/7 Global NOC',
+      subtitle: 'Enterprise AWS, Azure, and Google Cloud operations with automated Terraform IaC and 24/7 proactive monitoring.',
+      pipeline: [
+        { num: '01', title: 'Well-Architected Audit', desc: 'Security, cost & elasticity review' },
+        { num: '02', title: 'Terraform IaC', desc: 'Declarative GitOps cloud provisioning' },
+        { num: '03', title: 'Kubernetes Platform', desc: 'High-availability microservice clusters' },
+        { num: '04', title: '24/7 Proactive NOC', desc: 'Real-time telemetry & Datadog alert pods' },
+      ],
+      metrics: [
+        { val: '99.98%', lbl: 'System Availability' },
+        { val: '<10 Mins', lbl: 'NOC Mean Response' },
+        { val: '40%+', lbl: 'Cloud TCO Reduction' },
+      ],
+      stack: ['AWS', 'Microsoft Azure', 'Google Cloud', 'Kubernetes', 'Terraform', 'Datadog', 'Docker'],
+      cat: 'cloud',
+      modalService: 'Cloud Support & DevOps',
+    },
+    {
+      id: 'ai',
+      name: 'Agentic AI & Annotation',
+      shortName: 'AI & Data Annotation',
+      icon: <Brain size={16} />,
+      color: '#A78BFA',
+      gradient: 'linear-gradient(135deg, #6366F1 0%, #1E3A8A 100%)',
+      glow: 'rgba(167, 139, 250, 0.4)',
+      badge: 'ENTERPRISE AI PODS',
+      title: 'Agentic AI Workflows, LLM Engineering & Computer Vision',
+      subtitle: 'Specialized enterprise AI task agents, RAG document intelligence, and high-precision 2D/3D LiDAR data annotation.',
+      pipeline: [
+        { num: '01', title: 'Data Ingestion Silo', desc: 'HIPAA & ISO 27001 secure data pipeline' },
+        { num: '02', title: 'Agentic Workflows', desc: 'Autonomous LLM reasoning & tool routing' },
+        { num: '03', title: 'Precision Labeling', desc: 'LiDAR, Polygon CV & RLHF human feedback' },
+        { num: '04', title: 'Production Bench', desc: 'Continuous evaluation & model accuracy QA' },
+      ],
+      metrics: [
+        { val: '99.6%', lbl: 'Annotation Accuracy' },
+        { val: '4.8x', lbl: 'Throughput Acceleration' },
+        { val: '24/7', lbl: 'Continuous AI Retraining' },
+      ],
+      stack: ['Autonomous Agents', 'LangChain', 'Vector DB', '3D LiDAR', 'Computer Vision', 'RLHF QA'],
+      cat: 'ai_automation',
+      modalService: 'AI Solutions & Data Annotation',
+    },
+    {
+      id: 'bpo',
+      name: 'Omnichannel BPO Pods',
+      shortName: 'Omnichannel BPO',
+      icon: <Headphones size={16} />,
+      color: '#34D399',
+      gradient: 'linear-gradient(135deg, #059669 0%, #0D9488 100%)',
+      glow: 'rgba(52, 211, 153, 0.4)',
+      badge: 'OMNICHANNEL OPERATIONS',
+      title: 'Customer Experience, Tier 1-3 Desk & Back-Office BPO',
+      subtitle: 'Multi-lingual omnichannel support (voice, email, chat) paired with high-volume transaction processing & claims audits.',
+      pipeline: [
+        { num: '01', title: 'Pod Workflow Mapping', desc: 'Standard operating procedures (SOP)' },
+        { num: '02', title: 'Omnichannel Setup', desc: 'Telephony, Zendesk & CRM integration' },
+        { num: '03', title: 'Quality Auditing', desc: '100% call & transaction compliance' },
+        { num: '04', title: 'Rapid Pod Scale', desc: 'Onboarding extra talent within 48 hours' },
+      ],
+      metrics: [
+        { val: '94.6%', lbl: 'First Contact Res.' },
+        { val: '99.8%', lbl: 'SLA Adherence' },
+        { val: '<48 Hrs', lbl: 'Pod Deployment Time' },
+      ],
+      stack: ['Voice Telephony', 'Zendesk', 'Salesforce CRM', 'Email & Chat', 'Claims Processing', 'Transaction BPO'],
+      cat: 'bpo',
+      modalService: 'Enterprise BPO Services',
+    },
+    {
+      id: 'kpo',
+      name: 'Strategic KPO & Valuation',
+      shortName: 'Strategic KPO',
+      icon: <BarChart3 size={16} />,
+      color: '#FBBF24',
+      gradient: 'linear-gradient(135deg, #D97706 0%, #4F46E5 100%)',
+      glow: 'rgba(251, 191, 36, 0.4)',
+      badge: 'QUANTITATIVE INTELLIGENCE',
+      title: 'Financial Modeling, Equity Valuation & IP Legal Research',
+      subtitle: 'High-value analytical modeling, DCF/LBO models, market landscape intelligence, and patent prior-art searches.',
+      pipeline: [
+        { num: '01', title: 'Scope Definition', desc: 'Financial thesis & hypothesis mapping' },
+        { num: '02', title: 'Data Extraction', desc: 'SEC filings, Bloomberg & Capital IQ' },
+        { num: '03', title: 'Valuation Modeling', desc: 'Dynamic DCF, Comps & sensitivity matrix' },
+        { num: '04', title: 'Executive Report', desc: 'C-suite board-ready investment decks' },
+      ],
+      metrics: [
+        { val: '100%', lbl: 'Formula Audit Quality' },
+        { val: '3.2x', lbl: 'Research Turnaround' },
+        { val: '<24 Hrs', lbl: 'Model Update SLA' },
+      ],
+      stack: ['Financial Modeling', 'DCF / LBO', 'Prior Art IP', 'CapIQ / Bloomberg', 'Market Intelligence', 'LPO'],
+      cat: 'kpo',
+      modalService: 'KPO & Research Services',
+    },
+    {
+      id: 'rcm',
+      name: 'Healthcare RCM & HIPAA',
+      shortName: 'Healthcare RCM',
+      icon: <HeartPulse size={16} />,
+      color: '#F87171',
+      gradient: 'linear-gradient(135deg, #E11D48 0%, #1E3A8A 100%)',
+      glow: 'rgba(248, 113, 113, 0.4)',
+      badge: 'HIPAA COMPLIANT RCM',
+      title: 'Healthcare Revenue Cycle & Denial Recovery Pods',
+      subtitle: 'Certified medical coding (ICD-10-CM / CPT), automated claim scrubbing, prior authorization, and aged AR recovery.',
+      pipeline: [
+        { num: '01', title: 'Prior Authorization', desc: 'Real-time payer eligibility checks' },
+        { num: '02', title: 'Certified Coding', desc: 'AAPC / AHIMA certified ICD-10 coders' },
+        { num: '03', title: 'Claim Scrubbing', desc: '98%+ first-pass clean acceptance' },
+        { num: '04', title: 'Denial Recovery', desc: 'Rapid appeal cycle & AR monetization' },
+      ],
+      metrics: [
+        { val: '98.6%', lbl: 'Clean Claim Rate' },
+        { val: '<15 Days', lbl: 'Aged AR Days' },
+        { val: '91.4%', lbl: 'Denial Appeals Won' },
+      ],
+      stack: ['ICD-10-CM', 'CPT Codes', 'Epic EHR', 'Cerner', 'HIPAA Certified', 'Clearinghouse EDI'],
+      cat: 'healthcare',
+      modalService: 'Healthcare BPO & RCM',
+    },
+  ];
+
   return (
     <div className="homepage-root" style={{ background: '#ffffff' }}>
-      {/* ═══════ HERO SECTION ═══════ */}
+      {/* ═══════ REVOLUTIONARY NEXT-GEN CYBERNETIC HERO SECTION ═══════ */}
       <section
-        className="hero-section"
+        className="hero-cyber-root"
         style={{
-          background: 'radial-gradient(ellipse at 50% -10%, #e0e7ff 0%, #f0f7ff 38%, #ffffff 80%)',
-          padding: '48px 0 35px',
+          background: 'linear-gradient(180deg, #050814 0%, #070B1F 45%, #0B1228 100%)',
+          color: '#ffffff',
           position: 'relative',
           overflow: 'hidden',
-          minHeight: '88vh',
+          padding: '65px 0 35px',
+          minHeight: '90vh',
           display: 'flex',
           flexDirection: 'column',
           justifyContent: 'center',
         }}
       >
+        {/* Ambient Radial Flares & Lights */}
+        <div
+          style={{
+            position: 'absolute',
+            top: '-160px',
+            left: '50%',
+            transform: 'translateX(-50%)',
+            width: '950px',
+            height: '520px',
+            background: 'radial-gradient(ellipse at center, rgba(37, 99, 235, 0.35) 0%, rgba(6, 182, 212, 0.16) 40%, transparent 70%)',
+            filter: 'blur(60px)',
+            pointerEvents: 'none',
+            zIndex: 1,
+          }}
+        />
+        <div
+          style={{
+            position: 'absolute',
+            top: '35%',
+            left: '-120px',
+            width: '450px',
+            height: '450px',
+            background: 'radial-gradient(circle, rgba(99, 102, 241, 0.16) 0%, transparent 70%)',
+            filter: 'blur(60px)',
+            pointerEvents: 'none',
+            zIndex: 1,
+          }}
+        />
+        <div
+          style={{
+            position: 'absolute',
+            top: '40%',
+            right: '-120px',
+            width: '450px',
+            height: '450px',
+            background: 'radial-gradient(circle, rgba(16, 185, 129, 0.14) 0%, transparent 70%)',
+            filter: 'blur(60px)',
+            pointerEvents: 'none',
+            zIndex: 1,
+          }}
+        />
+        {/* Subtle Cyber Matrix Grid */}
+        <div
+          style={{
+            position: 'absolute',
+            inset: 0,
+            backgroundImage:
+              'radial-gradient(rgba(59, 130, 246, 0.15) 1px, transparent 1px), linear-gradient(to right, rgba(255, 255, 255, 0.02) 1px, transparent 1px), linear-gradient(to bottom, rgba(255, 255, 255, 0.02) 1px, transparent 1px)',
+            backgroundSize: '28px 28px, 112px 112px, 112px 112px',
+            pointerEvents: 'none',
+            zIndex: 1,
+          }}
+        />
+
         <div className="container" style={{ position: 'relative', zIndex: 2 }}>
+          {/* Top Live Operational Mesh Beacon */}
+          <div style={{ textAlign: 'center', marginBottom: '22px' }}>
+            <div
+              style={{
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: '10px',
+                background: 'rgba(15, 23, 42, 0.8)',
+                backdropFilter: 'blur(20px)',
+                border: '1px solid rgba(59, 130, 246, 0.3)',
+                padding: '7px 20px',
+                borderRadius: '100px',
+                boxShadow: '0 0 25px rgba(37, 99, 235, 0.25)',
+                flexWrap: 'wrap',
+                justifyContent: 'center',
+              }}
+            >
+              <span
+                style={{
+                  width: '8px',
+                  height: '8px',
+                  borderRadius: '50%',
+                  background: '#10B981',
+                  boxShadow: '0 0 12px #10B981',
+                  display: 'inline-block',
+                  animation: 'pulseGlow 1.6s infinite alternate',
+                }}
+              />
+              <span style={{ fontSize: '11px', fontWeight: 800, letterSpacing: '1px', textTransform: 'uppercase', color: '#93C5FD' }}>
+                GLOBAL DELIVERY MESH ACTIVE
+              </span>
+              <span style={{ color: 'rgba(255,255,255,0.3)', fontSize: '12px' }}>&bull;</span>
+              <span style={{ fontSize: '11px', color: '#CBD5E1', fontWeight: 600 }}>
+                PUNE HQ &bull; BENGALURU CoE &bull; WYOMING HUB
+              </span>
+              <span style={{ color: 'rgba(255,255,255,0.3)', fontSize: '12px' }}>&bull;</span>
+              <span style={{ fontSize: '11px', color: '#34D399', fontWeight: 700 }}>
+                ISO 27001 &bull; HIPAA CERTIFIED
+              </span>
+            </div>
+          </div>
+
+          {/* Monumental Hero Headline & Dynamic Scrambler */}
+          <div style={{ textAlign: 'center', maxWidth: '980px', margin: '0 auto 28px' }}>
+            <h1
+              style={{
+                fontSize: 'clamp(2.4rem, 4.8vw, 4.2rem)',
+                fontWeight: 900,
+                color: '#FFFFFF',
+                lineHeight: 1.12,
+                marginBottom: '18px',
+                letterSpacing: '-0.035em',
+              }}
+            >
+              Autonomous Enterprise IT Systems, Cloud Architecture &amp; Global{' '}
+              <span
+                style={{
+                  background: 'linear-gradient(135deg, #38BDF8 0%, #60A5FA 45%, #A78BFA 90%)',
+                  WebkitBackgroundClip: 'text',
+                  WebkitTextFillColor: 'transparent',
+                  display: 'inline-block',
+                  textShadow: '0 0 35px rgba(56, 189, 248, 0.35)',
+                }}
+              >
+                {currentText}
+              </span>
+              <span
+                style={{
+                  display: 'inline-block',
+                  width: '3.5px',
+                  height: '0.85em',
+                  background: '#38BDF8',
+                  marginLeft: '4px',
+                  verticalAlign: 'middle',
+                  boxShadow: '0 0 10px #38BDF8',
+                }}
+              />
+            </h1>
+
+            <p
+              style={{
+                fontSize: 'clamp(15.5px, 1.2vw, 18px)',
+                color: '#94A3B8',
+                lineHeight: 1.75,
+                maxWidth: '800px',
+                margin: '0 auto 30px',
+                fontWeight: 400,
+              }}
+            >
+              Orchestrating zero-downtime SAP S/4HANA migrations, 24/7 managed cloud NOC infrastructure, intelligent agentic AI workflows, and HIPAA-compliant healthcare BPO for <strong style={{ color: '#FFFFFF' }}>150+ international enterprise clients</strong> across the US, UK, Europe, and APAC.
+            </p>
+
+            {/* Action Center Buttons */}
+            <div style={{ display: 'flex', gap: '14px', justifyContent: 'center', alignItems: 'center', flexWrap: 'wrap' }}>
+              <button
+                type="button"
+                onClick={onOpenModal}
+                className="btn-cyber-primary"
+              >
+                <Send size={16} /> Request Executive Proposal
+              </button>
+              <Link
+                to="/services"
+                className="btn-cyber-ghost"
+              >
+                <Sparkles size={16} color="#38BDF8" /> Explore 75+ Service Directory
+              </Link>
+              <Link
+                to="/hero"
+                className="btn-cyber-ghost"
+                style={{ borderColor: 'rgba(94, 14, 215, 0.5)', background: 'rgba(94, 14, 215, 0.15)', color: '#DDD6FE' }}
+              >
+                <ArrowUpRight size={16} color="#A78BFA" /> Studio Hero
+              </Link>
+              <a
+                href="tel:+917758088438"
+                className="btn-cyber-hotline"
+              >
+                <Phone size={15} color="#34D399" /> +91 77580 88438
+                <span style={{ fontSize: '10.5px', color: '#94A3B8', fontWeight: 500 }}>(24/7 Global Desk)</span>
+              </a>
+            </div>
+          </div>
+
+          {/* ═══════ THE HOLOGRAPHIC ENTERPRISE OPERATIONS ORCHESTRATOR ═══════ */}
+          <div
+            className="cyber-orchestrator-console"
+            style={{
+              background: 'rgba(8, 14, 34, 0.82)',
+              border: '1.5px solid rgba(59, 130, 246, 0.28)',
+              borderRadius: '24px',
+              padding: '28px',
+              boxShadow: '0 25px 80px rgba(0, 0, 0, 0.65), 0 0 50px rgba(37, 99, 235, 0.15)',
+              backdropFilter: 'blur(28px)',
+              position: 'relative',
+              overflow: 'hidden',
+              marginBottom: '35px',
+            }}
+          >
+            {/* Top Glowing Mesh Strip */}
+            <div
+              style={{
+                position: 'absolute',
+                top: 0,
+                left: 0,
+                right: 0,
+                height: '2px',
+                background: 'linear-gradient(90deg, transparent 0%, #38BDF8 30%, #3B82F6 70%, transparent 100%)',
+              }}
+            />
+
+            {/* Division Switcher Tab Rail */}
+            <div
+              style={{
+                display: 'grid',
+                gridTemplateColumns: 'repeat(auto-fit, minmax(150px, 1fr))',
+                gap: '8px',
+                marginBottom: '24px',
+              }}
+            >
+              {orchestratorDivisions.map((div) => {
+                const isActive = activeOrchestratorTab === div.id;
+                return (
+                  <button
+                    key={div.id}
+                    type="button"
+                    onClick={() => setActiveOrchestratorTab(div.id)}
+                    className={`orchestrator-tab-btn ${isActive ? 'active' : ''}`}
+                    style={
+                      isActive
+                        ? {
+                            background: div.gradient,
+                            borderColor: div.color,
+                            boxShadow: `0 0 20px ${div.glow}`,
+                            color: '#ffffff',
+                          }
+                        : {}
+                    }
+                  >
+                    <span style={{ color: isActive ? '#ffffff' : div.color, display: 'flex', alignItems: 'center' }}>
+                      {div.icon}
+                    </span>
+                    <span>{div.shortName}</span>
+                  </button>
+                );
+              })}
+            </div>
+
+            {/* Active Division Holographic Console */}
+            {(() => {
+              const activeDiv =
+                orchestratorDivisions.find((d) => d.id === activeOrchestratorTab) || orchestratorDivisions[0];
+              return (
+                <div key={activeDiv.id} style={{ animation: 'fadeIn 0.35s ease-out' }}>
+                  {/* Division Header Banner */}
+                  <div
+                    style={{
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'space-between',
+                      flexWrap: 'wrap',
+                      gap: '14px',
+                      paddingBottom: '18px',
+                      borderBottom: '1px solid rgba(255, 255, 255, 0.08)',
+                      marginBottom: '20px',
+                    }}
+                  >
+                    <div>
+                      <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '5px' }}>
+                        <span
+                          style={{
+                            background: 'rgba(255, 255, 255, 0.08)',
+                            color: activeDiv.color,
+                            border: `1px solid ${activeDiv.color}40`,
+                            fontSize: '10px',
+                            fontWeight: 800,
+                            letterSpacing: '0.8px',
+                            textTransform: 'uppercase',
+                            padding: '3px 9px',
+                            borderRadius: '6px',
+                          }}
+                        >
+                          {activeDiv.badge}
+                        </span>
+                        <span style={{ fontSize: '11.5px', color: '#94A3B8' }}>
+                          Telemetry: <strong style={{ color: '#34D399' }}>Real-Time SLA Synchronized</strong>
+                        </span>
+                      </div>
+                      <h3 style={{ fontSize: '18px', fontWeight: 800, color: '#ffffff', margin: 0 }}>
+                        {activeDiv.title}
+                      </h3>
+                      <p style={{ fontSize: '13px', color: '#94A3B8', margin: '4px 0 0', maxWidth: '720px' }}>
+                        {activeDiv.subtitle}
+                      </p>
+                    </div>
+
+                    <Link
+                      to={`/services?cat=${activeDiv.cat}`}
+                      style={{
+                        background: 'rgba(255, 255, 255, 0.06)',
+                        border: '1px solid rgba(255, 255, 255, 0.15)',
+                        color: '#E2E8F0',
+                        fontSize: '12.5px',
+                        fontWeight: 700,
+                        padding: '9px 16px',
+                        borderRadius: '10px',
+                        display: 'inline-flex',
+                        alignItems: 'center',
+                        gap: '7px',
+                        textDecoration: 'none',
+                        transition: 'all 0.2s ease',
+                      }}
+                    >
+                      Explore Full Specification <ChevronRight size={14} color={activeDiv.color} />
+                    </Link>
+                  </div>
+
+                  {/* 4-Step Architecture Pipeline */}
+                  <div style={{ marginBottom: '22px' }}>
+                    <div
+                      style={{
+                        fontSize: '11px',
+                        fontWeight: 800,
+                        textTransform: 'uppercase',
+                        letterSpacing: '0.8px',
+                        color: '#94A3B8',
+                        marginBottom: '10px',
+                        display: 'flex',
+                        alignItems: 'center',
+                        gap: '6px',
+                      }}
+                    >
+                      <Layers size={13} color={activeDiv.color} /> Execution Pipeline Blueprint:
+                    </div>
+                    <div
+                      style={{
+                        display: 'grid',
+                        gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))',
+                        gap: '12px',
+                      }}
+                    >
+                      {activeDiv.pipeline.map((step, idx) => (
+                        <div key={idx} className="pipeline-step-card">
+                          <div
+                            style={{
+                              display: 'flex',
+                              alignItems: 'center',
+                              justifyContent: 'space-between',
+                              marginBottom: '6px',
+                            }}
+                          >
+                            <span
+                              style={{
+                                fontSize: '10.5px',
+                                fontWeight: 800,
+                                color: activeDiv.color,
+                                fontFamily: 'monospace',
+                                background: 'rgba(255, 255, 255, 0.05)',
+                                padding: '2px 7px',
+                                borderRadius: '4px',
+                              }}
+                            >
+                              PHASE {step.num}
+                            </span>
+                            <CheckCircle2 size={13} color="#10B981" />
+                          </div>
+                          <div style={{ fontSize: '13.5px', fontWeight: 700, color: '#ffffff', marginBottom: '3px' }}>
+                            {step.title}
+                          </div>
+                          <div style={{ fontSize: '11.5px', color: '#94A3B8', lineHeight: 1.4 }}>
+                            {step.desc}
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+
+                  {/* Telemetry Metrics & Deploy Pod Row */}
+                  <div
+                    style={{
+                      display: 'grid',
+                      gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
+                      gap: '16px',
+                      alignItems: 'center',
+                      background: 'rgba(0, 0, 0, 0.25)',
+                      padding: '16px 18px',
+                      borderRadius: '16px',
+                      border: '1px solid rgba(255, 255, 255, 0.06)',
+                    }}
+                  >
+                    {/* Left: 3 KPI Gauges */}
+                    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '10px' }}>
+                      {activeDiv.metrics.map((m, idx) => (
+                        <div
+                          key={idx}
+                          style={{
+                            background: 'rgba(255, 255, 255, 0.04)',
+                            padding: '10px 12px',
+                            borderRadius: '10px',
+                            border: '1px solid rgba(255, 255, 255, 0.06)',
+                          }}
+                        >
+                          <div style={{ fontSize: '18px', fontWeight: 800, color: activeDiv.color, lineHeight: 1.1 }}>
+                            {m.val}
+                          </div>
+                          <div style={{ fontSize: '10.5px', color: '#94A3B8', marginTop: '4px', fontWeight: 600 }}>
+                            {m.lbl}
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+
+                    {/* Right: Stack Chips & Modal Trigger */}
+                    <div>
+                      <div style={{ display: 'flex', flexWrap: 'wrap', gap: '6px', marginBottom: '12px' }}>
+                        {activeDiv.stack.map((t, idx) => (
+                          <span
+                            key={idx}
+                            style={{
+                              background: 'rgba(255, 255, 255, 0.05)',
+                              border: '1px solid rgba(255, 255, 255, 0.1)',
+                              color: '#CBD5E1',
+                              fontSize: '11px',
+                              fontWeight: 600,
+                              padding: '2px 8px',
+                              borderRadius: '6px',
+                            }}
+                          >
+                            {t}
+                          </span>
+                        ))}
+                      </div>
+                      <button
+                        type="button"
+                        onClick={onOpenModal}
+                        style={{
+                          background: 'linear-gradient(135deg, #10B981 0%, #059669 100%)',
+                          color: '#ffffff',
+                          fontWeight: 700,
+                          fontSize: '12.5px',
+                          padding: '9px 18px',
+                          borderRadius: '10px',
+                          border: 'none',
+                          cursor: 'pointer',
+                          display: 'inline-flex',
+                          alignItems: 'center',
+                          gap: '8px',
+                          boxShadow: '0 4px 15px rgba(16, 185, 129, 0.3)',
+                          transition: 'all 0.2s ease',
+                        }}
+                      >
+                        <Zap size={14} /> Deploy Dedicated {activeDiv.shortName} Pod &bull; &lt;48h Setup
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              );
+            })()}
+          </div>
+
+          {/* ═══════ 4-PILLAR PERFORMANCE BENTO SHIELDS ═══════ */}
           <div
             style={{
               display: 'grid',
-              gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))',
-              gap: '44px',
-              alignItems: 'center',
+              gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))',
+              gap: '16px',
+              marginBottom: '32px',
             }}
           >
-            {/* Left Column: Headline & Values */}
-            <div style={{ textAlign: 'left' }}>
-              {/* Trust Badge */}
-              <div
-                style={{
-                  display: 'inline-flex',
-                  alignItems: 'center',
-                  gap: '9px',
-                  background: 'rgba(255, 255, 255, 0.95)',
-                  backdropFilter: 'blur(14px)',
-                  border: '1px solid rgba(37, 99, 235, 0.2)',
-                  padding: '7px 18px',
-                  borderRadius: '100px',
-                  marginBottom: '22px',
-                  boxShadow: '0 4px 20px rgba(37, 99, 235, 0.08)',
-                }}
-              >
-                <span
-                  style={{
-                    width: '8px',
-                    height: '8px',
-                    borderRadius: '50%',
-                    background: '#10B981',
-                    boxShadow: '0 0 10px #10B981',
-                    display: 'inline-block',
-                    animation: 'pulseGlow 1.6s infinite alternate',
-                  }}
-                />
-                <span style={{ fontSize: '11.5px', fontWeight: 800, letterSpacing: '1px', textTransform: 'uppercase', color: '#1E3A8A' }}>
-                  GLOBAL ENTERPRISE DELIVERY &bull; ISO 27001 CERTIFIED &bull; HIPAA COMPLIANT
-                </span>
-              </div>
-
-              {/* Dynamic Typing Title */}
-              <h1
-                style={{
-                  fontSize: 'clamp(2.4rem, 4vw, 3.8rem)',
-                  fontWeight: 800,
-                  color: '#0F172A',
-                  lineHeight: 1.15,
-                  marginBottom: '20px',
-                  letterSpacing: '-0.03em',
-                }}
-              >
-                Architecting Next-Gen IT, AI Automations &amp; Global{' '}
-                <span
-                  style={{
-                    background: 'linear-gradient(135deg, #1E3A8A 0%, #2563EB 35%, #0284C7 70%, #6366F1 100%)',
-                    WebkitBackgroundClip: 'text',
-                    WebkitTextFillColor: 'transparent',
-                    display: 'inline-block',
-                  }}
-                >
-                  {currentText}
-                </span>
-                <span
-                  style={{
-                    display: 'inline-block',
-                    width: '3.5px',
-                    height: '0.85em',
-                    background: '#2563EB',
-                    marginLeft: '4px',
-                    verticalAlign: 'middle',
-                    boxShadow: '0 0 8px #2563EB',
-                  }}
-                />
-              </h1>
-
-              {/* Description */}
-              <p
-                style={{
-                  fontSize: '17px',
-                  color: '#475569',
-                  lineHeight: 1.75,
-                  marginBottom: '30px',
-                  maxWidth: '650px',
-                }}
-              >
-                We provide premier enterprise IT consulting, custom software engineering, intelligent AI workflows, and 24/7 global BPO services. Delivering SLA-backed excellence across Healthcare RCM, STM Publishing Prepress, Real Estate BPO, and Cloud Infrastructure for <strong>150+ international clients</strong> with <strong>200+ delivered engagements</strong>.
-              </p>
-
-              {/* CTA Buttons */}
-              <div style={{ display: 'flex', gap: '14px', flexWrap: 'wrap', marginBottom: '32px' }}>
-                <button
-                  type="button"
-                  onClick={onOpenModal}
-                  className="btn-sapphire"
-                  style={{ padding: '15px 32px', fontSize: '15px' }}
-                >
-                  <Send size={16} /> Request Executive Proposal
-                </button>
-                <Link
-                  to="/about"
-                  className="btn-glass"
-                  style={{ padding: '15px 30px', fontSize: '15px' }}
-                >
-                  <Zap size={16} /> Explore Organization Profile
-                </Link>
-              </div>
-
-              {/* Interactive Service Chips Bar */}
-              <div
-                style={{
-                  background: 'rgba(255, 255, 255, 0.9)',
-                  backdropFilter: 'blur(16px)',
-                  border: '1px solid rgba(37, 99, 235, 0.12)',
-                  borderRadius: '18px',
-                  padding: '16px 20px',
-                  boxShadow: '0 10px 30px rgba(15, 23, 42, 0.04)',
-                }}
-              >
-                <div
-                  style={{
-                    fontSize: '11px',
-                    fontWeight: 800,
-                    textTransform: 'uppercase',
-                    letterSpacing: '1px',
-                    color: '#1E3A8A',
-                    marginBottom: '10px',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'space-between',
-                  }}
-                >
-                  <span>Quick Service Router</span>
-                  <span style={{ fontSize: '10px', color: '#64748B' }}>Click to explore</span>
-                </div>
-                <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px' }}>
-                  <Link to="/services?cat=sap" className="hero-chip">
-                    <Cpu size={13} color="#0284C7" /> SAP S/4HANA &amp; AMS
-                  </Link>
-                  <Link to="/services?cat=cloud" className="hero-chip">
-                    <Cloud size={13} color="#2563EB" /> 24/7 Cloud NOC
-                  </Link>
-                  <Link to="/services?cat=bpo" className="hero-chip">
-                    <Headphones size={13} color="#059669" /> Omnichannel BPO
-                  </Link>
-                  <Link to="/services?cat=kpo" className="hero-chip">
-                    <BarChart3 size={13} color="#6366F1" /> Strategic KPO
-                  </Link>
-                  <Link to="/services?cat=csr" className="hero-chip">
-                    <Leaf size={13} color="#10B981" /> Corporate CSR &amp; ESG
-                  </Link>
-                  <Link to="/services?cat=ai_automation" className="hero-chip">
-                    <Brain size={13} color="#0284C7" /> AI &amp; Automations
-                  </Link>
-                  <Link to="/services?cat=realestate" className="hero-chip">
-                    <Building size={13} color="#F59E0B" /> Commercial Real Estate BPO
-                  </Link>
-                  <Link to="/services?cat=healthcare" className="hero-chip">
-                    <HeartPulse size={13} color="#10B981" /> Healthcare RCM
-                  </Link>
-                  <Link to="/services?cat=customsoftware" className="hero-chip">
-                    <Laptop size={13} color="#2563EB" /> Custom Software
-                  </Link>
-                  <Link to="/services?cat=publishing" className="hero-chip">
-                    <BookOpen size={13} color="#6366F1" /> STM Prepress
-                  </Link>
+            <div className="hero-bento-card">
+              <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '8px' }}>
+                <Globe2 size={22} color="#38BDF8" />
+                <div style={{ fontSize: '28px', fontWeight: 800, color: '#ffffff', lineHeight: 1 }}>
+                  150<span>+</span>
                 </div>
               </div>
-
-              {/* 5-Stat Chips */}
-              <div
-                style={{
-                  display: 'grid',
-                  gridTemplateColumns: 'repeat(auto-fit, minmax(100px, 1fr))',
-                  gap: '12px',
-                  marginTop: '26px',
-                }}
-              >
-                <div className="stat-chip">
-                  <div className="stat-num">6<span>+</span></div>
-                  <div className="stat-lbl">Years Exp.</div>
-                </div>
-                <div className="stat-chip">
-                  <div className="stat-num">200<span>+</span></div>
-                  <div className="stat-lbl">Projects</div>
-                </div>
-                <div className="stat-chip">
-                  <div className="stat-num">150<span>+</span></div>
-                  <div className="stat-lbl">Clients</div>
-                </div>
-                <div className="stat-chip">
-                  <div className="stat-num">75<span>+</span></div>
-                  <div className="stat-lbl">Services</div>
-                </div>
-                <div className="stat-chip">
-                  <div className="stat-num">200<span>+</span></div>
-                  <div className="stat-lbl">Talent</div>
-                </div>
+              <div style={{ fontSize: '13px', color: '#94A3B8', lineHeight: 1.4 }}>
+                Global Enterprise Clients across US, UK, EU &amp; APAC
               </div>
             </div>
 
-            {/* Right Column: ALL-NEW INTERACTIVE 3D ENTERPRISE OPERATIONS COCKPIT */}
-            <div style={{ position: 'relative', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-              <div
-                style={{
-                  position: 'relative',
-                  width: '100%',
-                  maxWidth: '560px',
-                  background: 'linear-gradient(160deg, #070C1E 0%, #0B1228 60%, #111A38 100%)',
-                  borderRadius: '26px',
-                  border: '1.5px solid rgba(255, 255, 255, 0.14)',
-                  boxShadow: '0 25px 70px rgba(7, 12, 30, 0.4), 0 0 40px rgba(37, 99, 235, 0.15)',
-                  padding: '30px',
-                  color: '#ffffff',
-                  overflow: 'hidden',
-                }}
-              >
-                {/* Background Ambient Glow Grid */}
-                <div
-                  style={{
-                    position: 'absolute',
-                    top: '-50%',
-                    right: '-20%',
-                    width: '320px',
-                    height: '320px',
-                    background: 'radial-gradient(circle, rgba(37, 99, 235, 0.3) 0%, transparent 70%)',
-                    filter: 'blur(40px)',
-                    pointerEvents: 'none',
-                  }}
-                />
-
-                {/* Console Header Bar */}
-                <div
-                  style={{
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'space-between',
-                    paddingBottom: '18px',
-                    borderBottom: '1px solid rgba(255, 255, 255, 0.1)',
-                    marginBottom: '20px',
-                  }}
-                >
-                  <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-                    <div
-                      style={{
-                        width: '34px',
-                        height: '34px',
-                        borderRadius: '10px',
-                        background: 'linear-gradient(135deg, #1E3A8A 0%, #2563EB 100%)',
-                        display: 'flex',
-                        alignItems: 'center',
-                        justifyContent: 'center',
-                        boxShadow: '0 0 15px rgba(37, 99, 235, 0.5)',
-                      }}
-                    >
-                      <Activity size={18} color="#ffffff" />
-                    </div>
-                    <div>
-                      <div style={{ fontFamily: 'var(--font-heading)', fontWeight: 800, fontSize: '13.5px', letterSpacing: '0.6px' }}>
-                        CARETRIX COMMAND COCKPIT
-                      </div>
-                      <div style={{ fontSize: '10.5px', color: '#94A3B8' }}>
-                        Autonomous Operations Telemetry &bull; v4.2
-                      </div>
-                    </div>
-                  </div>
-
-                  <div style={{ display: 'flex', alignItems: 'center', gap: '7px' }}>
-                    <span
-                      style={{
-                        width: '8px',
-                        height: '8px',
-                        borderRadius: '50%',
-                        background: '#10B981',
-                        boxShadow: '0 0 10px #10B981',
-                        display: 'inline-block',
-                        animation: 'pulseGlow 1.5s infinite alternate',
-                      }}
-                    />
-                    <span style={{ fontSize: '11px', fontWeight: 700, color: '#10B981', textTransform: 'uppercase' }}>
-                      SYNCHRONIZED
-                    </span>
-                  </div>
+            <div className="hero-bento-card">
+              <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '8px' }}>
+                <Layers size={22} color="#60A5FA" />
+                <div style={{ fontSize: '28px', fontWeight: 800, color: '#ffffff', lineHeight: 1 }}>
+                  75<span>+</span>
                 </div>
+              </div>
+              <div style={{ fontSize: '13px', color: '#94A3B8', lineHeight: 1.4 }}>
+                Specialized Enterprise IT, Cloud &amp; BPO Services
+              </div>
+            </div>
 
-                {/* Global Hubs Grid Status */}
-                <div
-                  style={{
-                    display: 'grid',
-                    gridTemplateColumns: 'repeat(3, 1fr)',
-                    gap: '10px',
-                    marginBottom: '20px',
-                  }}
-                >
-                  <div style={{ background: 'rgba(255, 255, 255, 0.05)', borderRadius: '12px', padding: '10px 12px', border: '1px solid rgba(255, 255, 255, 0.08)' }}>
-                    <div style={{ fontSize: '9.5px', color: '#94A3B8', textTransform: 'uppercase', fontWeight: 600 }}>Pune Global HQ</div>
-                    <div style={{ fontSize: '12.5px', fontWeight: 700, color: '#60A5FA', marginTop: '3px' }}>24/7 BPO &bull; Active</div>
-                  </div>
-                  <div style={{ background: 'rgba(255, 255, 255, 0.05)', borderRadius: '12px', padding: '10px 12px', border: '1px solid rgba(255, 255, 255, 0.08)' }}>
-                    <div style={{ fontSize: '9.5px', color: '#94A3B8', textTransform: 'uppercase', fontWeight: 600 }}>Bengaluru CoE</div>
-                    <div style={{ fontSize: '12.5px', fontWeight: 700, color: '#34D399', marginTop: '3px' }}>AI Lab &bull; Online</div>
-                  </div>
-                  <div style={{ background: 'rgba(255, 255, 255, 0.05)', borderRadius: '12px', padding: '10px 12px', border: '1px solid rgba(255, 255, 255, 0.08)' }}>
-                    <div style={{ fontSize: '9.5px', color: '#94A3B8', textTransform: 'uppercase', fontWeight: 600 }}>Wyoming Hub</div>
-                    <div style={{ fontSize: '12.5px', fontWeight: 700, color: '#FCD34D', marginTop: '3px' }}>US Entity &bull; Active</div>
-                  </div>
+            <div className="hero-bento-card">
+              <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '8px' }}>
+                <ShieldCheck size={22} color="#10B981" />
+                <div style={{ fontSize: '28px', fontWeight: 800, color: '#ffffff', lineHeight: 1 }}>
+                  99.98<span>%</span>
                 </div>
+              </div>
+              <div style={{ fontSize: '13px', color: '#94A3B8', lineHeight: 1.4 }}>
+                Operational &amp; Uptime SLA Compliance Guarantee
+              </div>
+            </div>
 
-                {/* Interactive Cockpit Capability Switcher */}
-                <div style={{ marginBottom: '18px' }}>
-                  <div style={{ fontSize: '11px', fontWeight: 700, color: '#94A3B8', textTransform: 'uppercase', letterSpacing: '0.8px', marginBottom: '8px' }}>
-                    Select Live Division Telemetry:
-                  </div>
-                  <div style={{ display: 'flex', flexWrap: 'wrap', gap: '6px' }}>
-                    <button
-                      type="button"
-                      onClick={() => setActiveCockpitTab('ai')}
-                      style={{
-                        background: activeCockpitTab === 'ai' ? 'linear-gradient(135deg, #1E3A8A 0%, #2563EB 100%)' : 'rgba(255, 255, 255, 0.06)',
-                        border: activeCockpitTab === 'ai' ? '1px solid #60A5FA' : '1px solid rgba(255, 255, 255, 0.1)',
-                        color: '#ffffff',
-                        padding: '6px 12px',
-                        borderRadius: '8px',
-                        fontSize: '11px',
-                        fontWeight: 700,
-                        cursor: 'pointer',
-                        transition: 'all 0.2s ease',
-                      }}
-                    >
-                      AI &amp; Software
-                    </button>
-                    <button
-                      type="button"
-                      onClick={() => setActiveCockpitTab('sap')}
-                      style={{
-                        background: activeCockpitTab === 'sap' ? 'linear-gradient(135deg, #0284C7 0%, #1E3A8A 100%)' : 'rgba(255, 255, 255, 0.06)',
-                        border: activeCockpitTab === 'sap' ? '1px solid #38BDF8' : '1px solid rgba(255, 255, 255, 0.1)',
-                        color: '#ffffff',
-                        padding: '6px 12px',
-                        borderRadius: '8px',
-                        fontSize: '11px',
-                        fontWeight: 700,
-                        cursor: 'pointer',
-                        transition: 'all 0.2s ease',
-                      }}
-                    >
-                      SAP &amp; Cloud NOC
-                    </button>
-                    <button
-                      type="button"
-                      onClick={() => setActiveCockpitTab('bpo')}
-                      style={{
-                        background: activeCockpitTab === 'bpo' ? 'linear-gradient(135deg, #0D9488 0%, #059669 100%)' : 'rgba(255, 255, 255, 0.06)',
-                        border: activeCockpitTab === 'bpo' ? '1px solid #34D399' : '1px solid rgba(255, 255, 255, 0.1)',
-                        color: '#ffffff',
-                        padding: '6px 12px',
-                        borderRadius: '8px',
-                        fontSize: '11px',
-                        fontWeight: 700,
-                        cursor: 'pointer',
-                        transition: 'all 0.2s ease',
-                      }}
-                    >
-                      BPO &amp; KPO Pods
-                    </button>
-                    <button
-                      type="button"
-                      onClick={() => setActiveCockpitTab('rcm')}
-                      style={{
-                        background: activeCockpitTab === 'rcm' ? 'linear-gradient(135deg, #059669 0%, #10B981 100%)' : 'rgba(255, 255, 255, 0.06)',
-                        border: activeCockpitTab === 'rcm' ? '1px solid #34D399' : '1px solid rgba(255, 255, 255, 0.1)',
-                        color: '#ffffff',
-                        padding: '6px 12px',
-                        borderRadius: '8px',
-                        fontSize: '11px',
-                        fontWeight: 700,
-                        cursor: 'pointer',
-                        transition: 'all 0.2s ease',
-                      }}
-                    >
-                      Healthcare RCM
-                    </button>
-                    <button
-                      type="button"
-                      onClick={() => setActiveCockpitTab('csr')}
-                      style={{
-                        background: activeCockpitTab === 'csr' ? 'linear-gradient(135deg, #10B981 0%, #059669 100%)' : 'rgba(255, 255, 255, 0.06)',
-                        border: activeCockpitTab === 'csr' ? '1px solid #6EE7B7' : '1px solid rgba(255, 255, 255, 0.1)',
-                        color: '#ffffff',
-                        padding: '6px 12px',
-                        borderRadius: '8px',
-                        fontSize: '11px',
-                        fontWeight: 700,
-                        cursor: 'pointer',
-                        transition: 'all 0.2s ease',
-                      }}
-                    >
-                      CSR &amp; ESG
-                    </button>
-                  </div>
+            <div className="hero-bento-card">
+              <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '8px' }}>
+                <CircleDollarSign size={22} color="#FBBF24" />
+                <div style={{ fontSize: '28px', fontWeight: 800, color: '#ffffff', lineHeight: 1 }}>
+                  45<span>%</span>
                 </div>
-
-                {/* Dynamic Telemetry Display Card */}
-                <div
-                  style={{
-                    background: 'rgba(255, 255, 255, 0.06)',
-                    borderRadius: '16px',
-                    padding: '18px',
-                    border: '1px solid rgba(255, 255, 255, 0.12)',
-                    marginBottom: '20px',
-                  }}
-                >
-                  {activeCockpitTab === 'ai' && (
-                    <div>
-                      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '12px' }}>
-                        <div>
-                          <strong style={{ fontSize: '14.5px', color: '#ffffff' }}>Agentic AI &amp; Cloud Systems</strong>
-                          <div style={{ fontSize: '11px', color: '#94A3B8' }}>Autonomous task agents &amp; cloud microservices</div>
-                        </div>
-                        <span style={{ background: 'rgba(37, 99, 235, 0.3)', border: '1px solid #3B82F6', color: '#93C5FD', fontSize: '10px', fontWeight: 700, padding: '2px 8px', borderRadius: '4px' }}>
-                          SOC 2 &bull; ISO 27001
-                        </span>
-                      </div>
-                      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '10px', marginBottom: '12px' }}>
-                        <div style={{ background: 'rgba(0, 0, 0, 0.2)', padding: '10px', borderRadius: '8px' }}>
-                          <div style={{ fontSize: '10px', color: '#94A3B8' }}>Model Accuracy</div>
-                          <div style={{ fontSize: '18px', fontWeight: 800, color: '#38BDF8' }}>99.6%</div>
-                        </div>
-                        <div style={{ background: 'rgba(0, 0, 0, 0.2)', padding: '10px', borderRadius: '8px' }}>
-                          <div style={{ fontSize: '10px', color: '#94A3B8' }}>Throughput</div>
-                          <div style={{ fontSize: '18px', fontWeight: 800, color: '#34D399' }}>4.8x</div>
-                        </div>
-                        <div style={{ background: 'rgba(0, 0, 0, 0.2)', padding: '10px', borderRadius: '8px' }}>
-                          <div style={{ fontSize: '10px', color: '#94A3B8' }}>Pipeline</div>
-                          <div style={{ fontSize: '18px', fontWeight: 800, color: '#A5B4FC' }}>24/7 CI/CD</div>
-                        </div>
-                      </div>
-                      <div style={{ fontSize: '11.5px', color: '#CBD5E1', display: 'flex', alignItems: 'center', gap: '6px' }}>
-                        <Check size={14} color="#10B981" /> Active: 3D LiDAR, Polygon Segmentation &amp; LLM Automation
-                      </div>
-                    </div>
-                  )}
-
-                  {activeCockpitTab === 'sap' && (
-                    <div>
-                      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '12px' }}>
-                        <div>
-                          <strong style={{ fontSize: '14.5px', color: '#ffffff' }}>SAP S/4HANA &amp; 24/7 Cloud NOC</strong>
-                          <div style={{ fontSize: '11px', color: '#94A3B8' }}>S/4HANA Cloud Migration, BASIS AMS &amp; DevOps</div>
-                        </div>
-                        <span style={{ background: 'rgba(2, 132, 199, 0.3)', border: '1px solid #0284C7', color: '#7DD3FC', fontSize: '10px', fontWeight: 700, padding: '2px 8px', borderRadius: '4px' }}>
-                          24/7 MANAGED
-                        </span>
-                      </div>
-                      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '10px', marginBottom: '12px' }}>
-                        <div style={{ background: 'rgba(0, 0, 0, 0.2)', padding: '10px', borderRadius: '8px' }}>
-                          <div style={{ fontSize: '10px', color: '#94A3B8' }}>Cloud Uptime</div>
-                          <div style={{ fontSize: '18px', fontWeight: 800, color: '#34D399' }}>99.99%</div>
-                        </div>
-                        <div style={{ background: 'rgba(0, 0, 0, 0.2)', padding: '10px', borderRadius: '8px' }}>
-                          <div style={{ fontSize: '10px', color: '#94A3B8' }}>Incident SLA</div>
-                          <div style={{ fontSize: '18px', fontWeight: 800, color: '#38BDF8' }}>&lt;15 Mins</div>
-                        </div>
-                        <div style={{ background: 'rgba(0, 0, 0, 0.2)', padding: '10px', borderRadius: '8px' }}>
-                          <div style={{ fontSize: '10px', color: '#94A3B8' }}>Migration Speed</div>
-                          <div style={{ fontSize: '18px', fontWeight: 800, color: '#A5B4FC' }}>Zero Downtime</div>
-                        </div>
-                      </div>
-                      <div style={{ fontSize: '11.5px', color: '#CBD5E1', display: 'flex', alignItems: 'center', gap: '6px' }}>
-                        <Check size={14} color="#10B981" /> Active: AWS / Azure / GCP Infrastructure &amp; SAP BASIS L1-L3
-                      </div>
-                    </div>
-                  )}
-
-                  {activeCockpitTab === 'bpo' && (
-                    <div>
-                      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '12px' }}>
-                        <div>
-                          <strong style={{ fontSize: '14.5px', color: '#ffffff' }}>Omnichannel BPO &amp; Strategic KPO</strong>
-                          <div style={{ fontSize: '11px', color: '#94A3B8' }}>Helpdesk, Claims, Financial Valuation &amp; IP Research</div>
-                        </div>
-                        <span style={{ background: 'rgba(13, 148, 136, 0.3)', border: '1px solid #14B8A6', color: '#99F6E4', fontSize: '10px', fontWeight: 700, padding: '2px 8px', borderRadius: '4px' }}>
-                          SLA ASSURED
-                        </span>
-                      </div>
-                      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '10px', marginBottom: '12px' }}>
-                        <div style={{ background: 'rgba(0, 0, 0, 0.2)', padding: '10px', borderRadius: '8px' }}>
-                          <div style={{ fontSize: '10px', color: '#94A3B8' }}>First Contact Res.</div>
-                          <div style={{ fontSize: '18px', fontWeight: 800, color: '#34D399' }}>94.6%</div>
-                        </div>
-                        <div style={{ background: 'rgba(0, 0, 0, 0.2)', padding: '10px', borderRadius: '8px' }}>
-                          <div style={{ fontSize: '10px', color: '#94A3B8' }}>SLA Compliance</div>
-                          <div style={{ fontSize: '18px', fontWeight: 800, color: '#38BDF8' }}>99.8%</div>
-                        </div>
-                        <div style={{ background: 'rgba(0, 0, 0, 0.2)', padding: '10px', borderRadius: '8px' }}>
-                          <div style={{ fontSize: '10px', color: '#94A3B8' }}>Pod Deployment</div>
-                          <div style={{ fontSize: '18px', fontWeight: 800, color: '#FCD34D' }}>&lt;48 Hrs</div>
-                        </div>
-                      </div>
-                      <div style={{ fontSize: '11.5px', color: '#CBD5E1', display: 'flex', alignItems: 'center', gap: '6px' }}>
-                        <Check size={14} color="#10B981" /> Active: 24/7 Multi-Lingual Helpdesk &amp; Quantitative Analytics
-                      </div>
-                    </div>
-                  )}
-
-                  {activeCockpitTab === 'rcm' && (
-                    <div>
-                      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '12px' }}>
-                        <div>
-                          <strong style={{ fontSize: '14.5px', color: '#ffffff' }}>Healthcare Revenue Cycle (RCM)</strong>
-                          <div style={{ fontSize: '11px', color: '#94A3B8' }}>ICD-10-CM, Prior Auth &amp; AR Recovery</div>
-                        </div>
-                        <span style={{ background: 'rgba(16, 185, 129, 0.2)', border: '1px solid #10B981', color: '#6EE7B7', fontSize: '10px', fontWeight: 700, padding: '2px 8px', borderRadius: '4px' }}>
-                          HIPAA COMPLIANT
-                        </span>
-                      </div>
-                      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '10px', marginBottom: '12px' }}>
-                        <div style={{ background: 'rgba(0, 0, 0, 0.2)', padding: '10px', borderRadius: '8px' }}>
-                          <div style={{ fontSize: '10px', color: '#94A3B8' }}>Clean Claims</div>
-                          <div style={{ fontSize: '18px', fontWeight: 800, color: '#34D399' }}>98.6%</div>
-                        </div>
-                        <div style={{ background: 'rgba(0, 0, 0, 0.2)', padding: '10px', borderRadius: '8px' }}>
-                          <div style={{ fontSize: '10px', color: '#94A3B8' }}>AR Reduction</div>
-                          <div style={{ fontSize: '18px', fontWeight: 800, color: '#38BDF8' }}>&lt;15 Days</div>
-                        </div>
-                        <div style={{ background: 'rgba(0, 0, 0, 0.2)', padding: '10px', borderRadius: '8px' }}>
-                          <div style={{ fontSize: '10px', color: '#94A3B8' }}>Denial Appeal</div>
-                          <div style={{ fontSize: '18px', fontWeight: 800, color: '#FCD34D' }}>91.4%</div>
-                        </div>
-                      </div>
-                      <div style={{ fontSize: '11.5px', color: '#CBD5E1', display: 'flex', alignItems: 'center', gap: '6px' }}>
-                        <Check size={14} color="#10B981" /> Active: Dedicated US Healthcare Pods (PST/EST Coverage)
-                      </div>
-                    </div>
-                  )}
-
-                  {activeCockpitTab === 'csr' && (
-                    <div>
-                      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '12px' }}>
-                        <div>
-                          <strong style={{ fontSize: '14.5px', color: '#ffffff' }}>Corporate CSR &amp; ESG Sustainability</strong>
-                          <div style={{ fontSize: '11px', color: '#94A3B8' }}>Section 135 Execution, Carbon Accounting &amp; BRSR</div>
-                        </div>
-                        <span style={{ background: 'rgba(16, 185, 129, 0.3)', border: '1px solid #10B981', color: '#A7F3D0', fontSize: '10px', fontWeight: 700, padding: '2px 8px', borderRadius: '4px' }}>
-                          SEBI BRSR COMPLIANT
-                        </span>
-                      </div>
-                      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '10px', marginBottom: '12px' }}>
-                        <div style={{ background: 'rgba(0, 0, 0, 0.2)', padding: '10px', borderRadius: '8px' }}>
-                          <div style={{ fontSize: '10px', color: '#94A3B8' }}>BRSR Audit Ready</div>
-                          <div style={{ fontSize: '18px', fontWeight: 800, color: '#34D399' }}>100%</div>
-                        </div>
-                        <div style={{ background: 'rgba(0, 0, 0, 0.2)', padding: '10px', borderRadius: '8px' }}>
-                          <div style={{ fontSize: '10px', color: '#94A3B8' }}>Projects Audited</div>
-                          <div style={{ fontSize: '18px', fontWeight: 800, color: '#38BDF8' }}>50+</div>
-                        </div>
-                        <div style={{ background: 'rgba(0, 0, 0, 0.2)', padding: '10px', borderRadius: '8px' }}>
-                          <div style={{ fontSize: '10px', color: '#94A3B8' }}>Carbon Offset</div>
-                          <div style={{ fontSize: '18px', fontWeight: 800, color: '#FCD34D' }}>28,000+ Tn</div>
-                        </div>
-                      </div>
-                      <div style={{ fontSize: '11.5px', color: '#CBD5E1', display: 'flex', alignItems: 'center', gap: '6px' }}>
-                        <Check size={14} color="#10B981" /> Active: Verified NGO Due Diligence &amp; GHG Protocol Scope 1-3 Audits
-                      </div>
-                    </div>
-                  )}
-                </div>
-
-                {/* Guaranteed SLA Meters */}
-                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', fontSize: '12px', color: '#94A3B8' }}>
-                  <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
-                    <Clock size={14} color="#60A5FA" /> Incident SLA: <strong style={{ color: '#ffffff' }}>&lt;15 Mins</strong>
-                  </div>
-                  <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
-                    <ShieldCheck size={14} color="#10B981" /> Uptime SLA: <strong style={{ color: '#ffffff' }}>99.98%</strong>
-                  </div>
-                  <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
-                    <Award size={14} color="#FCD34D" /> ISO 27001 Certified
-                  </div>
-                </div>
-
-                {/* Floating Satellite Badges */}
-                <div className="satellite-pill satellite-1">
-                  <Sparkles size={12} color="#38BDF8" /> 45% Operational Savings
-                </div>
-                <div className="satellite-pill satellite-2">
-                  <ShieldCheck size={12} color="#34D399" /> Dedicated Security Pods
-                </div>
+              </div>
+              <div style={{ fontSize: '13px', color: '#94A3B8', lineHeight: 1.4 }}>
+                Average Operational Cost Reduction vs Onshore Teams
               </div>
             </div>
           </div>
         </div>
 
         {/* ── DUAL TRACK EDGE-TO-EDGE MARQUEE ────────────────────────────────────── */}
-        <div className="hero-scroll-container full-bleed" style={{ marginTop: '35px' }}>
+        <div className="hero-scroll-container full-bleed" style={{ marginTop: '10px' }}>
           <div className="hero-scroll-track">
             {marqueeItems.concat(marqueeItems).map((item, idx) => (
-              <div key={`m1-${idx}`} className="hero-card">
+              <div key={`m1-${idx}`} className="hero-card" style={{ background: 'rgba(255, 255, 255, 0.04)', borderColor: 'rgba(255, 255, 255, 0.08)' }}>
                 <div className="hero-tag">{item.tag}</div>
                 <div className="service-icon">{item.icon}</div>
-                <h5>{item.title}</h5>
-                <p>{item.desc}</p>
+                <h5 style={{ color: '#ffffff' }}>{item.title}</h5>
+                <p style={{ color: '#94A3B8' }}>{item.desc}</p>
               </div>
             ))}
           </div>
           <div className="hero-scroll-track reverse">
             {marqueeItems.concat(marqueeItems).reverse().map((item, idx) => (
-              <div key={`m2-${idx}`} className="hero-card">
+              <div key={`m2-${idx}`} className="hero-card" style={{ background: 'rgba(255, 255, 255, 0.04)', borderColor: 'rgba(255, 255, 255, 0.08)' }}>
                 <div className="hero-tag">{item.tag}</div>
                 <div className="service-icon">{item.icon}</div>
-                <h5>{item.title}</h5>
-                <p>{item.desc}</p>
+                <h5 style={{ color: '#ffffff' }}>{item.title}</h5>
+                <p style={{ color: '#94A3B8' }}>{item.desc}</p>
               </div>
             ))}
           </div>
@@ -1364,8 +1446,8 @@ export default function Home({ onOpenModal }) {
                       <div style={{ fontSize: '11px', textTransform: 'uppercase', color: 'rgba(255, 255, 255, 0.7)', fontWeight: 600 }}>
                         Direct Phone (India / Global)
                       </div>
-                      <a href="tel:+918308906690" style={{ color: '#ffffff', fontWeight: 700, fontSize: '15.5px' }}>
-                        +91-8308906690
+                      <a href="tel:+917758088438" style={{ color: '#ffffff', fontWeight: 700, fontSize: '15.5px' }}>
+                        +91 77580 88438
                       </a>
                     </div>
                   </div>
@@ -1559,7 +1641,7 @@ export default function Home({ onOpenModal }) {
               <Send size={16} /> Request Free Consultation
             </button>
             <a
-              href="tel:+918308906690"
+              href="tel:+917758088438"
               style={{
                 background: 'rgba(255, 255, 255, 0.16)',
                 color: '#ffffff',
@@ -1574,7 +1656,7 @@ export default function Home({ onOpenModal }) {
                 transition: 'all 0.2s',
               }}
             >
-              <Phone size={16} /> +91-8308906690
+              <Phone size={16} /> +91 77580 88438
             </a>
           </div>
         </div>
@@ -1582,78 +1664,128 @@ export default function Home({ onOpenModal }) {
 
       {/* Scoped CSS for Home */}
       <style>{`
-        .hero-chip {
+        /* Next-Gen Cybernetic Hero Styles */
+        .btn-cyber-primary {
+          background: linear-gradient(135deg, #1E3A8A 0%, #2563EB 50%, #0284C7 100%);
+          color: #ffffff !important;
+          font-weight: 700;
+          font-size: 15px;
+          padding: 14px 28px;
+          border-radius: 12px;
+          border: 1px solid rgba(147, 197, 253, 0.4);
+          box-shadow: 0 10px 30px rgba(37, 99, 235, 0.4), 0 0 20px rgba(37, 99, 235, 0.2);
           display: inline-flex;
           align-items: center;
-          gap: 6px;
-          padding: 7px 15px;
-          border-radius: 100px;
-          background: #ffffff;
-          border: 1px solid rgba(37, 99, 235, 0.14);
-          font-size: 11.5px;
-          font-weight: 600;
-          color: #334155;
+          gap: 9px;
+          cursor: pointer;
           transition: all 0.25s ease;
-          box-shadow: 0 2px 6px rgba(15, 23, 42, 0.03);
+          text-decoration: none;
         }
-        .hero-chip:hover {
-          background: #0F172A;
+        .btn-cyber-primary:hover {
+          transform: translateY(-2px);
+          box-shadow: 0 15px 40px rgba(37, 99, 235, 0.6), 0 0 30px rgba(56, 189, 248, 0.4);
+          border-color: #60A5FA;
+        }
+
+        .btn-cyber-ghost {
+          background: rgba(255, 255, 255, 0.05);
+          backdrop-filter: blur(14px);
+          color: #E2E8F0 !important;
+          font-weight: 700;
+          font-size: 15px;
+          padding: 14px 26px;
+          border-radius: 12px;
+          border: 1px solid rgba(255, 255, 255, 0.16);
+          display: inline-flex;
+          align-items: center;
+          gap: 8px;
+          cursor: pointer;
+          transition: all 0.25s ease;
+          text-decoration: none;
+        }
+        .btn-cyber-ghost:hover {
+          background: rgba(255, 255, 255, 0.1);
+          border-color: rgba(59, 130, 246, 0.5);
           color: #ffffff !important;
           transform: translateY(-2px);
-          border-color: transparent;
         }
-        .stat-chip {
-          background: rgba(255, 255, 255, 0.95);
-          backdrop-filter: blur(10px);
-          border: 1px solid rgba(37, 99, 235, 0.12);
-          border-radius: 14px;
-          padding: 13px 15px;
-          box-shadow: 0 4px 16px rgba(37, 99, 235, 0.06);
-          text-align: left;
-        }
-        .stat-num {
-          font-family: var(--font-heading);
-          font-size: 1.6rem;
-          font-weight: 800;
-          color: var(--primary-dark);
-          line-height: 1;
-          margin-bottom: 2px;
-        }
-        .stat-num span {
-          color: var(--primary-light);
-        }
-        .stat-lbl {
-          font-size: 10.5px;
-          font-weight: 600;
-          color: #64748B;
-          text-transform: uppercase;
-          letter-spacing: 0.6px;
-        }
-        .satellite-pill {
-          position: absolute;
-          background: rgba(15, 23, 42, 0.85);
-          backdrop-filter: blur(12px);
-          border: 1px solid rgba(255, 255, 255, 0.18);
-          color: #ffffff;
-          font-size: 11px;
+
+        .btn-cyber-hotline {
+          background: rgba(16, 185, 129, 0.08);
+          border: 1px solid rgba(16, 185, 129, 0.3);
+          color: #A7F3D0 !important;
           font-weight: 700;
-          padding: 6px 14px;
-          border-radius: 100px;
+          font-size: 14px;
+          padding: 13px 20px;
+          border-radius: 12px;
           display: inline-flex;
           align-items: center;
-          gap: 6px;
-          box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
-          pointer-events: none;
+          gap: 8px;
+          text-decoration: none;
+          transition: all 0.25s ease;
         }
-        .satellite-1 {
-          top: -12px;
-          right: 20px;
-          animation: floatSlow 4s ease-in-out infinite;
+        .btn-cyber-hotline:hover {
+          background: rgba(16, 185, 129, 0.16);
+          border-color: #10B981;
+          transform: translateY(-2px);
         }
-        .satellite-2 {
-          bottom: -12px;
-          left: 20px;
-          animation: floatSlow 5s ease-in-out infinite reverse;
+
+        /* Orchestrator Tab Buttons */
+        .orchestrator-tab-btn {
+          background: rgba(255, 255, 255, 0.04);
+          border: 1px solid rgba(255, 255, 255, 0.08);
+          color: #94A3B8;
+          padding: 11px 14px;
+          border-radius: 12px;
+          font-size: 12px;
+          font-weight: 700;
+          display: flex;
+          align-items: center;
+          justifyContent: center;
+          gap: 8px;
+          cursor: pointer;
+          transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+          text-align: center;
+        }
+        .orchestrator-tab-btn:hover {
+          background: rgba(255, 255, 255, 0.08);
+          color: #E2E8F0;
+          border-color: rgba(255, 255, 255, 0.16);
+        }
+        .orchestrator-tab-btn.active {
+          color: #ffffff;
+          box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
+        }
+
+        /* Pipeline Step Cards */
+        .pipeline-step-card {
+          background: rgba(255, 255, 255, 0.03);
+          border: 1px solid rgba(255, 255, 255, 0.07);
+          border-radius: 14px;
+          padding: 16px 14px;
+          transition: all 0.25s ease;
+          position: relative;
+        }
+        .pipeline-step-card:hover {
+          background: rgba(255, 255, 255, 0.06);
+          border-color: rgba(59, 130, 246, 0.3);
+          transform: translateY(-2px);
+        }
+
+        /* Metric Bento Cards */
+        .hero-bento-card {
+          background: rgba(255, 255, 255, 0.035);
+          border: 1px solid rgba(255, 255, 255, 0.09);
+          border-radius: 18px;
+          padding: 22px 24px;
+          backdrop-filter: blur(14px);
+          transition: all 0.25s ease;
+        }
+        .hero-bento-card:hover {
+          background: rgba(255, 255, 255, 0.06);
+          border-color: rgba(56, 189, 248, 0.35);
+          transform: translateY(-3px);
+          box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
         }
 
         .testimonial-card {

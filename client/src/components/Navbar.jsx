@@ -461,10 +461,10 @@ export default function Navbar({ onOpenModal }) {
               </a>
               <span style={{ width: '1px', height: '14px', background: 'rgba(255,255,255,0.15)' }} />
               <a
-                href="tel:+918308906690"
+                href="tel:+917758088438"
                 style={{ display: 'inline-flex', alignItems: 'center', gap: '6px', color: 'rgba(255,255,255,0.85)' }}
               >
-                <Phone size={12} color="#0284C7" /> +91-8308906690
+                <Phone size={12} color="#0284C7" /> +91 77580 88438
               </a>
             </div>
 
