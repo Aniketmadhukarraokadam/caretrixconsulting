@@ -20,7 +20,6 @@ const Careers = lazy(() => import('./pages/Careers'));
 const Contact = lazy(() => import('./pages/Contact'));
 const Admin = lazy(() => import('./pages/Admin'));
 const FullScreenHero = lazy(() => import('./components/FullScreenHero'));
-const Targo = lazy(() => import('./pages/Targo'));
 
 function ScrollToTop() {
   const { pathname } = useLocation();
@@ -59,20 +58,10 @@ export default function App() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const location = useLocation();
 
-  const isCaretrix = location.pathname.startsWith('/caretrix') || location.search.includes('view=caretrix');
-  const isTargoRoute = location.pathname === '/' || location.pathname === '/targo';
   const isHeroRoute = location.pathname === '/hero' || location.pathname === '/fullscreen-hero';
 
   const openModal = () => setIsModalOpen(true);
   const closeModal = () => setIsModalOpen(false);
-
-  if (isTargoRoute && !isCaretrix) {
-    return (
-      <Suspense fallback={<PageLoader />}>
-        <Targo />
-      </Suspense>
-    );
-  }
 
   if (isHeroRoute) {
     return (
@@ -95,9 +84,7 @@ export default function App() {
         <main className="main-content">
           <Suspense fallback={<PageLoader />}>
             <Routes>
-              <Route path="/" element={<Targo />} />
-              <Route path="/targo" element={<Targo />} />
-              <Route path="/caretrix" element={<Home onOpenModal={openModal} />} />
+              <Route path="/" element={<Home onOpenModal={openModal} />} />
               <Route path="/hero" element={<FullScreenHero onOpenModal={openModal} />} />
               <Route path="/fullscreen-hero" element={<FullScreenHero onOpenModal={openModal} />} />
               <Route path="/about" element={<About onOpenModal={openModal} />} />
